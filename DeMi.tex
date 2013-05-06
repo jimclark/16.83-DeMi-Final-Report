@@ -13,6 +13,7 @@
 \usepackage{setspace}
 \usepackage{amsmath}
 \onehalfspacing
+\usepackage{pdfpages}
 
 
 \title{Deformable Mirror Demonstration}
@@ -43,7 +44,10 @@ Alexandra E. Wassenberg
 \section*{List of Acronyms}
 \begin{acronym}
 
-\acro{DeMi}{Deformable Mirror}
+\acro{DeMi}{Deformable Mirror Demonstration}
+\acro{DM}{Deformable Mirror}
+\acro{FOV}{Field of View}
+\acro{PSF}{Point Spread Function}
 
 \end{acronym}
 \newpage
@@ -58,15 +62,156 @@ Alexandra E. Wassenberg
 		\subsection{$N^2$ Diagram}
 		\subsection{System Level Budgets}
 \section{Subsystems}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% PAYLOAD
+
 		\subsection{Payload}
-			\subsubsection{Requirements}
-			\subsubsection{Trade Studies and Decisions Made}
+
+			\subsubsection{Requirements - AC}
+There are two types of payload requirements, the first set applies to the deformable mirror system.  The second set pertains to the measurement and reconstruction of the wavefront.  (All requirements are displayed in Appendix~\ref{app:requirements}.) 
+
+The deformable mirrors must operate for at least 5 minutes per orbit (PLD-1).  This requirement comes from the mission level requirements (MLR-3, MLR-4) to characterize the deformable mirrors.  The individual actuators that make up the deformable mirror must have a response time of less than or equal to $0.001\ s$, with a control rate of at least $100\ Hz$.  The stroke must be at least $1.5\ \mu m$, with control precision of less than or equal to $1\ nm$.
+
+The requirements on measuring and reconstructing the wavefront are requirements on the detector.  Nominally, the detector must operate (take images) for at least 5 minutes per orbit, and be able to function at at least $10\ Hz$ (PLD-2). The requirement is further separated into a “Diagnostic Mode”, used for calibration and for full frame images, and a “Burst Mode”, used for data capture.  “Diagnostic Mode” is required to take images for at least a minute per orbit at $10\ Hz$ (PLD-2.1).  “Burst Mode” is required to take images for at least 30 seconds per orbit at least $100\ Hz$ (PLD-2.2).  For both modes, the reconstruction accuracy must be less than or equal to $100\ nm\ rms$ (PLD-2.3).
+
+			\subsubsection{Trade Studies and Decisions Made - AC and KB}
+
+\paragraph{Payload Architecture - AC}
+
+While in future applications the deformable mirror will be used to aid in observing stars or other objects, the mission goal is to characterize the deformable mirrors in an easy platform, making the internal laser source desirable for this technology demonstration. There are many different techniques to measuring and reconstructing a wavefront \cite{FGadaptiveoptics}. Only sensored approaches are considered for this platform due to the compact form factor and desire for simple components. There are many wavefront sensing approaches that could be implemented, as well as improved or modified versions of those presented here, which could be considered in future analyses, but the two approaches discussed in detail are a Michelson Interferometer and a Shack-Hartmann Wavefront Sensor.
+
+\subparagraph{Michelson Interferometer with Linear Stager}
+The interferometer design shown in Figure~\ref{fig:interferometer} is slightly modified from a typical interferometer due to volume constraints on the payload and the requirement for high contrast imaging. It has an internal source (laser diode), whose path is denoted by a dotted red line.
+The laser beam is first resized, then is reflected 90 degrees by a flat mirror. The light is then divided by a beam splitter oriented 45 degrees to the beam. The transmitted beam travels to the deformable mirror where it is reflected back towards the beam splitter. Half of the beam is deflected by 90 degrees at the beam splitter and strikes the detector. The reflected beam travels to the flat mirror on the linear stager where it is reflected and half of it then is transmitted through the beam splitter and reaches the detector. The two beams that reach the detector interfere to produce fringes that are analytically well understood as a function of beam coherence/divergence and mirror tip/tilt \cite{demtroeder} and that can be simulated for a variety of different deformable mirror shapes.
+
+\begin{figure}[ht]
+\centering
+  \includegraphics[width=5in]{payload_interferometer.jpg}
+\caption{This is the Michelson Interferometer with the flat mirror on a linear stager.  This is a payload design possibility.}
+\label{fig:interferometer}
+\end{figure}
+
+For this particular design, as mentioned previously, a flat mirror is on a piezo linear stager which moves in increments of fractions of the incoming wavelength. This allows for higher precision fringe patterns (reference?), allowing for better mirror characterization.
+
+What is not shown in Figure~\ref{fig:interferometer} is the controller for the linear stager. It does not currently fit within the constraints of the satellite in terms of mass, volume, and power needs. It would require significant modifications, if it were to be implemented. Also, the additional moving part increases the risk and complexity of the mission.
+
+\subparagraph{Shack-Hartmann Wavefront Sensing System}
+For the wavefront sensing design in Figure~\ref{fig:SHWFS}, a Shack-Hartmann lenslet array on the detector is used, allowing for accurate wavefront measurement and reconstruction sensitivity. The design has an internal source (laser diode), whose path is denoted by a dotted red line, and an aperture for imaging an external source, whose path is denoted by a dotted green line.
+
+\begin{figure}[ht]
+\centering
+  \includegraphics[width=5in]{payload_SHWFS.jpg}
+\caption{This is the Wavefront Sensing design with a Shack-Hartmann lenslet array.  This is a payload design possibility.}
+\label{fig:SHWFS}
+\end{figure}
+
+For the internal source, the laser diode module emits a collimated elliptical beam. This beam enters a linear polarizer (where its intensity is halved). The beam then encounters a flat mirror at 45 degrees, reflecting the beam 90 degrees, and proceeds to a primary beam splitter. Here, the beam is reflected 90 degrees to secondary polarizing beamsplitter, and reflected another 90 degrees. The beam then goes through a quarter waveplate (where the beam is now elliptically polarized) before striking the deformable mirrors. The deformable mirrors reflect the beam back through the quarter waveplate, rendering the beam now linearly polarized with an orientation that allows it to pass through the secondary beam splitter. The beam then proceeds through the microlenslet array, creating a spot diagram on the detector corresponding to shape of the wavefront.
+
+For the external source, the wavefront beam enters a plano-convex lens and then passes through a collimating lens. The beam then enters a linear polarizer (where the intensity is halved). The beam then passes through the primary beam splitter, and then to the secondary polarizing beamsplitter, which reflects the beam 90 degrees towards the quarter waveplate and the deformable mirrors, as mentioned previously, and follows an identical path to the detector.
+
+\subparagraph{Design Decision}
+The mission goal is to characterize the deformable mirror system, and to accomplish this with COTS as much as possible to allow for a quick and easy platform for space (MLR-3, MLR-4). While the interferometer with the linear stager is able to achieve higher precision, the Shack-Hartmann wavefront sensing system will fit with minor modifications to components, and allows for sufficient mirror characterization, meeting our mission goal and requirements. Therefore, the Shack-Hartmann wavefront sensing design in Figure~\ref{fig:SHWFS} has been chosen to image the wavefront.
+
+The chosen design allows the detector to image both an internal and external source. While the mission goal can be accomplished with just an internal source, the ultimate goal of using this technology on a larger space telescope for imaging of bright stars motivates the use of an external source. Therefore, the option for an external source will be included in the design.
+
+Due to the added complexity required of the ADCS system on a CubeSat platform, the external source imaging will not require knowledge of particular stars and navigating there. In contrast, with pointing knowledge from ADCS, the shutter on the aperture will be commanded open when a bright star is in the field of view (FOV). Additional work is need to evaluate revisit times to particular stars. Pointing requirements on the maximum ADCS slew rate to keep the star on the same pixels on the detector are discussed in Section~\ref{sec:pointing_requirement}.
+
+The aperture for imaging an external source will necessarily be small, given the volume constraints of the CubeSat platform after accommodating all of the key elements of the system (deformable mirror, mirror driver electronics, detector, and necessary imaging optics). Due to these key elements, it is not practical to design the external source imaging as a reflecting telescope. While it may be possible to accommodate a larger aperture lens ($>60\ mm$), the corresponding longer focal length would not fit in the space, and the space for resizing the beam is limited. While the smaller aperture will limit the angular resolution and sensitivity and increase the size of the point spread function (PSF), tight angular resolution is not a requirement for this technology demonstration. Therefore, an aperture lens with diameter $12.7\ mm$ has been chosen, with a minimum focal length on the order of its diameter. Using the Rayleigh criterion, the angular resolution (width of the center of the PSF) at $500\ nm$ would be $2.436"$ (NEED TO CHECK number, because I’m getting double this.).
+
+The current design is an open loop system, where images and centroid solutions (reference to how centroids are found?) are sent to the ground, and analyzed there. Then, commands can be sent to the payload about how to correct the wavefront. However, the choice of a Shack-Hartmann design makes it easier to incorporate closed loop control for future follow up missions. The option of active correction of the wavefront on-orbit with the current design can be accomplished by the addition of a few components and requiring more on-orbit processing.
+
+All optical elements of the system have been preliminarily chosen.  See Appendix~\ref{app:payload_components} for the full list of elements with part numbers and mass totals.  Glass elements were chosen to be UV fused silica over other glasses whenever possible for their better performance in space \cite{radiation_optics} due to a high coefficient of thermal expansion and better UV transmission.  All elements also have anti-reflective coatings that are efficient in the visible spectrum (400 - 700 $nm$).  Mounts have been chosen for all components, however, these are only estimates of the custom mounts that will be built for all optics.  The reason for this is due to the space application.  All elements must be mounted in stress-free mounts (no glass touching metal, etc.) and mounted to an optical breadboard with multi-footed lens tubes that are made of aluminum, or of a metal that has the same coefficient of thermal expansion as the lenses they hold.  Future modeling and optimization of the optical design will yield more exact component choices.
+
+\subparagraph{Payload Operations}
+For the initial demonstration and on-orbit testing, we will use an internal light source. This eliminates any payload specific requirements on the satellite's attitude and inclination. For the latter half of the mission, we will use an external light source, attempting to image the optical wavefront from a star.
+
+After detumbling, and thirty days of commissioning, as describe in Section~???, the payload will perform a status check of all instruments. This includes the deformable mirror system, the detector, and the laser. Each element will be turned on and checked for any error or status codes. Then, the payload with take some TBD sequence of test images, with TBD sequence of mirror positions (not very many, not very frequently). The full-frame images will be sent down with centroid solutions and any available status information directly from the deformable mirrors and the detector.
+
+The next phase is to calibrate the system. This involves turning on the laser and recording several images in this configuration with the detector, without deforming the mirrors (acts as a flat mirror). From these images, one can find the centroids and average them to obtain new 'standard centroids' which will be used for wavefront comparison calculations throughout the remainder of the mission. These images, averages, and new centroid solutions will be sent to the ground.
+
+The next, and primary, stage is data capture using the internal source. The laser is turned on, then the mirror is deformed by a predetermined test sequence of commands, and the wavefront is imaged on the detector. The test sequence will include 'poking' one actuator at a time, and 'poking' combinations of actuators. Then, the images are read from the detector, centroids are found, and one full image and the collection of centroid solutions are sent down to the ground.
+
+The second part of data capture will be with an external source. With knowledge from ADCS, the shutter will be commanded open, and the laser will be commanded off, allowing some TBD external source to be imaged. The images are read from the detector, the centroids are found, and one full frame image along with the collection of centroid solutions are sent to the ground. All downlinked files are timestamped.
+
+\paragraph{Deformable Mirror System - KB}
+
+\paragraph{Detector - KB}
+
+\paragraph{Shack-Hartmann Lenslet Array - AC}
+
+A Shack-Hartmann lenslet array consists of an array of lenses (called lenslets) of the same focal length, where the array is focused on the detector. Each lens creates a “spot”, creating a spot diagram on the detector. Figure~\ref{fig:lenslet_array} demonstrates incoming light through a lenslet array. The local tilt of the wavefront across each lens can then be calculated from the position of the focal spot on the sensor; the displacement, $\Delta x$, equals the local slope of the wavefront. Any phase aberration can be approximated to a set of discrete tilts. By sampling an array of lenslets all of these tilts can be measured and the whole wavefront approximated. One thing to note: since only tilts are measured, the lenslet array cannot detect discontinuous steps in the wavefront.
+
+\begin{figure}[ht]
+\centering
+  \includegraphics[width=5in]{payload_SH.gif}
+\caption{This figure demonstrates the result of two wavefronts, plane and abberated, entering a Shack-Hartmann lenslet array, and their resulting spot diagrams on the detector.}
+\label{fig:lenslet_array}
+\end{figure}
+
+To get the best measurement of the wavefront, the maximum number of spots, and therefore lenses, is desired. As a result, for a constant beam size, a lenslet array should be chosen with the lowest pitch (distance from the center of each lens) in order to get the maximum number of spots for the beam.
+
+
+Therefore, MLA150 (Figure~\ref{fig:MLA150}) was chosen from ThorLabs, with a pitch of $150\ \mu m$.
+The lenslet is $10\ mm^2$ square, so it contains about 66 by 66 microlenses. It has a $9\ mm^2$ square effective aperture, with a focal length of $5.2\ mm$, and will be mounted in the lens tube on the detector (see Paragraph~\ref{sec:detector}). For an approximate beam size of $2.25\ mm$ (see Paragraph~\ref{sec:dms}), approximately 15 by 15 lenses will be used of the lenslet array. As discussed in Paragraph~\ref{sec:detector}, a $2.25\ mm$ incoming beam corresponds to about $425\ px^2$ square, allowing for over 20 pixels per spot, so there is no concern for multiple spots falling on the same pixel. 
+
+\begin{figure}[ht]
+\centering
+  \includegraphics[width=2in]{payload_MLA150.jpg}
+\caption{This is the MLA150 lenslet array from ThorLabs choosen for the Shack-Hartmann Wavefront Sensing design.}
+\label{fig:MLA150}
+\end{figure}
+
+
 			\subsubsection{Analysis}
-			\subsubsection{Summary of Outputs}
+
+			\subsubsection{Summary of Outputs - AC}
+
+The payload`s operational requirements are major drivers for the design of the rest of the satellite. A summary of mass totals, power needs, and thermal requirements of all major Payload components can be found in Table~\ref{fig:payload_summary_table}.  
+During data capture mode, the payload needs to be kept within $0^\circ$C to $50^\circ$C, will draw a maximum power of $4.5\ W$, will output a maximum data rate of $550\ Mbit/s$, and, during external data acquisition only, has a maximum slew rate of $4.7'/s$. 
+With all components, the Payload is about $997\ g$, or $1.25\ kg$ with a $25\%$ margin.  
+
+\begin{table}\label{fig:payload_summary_table}
+\caption{This is a summary of the mass totals, power needs, and thermal needs of the major payload components.}
+\begin{tabular}{|c||c|c|c|c|} \hline
+	Component & Mass (g) & Power (W) & Thermal, operating ($^\circ$C) & Thermal, storage ($^\circ$C) \\ \hline \hline
+Laser diode & $24.45$ & $0.0045$ & $-10$ to $50$ & unknown \\
+Detector & $46.64$ & $<\ 2\ W$ & $0$ to $50$ & $-20$ to $80$ \\
+Def. Mirrors + Driver & $189.9$ & $<\ 2.5\ W$ & $-10$ to $50$ & unknown \\
+Optical Breadboard & $\sim 250$ & ~ & ~ & \\
+Optical Enclosure & $\sim 300$ & ~ & ~ & \\ \hline \hline
+Totals & $996.9$ & $4.5\ W$ max & $0$ to $50$ & $-20$ to $80$ \\ \hline
+\end{tabular}
+\end{table}
+
 			\subsubsection{Risks}
-			\subsubsection{Future Work}
+
+			\subsubsection{Future Work - AC}
+
+\begin{itemize}
+\item{Optical Modeling in ZEMAX}: Determine final beam profile on the detector, Optimization of 
+space to find the best choice of components, Explore thermal effects on beam and optical components
+
+\item{Interferometer with Linear Stager Design Feasibility}: Can nanopositioner elements be scaled down for a CubeSat platform?, What would the effects be on other subsystems?
+
+\item{Imaging External Sources}: Need to determine when and how to image an external source (FOV, star sensors)
+
+\item{Closed Loop Control}: Determine difficulty in implementation
+
+\item{Stroke Analysis}: Study properties of DM stroke
+
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% POWER
+
 		\subsection{Power}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% COMM
+
 		\subsection{Communication}
+
 			\subsubsection{Requirements - ZC}
 
 Most of the Communications requirements (see Appendix~\ref{app:requirements}) are standard Communications requirements for operability. Comm-1 is simply stating what the main goal of the Communications subsystem is. Comm-2 is there to ensure that the link with the ground station is good enough to transmit all of the data that we need to. Comm-2.1 is there so that if there is an error in the transmission, the system will be able to realize this and ask for a correction. Comm-2.2 is so that it doesn’t try to downlink more data than possible because if it does, then data will be lost. Comm-3 is simply there so that the Communications subsystem can ensure access with the ground station. Comm-3.1 and Comm-3.2 are specifics when it comes to communicating with the ground station. Comm-4 is there because if we do not encrypt it, another satellite may be able to receive our commands and learn about the DeMi system. Comm-5 is there to ensure that if there are errors, there will be very few of them. Comm-6 is just to ensure that DeMi follows all regulations set by different government agencies.
@@ -74,7 +219,7 @@ Most of the Communications requirements (see Appendix~\ref{app:requirements}) ar
 			\subsubsection{Trade Studies - ZC}\label{sec:comm_tradestudies}
 The main factor in choosing what transceiver to use in our system is the data downlink amount. Because payload is generating so much data, Communications will need to have a high downlink rate to ensure that all of that data can be sent to the ground. Several options were looked into, and shown in Table~\ref{table:comm_transceivers}.
 
-\begin{table}[ht]\label{table:comm_transceivers}
+\begin{table}[ht]
 \caption{Communications Trade Study for Maximum Downlink Data Rate}
 \begin{center}
     \begin{tabular}{| c | c |} \hline
@@ -87,16 +232,18 @@ L-3 Cadet Nanosat UHF Radio & $1.5\ Mb/s$ \\
 Microhard MHX2420 Modem & $230.4\ kb/s$ \\ \hline 
     \end{tabular}
 \end{center}
+\label{table:comm_transceivers}
 \end{table}
 
 			\subsubsection{Decisions Made - ZC}
 
 Given the information in Section~\ref{sec:comm_tradestudies}, the L-3 Cadet Nanosat UHF Radio was chosen for use on DeMi. It will transmit at the frequencies and data rates outlined in the requirements, which are $445\ -\ 455\ MHz$ for uplink at $19.2\ kb/s$, $460\ -\ 470\ MHz$ for downlink at $1.5\ Mb/s$. The transceiver also has an extra $4\ GB$ of storage that avionics will be able to use in addition to any of its storage. 
 
-\begin{figure}[ht]\label{fig:comm_Cadet}
+\begin{figure}[ht]
 \centering
-  \includegraphics[width=3in]{images/comm-cadet.png}
+  \includegraphics[width=3in]{Comm-1.png}
 \caption{Photo of the custom-designed high-speed L3 Cadet radio \cite{DICE}.}
+\label{fig:comm_Cadet}
 \end{figure}
 
 Because the transceiver will be transmitting and receiving at UHF frequencies, a very common antenna choice is to use a measuring tape antenna that is tuned to the frequency that is desired. Because the antenna works like a quarter-wave monopole, one can determine the desired length of the antenna by dividing the wavelength of the transmitted and received signal by 4. Because the transmitting and receiving frequencies are different, the average of these frequencies was used to compute the wavelength. 
@@ -113,10 +260,11 @@ l = \lambda/4
 
 In Eq.~\ref{eq:comm_length}, $l$ is the length of the antenna, and $\lambda$ is the wavelength. Using a wavelength of $0.645\ m$, one can find that the desired length of the antenna is about $0.164\ m$. The gain of this antenna will be approximately $3\ dB$ and the beam width approximately $65^\circ$.
 
-\begin{figure}[ht]\label{fig:comm_tape}
+\begin{figure}[ht]
 \centering
-  \includegraphics[width=3in]{images/comm-tape.png}
+  \includegraphics[width=3in]{Comm-2.png}
 \caption{Photo of stored and deployed measuring tape antenna. The pictured CubeSat has four antennas. DeMi will only be using one \cite{antenna}.}
+\label{fig:comm_tape}
 \end{figure}
 
 The ground station that will be used with this system will be the NASA Wallops UHF Ground Station. This was chosen because the transceiver that will be used was also used in the Dynamic Ionosphere CubeSat Experiment, and the ground station that was used in that mission was the NASA Wallops UHF Ground Station. The diameter if the dish is $18.29\ m$, the gain is $35\ dB$ and the beam width is $2.9^\circ$.
@@ -129,10 +277,11 @@ A Link Budget was created in order to determine the Link Margin for a worst case
 
 The first calculation in the Appendix~\ref{app:link_budgets} is to calculate the worst case propagation path length. We know that the best case length is $500\ km$ because that is the altitude at which the satellite is orbiting. Figure~\ref{fig:comm_angles} shows how a wave propagates through that atmosphere and will be explained beneath.
 
-\begin{figure}[ht]\label{fig:comm_angles}
+\begin{figure}[ht]
 \centering
-  \includegraphics[width=4in]{images/comm-angles.png}
+  \includegraphics[width=4in]{Comm-3.png}
 \caption{Diagram of propagation path of a signal from a satellite \cite{ITU-R}.}
+\label{fig:comm_angles}
 \end{figure}
 
 In order to determine the propagation path length, $r$, one must determine the path length of the first layer and the second layer and add them together. The equation for calculating \cite{ITU-R} the path length of a layer is as follows.
@@ -202,23 +351,25 @@ Using that value and the data rate in decibels, one can calculate \cite{SMAD} th
 
 Finally, the link margin can be determined by subtracting the required Energy per bit to Noise Ratio from the predicted one. 
 
-\begin{figure}[ht]\label{fig:comm_best}
+\begin{figure}[ht]
 \centering
-  \includegraphics[width=4in]{images/comm-best.png}
+  \includegraphics[width=4in]{Comm-4.PNG}
 \caption{Representation of Satellite and Ground Station during Best Case Communication.}
+\label{fig:comm_best}
 \end{figure}
 
-\begin{figure}[ht]\label{fig:comm_worst}
+\begin{figure}[ht]
 \centering
-  \includegraphics[width=4in]{images/comm-worst.png}
+  \includegraphics[width=4in]{Comm-5.PNG}
 \caption{Representation of Satellite and Ground Station during Worst Case Communication.}
+\label{fig:comm_worst}
 \end{figure}
 
 			\subsubsection{Summary of Outputs - ZC}
 
 There were several outputs during the design process from the Communications subsystem. These outputs include the Ground station to Orbits, which is NASA Wallops UHF Ground Station, the beam width of Wallops UHF Ground Station and DeMi to ADCS, which are $2.9^\circ$ and $65^\circ$ respectively, the operational and survival temperatures of the transceiver to Thermal, which are $-20^\circ$ C to $70^\circ$ C and $-40^\circ$ C to $80^\circ$ C respectively. The power for each mode to Power, and the mass and volume to Structures are detailed in Table~\ref{table:comm_summary_outputs}
 
-\begin{table}[ht]\label{table:comm_summary_outputs}
+\begin{table}[ht]
 \caption{Communications Budgets}
 \begin{center}
     \begin{tabular}{|c||c|} \hline
@@ -232,6 +383,7 @@ There were several outputs during the design process from the Communications sub
     Volume & $0.069\ U$ \\ \hline 
     \end{tabular}
 \end{center}
+\label{table:comm_summary_outputs}
 \end{table}
 
 			\subsubsection{Risks - ZC}
@@ -242,6 +394,9 @@ As of PDR, there were no risks for the Communications subsystem. Towards the beg
 
 Moving on from here, the main thing that should be done is research and analysis of measuring tape antennas. There is currently not very much information out there that is available to DeMi concerning them, so research to determine the exact gain, beam width and radiation patterns should be conducted.		
 		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% AVIONICS
+
 		\subsection{Avionics}
 			\subsubsection{Requirements - VE}
 The Avionics subsystem requirements are presented in Appendix~\ref{app:requirements}.  The main driving requirements are number 3 and 2 in the order of importance because they are the most challenging to satisfy with a current level of technology.
@@ -249,7 +404,7 @@ The Avionics subsystem requirements are presented in Appendix~\ref{app:requireme
 			\subsubsection{Trade Studies - VE}
 We have two main options that are able to satisfy the requirements for Avionics subsystem. Both are shown in Table~\ref{table:avionics_hardware_options}
 
-\begin{table}[ht]\label{table:avionics_hardware_options}
+\begin{table}[ht]
 \caption{Hardware Options}
 \begin{center}
     \begin{tabular}{| c || p{6cm} | p{6cm} |} \hline
@@ -263,11 +418,12 @@ We have two main options that are able to satisfy the requirements for Avionics 
     Mass & $62$ g & $88\ -\ 114$ g \\ \hline 
     \end{tabular}
 \end{center}
+\label{table:avionics_hardware_options}
 \end{table}
 
 Since we have identified the Payload driven requirements as the most challenging, we have to start selection of appropriate hardware from that.
 
-\begin{table}[ht]\label{table:avionics_modes}
+\begin{table}[ht]
 \caption{Payload image capturing modes}
 \begin{center}
     \begin{tabular}{| c || c | c | c |} \hline
@@ -278,6 +434,7 @@ Since we have identified the Payload driven requirements as the most challenging
     Memory Required & $1.14\ GB$ & $1.14\ GB$ & $0.96\ GB$ \\ \hline 
     \end{tabular}
 \end{center}
+\label{table:avionics_modes}
 \end{table}
 
 Let’s consider approach when we downlink all the data generated by the Payload without processing it. From Table~\ref{table:avionics_modes} we can see that Payload will be generating around $1\ GB$ of data every time it is run. For a given $1.5\ Mbit/s$ downlink speed in this case we will need $600\ s$ to downlink all the data captured or 10 ground accesses. Since we have only one ground access every three orbits in general this particular approach seems to be too ineffective in terms of Payload active time. 
@@ -291,15 +448,16 @@ The Steepest Ascent Mission Interface Computer CS-MIC-G-EM is a good fit for suc
 
 We have made a decision to use CS-MIC-G-EM (Figure~\ref{fig:avionics_MIC}) mainly because it enables onboard image processing which reduces the amount of data we send to the ground and provides with a capability to build a closed loop deformable mirror control system.
 
-\begin{figure}[ht]\label{fig:avionics_MIC}
+\begin{figure}[ht]
 \centering
-  \includegraphics[width=4in]{images/avionics-MIC.jpg}
+  \includegraphics[width=3in]{Avionics_fig1.jpg}
 \caption{Mission Interface Computer CS-MIC-G-EM \cite{avionics_clyde_space}}
+\label{fig:avionics_MIC}
 \end{figure}
 
 It is also capable of providing the following interfaces with other subsystems see Table~\ref{table:avionics_interfaces}.
 
-\begin{table}[ht]\label{table:avionics_interfaces}
+\begin{table}[ht]
 \caption{Avionics hardware interfaces with other subsystems (*assuming update 10 times per second).}
 \begin{center}
     \begin{tabular}{| c | c | c | c |} \hline
@@ -316,21 +474,23 @@ It is also capable of providing the following interfaces with other subsystems s
     Communication & Cadet NanoSat UHF Radio & RS232 & $1.5\ Mbit/s$ \\ \hline 
     \end{tabular}
 \end{center}
+\label{table:avionics_interfaces}
 \end{table}
 
 			\subsubsection{Analysis - VE}
 The system architecture in general is shown in Figure~\ref{fig:avionics_architecture}. The Mission Interface Computer we have selected allows us to separate telemetry from image processing data. The first is processed on CPU while the latter is done on FPGA.
 
-\begin{figure}[ht]\label{fig:avionics_architecture}
+\begin{figure}[ht]
 \centering
-  \includegraphics[width=7in]{images/avionics-architecture.jpg}
+  \includegraphics[width=7in]{Avionics_fig2.jpg}
 \caption{Caption goes here...}
+\label{fig:avionics_architecture}
 \end{figure}
 
 			\subsubsection{Summary of Outputs - ZC}
 The Avionics system had very few outputs to the other subsystems. It had to give values to Thermal for operational temperature range for the computer which is $-25^\circ$C to $85^\circ$C. The survival temperature is unknown. It also had to give outputs to power for power consumed during the different modes, and to structures for the mass and volume. These outputs, or budgets are detailed in Table~\ref{table:avionics_summary_outputs}.
 
-\begin{table}[ht]\label{table:avionics_summary_outputs}
+\begin{table}[ht]
 \caption{This is a summary of the mass totals, power needs, and thermal needs of the avionics system.}
 \begin{center}
     \begin{tabular}{|c||c|} \hline
@@ -343,6 +503,7 @@ The Avionics system had very few outputs to the other subsystems. It had to give
     Volume & $0.104\ U$ \\ \hline 
     \end{tabular}
 \end{center}
+\label{table:avionics_summary_outputs}
 \end{table}
 
 			\subsubsection{Risks - ZC}
@@ -351,13 +512,49 @@ There are two risks that avionics faces currently. One risk which is a high cons
 			\subsubsection{Future Work - ZC}
 The future work that needs to be conducted is that there should be work done to determine a new solution to interfacing with Payload. The mirror driver interfaces with USB 2.0, however the computer is not able to interface with this. So work should be done into determining how to resolve this. One other thing that should be looked into is ensuring that the system can run all of the necessary calculations at the required speed so that all of the payload data can be processed and sent to the ground. If all of the data can’t be processed, it would be difficult to complete our science goals.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ADCS
+
 		\subsection{Attitude Determination and Control System}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% THERMAL
+
 		\subsection{Thermal}
-		\subsection{Structure}
-\section{Conclusion}
-		\subsection{Risk Analysis}
-		\subsection{Future Work}
-\section{Acknowledgment}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% STRUCTURES
+
+		\subsection{Structures}
+
+
+
+\section{Conclusion - AW}
+
+In this paper it has been shown that a low-cost, quick-access mission can be carried out on a 3U CubeSat platform in order to demonstrate MEMS deformable mirror technology on-orbit.  Continued iterations of the system design based on the current system risks and outlined in the section on future work need to be carried out in order to optimize the design.
+
+		\subsection{Risk Summary - AW}
+
+Although, at this stage in the design the DeMi demonstration system closes, the mission is still confronted with a number of risks (see Figure~\ref{fig:risk_chart}).  Due to the fact that there is only a $9\%$ margin instead of an $18\%$ margin between the power required and the power that can be supplied to the system, there is a high consequence, medium likelihood risk (PO1) that there will not be enough power to supply the system in order to carry out the mission.
+
+There is also a risk (S1) that the center of mass of the structure could move out of range.  With the current design, the center of mass is within range.  However, since at this stage in the design there still exists the possibility that masses and positions of the parts may change, the center of mass could potentially move out of range.  This risk is low likelihood but high consequence.
+
+Two risks exist regarding the avionics subsystem.  The first, a low likelihood, high consequence risk (AV1), is that the avionics subsystem will not be capable of processing all of the incoming data.  The second (AV2), regards the avionics system not being capable of providing the required latency for the Payload and ADCS subsystems. 
+
+Additionally, there is a low consequence, low likelihood risk (AD1) that ADCS will exceed the system mass budget.  Since a trade between mass and power was made in the design of the torque coils, both the mass and power budgets of the system are tight, and the system components and design still have the potential to change in this stage of the design, if the torque coil design needs to change in order to reduce the power draw of the system, the mass might increase to above the maximum set by the CubeSat regulations.  However, this is a low consequence, low likelihood risk since currently the system mass is under the maximum for a 3U CubeSat with over a $30\%$ margin.
+
+\begin{figure}[h]
+\centering
+\includegraphics{conclusion_1.png}
+\caption{Systems level risk chart.}
+\label{fig:risk_chart}
+\end{figure}
+
+		\subsection{Future Work - AW}
+
+More iterations in the design process need to be carried out before the design can be completed.  Future work for the DeMi demonstration includes creating more detailed models of the temperature dependence of battery and solar panel performance and the temperature gradient across the satellite in order to more accurately calculate the power that can be supplied to the system and to determine whether the proposed heating design will be effective.  Additionally, as the design continues to mature, the structural model will need to continue to be updated.  It also needs to be verified that the structure and components will survive the launch environment. In addition, further research needs to be conducted on the construction and use of the measuring tape antenna.  More research and analysis needs to be carried out regarding the interface with payload and it must be confirmed that the avionics system can process all information at the required speed.  Finally, ADCS needs to create more accurate models of external disturbances and an attitude control loop.
+
+\section{Acknowledgments}
 	
 	
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -377,6 +574,8 @@ Requirements go here.
 \includegraphics[width=8in]{Uplink_Budget.pdf}
 \end{figure}
 
+\newpage
+
 \begin{figure}[ht]
 \centering 
 \caption{Downlink Budget}
@@ -393,11 +592,23 @@ Requirements go here.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % REFERENCES
 
+\bibitem{cahoy2013}
+   Cahoy, K. L., A. Marinan, B. Novak, C. Kerr, M. Webber. 
+   \emph{Wavefront control in space with MEMS deformable mirrors}, Photonics West, MEMS Adaptive Optics VII, Vol. 8617, SPIE, Washington, D.C., 2013.
+
 \bibitem{avionics_clyde_space}
 Clyde Space. CubeSat Shop. [Online]. \url{http://www.clyde-space.com/cubesat_shop/obdh/364_mission-interface-computer-grande-em}, visited May 5, 2013. 
  
+\bibitem{demtroeder}
+   Demtroeder, W.
+   \emph{Laser Spectroscopy: Basic Concepts and Instrumentation}, 3rd ed. Berlin: Spring-Verlag, 2003.
+
 \bibitem{DICE}
 “DICE (Dynamic Ionosphere CubeSat Experiment), DICE-1 and DICE-2”, eoPortal, \url{https://directory.eoportal.org/web/eoportal/satellite-missions/d/dice}, Accessed 4/2013.
+
+\bibitem {greivenkamp}
+   Greivenkamp, John E. 
+   \emph{Field Guide to Geometrical Optics}, Bellingham, WA: SPIE, 2004. Print.
 
 \bibitem{ITU-R}
 “ITU-R P.676-9”, \url{http://www.itu.int/dms_pubrec/itu-r/rec/p/R-REC-P.676-9-201202-I!!PDF-E.pdf}, Accessed 4/2013.
@@ -410,13 +621,23 @@ Clyde Space. CubeSat Shop. [Online]. \url{http://www.clyde-space.com/cubesat_sho
   \emph{\ Simulation Study of A Low-Low Satellite-to-Satellite Tracking Mission}. (Doctoral dissertation)
   The University of Texas at Austin, TX.
 
-\bibitem{SMAD}
-Wertz, James, \emph{Space Mission Engineering: The New SMAD}, Microcosm Press, Hawthorne, CA, 2011.
+\bibitem{radiation_optics}
+   Nicoletta, C. A. and A. G. Eubanks.
+   \emph{Effect of Simulated Space Radiation On Selected Optical Materials}. Washington, D.C.: National Aeronautics and Space Administration, 1972.
 
 \bibitem{pozar}
 Pozar, David M., \emph{Microwave and RF Design of Wireless Systems}, Wiley, New York City, NY, 2001.
 
+\bibitem{FGadaptiveoptics}
+   Tyson, Robert K. and Benjamin W. Frazier. 
+   \emph{Field Guide to Adaptive Optics}. Bellingham, WA: SPIE Press, 2012.  Internet resource.
+
+\bibitem{SMAD}
+Wertz, James, \emph{Space Mission Engineering: The New SMAD}, Microcosm Press, Hawthorne, CA, 2011.
+
+
 \end{thebibliography}
 
 \end{document}
+
 
