@@ -58,11 +58,52 @@ Alexandra E. Wassenberg
 \newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Introduction}
-		\subsection{Mission Statement}
-		\subsection{Motivation}
+\section{Introduction - AW}
+Deformable mirror wavefront control systems, which correct for aberrations in the wavefront to produce high contrast images, have been utilized for observation from ground telescopes but have yet to be implemented on spacecraft.  A proposed CubeSat Deformable Mirror (DeMi) demonstration will begin the process of testing adaptive optics technology in space for future use on space telescopes in conjunction with a coronograph for direct imaging of exoplanets and potentially free-space laser communication systems.
+
+\subsection{Mission Statement}
+The mission of the Deformable Mirror Demonstration is to provide a low-cost, quick-access platform on which to demonstrate microelectromechanical (MEMS) wavefront control deformable mirror imaging technology on-orbit.
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=3in]{images/introduction_1.png}
+\caption{Boston Micromechanics MEMS Deformable Mirror}
+\label{fig:Intro_demi}
+\end{figure}
+\subsection{Motivation}
+The driving force behind the DeMi mission is the desire to directly image Earth-like exoplanets in the search for signs of life, requiring imaging technology that can produce high contrast and dynamic range images.  However, current high-performance space telescope technology suffers from wavefront aberrations, such as speckles which can result from diffraction, noise, phase errors, and thermal drift and reduce the achievable image contrast.   
+
+A solution to this problem is to implement adaptable wavefront control imaging technology in the form of a deformable mirror.  In the deformable mirror system, a wavefront sensor measures wavefront aberrations in an approaching wavefront, an adaptive optics computer calculates the errors in the wavefront reflecting off of the deformable mirror surface by subtracting the wavefront from a reference wavefront, and then electrostatic actuators in an array beneath the membrane surface of the mirror individually deform the surface to correct the wavefront.   
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=4in]{images/introduction_2.png}
+\caption{Comparison of the effects of a flat and deformable mirror on an aberrated wavefront}
+\label{fig:Intro_wavefront}
+\end{figure}
+
+Adaptive optics technology is currently being used in conjunction with coronographs in ground telescopes to correct for distortions in the Earth’s atmosphere and to resolve light from nearby objects.  An example is seen in the image below of three exoplanets imaged using the Palomar Observatory’s Hale Telescope with adaptive optics technology.  
+
+
+%insert figure here
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=4in]{images/introduction_3.png}
+\caption{Three exoplanets directly imaged using a combination of adaptive optics and a coronagraph with the Palomar Observatory’s Hale Telescope.}
+\label{fig:Intro_exo}
+\end{figure}
+
+However, factors such as high speeds of atmospheric turbulence and limited numbers of photons from targeted exoplanets reduce the achievable image contrast.  A solution to this issue is to incorporate deformable mirror wavefront control technology in high performance space telescope missions.  The DeMi demonstration will take the initial step by testing the stability, calibration, and predictability of a more complex, higher actuator count deformable mirror system in space.   
+
+A space telescope utilizing a high performance coronograph and deformable mirror wavefront control system to directly image Earth-like exoplanets could potentially cost over a billion dollars.  Therefore, a low-cost CubeSat platform was selected for the DeMi demonstration in order to provide relatively quick and easy access to space in order to conduct the deformable demonstration. 
+
+The technology that will tested in the DeMi demonstration has a number of foreseeable future applications, including implementation on high performance space telescopes, such as for direct imaging of Earth-like exoplanets, or for use with free-space laser communication in order to correct for aberrations in the atmosphere. 
+
 \section{Mission Overview}
 		\subsection{Requirements}
+		
+		See Appendix~\ref{app:requirements}.
+		
 		\subsection{Concept of Operations -ZG}
 		
 		DeMi will be a 3-unit CubeSat on a low-Earth orbit with an altitude of 500 km at an inclination of 40°. Immediately separation from a standard Poly-PicoSatellite Orbital Deployer (P-POD), the satellite will begin to charge its primary batteries through solar panels covering the long faces of the structure. During this first stage, the satellite’s antenna will be deployed and will emit intermittent signals, or beacons, in order to be located by the ground station. The ADCS torque coils will detumble the satellite and align it in a nadir-pointing position. The detumble stage should last approximately 2 weeks. In case the satellite needs more time to power up, communicate with the ground station and stabilize itself, the science operations could be delayed. 
@@ -97,32 +138,24 @@ Feedback loops were present between several subsystems, which forced the team to
 	
 	\subsection{System Level Budgets}
 		\subsubsection{Mass}
-		The mass budget is presented in Figure~\ref{fig:Mission_mass2} below. 
-			\begin{figure}[!ht]
-				\centering
-				\includegraphics[width=5in]{images/MissionOverview_3.png}
-				%\caption{System Mass Budget}
-				\label{fig:Mission_mass1}
-			\end{figure}
+		The mass budget is presented in Figure~\ref{fig:Mission_mass2} below.
 		
 			\begin{figure}[!ht]
 				\centering
+				\includegraphics[width=5in]{images/MissionOverview_3.png}
+				
 				\includegraphics[width=5in]{images/MissionOverview_5.png}
 				\caption{System Mass Budget}
 				\label{fig:Mission_mass2}
 			\end{figure}
 			
 		\subsubsection{Power}
-		The power budget is presented in Figure~\ref{fig:Mission_power2} below. 
-			\begin{figure}[!ht]
-				\centering
-				\includegraphics[width=5in]{images/MissionOverview_4.png}
-				%\caption{System Power Budget}
-				\label{fig:Mission_power1}
-			\end{figure}
+		The power budget is presented in Figure~\ref{fig:Mission_power2} below.
 			
 			\begin{figure}[!ht]
 				\centering
+				\includegraphics[width=5in]{images/MissionOverview_4.png}
+				
 				\includegraphics[width=5in]{images/MissionOverview_6.png}
 				\caption{System Power Budget}
 				\label{fig:Mission_power2}
@@ -203,7 +236,16 @@ The second part of data capture will be with an external source. With knowledge 
 
 \paragraph{Deformable Mirror System - KB}
 
+There are only two vendors which sell commercial off-the-self options for MEMS deformable mirrors that will fit inside a CubeSat: Boston Micromachines, and Iris Adaptive Optics. The Boston Micromachines Mini DM comes in three different sizes of stroke and aperture. Stroke
+referes to the maximum amount the mirror can 'push' a segment outward, and the aperture is simply the aperture of the DM. Since there is little room for resizing optics in our system, the aperture of the DM
+acts as a stop. As such, larger apertures are strictly better for the accuracy of the wavefront we can reconstruct. While the Iris AO PT111 does have a larger aperture \emph{and} a larger stroke, which are both
+better for accuracy, its driver board is larger and much more difficult to modify than the BMC Mini's. As such, we selected the largest BMC mini DM, with a 2.25 mm aperture and a stroke of 5.5 $\mu \text{m}$.
+
 \paragraph{Detector - KB}
+
+For a detector, we chose the UI52-41LE-M CMOS detector from IDS. Critically, it has a 5.2$\mu m$ pixel size, which is smaller than the pixel sizes we looked at for the alternatives. Since accuracy is a function of pixel size, maximizing pixels per subaperture is very
+important.
+%clearly planning to write more here -KB
 
 \paragraph{Shack-Hartmann Lenslet Array - AC}
 
@@ -230,7 +272,7 @@ The lenslet is $10\ mm^2$ square, so it contains about 66 by 66 microlenses. It 
 \end{figure}
 
 
-			\subsubsection{Analysis}
+%			\subsubsection{Analysis}
 
 			\subsubsection{Summary of Outputs - AC}
 
@@ -253,20 +295,7 @@ Totals & $996.9$ & $4.5\ W$ max & $0$ to $50$ & $-20$ to $80$ \\ \hline
 \end{table}
 
 
-			\subsubsection{Requirements}
-			\subsubsection{Trade Studies and Decisions Made}
-                        \paragraph{Deformable Mirror System - KB} 
-                        %insert content
 
-                        \paragraph{Detector - KB}
-                        %insert content
-
-			\subsubsection{Analysis}
-                        \paragraph{Pointing Requirement - KB}
-                        %insert content
-
-			\subsubsection{Summary of Outputs}\
-			\subsubsection{Risks}
 
 			\subsubsection{Future Work - AC}
 
@@ -730,207 +759,6 @@ The future work that needs to be conducted is that there should be work done to 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % ADCS
 
-		\subsection{Attitude Determination and Control System}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% THERMAL
-
-		\subsection{Thermal - Tam? David?}
-		
-\subsubsection{Requirements}
-
-The requirements of the thermal subsystem were as follows:
-
-\begin{itemize}
-	\item THM1: The thermal subsystem shall ensure that all components are kept within their survival
-temperature ranges for the duration of the mission.
-\item THM2: The thermal subsystem shall ensure that all operating components are kept within their
-operating temperature ranges.
-\item THM3: Monitor the temperatures of all key components.
-\end{itemize}
-
-
-\subsubsection{Analysis/Results}
-
-The analysis of the thermal environment of the satellite took into consideration the radiation fluxes from the sun and earth (albedo and infrared) on all six faces of the cubeSat as shown in Figure~\ref{fig:thermal-environment}. For each face, an energy balance was carried out and the average energy over all faces used to determine the average temperature of the satellite. The energy balance equations were are as follows:
-
-\begin{equation}
-Q_{in} + Q_{internal} = Q_{out} \rightarrow [\alpha(S + S_A) + \epsilon S_{IR}] A + Q_{internal} = A_S \epsilon \sigma T^4
-\label{eq:thermal-balance}
-\end{equation}		
-
-Values for radiation flux over the course of an orbit were taken from the new SMAD, the main text for this course. Temperatures were calculated for two extremes, cold case, $\beta = 0$; hot case, $\beta =45$, where $\beta$ is the angle subtended by the orbit relative to the sun. 
-
-\begin{figure}[ht]%
-\centering
-%\includegraphics{images/thermal-environment}% (this doesn't seem to exist)
-\caption{ Thermal environment of satellite considered in analysis.}%
-\label{fig:thermal-environment}%
-\end{figure}
-
-The operating and survival temperatures of other subsystems are shown in Table~\ref{table:thermal-inputs}. These figures were used to determine the desired temperature range of the satellite during each mode of operation. The results of the analysis are shown in Table~\ref{table:thermal-results}. These show that during the cold case, the satellite will experience temperatures below the operation and survival temperatures of the payload during data-capture and other modes respectively.
-
-\begin{table}[ht]%
-\caption{Operating and survival temperatures of different subsystems and components.}
-\label{table:thermal-inputs}
-\begin{tabular}{|p{1.5in}|l|l|}\hline
-\textbf{Equipment} & \textbf{Operating Temperature ($^\circ$C)} & \textbf{Survival Temperature ($^\circ$C)} \\\hline
-\textbf{Payload} & 0 to 35 & -10 to 70 \\\hline
-\textbf{ADCS} & -20 to 40 & -20 to 40 \\\hline
-\textbf{Avionics} & -25 to 85 & -25 to 85\\\hline
-\textbf{Batteries (have internal heaters)} & 0 to 50 & -10 to 50\\\hline
-\textbf{Solar Arrays} & -40 to 80  & -50 to 100 \\\hline
-\textbf{Communications} & -20 to 70 & -40 to 80 \\\hline
-\end{tabular}
-\end{table}
-
-\begin{table}[ht]%
-\caption{Results of the thermal analysis for hot and cold cases.}
-\label{table:thermal-results}
-\begin{tabular}{|l|r|r|r|r|r|}\hline
-\textbf{Mode} & \textbf{Data Capture} & \textbf{Standby} & \textbf{Uplink} & \textbf{Downlink} & \textbf{Safe} \\\hline
-\textbf{Operating temp. ($^\circ$C)} & 0 to 35 & -10 to 40 & -10 to 40 & -10 to 40 & -10 to 40 \\\hline
-\textbf{Temp. Cold case ($^\circ$C)} & -3.68 & -13.40 & -13.40 & 5.79 & -15.72 \\\hline
-\textbf{Temp. Hot case ($^\circ$C)} & 21.99 & 14.72 & 14.72 & 29.31 & 13.02 \\\hline
-\end{tabular}
-\end{table}
-
-\subsubsection{Trade Studies}
-
-Based on the results of the thermal analysis, the need to augment the thermal control was evident. Amongst the myriad of possible options, the inclusion of a heater, multi-layer insulation (MLI aka thermal blanket), and surface coating stood out as more feasible for a cubeSat mission given the limited mass, volume, and power available. Since the payload’s detector was the main component whose temperature needed to be kept above the average satellite temperature for most modes of operation, a decision needed to be made on whether  a heater or thermal blanket would be used as the primary thermal control for the payload.
-
-The heater being considered was a model HK5586 polyimide thermofoil heater from Minco (see Figure~\ref{fig:thermal-heater}). It takes up an area of 4.50 cm x 2.54 cm, operates within -200 to 200 $^\circ$C, and with an input voltage of 3.3V, would require a maximum wattage of 0.83 W. 
-
-\begin{figure}[ht]%
-\centering
-%\includegraphics{images/thermal-heater}%
-\caption{Thermofoil heater and payload detector}%
-\label{fig:thermal-heater}%
-\end{figure}
-
-Computing the heat exchange between the heater and the detector, we obtained values for the average power required by the heater to keep the detector above 0 °C during data capture mode, and above -10°C during other modes. The equation used:
-
-\begin{equation}
-P_{req} = \frac{\text{Energy transferred}}{\text{Time}} = \frac{m_{sat} Cp_{sat} (T_{min} - T_{sat})}{\text{Time}}
-\label{eq:thermal-power-required}
-\end{equation}
-
-Where a maximum of ten seconds is allowed for the detector to attain desired temperatures, and $T_{min}$ corresponds to the minimum operational and survival temperature during data capture and other modes respectively. The results are shown in Figure~\ref{fig:thermal-power-usage}. Excepting downlink mode, the heater will require power ranging from 0.44 to 0.75W, which is a significant percentage of the average power available to the entire satellite.
-
-\begin{figure}[ht]%
-\centering
-%\includegraphics{images/thermal-power-usage}%
-\caption{Power usage by heater during different modes of operation.}%
-\label{fig:thermal-power-usage}%
-\end{figure}
-
-For the thermal blanket option, we considered aluminized 25 gauge polyester with nylon scrim from Dunmore. Some of the advantages of this option are that it does not require power, and its mass requirement is significantly low.
-
-In order to determine the amount of insulation needed, a lumped parameter model for the thermal diffusion through the thermal blanket was used. Temperature of the inner face of the MLI is given by
-
-\begin{equation}
-T = T_\infty + (T_i- T_\infty)e^{-t/\tau}, \tau = m \times Cp \times R_{ext}
-\label{eq:thermal-inner-MLI}
-\end{equation}
-
-Where $\tau$ is the time constant for temperature decay, $R_{ext}$ is the thermal resistance to external heat flux, and $T_i$ and $T_\infty$ are the initial temperature of the inner face and average temperature of the satellite respectively. In order to achieve a time constant of approximately the duration of eclipse, two layers of insulation will be required. The results are shown in Figure~\ref{fig:thermal-decay}.
-
-\begin{figure}[ht]%
-\centering
-%\includegraphics{images/thermal-decay}%
-\caption{Temperature decay of inner face of MLI for different modes of operation.}%
-\label{fig:thermal-decay}%
-\end{figure}
-
-\subsubsection{Design/Budget}
-
-Given the results of the aforementioned analysis, the thermal blanket was chosen for primary thermal control. Initially, the thermal subsystem chose dispense with idea of a payload heater, and use solely the MLI for thermal control, but after further discussion with other subsystems, it was agreed upon to still have the heater installed. The rationale behind this decision was that in the event that the average satellite temperature falls below the predicted value, the heater would be used to augment the action of the thermal blanket.
- 
-Thus, the design will include a double layer thermal blanket surrounding the payload, aluminized 25 gauge polyester with nylon scrim taking up approximately 1g and 0.8cm$^3$ of mass and volume respectively. In addition, the heater will be attached to the detector within the thermal blanket as shown in Figure~\ref{fig:thermal-heater}.
-
-Furthermore, in order to fully meet the third requirement of the subsystem, the temperatures of key components of other subsystems will be monitored via thermal sensors.  These components are listed in Table~\ref{table:thermal-sensors} below.
-
-\begin{table}[ht]%
-\centering
-\caption{Key components and their corresponding number of thermal sensors required.}
-\label{table:thermal-sensors}
-\begin{tabular}{|l|r|}\hline
-\textbf{KEY COMPONENTS} & \textbf{Sensors needed} \\\hline
-Sun sensors & 5 \\\hline
-Torque coils & 3 \\\hline
-ADCS interface board & 1 \\\hline
-DMs + Driver & 1 \\\hline
-Detector & 1 \\\hline
-Laser & 1 \\\hline
-Electronic Power System & 1 \\\hline
-Power Distribution Module & 1 \\\hline
-\textbf{Total} & \textbf{14} \\\hline
-\end{tabular}
-\end{table}
-
-The thermal sensors chosen are model 44004 precision thermistor elements from Omega, each of volume 0.04cm3 and mass 0.4g. Fourteen in all, they will each draw power of about 0.5 μW and operate within a temperature range of -80 to 120 °C. As shown in Figure~\ref{fig:thermal-thermistor} they consists of a bead and a tail; the bead will be attached to the surface of the component whose temperature is being measured, and the tail goes to the avionics board.
-
-\begin{figure}[ht]%
-\centering
-%\includegraphics{images/thermal-thermistor}%
-\caption{Precision Thermistor elements – model 44004 (Omega.com).}%
-\label{fig:thermal-thermistor}%
-\end{figure}
-
-In addition, the zenith and nadir faces will be painted with Chemglaze Z306 ( $\alpha= 0.98, \epsilon = 0.89$) in order to improve their absorptivity-emissivity ratio from 0.9 to 1.1.
-
-In summary, the mass, volume, and power budget will be as shown in Table~\ref{table:thermal-outputs}
-
-\begin{table}[ht]%
-\centering
-\caption{Outputs (mass, power consumed, volume) to other subsystems.}
-\label{table:thermal-outputs}
-\begin{tabular}{|l|l|l|l|}\hline
-& Mass (kg) & Power (W) & Volume (U) \\\hline
-Thermistors & & & \\\hline
-MLI & & & \\\hline
-Heater & & & \\\hline
-Surface coating & & & N/A \\\hline
-
-\end{tabular}
-\end{table}
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% STRUCTURES
-
-		\subsection{Structures}
-
-
-
-\section{Conclusion - AW}
-
-In this paper it has been shown that a low-cost, quick-access mission can be carried out on a 3U CubeSat platform in order to demonstrate MEMS deformable mirror technology on-orbit.  Continued iterations of the system design based on the current system risks and outlined in the section on future work need to be carried out in order to optimize the design.
-
-		\subsection{Risk Summary - AW}
-
-Although, at this stage in the design the DeMi demonstration system closes, the mission is still confronted with a number of risks (see Figure~\ref{fig:risk_chart}).  Due to the fact that there is only a $9\%$ margin instead of an $18\%$ margin between the power required and the power that can be supplied to the system, there is a high consequence, medium likelihood risk (PO1) that there will not be enough power to supply the system in order to carry out the mission.
-
-There is also a risk (S1) that the center of mass of the structure could move out of range.  With the current design, the center of mass is within range.  However, since at this stage in the design there still exists the possibility that masses and positions of the parts may change, the center of mass could potentially move out of range.  This risk is low likelihood but high consequence.
-
-Two risks exist regarding the avionics subsystem.  The first, a low likelihood, high consequence risk (AV1), is that the avionics subsystem will not be capable of processing all of the incoming data.  The second (AV2), regards the avionics system not being capable of providing the required latency for the Payload and ADCS subsystems. 
-
-Additionally, there is a low consequence, low likelihood risk (AD1) that ADCS will exceed the system mass budget.  Since a trade between mass and power was made in the design of the torque coils, both the mass and power budgets of the system are tight, and the system components and design still have the potential to change in this stage of the design, if the torque coil design needs to change in order to reduce the power draw of the system, the mass might increase to above the maximum set by the CubeSat regulations.  However, this is a low consequence, low likelihood risk since currently the system mass is under the maximum for a 3U CubeSat with over a $30\%$ margin.
-
-\begin{figure}[h]
-\centering
-\includegraphics{images/conclusion_1.png}
-\caption{Systems level risk chart.}
-\label{fig:risk_chart}
-\end{figure}
-
-		\subsection{Future Work - AW}
-
-More iterations in the design process need to be carried out before the design can be completed.  Future work for the DeMi demonstration includes creating more detailed models of the temperature dependence of battery and solar panel performance and the temperature gradient across the satellite in order to more accurately calculate the power that can be supplied to the system and to determine whether the proposed heating design will be effective.  Additionally, as the design continues to mature, the structural model will need to continue to be updated.  It also needs to be verified that the structure and components will survive the launch environment. In addition, further research needs to be conducted on the construction and use of the measuring tape antenna.  More research and analysis needs to be carried out regarding the interface with payload and it must be confirmed that the avionics system can process all information at the required speed.  Finally, ADCS needs to create more accurate models of external disturbances and an attitude control loop.
-
-
-		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 		\subsection{Attitude Determination and Control System (ADCS) - TN} 
 		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 			\subsubsection{Requirements}
@@ -1110,11 +938,207 @@ The simulation was run with an initial angular rate of 10$^o$/s, magnetic moment
 			The main design risk in the ADCS system is the pointing stability requirement and the mass and power budget. As previously mentioned, the stability of the satellite will need to be < 0.08$^o$/s for payload science operation of capturing light from a star. The sensors and actuators are expected to provide this performance based on the survey of past CubeSat missions. However, more analysis through simulation and testing will need to be implemented to determine the exact performance of the system. The second risk is due to the narrow margin on the power budget of the whole system. To compensate for this, the mass of the torque coils is higher than previously expected. More iterations will be needed to determine the optimal power consumption and mass of the torque coils. 
 			\subsubsection{Future Work}
 			The main future work of the ADCS system is to simulate the flight condition through with external disturbance torques at each position on orbit. The next step would be to create a control loop that takes these environmental torques as inputs to compute the needed magnetic moment of each of the 3 torque coils. 
-		\subsection{Thermal}
-		\subsection{Structure}
-\section{Conclusion}
-		\subsection{Risk Analysis}
-		\subsection{Future Work}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% THERMAL
+
+		\subsection{Thermal - David}
+		
+\subsubsection{Requirements}
+
+The requirements of the thermal subsystem were as follows:
+
+\begin{itemize}
+	\item THM1: The thermal subsystem shall ensure that all components are kept within their survival
+temperature ranges for the duration of the mission.
+\item THM2: The thermal subsystem shall ensure that all operating components are kept within their
+operating temperature ranges.
+\item THM3: Monitor the temperatures of all key components.
+\end{itemize}
+
+
+\subsubsection{Analysis/Results}
+
+The analysis of the thermal environment of the satellite took into consideration the radiation fluxes from the sun and earth (albedo and infrared) on all six faces of the cubeSat as shown in Figure~\ref{fig:thermal-environment}. For each face, an energy balance was carried out and the average energy over all faces used to determine the average temperature of the satellite. The energy balance equations were are as follows:
+
+\begin{equation}
+Q_{in} + Q_{internal} = Q_{out} \rightarrow [\alpha(S + S_A) + \epsilon S_{IR}] A + Q_{internal} = A_S \epsilon \sigma T^4
+\label{eq:thermal-balance}
+\end{equation}		
+
+Values for radiation flux over the course of an orbit were taken from the new SMAD, the main text for this course. Temperatures were calculated for two extremes, cold case, $\beta = 0$; hot case, $\beta =45$, where $\beta$ is the angle subtended by the orbit relative to the sun. 
+
+\begin{figure}[ht]%
+\centering
+\includegraphics{images/thermal-environment}%
+\caption{Thermal environment of satellite considered in analysis.}%
+\label{fig:thermal-environment}%
+\end{figure}
+
+The operating and survival temperatures of other subsystems are shown in Table~\ref{table:thermal-inputs}. These figures were used to determine the desired temperature range of the satellite during each mode of operation. The results of the analysis are shown in Table~\ref{table:thermal-results}. These show that during the cold case, the satellite will experience temperatures below the operation and survival temperatures of the payload during data-capture and other modes respectively.
+
+\begin{table}[ht]%
+\caption{Operating and survival temperatures of different subsystems and components.}
+\label{table:thermal-inputs}
+\begin{tabular}{|p{1.5in}|l|l|}\hline
+\textbf{Equipment} & \textbf{Operating Temperature ($^\circ$C)} & \textbf{Survival Temperature ($^\circ$C)} \\\hline
+\textbf{Payload} & 0 to 35 & -10 to 70 \\\hline
+\textbf{ADCS} & -20 to 40 & -20 to 40 \\\hline
+\textbf{Avionics} & -25 to 85 & -25 to 85\\\hline
+\textbf{Batteries (have internal heaters)} & 0 to 50 & -10 to 50\\\hline
+\textbf{Solar Arrays} & -40 to 80  & -50 to 100 \\\hline
+\textbf{Communications} & -20 to 70 & -40 to 80 \\\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[ht]%
+\caption{Results of the thermal analysis for hot and cold cases.}
+\label{table:thermal-results}
+\begin{tabular}{|l|r|r|r|r|r|}\hline
+\textbf{Mode} & \textbf{Data Capture} & \textbf{Standby} & \textbf{Uplink} & \textbf{Downlink} & \textbf{Safe} \\\hline
+\textbf{Operating temp. ($^\circ$C)} & 0 to 35 & -10 to 40 & -10 to 40 & -10 to 40 & -10 to 40 \\\hline
+\textbf{Temp. Cold case ($^\circ$C)} & -3.68 & -13.40 & -13.40 & 5.79 & -15.72 \\\hline
+\textbf{Temp. Hot case ($^\circ$C)} & 21.99 & 14.72 & 14.72 & 29.31 & 13.02 \\\hline
+\end{tabular}
+\end{table}
+
+\subsubsection{Trade Studies}
+
+Based on the results of the thermal analysis, the need to augment the thermal control was evident. Amongst the myriad of possible options, the inclusion of a heater, multi-layer insulation (MLI aka thermal blanket), and surface coating stood out as more feasible for a cubeSat mission given the limited mass, volume, and power available. Since the payload’s detector was the main component whose temperature needed to be kept above the average satellite temperature for most modes of operation, a decision needed to be made on whether  a heater or thermal blanket would be used as the primary thermal control for the payload.
+
+The heater being considered was a model HK5586 polyimide thermofoil heater from Minco (see Figure~\ref{fig:thermal-heater}). It takes up an area of 4.50 cm x 2.54 cm, operates within -200 to 200 $^\circ$C, and with an input voltage of 3.3V, would require a maximum wattage of 0.83 W. 
+
+\begin{figure}[ht]%
+\centering
+\includegraphics{images/thermal-heater}%
+\caption{Thermofoil heater and payload detector.}%
+\label{fig:thermal-heater}%
+\end{figure}
+
+Computing the heat exchange between the heater and the detector, we obtained values for the average power required by the heater to keep the detector above 0 °C during data capture mode, and above -10°C during other modes. The equation used:
+
+\begin{equation}
+P_{req} = \frac{\text{Energy transferred}}{\text{Time}} = \frac{m_{sat} Cp_{sat} (T_{min} - T_{sat})}{\text{Time}}
+\label{eq:thermal-power-required}
+\end{equation}
+
+Where a maximum of ten seconds is allowed for the detector to attain desired temperatures, and $T_{min}$ corresponds to the minimum operational and survival temperature during data capture and other modes respectively. The results are shown in Figure~\ref{fig:thermal-power-usage}. Excepting downlink mode, the heater will require power ranging from 0.44 to 0.75W, which is a significant percentage of the average power available to the entire satellite.
+
+\begin{figure}[ht]%
+\centering
+%\includegraphics{images/thermal-power-usage}%
+\caption{Power usage by heater during different modes of operation.}%
+\label{fig:thermal-power-usage}%
+\end{figure}
+
+For the thermal blanket option, we considered aluminized 25 gauge polyester with nylon scrim from Dunmore. Some of the advantages of this option are that it does not require power, and its mass requirement is significantly low.
+
+In order to determine the amount of insulation needed, a lumped parameter model for the thermal diffusion through the thermal blanket was used. Temperature of the inner face of the MLI is given by
+
+\begin{equation}
+T = T_\infty + (T_i- T_\infty)e^{-t/\tau}, \tau = m \times Cp \times R_{ext}
+\label{eq:thermal-inner-MLI}
+\end{equation}
+
+Where $\tau$ is the time constant for temperature decay, $R_{ext}$ is the thermal resistance to external heat flux, and $T_i$ and $T_\infty$ are the initial temperature of the inner face and average temperature of the satellite respectively. In order to achieve a time constant of approximately the duration of eclipse, two layers of insulation will be required. The results are shown in Figure~\ref{fig:thermal-decay}.
+
+\begin{figure}[ht]%
+\centering
+%\includegraphics{images/thermal-decay}%
+\caption{Temperature decay of inner face of MLI for different modes of operation.}%
+\label{fig:thermal-decay}%
+\end{figure}
+
+\subsubsection{Design/Budget}
+
+Given the results of the aforementioned analysis, the thermal blanket was chosen for primary thermal control. Initially, the thermal subsystem chose dispense with idea of a payload heater, and use solely the MLI for thermal control, but after further discussion with other subsystems, it was agreed upon to still have the heater installed. The rationale behind this decision was that in the event that the average satellite temperature falls below the predicted value, the heater would be used to augment the action of the thermal blanket.
+ 
+Thus, the design will include a double layer thermal blanket surrounding the payload, aluminized 25 gauge polyester with nylon scrim taking up approximately 1g and 0.8cm$^3$ of mass and volume respectively. In addition, the heater will be attached to the detector within the thermal blanket as shown in Figure~\ref{fig:thermal-heater}.
+
+Furthermore, in order to fully meet the third requirement of the subsystem, the temperatures of key components of other subsystems will be monitored via thermal sensors.  These components are listed in Table~\ref{table:thermal-sensors} below.
+
+\begin{table}[ht]%
+\centering
+\caption{Key components and their corresponding number of thermal sensors required.}
+\label{table:thermal-sensors}
+\begin{tabular}{|l|r|}\hline
+\textbf{KEY COMPONENTS} & \textbf{Sensors needed} \\\hline
+Sun sensors & 5 \\\hline
+Torque coils & 3 \\\hline
+ADCS interface board & 1 \\\hline
+DMs + Driver & 1 \\\hline
+Detector & 1 \\\hline
+Laser & 1 \\\hline
+Electronic Power System & 1 \\\hline
+Power Distribution Module & 1 \\\hline
+\textbf{Total} & \textbf{14} \\\hline
+\end{tabular}
+\end{table}
+
+The thermal sensors chosen are model 44004 precision thermistor elements from Omega, each of volume 0.04cm3 and mass 0.4g. Fourteen in all, they will each draw power of about 0.5 μW and operate within a temperature range of -80 to 120 °C. As shown in Figure~\ref{fig:thermal-thermistor} they consists of a bead and a tail; the bead will be attached to the surface of the component whose temperature is being measured, and the tail goes to the avionics board.
+
+\begin{figure}[ht]%
+\centering
+%\includegraphics{images/thermal-thermistor}%
+\caption{Precision Thermistor elements – model 44004 (Omega.com).}%
+\label{fig:thermal-thermistor}%
+\end{figure}
+
+In addition, the zenith and nadir faces will be painted with Chemglaze Z306 ( $\alpha= 0.98, \epsilon = 0.89$) in order to improve their absorptivity-emissivity ratio from 0.9 to 1.1.
+
+In summary, the mass, volume, and power budget will be as shown in Table~\ref{table:thermal-outputs}
+
+\begin{table}[ht]%
+\centering
+\caption{Outputs (mass, power consumed, volume) to other subsystems.}
+\label{table:thermal-outputs}
+\begin{tabular}{|l|l|l|l|}\hline
+& Mass (kg) & Power (W) & Volume (U) \\\hline
+Thermistors & & & \\\hline
+MLI & & & \\\hline
+Heater & & & \\\hline
+Surface coating & & & N/A \\\hline
+
+\end{tabular}
+\end{table}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% STRUCTURES
+
+		\subsection{Structures}
+
+(See separate document.)
+
+\section{Conclusion - AW}
+
+In this paper it has been shown that a low-cost, quick-access mission can be carried out on a 3U CubeSat platform in order to demonstrate MEMS deformable mirror technology on-orbit.  Continued iterations of the system design based on the current system risks and outlined in the section on future work need to be carried out in order to optimize the design.
+
+		\subsection{Risk Summary - AW}
+
+Although, at this stage in the design the DeMi demonstration system closes, the mission is still confronted with a number of risks (see Figure~\ref{fig:risk_chart}).  Due to the fact that there is only a $9\%$ margin instead of an $18\%$ margin between the power required and the power that can be supplied to the system, there is a high consequence, medium likelihood risk (PO1) that there will not be enough power to supply the system in order to carry out the mission.
+
+There is also a risk (S1) that the center of mass of the structure could move out of range.  With the current design, the center of mass is within range.  However, since at this stage in the design there still exists the possibility that masses and positions of the parts may change, the center of mass could potentially move out of range.  This risk is low likelihood but high consequence.
+
+Two risks exist regarding the avionics subsystem.  The first, a low likelihood, high consequence risk (AV1), is that the avionics subsystem will not be capable of processing all of the incoming data.  The second (AV2), regards the avionics system not being capable of providing the required latency for the Payload and ADCS subsystems. 
+
+Additionally, there is a low consequence, low likelihood risk (AD1) that ADCS will exceed the system mass budget.  Since a trade between mass and power was made in the design of the torque coils, both the mass and power budgets of the system are tight, and the system components and design still have the potential to change in this stage of the design, if the torque coil design needs to change in order to reduce the power draw of the system, the mass might increase to above the maximum set by the CubeSat regulations.  However, this is a low consequence, low likelihood risk since currently the system mass is under the maximum for a 3U CubeSat with over a $30\%$ margin.
+
+\begin{figure}[h]
+\centering
+\includegraphics{images/conclusion_1.png}
+\caption{Systems level risk chart.}
+\label{fig:risk_chart}
+\end{figure}
+
+		\subsection{Future Work - AW}
+
+More iterations in the design process need to be carried out before the design can be completed.  Future work for the DeMi demonstration includes creating more detailed models of the temperature dependence of battery and solar panel performance and the temperature gradient across the satellite in order to more accurately calculate the power that can be supplied to the system and to determine whether the proposed heating design will be effective.  Additionally, as the design continues to mature, the structural model will need to continue to be updated.  It also needs to be verified that the structure and components will survive the launch environment. In addition, further research needs to be conducted on the construction and use of the measuring tape antenna.  More research and analysis needs to be carried out regarding the interface with payload and it must be confirmed that the avionics system can process all information at the required speed.  Finally, ADCS needs to create more accurate models of external disturbances and an attitude control loop.
+
+
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Acknowledgment}
 	
 	
@@ -1123,28 +1147,34 @@ The simulation was run with an initial angular rate of 10$^o$/s, magnetic moment
 
 \newpage
 \appendix
-\section{\\Requirements} \label{app:requirements}
-Requirements go here.
+\section{Requirements} \label{app:requirements}
+
+\includepdf[pages={-}]{images/Requirements.pdf}
+
 
 \newpage
-\section{\\Link Budgets} \label{app:link_budgets}
+\section{Link Budgets} \label{app:link_budgets}
 
 \begin{figure}[ht]
 \centering 
 \caption{Uplink Budget}
-%\includegraphics[width=6.5in]{images/comm-uplink-budget}
+\includegraphics[width=6.5in]{images/comm-uplink-budget}
 \end{figure}
 
 \newpage
+\noindent
+\newline
 
 \begin{figure}[ht]
 \centering 
 \caption{Downlink Budget}
-%\includegraphics[width=6.5in]{images/comm-downlink-budget}
+\includegraphics[width=6.5in]{images/comm-downlink-budget}
 \end{figure}
 
-
+\noindent
+\newline
 \newpage
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % REFERENCES
