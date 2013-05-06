@@ -54,9 +54,49 @@ Alexandra E. Wassenberg
 \newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Introduction}
+\section{Introduction - AW}
+Deformable mirror wavefront control systems, which correct for aberrations in the wavefront to produce high contrast images, have been utilized for observation from ground telescopes but have yet to be implemented on spacecraft.  A proposed CubeSat Deformable Mirror (DeMi) demonstration will begin the process of testing adaptive optics technology in space for future use on space telescopes in conjunction with a coronograph for direct imaging of exoplanets and potentially free-space laser communication systems.
+
 		\subsection{Mission Statement}
+		The mission of the Deformable Mirror Demonstration is to provide a low-cost, quick-access platform on which to demonstrate microelectromechanical (MEMS) wavefront control deformable mirror imaging technology on-orbit.
+
+		\begin{figure}[!ht]
+				\centering
+				\includegraphics[width=3in]{images/introduction_1.png}
+				\caption{Boston Micromechanics MEMS Deformable Mirror}
+				\label{fig:Intro_demi}
+			\end{figure}
+	
 		\subsection{Motivation}
+		The driving force behind the DeMi mission is the desire to directly image Earth-like exoplanets in the search for signs of life, requiring imaging technology that can produce high contrast and dynamic range images.  However, current high-performance space telescope technology suffers from wavefront aberrations, such as speckles which can result from diffraction, noise, phase errors, and thermal drift and reduce the achievable image contrast.   
+
+A solution to this problem is to implement adaptable wavefront control imaging technology in the form of a deformable mirror.  In the deformable mirror system, a wavefront sensor measures wavefront aberrations in an approaching wavefront, an adaptive optics computer calculates the errors in the wavefront reflecting off of the deformable mirror surface by subtracting the wavefront from a reference wavefront, and then electrostatic actuators in an array beneath the membrane surface of the mirror individually deform the surface to correct the wavefront.   
+
+\begin{figure}[!ht]
+				\centering
+				\includegraphics[width=4in]{images/introduction_2.png}
+				\caption{Comparison of the effects of a flat and deformable mirror on an aberrated wavefront}
+				\label{fig:Intro_wavefront}
+			\end{figure}
+
+Adaptive optics technology is currently being used in conjunction with coronographs in ground telescopes to correct for distortions in the Earth’s atmosphere and to resolve light from nearby objects.  An example is seen in the image below of three exoplanets imaged using the Palomar Observatory’s Hale Telescope with adaptive optics technology.  
+
+
+%insert figure here
+\begin{figure}[!ht]
+				\centering
+				\includegraphics[width=4in]{images/introduction_3.png}
+				\caption{Three exoplanets directly imaged using a combination of adaptive optics and a coronagraph with the Palomar Observatory’s Hale Telescope.}
+				\label{fig:Intro_exo}
+			\end{figure}
+
+However, factors such as high speeds of atmospheric turbulence and limited numbers of photons from targeted exoplanets reduce the achievable image contrast.  A solution to this issue is to incorporate deformable mirror wavefront control technology in high performance space telescope missions.  The DeMi demonstration will take the initial step by testing the stability, calibration, and predictability of a more complex, higher actuator count deformable mirror system in space.   
+
+A space telescope utilizing a high performance coronograph and deformable mirror wavefront control system to directly image Earth-like exoplanets could potentially cost over a billion dollars.  Therefore, a low-cost CubeSat platform was selected for the DeMi demonstration in order to provide relatively quick and easy access to space in order to conduct the deformable demonstration. 
+
+The technology that will tested in the DeMi demonstration has a number of foreseeable future applications, including implementation on high performance space telescopes, such as for direct imaging of Earth-like exoplanets, or for use with free-space laser communication in order to correct for aberrations in the atmosphere. 
+
+
 \section{Mission Overview}
 		\subsection{Requirements}
 		\subsection{Concept of Operations -ZG}
@@ -753,7 +793,13 @@ The simulation was run with an initial angular rate of 10$^o$/s, magnetic moment
 \newpage
 \appendix
 \section{\\Requirements} \label{app:requirements}
-Requirements go here.
+
+	\begin{figure}[!ht]
+				\centering
+				\includegraphics{images/Requirements.pdf}
+				%\caption{ADCS components interactions and Avionics interface}
+				\label{fig:Requirements}
+			\end{figure}
 
 \newpage
 \section{\\Link Budgets} \label{app:link_budgets}
