@@ -203,7 +203,25 @@ Totals & $996.9$ & $4.5\ W$ max & $0$ to $50$ & $-20$ to $80$ \\ \hline
 			\subsubsection{Summary of Outputs}\
 			\subsubsection{Risks}
 
-			\subsubsection{Future Work}
+			\subsubsection{Future Work - AC}
+
+\begin{itemize}
+\item{Optical Modeling in ZEMAX}: Determine final beam profile on the detector, Optimization of 
+space to find the best choice of components, Explore thermal effects on beam and optical components
+
+\item{Interferometer with Linear Stager Design Feasibility}: Can nanopositioner elements be scaled down for a CubeSat platform?, What would the effects be on other subsystems?
+
+\item{Imaging External Sources}: Need to determine when and how to image an external source (FOV, star sensors)
+
+\item{Closed Loop Control}: Determine difficulty in implementation
+
+\item{Stroke Analysis}: Study properties of DM stroke
+
+\end{itemize}
+			
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% POWER
+			
 		\subsection{Power - JC}
 			\subsubsection{Requirements}
 			The Power subsystem is required to supply power to all other subsystems under all conditions.  In particular, it must supply an average of 3.54 watts on average over the course of the orbit (calculated in Section~\ref{subsubsec:power-analysis}, Analysis), sustain a maximum load of 13.84 watts during certain operational modes (downlink mode, per Systems), have a minimum battery capacity of 3.9 watt-hours (calculated in Section~\ref{subsubsec:power-analysis}, Analysis), and meet these requirements for up to 1 year, or approximately 6,000 cycles (calculated in Section~\ref{subsubsec:power-analysis}, Analysis).
@@ -238,7 +256,7 @@ Note that these power values are averaged over the entire orbit -- that is, taki
 			\begin{figure}%
 			\centering
 			\includegraphics[trim = 0 2cm 0 0, clip]{images/power-3U-side-paneled}%
-			\caption{The solar panel configuration to be used on the DeMi satellite.  Image from Clyde Space.\cite{CS image}}%
+			\caption{The solar panel configuration to be used on the DeMi satellite.  Image from Clyde Space.\cite{CS-image}}%
 			\label{fig:power-panels}%
 			\end{figure}
 			
@@ -259,7 +277,7 @@ P_{req,avg} = \frac{1}{T_{total}}\sum_{modes}{ \sum_{systems}{T_{mode} \: P_{sys
 \label{eq:power-required}
 \end{equation}
 
-The solar panels are required to gather enough power during the day to power the satellite for the entire orbit, when taking the inefficiency of the EPS into account ($\eta = 0.85$ in the worst case\cite{EPS manual}):
+The solar panels are required to gather enough power during the day to power the satellite for the entire orbit, when taking the inefficiency of the EPS into account ($\eta = 0.85$ in the worst case\cite{EPS-manual}):
 
 \begin{equation}
 P_{req,panels} = \frac{T_d + T_e}{T_d}\frac{P_{req,avg}}{\eta} = 6.61 \ \text{W (cold)}, 5.21 \ \text{W (hot)}, 4.16 \ \text{W (orbit avg)}
@@ -313,7 +331,7 @@ N_{cycles} = \frac{T_{year}}{T_{orbit}} = 5500 \approx 6000 \ \text{(with 10\% m
 			\subsubsection{Summary of Outputs}
 
 \begin{table}[ht]\label{table:power-outputs}
-\caption{Outputs to other systems (mass, volume, power consumed, and survival and operating temperatures).\cite{EPS manual} \cite{PDM manual} \cite{Battery manual} \cite{Solar panel datasheet}}
+\caption{Outputs to other systems (mass, volume, power consumed, and survival and operating temperatures).\cite{EPS-manual} \cite{PDM-manual} \cite{Battery-manual} \cite{Solar-panel-datasheet}}
 \begin{center}
     \begin{tabular}{|l|l|l|p{0.8in}|p{1in}|p{1.1in}|} \hline
 Component & Mass (kg) & Volume (U) & Power consumed (W) & Survival temperature ($^\circ$ C) & Operating temperature ($^\circ$ C) \\ \hline \hline
@@ -330,40 +348,17 @@ The solar panels do not literally have zero volume, but because they are fixed t
 
 			\subsubsection{Risks}
 
-The primary risk facing the Power subsystem is that our incoming power is fundamentally limited, so we will have to be careful to not exceed our budget.  As computed in Analysis (Section~\ref{subsubsec:power-analysis}), the average power drawn by the satellite for nominal mode durations is 3.54 watts.  While the orbit-averaged power coming in from the solar panels is 4.52 watts, which is a 28\% margin over the power needs, when we take the worst-case efficiency of the EPS's solar-panel connection into account\cite{EPS manual}, we find that as little as 3.84 watts are actually getting to the battery power bus, leaving only a 9\% margin (which might then be further eroded by inefficiencies in the power lines).  This is less than the 18\% margin goal we had set for ourselves, and substantially less than the 30\% margin that JPL informed us was their usual standard for satellite missions.
+The primary risk facing the Power subsystem is that our incoming power is fundamentally limited, so we will have to be careful to not exceed our budget.  As computed in Analysis (Section~\ref{subsubsec:power-analysis}), the average power drawn by the satellite for nominal mode durations is 3.54 watts.  While the orbit-averaged power coming in from the solar panels is 4.52 watts, which is a 28\% margin over the power needs, when we take the worst-case efficiency of the EPS's solar-panel connection into account\cite{EPS-manual}, we find that as little as 3.84 watts are actually getting to the battery power bus, leaving only a 9\% margin (which might then be further eroded by inefficiencies in the power lines).  This is less than the 18\% margin goal we had set for ourselves, and substantially less than the 30\% margin that JPL informed us was their usual standard for satellite missions.
 
 This risk is mitigated by the 32\% margin of available power over the standby power need of 2.91 watts.  From this, we can be confident that, even in the worst possible case, the satellite will be power-positive during its standby mode.  This means that, if the satellite should find itself unable to meet its power needs for nominal mode durations, it could be commanded to spend more time in standby mode and less in data capture or downlink mode to restore balance to its power budget.  As mentioned in the Analysis section, the available power was calculated for the coldest, darkest orbit that the satellite will be in.  For the brightest orbit, the average power generated by the solar panels over the entire orbit increases to 7.42 watts, which, taking the worst-case EPS efficiency into account, results in 6.31 watts reaching the power line, which is a 78\% margin over the average power required.  In fact, we could spend 29 minutes -- nearly six times the nominal data capture mode duration -- of such a bright orbit in data capture mode (leaving the downlink mode duration constant, as ground pass durations are independent of available power) while maintaining a 30\% margin of available (post-EPS) power over required power.  We can thus be assured that, even if the satellite is forced to reduce the duration of data capture and downlink modes during darker orbits to conserve power, we can make up for any shortfalls of captured data during better orbits.
 
 			\subsubsection{Future Work}
 The performance of the solar panels and batteries is temperature-dependent.  In particular, the battery becomes more effective as its temperature increases, while the solar panels become less so.  Going forward, it would be useful to perform a more detailed simulation of the satellite that incorporates a thermal model, so that we can more accurately measure the effect of satellite temperature and dissipated excess energy (energy from the solar panels that does not go into charging the battery or powering the satellite).
-		
-
-
-			\subsubsection{Future Work - AC}
-
-\begin{itemize}
-\item{Optical Modeling in ZEMAX}: Determine final beam profile on the detector, Optimization of 
-space to find the best choice of components, Explore thermal effects on beam and optical components
-
-\item{Interferometer with Linear Stager Design Feasibility}: Can nanopositioner elements be scaled down for a CubeSat platform?, What would the effects be on other subsystems?
-
-\item{Imaging External Sources}: Need to determine when and how to image an external source (FOV, star sensors)
-
-\item{Closed Loop Control}: Determine difficulty in implementation
-
-\item{Stroke Analysis}: Study properties of DM stroke
-
-\end{itemize}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% POWER
-
-		\subsection{Power}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % COMM
 
->>>>>>> 7b454c39685a15bd7bc963104117aa5faf9dfebc
+
 		\subsection{Communication}
 
 			\subsubsection{Requirements - ZC}
@@ -674,7 +669,167 @@ The future work that needs to be conducted is that there should be work done to 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % THERMAL
 
-		\subsection{Thermal}
+		\subsection{Thermal - Tam? David?}
+		
+\subsubsection{Requirements}
+
+The requirements of the thermal subsystem were as follows:
+
+\begin{itemize}
+	\item THM1: The thermal subsystem shall ensure that all components are kept within their survival
+temperature ranges for the duration of the mission.
+\item THM2: The thermal subsystem shall ensure that all operating components are kept within their
+operating temperature ranges.
+\item THM3: Monitor the temperatures of all key components.
+\end{itemize}
+
+
+\subsubsection{Analysis/Results}
+
+The analysis of the thermal environment of the satellite took into consideration the radiation fluxes from the sun and earth (albedo and infrared) on all six faces of the cubeSat as shown in Figure~\ref{fig:thermal-environment}. For each face, an energy balance was carried out and the average energy over all faces used to determine the average temperature of the satellite. The energy balance equations were are as follows:
+
+\begin{equation}
+Q_{in} + Q_{internal} = Q_{out} \rightarrow [\alpha(S + S_A) + \epsilon S_{IR}] A + Q_{internal} = A_S \epsilon \sigma T^4
+\label{eq:thermal-balance}
+\end{equation}		
+
+Values for radiation flux over the course of an orbit were taken from the new SMAD, the main text for this course. Temperatures were calculated for two extremes, cold case, $\beta = 0$; hot case, $\beta =45$, where $\beta$ is the angle subtended by the orbit relative to the sun. 
+
+\begin{figure}[ht]%
+\centering
+\includegraphics{images/thermal-environment}%
+\caption{ Thermal environment of satellite considered in analysis.}%
+\label{fig:thermal-environment}%
+\end{figure}
+
+The operating and survival temperatures of other subsystems are shown in Table~\ref{table:thermal-inputs}. These figures were used to determine the desired temperature range of the satellite during each mode of operation. The results of the analysis are shown in Table~\ref{table:thermal-results}. These show that during the cold case, the satellite will experience temperatures below the operation and survival temperatures of the payload during data-capture and other modes respectively.
+
+\begin{table}[ht]%
+\caption{Operating and survival temperatures of different subsystems and components.}
+\label{table:thermal-inputs}
+\begin{tabular}{|p{1.5in}|l|l|}\hline
+\textbf{Equipment} & \textbf{Operating Temperature ($^\circ$C)} & \textbf{Survival Temperature ($^\circ$C)} \\\hline
+\textbf{Payload} & 0 to 35 & -10 to 70 \\\hline
+\textbf{ADCS} & -20 to 40 & -20 to 40 \\\hline
+\textbf{Avionics} & -25 to 85 & -25 to 85\\\hline
+\textbf{Batteries (have internal heaters)} & 0 to 50 & -10 to 50\\\hline
+\textbf{Solar Arrays} & -40 to 80  & -50 to 100 \\\hline
+\textbf{Communications} & -20 to 70 & -40 to 80 \\\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[ht]%
+\caption{Results of the thermal analysis for hot and cold cases.}
+\label{table:thermal-results}
+\begin{tabular}{|l|r|r|r|r|r|}\hline
+\textbf{Mode} & \textbf{Data Capture} & \textbf{Standby} & \textbf{Uplink} & \textbf{Downlink} & \textbf{Safe} \\\hline
+\textbf{Operating temp. ($^\circ$C)} & 0 to 35 & -10 to 40 & -10 to 40 & -10 to 40 & -10 to 40 \\\hline
+\textbf{Temp. Cold case ($^\circ$C)} & -3.68 & -13.40 & -13.40 & 5.79 & -15.72 \\\hline
+\textbf{Temp. Hot case ($^\circ$C)} & 21.99 & 14.72 & 14.72 & 29.31 & 13.02 \\\hline
+\end{tabular}
+\end{table}
+
+\subsubsection{Trade Studies}
+
+Based on the results of the thermal analysis, the need to augment the thermal control was evident. Amongst the myriad of possible options, the inclusion of a heater, multi-layer insulation (MLI aka thermal blanket), and surface coating stood out as more feasible for a cubeSat mission given the limited mass, volume, and power available. Since the payload’s detector was the main component whose temperature needed to be kept above the average satellite temperature for most modes of operation, a decision needed to be made on whether  a heater or thermal blanket would be used as the primary thermal control for the payload.
+
+The heater being considered was a model HK5586 polyimide thermofoil heater from Minco (see Figure~\ref{fig:thermal-heater}). It takes up an area of 4.50 cm x 2.54 cm, operates within -200 to 200 $^\circ$C, and with an input voltage of 3.3V, would require a maximum wattage of 0.83 W. 
+
+\begin{figure}[ht]%
+\centering
+\includegraphics{images/thermal-heater}%
+\caption{Thermofoil heater and payload detector}%
+\label{fig:thermal-heater}%
+\end{figure}
+
+Computing the heat exchange between the heater and the detector, we obtained values for the average power required by the heater to keep the detector above 0 °C during data capture mode, and above -10°C during other modes. The equation used:
+
+\begin{equation}
+P_{req} = \frac{\text{Energy transferred}}{\text{Time}} = \frac{m_{sat} Cp_{sat} (T_{min} - T_{sat})}{\text{Time}}
+\label{eq:thermal-power-required}
+\end{equation}
+
+Where a maximum of ten seconds is allowed for the detector to attain desired temperatures, and $T_{min}$ corresponds to the minimum operational and survival temperature during data capture and other modes respectively. The results are shown in Figure~\ref{fig:thermal-power-usage}. Excepting downlink mode, the heater will require power ranging from 0.44 to 0.75W, which is a significant percentage of the average power available to the entire satellite.
+
+\begin{figure}[ht]%
+\centering
+\includegraphics{images/thermal-power-usage}%
+\caption{Power usage by heater during different modes of operation.}%
+\label{fig:thermal-power-usage}%
+\end{figure}
+
+For the thermal blanket option, we considered aluminized 25 gauge polyester with nylon scrim from Dunmore. Some of the advantages of this option are that it does not require power, and its mass requirement is significantly low.
+
+In order to determine the amount of insulation needed, a lumped parameter model for the thermal diffusion through the thermal blanket was used. Temperature of the inner face of the MLI is given by
+
+\begin{equation}
+T = T_\infty + (T_i- T_\infty)e^{-t/\tau}, \tau = m \times Cp \times R_{ext}
+\label{eq:thermal-inner-MLI}
+\end{equation}
+
+Where $\tau$ is the time constant for temperature decay, $R_{ext}$ is the thermal resistance to external heat flux, and $T_i$ and $T_\infty$ are the initial temperature of the inner face and average temperature of the satellite respectively. In order to achieve a time constant of approximately the duration of eclipse, two layers of insulation will be required. The results are shown in Figure~\ref{fig:thermal-decay}.
+
+\begin{figure}[ht]%
+\centering
+\includegraphics{images/thermal-decay}%
+\caption{Temperature decay of inner face of MLI for different modes of operation.}%
+\label{fig:thermal-decay}%
+\end{figure}
+
+\subsubsection{Design/Budget}
+
+Given the results of the aforementioned analysis, the thermal blanket was chosen for primary thermal control. Initially, the thermal subsystem chose dispense with idea of a payload heater, and use solely the MLI for thermal control, but after further discussion with other subsystems, it was agreed upon to still have the heater installed. The rationale behind this decision was that in the event that the average satellite temperature falls below the predicted value, the heater would be used to augment the action of the thermal blanket.
+ 
+Thus, the design will include a double layer thermal blanket surrounding the payload, aluminized 25 gauge polyester with nylon scrim taking up approximately 1g and 0.8cm$^3$ of mass and volume respectively. In addition, the heater will be attached to the detector within the thermal blanket as shown in Figure~\ref{fig:thermal-heater}.
+
+Furthermore, in order to fully meet the third requirement of the subsystem, the temperatures of key components of other subsystems will be monitored via thermal sensors.  These components are listed in Table~\ref{table:thermal-sensors} below.
+
+\begin{table}[ht]%
+\centering
+\caption{Key components and their corresponding number of thermal sensors required.}
+\label{table:thermal-sensors}
+\begin{tabular}{|l|r|}\hline
+\textbf{KEY COMPONENTS} & \textbf{Sensors needed} \\\hline
+Sun sensors & 5 \\\hline
+Torque coils & 3 \\\hline
+ADCS interface board & 1 \\\hline
+DMs + Driver & 1 \\\hline
+Detector & 1 \\\hline
+Laser & 1 \\\hline
+Electronic Power System & 1 \\\hline
+Power Distribution Module & 1 \\\hline
+\textbf{Total} & \textbf{14} \\\hline
+\end{tabular}
+\end{table}
+
+The thermal sensors chosen are model 44004 precision thermistor elements from Omega, each of volume 0.04cm3 and mass 0.4g. Fourteen in all, they will each draw power of about 0.5 μW and operate within a temperature range of -80 to 120 °C. As shown in Figure~\ref{fig:thermal-thermistor} they consists of a bead and a tail; the bead will be attached to the surface of the component whose temperature is being measured, and the tail goes to the avionics board.
+
+\begin{figure}[ht]%
+\centering
+\includegraphics{images/thermal-thermistor}%
+\caption{Precision Thermistor elements – model 44004 (Omega.com).}%
+\label{fig:thermal-thermistor}%
+\end{figure}
+
+In addition, the zenith and nadir faces will be painted with Chemglaze Z306 ( $\alpha= 0.98, \epsilon = 0.89$) in order to improve their absorptivity-emissivity ratio from 0.9 to 1.1.
+
+In summary, the mass, volume, and power budget will be as shown in Table~\ref{table:thermal-outputs}
+
+\begin{table}[ht]%
+\centering
+\caption{Outputs (mass, power consumed, volume) to other subsystems.}
+\label{table:thermal-outputs}
+\begin{tabular}{|l|l|l|l|}\hline
+& Mass (kg) & Power (W) & Volume (U) \\\hline
+Thermistors & & & \\\hline
+MLI & & & \\\hline
+Heater & & & \\\hline
+Surface coating & & & N/A \\\hline
+
+\end{tabular}
+\end{table}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % STRUCTURES
@@ -725,7 +880,7 @@ Requirements go here.
 \begin{figure}[ht]
 \centering 
 \caption{Uplink Budget}
-\includegraphics[width=8in]{Uplink_Budget.pdf}
+\includegraphics[width=6.5in]{images/comm-uplink-budget}
 \end{figure}
 
 \newpage
@@ -733,7 +888,7 @@ Requirements go here.
 \begin{figure}[ht]
 \centering 
 \caption{Downlink Budget}
-\includegraphics[width=8in]{Downlink_Budget.pdf}
+\includegraphics[width=6.5in]{images/comm-downlink-budget}
 \end{figure}
 
 
@@ -754,18 +909,18 @@ Requirements go here.
 
 %%% POWER
 
-\bibitem{CS image}
+\bibitem{CS-image}
 Image from Clyde Space.  URL \url{http://www.clyde-space.com/cubesat_shop/solar_panels_-_deployable}, (visited May 05, 2013).
 
 \bibitem{libertad-1} (2012).  ``CubeSat Kit -- In Space.''  URL \url{http://www.cubesatkit.com/content/space.html}, (visited May 05, 2013).
 
-\bibitem{EPS manual} Strain, A, (February 14, 2011).  ``User Manual: CubeSat 3U Electronic Power System.'' URL \url{http://www.clyde-space.com/documents/2471}, (visited May 05, 2013).
+\bibitem{EPS-manual} Strain, A, (February 14, 2011).  ``User Manual: CubeSat 3U Electronic Power System.'' URL \url{http://www.clyde-space.com/documents/2471}, (visited May 05, 2013).
 
-\bibitem{PDM manual} Worrall, K, (March 14, 2011).  ``CubeSat Power Distribution Module User Manual.'' URL \url{http://www.clyde-space.com/documents/2560}, (visited May 05, 2013).
+\bibitem{PDM-manual} Worrall, K, (March 14, 2011).  ``CubeSat Power Distribution Module User Manual.'' URL \url{http://www.clyde-space.com/documents/2560}, (visited May 05, 2013).
 
-\bibitem{Battery manual} McLaren, V, (April 28 2010).  ``User Manual: Standalone 30Wh Battery.''  URL \url{http://www.clyde-space.com/documents/1902}, (visited May 05, 2013).
+\bibitem{Battery-manual} McLaren, V, (April 28 2010).  ``User Manual: Standalone 30Wh Battery.''  URL \url{http://www.clyde-space.com/documents/1902}, (visited May 05, 2013).
 
-\bibitem{Solar panel datasheet} (March 16 2012). ``CubeSat Solar Panels.''  URL \url{http://www.clyde-space.com/documents/2625}, (visited May 05, 2013).
+\bibitem{Solar-panel-datasheet} (March 16 2012). ``CubeSat Solar Panels.''  URL \url{http://www.clyde-space.com/documents/2625}, (visited May 05, 2013).
 
 %%% COMMUNICATIONS
 
