@@ -12,6 +12,8 @@
 \usepackage{acronym}
 \usepackage{setspace}
 \usepackage{amsmath}
+\usepackage[hypcap]{caption}
+\usepackage{hyperref}
 \onehalfspacing
 
 
@@ -65,7 +67,139 @@ Alexandra E. Wassenberg
 			\subsubsection{Summary of Outputs}
 			\subsubsection{Risks}
 			\subsubsection{Future Work}
-		\subsection{Power}
+		\subsection{Power - JC}
+			\subsubsection{Requirements}
+			The Power subsystem is required to supply power to all other subsystems under all conditions.  In particular, it must supply an average of 3.54 watts on average over the course of the orbit (calculated in Section~\ref{subsubsec:power-analysis}, Analysis), sustain a maximum load of 13.84 watts during certain operational modes (downlink mode, per Systems), have a minimum battery capacity of 3.9 watt-hours (calculated in Section~\ref{subsubsec:power-analysis}, Analysis), and meet these requirements for up to 1 year, or approximately 6,000 cycles (calculated in Section~\ref{subsubsec:power-analysis}, Analysis).
+			
+			\subsubsection{Trade Studies and Decisions Made}
+			Using STK, we compared the average power obtained by the solar panels under several circumstances.  The two variables were the inclusion or omission of a solar panel on the top face of the satellite, in addition to the four side-mounted panels, and the orientation of the satellite in its orbit -- whether it few ``face-first'', with the normal vector of one of its sides aligned with its velocity, ``corner-first'', where it is tilted by 45 degrees about its long axis from the face-first orientation, or spinning about its long axis.  The face-first and corner-first attitudes are illustrated below:
+			
+			\begin{figure}[ht]%
+			\centering
+			\includegraphics{images/power-face-first}%
+			\hspace{0.5in}
+			\includegraphics{images/power-corner-first}
+			\caption{The ``face-first'' and ``corner-first'' attitudes.  Images generated from STK.}%
+			\label{fig:power-face-first}%
+			\end{figure}
+			
+			\begin{table}[ht]\label{table:power-trade-study}
+\caption{Power values for various panel configurations and satellite attitudes.}
+\begin{center}
+    \begin{tabular}{|c|c|c|c|} \hline
+    	 & Face-first & Spinning & Corner-first \\ \hline
+Side panels & 3.77 W & 4.16 W & 4.52 W \\\hline
+Side and top panels & 4.45 W & 4.84 W & 5.19 W \\\hline
+    \end{tabular}
+\end{center}
+\end{table}
+
+Note that these power values are averaged over the entire orbit -- that is, taking the incoming power to be zero during local night and including that in the average.  This was done because the satellite is active during the entire orbit, and its average power needs are calculated over the entire orbit; to ensure that we are comparing likes against likes, we did the same for the power generated.
+			
+			\subsubsection{Decisions Made}
+			
+			\begin{figure}%
+			\centering
+			\includegraphics[trim = 0 2cm 0 0, clip]{images/power-3U-side-paneled}%
+			\caption{The solar panel configuration to be used on the DeMi satellite.  Image from Clyde Space.\cite{CS image}}%
+			\label{fig:power-panels}%
+			\end{figure}
+			
+In general, the power subsystem was designed to be as simple as possible while meeting the satellite's power needs.  We chose to use stock parts as much as possible because they have known performance, which helps us verify that requirements are met and reduces the margins we need to hold.
+
+The chosen solar panel configuration was four body-mounted side panels.  Body-mounted panels were chosen over deployable panels because they minimized the surface area of the satellite, which minimized the disturbance torques, and they are symmetrical, reducing the pointing constraints on the ADCS.  The satellite would be oriented in a nadir-pointing configuration, so the nadir face would almost never see any sunlight, so we chose not to panel it, and we chose not to panel the zenith face to allow the payload to have an aperture in that face, so that it could potentially image external light sources.
+
+The remainder of the power system is similar to that of most other satellites: an electrical power system module takes power from the solar panels and manages the current and voltage levels to ensure that the panels deliver power at maximum efficiency, a secondary (rechargeable) battery supplies the satellite with energy during eclipse, and a power distribution module supplies power to systems which are not part of the main system stack, like the torque coils.
+
+The satellite's power subsystem does not include a primary battery.  A primary battery was never included in the design because the satellite was to be covered on most sides by solar panels and would be power-positive in detumbling mode, so it would charge as soon as it exited the P-POD.  The only reference to a Cubesat containing a primary battery was a description of a Cubesat that lacked solar panels entirely.\cite{libertad-1}
+			
+			\subsubsection{Analysis}\label{subsubsec:power-analysis}
+			
+The average power required is the time-weighted average of the power required during the various modes of the satellite:
+
+\begin{equation}
+P_{req,avg} = \frac{1}{T_{total}}\sum_{modes}{ \sum_{systems}{T_{mode} \: P_{sys,mode}} } = 3.54 \ \text{W} 
+\label{eq:power-required}
+\end{equation}
+
+The solar panels are required to gather enough power during the day to power the satellite for the entire orbit, when taking the inefficiency of the EPS into account ($\eta = 0.85$ in the worst case\cite{EPS manual}):
+
+\begin{equation}
+P_{req,panels} = \frac{T_d + T_e}{T_d}\frac{P_{req,avg}}{\eta} = 6.61 \ \text{W (cold)}, 5.21 \ \text{W (hot)}, 4.16 \ \text{W (orbit avg)}
+\label{eq:power-required-panels}
+\end{equation}
+
+``Hot'' and ``cold''\footnote{Perhaps ``bright'' and ``dark'' would be better terms from a power perspective, because it is not temperature that gives us power but sunlight.} here refer to the two orbital cases which have the most and least solar exposure for the satellite – because the orbit is fixed in inertial space, it appears to rotate with respect to the Earth-Sun vector over the course of a year.  Every six months, it goes from a “cold” orbit, which is in the sunlight 63\% of the time, to a “hot” orbit, which is 80\% sunlit, and back again.  The two orbits are illustrated below.
+
+\begin{figure}[ht]%
+\centering
+\includegraphics{images/power-hot-orbit}%
+\caption{A ``hot'' orbit, where the satellite is exposed to the sun 80\% of the time.  Image generated from STK.}%
+\label{fig:power-hot-orbit}%
+\end{figure}
+
+\begin{figure}[ht]%
+\centering
+\includegraphics{images/power-cold-orbit}%
+\caption{A ``cold'' orbit, where the satellite is exposed to the sun 63\% of the time.  Image generated from STK.}%
+\label{fig:power-cold-orbit}%
+\end{figure}
+
+The satellite drains the most energy from the battery if it performs a ground station pass (maximum duration: 9.77 minutes, per Comm) and scientific operation (nominal duration: 5 minutes, per Payload) during local night:
+
+\begin{equation}
+E_{req,batt} = T_{sci} P_{sci} + T_{comm} P_{comm} + (T_e - T_{sci} - T_{comm}) P_{standby} = 3.9 \ \text{Wh}
+\label{eq:power-batt-req}
+\end{equation}
+
+The excess power is the power actually generated by the panels that does not go into powering the satellite or charging the battery -- in other words, the difference between the power required power and the power actually generated:
+
+\begin{equation}
+P_{excess} = P_{panels} - P_{req,panels} = 0.63 \ \text{W (cold)}, 2.57 \ \text{W (hot)}
+\label{eq:power-excess}
+\end{equation}
+
+It can be useful to model the excess power as an average over the entire orbit, rather than just happening during local day (for first-order approximations of the equilibrium satellite temperature):
+
+\begin{equation}
+P_{excess,avg} = P_{excess} \: \frac{T_d}{T_d + T_e} = 0.40 \ \text{W (cold)}, 2.06 \ \text{W (hot)}
+\label{eq:power-excess-avg}
+\end{equation}
+
+The number of charge-discharge cycles of the battery is approximately equal to the number of orbits that the satellite will have to sustain:
+
+\begin{equation}
+N_{cycles} = \frac{T_{year}}{T_{orbit}} = 5500 \approx 6000 \ \text{(with 10\% margin)}
+\label{eq:power-num-cycles}
+\end{equation}
+
+			\subsubsection{Summary of Outputs}
+
+\begin{table}[ht]\label{table:power-outputs}
+\caption{Outputs to other systems (mass, volume, power consumed, and survival and operating temperatures).\cite{EPS manual} \cite{PDM manual} \cite{Battery manual} \cite{Solar panel datasheet}}
+\begin{center}
+    \begin{tabular}{|l|l|l|p{0.8in}|p{1in}|p{1.1in}|} \hline
+Component & Mass (kg) & Volume (U) & Power consumed (W) & Survival temperature ($^\circ$ C) & Operating temperature ($^\circ$ C) \\ \hline \hline
+Solar panels & 0.540 & 0 & 0 & -40 to 80 & -40 to 80 \\\hline
+EPS & 0.083 & 0.15 & 0.1 & -50 to 100 & -40 to 85 \\\hline
+Battery & 0.256 & 0.2 & 0.1 & -10 to 50 & 0 to 50 \\\hline
+PDM & 0.060 & 0.25 & 0.16 & -50 to 100 & -40 to 85 \\\hline \hline
+Total & 0.939 & 0.6 & 0.36 & N/A & N/A \\\hline
+    \end{tabular}
+\end{center}
+\end{table}
+
+The solar panels do not literally have zero volume, but because they are fixed to the sides of the Cubesat, they do not occupy any of the three units of internal volume.
+
+			\subsubsection{Risks}
+
+The primary risk facing the Power subsystem is that our incoming power is fundamentally limited, so we will have to be careful to not exceed our budget.  As computed in Analysis (Section~\ref{subsubsec:power-analysis}), the average power drawn by the satellite for nominal mode durations is 3.54 watts.  While the orbit-averaged power coming in from the solar panels is 4.52 watts, which is a 28\% margin over the power needs, when we take the worst-case efficiency of the EPS's solar-panel connection into account\cite{EPS manual}, we find that as little as 3.84 watts are actually getting to the battery power bus, leaving only a 9\% margin (which might then be further eroded by inefficiencies in the power lines).  This is less than the 18\% margin goal we had set for ourselves, and substantially less than the 30\% margin that JPL informed us was their usual standard for satellite missions.
+
+This risk is mitigated by the 32\% margin of available power over the standby power need of 2.91 watts.  From this, we can be confident that, even in the worst possible case, the satellite will be power-positive during its standby mode.  This means that, if the satellite should find itself unable to meet its power needs for nominal mode durations, it could be commanded to spend more time in standby mode and less in data capture or downlink mode to restore balance to its power budget.  As mentioned in the Analysis section, the available power was calculated for the coldest, darkest orbit that the satellite will be in.  For the brightest orbit, the average power generated by the solar panels over the entire orbit increases to 7.42 watts, which, taking the worst-case EPS efficiency into account, results in 6.31 watts reaching the power line, which is a 78\% margin over the average power required.  In fact, we could spend 29 minutes -- nearly six times the nominal data capture mode duration -- of such a bright orbit in data capture mode (leaving the downlink mode duration constant, as ground pass durations are independent of available power) while maintaining a 30\% margin of available (post-EPS) power over required power.  We can thus be assured that, even if the satellite is forced to reduce the duration of data capture and downlink modes during darker orbits to conserve power, we can make up for any shortfalls of captured data during better orbits.
+
+			\subsubsection{Future Work}
+The performance of the solar panels and batteries is temperature-dependent.  In particular, the battery becomes more effective as its temperature increases, while the solar panels become less so.  Going forward, it would be useful to perform a more detailed simulation of the satellite that incorporates a thermal model, so that we can more accurately measure the effect of satellite temperature and dissipated excess energy (energy from the solar panels that does not go into charging the battery or powering the satellite).
+		
 		\subsection{Communication}
 			\subsubsection{Requirements - ZC}
 
@@ -74,8 +208,9 @@ Most of the Communications requirements (see Appendix~\ref{app:requirements}) ar
 			\subsubsection{Trade Studies - ZC}\label{sec:comm_tradestudies}
 The main factor in choosing what transceiver to use in our system is the data downlink amount. Because payload is generating so much data, Communications will need to have a high downlink rate to ensure that all of that data can be sent to the ground. Several options were looked into, and shown in Table~\ref{table:comm_transceivers}.
 
-\begin{table}[ht]\label{table:comm_transceivers}
+\begin{table}[ht]
 \caption{Communications Trade Study for Maximum Downlink Data Rate}
+\label{table:comm_transceivers}
 \begin{center}
     \begin{tabular}{| c | c |} \hline
     	Tranceiver & Maximum Downlink Rate \\ \hline \hline
@@ -129,10 +264,11 @@ A Link Budget was created in order to determine the Link Margin for a worst case
 
 The first calculation in the Appendix~\ref{app:link_budgets} is to calculate the worst case propagation path length. We know that the best case length is $500\ km$ because that is the altitude at which the satellite is orbiting. Figure~\ref{fig:comm_angles} shows how a wave propagates through that atmosphere and will be explained beneath.
 
-\begin{figure}[ht]\label{fig:comm_angles}
+\begin{figure}[ht]
 \centering
   \includegraphics[width=4in]{images/comm-angles.png}
 \caption{Diagram of propagation path of a signal from a satellite \cite{ITU-R}.}
+\label{fig:comm_angles}
 \end{figure}
 
 In order to determine the propagation path length, $r$, one must determine the path length of the first layer and the second layer and add them together. The equation for calculating \cite{ITU-R} the path length of a layer is as follows.
@@ -218,8 +354,9 @@ Finally, the link margin can be determined by subtracting the required Energy pe
 
 There were several outputs during the design process from the Communications subsystem. These outputs include the Ground station to Orbits, which is NASA Wallops UHF Ground Station, the beam width of Wallops UHF Ground Station and DeMi to ADCS, which are $2.9^\circ$ and $65^\circ$ respectively, the operational and survival temperatures of the transceiver to Thermal, which are $-20^\circ$ C to $70^\circ$ C and $-40^\circ$ C to $80^\circ$ C respectively. The power for each mode to Power, and the mass and volume to Structures are detailed in Table~\ref{table:comm_summary_outputs}
 
-\begin{table}[ht]\label{table:comm_summary_outputs}
+\begin{table}[ht]
 \caption{Communications Budgets}
+\label{table:comm_summary_outputs}
 \begin{center}
     \begin{tabular}{|c||c|} \hline
     	Output & Value \\ \hline \hline
@@ -249,8 +386,9 @@ The Avionics subsystem requirements are presented in Appendix~\ref{app:requireme
 			\subsubsection{Trade Studies - VE}
 We have two main options that are able to satisfy the requirements for Avionics subsystem. Both are shown in Table~\ref{table:avionics_hardware_options}
 
-\begin{table}[ht]\label{table:avionics_hardware_options}
+\begin{table}[ht]
 \caption{Hardware Options}
+\label{table:avionics_hardware_options}
 \begin{center}
     \begin{tabular}{| c || p{6cm} | p{6cm} |} \hline
      &	Processing on-board & Raw images to the ground \\ \hline \hline
@@ -267,8 +405,9 @@ We have two main options that are able to satisfy the requirements for Avionics 
 
 Since we have identified the Payload driven requirements as the most challenging, we have to start selection of appropriate hardware from that.
 
-\begin{table}[ht]\label{table:avionics_modes}
+\begin{table}[ht]
 \caption{Payload image capturing modes}
+\label{table:avionics_modes}
 \begin{center}
     \begin{tabular}{| c || c | c | c |} \hline
     	Mode & 640x480 px subframe &  640x480 px subframe & 1280x1024 px  full frame \\ \hline \hline
@@ -291,16 +430,18 @@ The Steepest Ascent Mission Interface Computer CS-MIC-G-EM is a good fit for suc
 
 We have made a decision to use CS-MIC-G-EM (Figure~\ref{fig:avionics_MIC}) mainly because it enables onboard image processing which reduces the amount of data we send to the ground and provides with a capability to build a closed loop deformable mirror control system.
 
-\begin{figure}[ht]\label{fig:avionics_MIC}
+\begin{figure}[ht]
 \centering
   \includegraphics[width=4in]{images/avionics-MIC.jpg}
 \caption{Mission Interface Computer CS-MIC-G-EM \cite{avionics_clyde_space}}
+\label{fig:avionics_MIC}
 \end{figure}
 
 It is also capable of providing the following interfaces with other subsystems see Table~\ref{table:avionics_interfaces}.
 
-\begin{table}[ht]\label{table:avionics_interfaces}
+\begin{table}[ht]
 \caption{Avionics hardware interfaces with other subsystems (*assuming update 10 times per second).}
+\label{table:avionics_interfaces}
 \begin{center}
     \begin{tabular}{| c | c | c | c |} \hline
     	Subsytem & Component & Interface & Data rate \\ \hline \hline
@@ -321,17 +462,19 @@ It is also capable of providing the following interfaces with other subsystems s
 			\subsubsection{Analysis - VE}
 The system architecture in general is shown in Figure~\ref{fig:avionics_architecture}. The Mission Interface Computer we have selected allows us to separate telemetry from image processing data. The first is processed on CPU while the latter is done on FPGA.
 
-\begin{figure}[ht]\label{fig:avionics_architecture}
+\begin{figure}[ht]
 \centering
   \includegraphics[width=7in]{images/avionics-architecture.jpg}
 \caption{Caption goes here...}
+\label{fig:avionics_architecture}
 \end{figure}
 
 			\subsubsection{Summary of Outputs - ZC}
 The Avionics system had very few outputs to the other subsystems. It had to give values to Thermal for operational temperature range for the computer which is $-25^\circ$C to $85^\circ$C. The survival temperature is unknown. It also had to give outputs to power for power consumed during the different modes, and to structures for the mass and volume. These outputs, or budgets are detailed in Table~\ref{table:avionics_summary_outputs}.
 
-\begin{table}[ht]\label{table:avionics_summary_outputs}
+\begin{table}[ht]
 \caption{This is a summary of the mass totals, power needs, and thermal needs of the avionics system.}
+\label{table:avionics_summary_outputs}
 \begin{center}
     \begin{tabular}{|c||c|} \hline
     	Output & Value \\ \hline \hline
@@ -393,28 +536,61 @@ Requirements go here.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % REFERENCES
 
-\bibitem{avionics_clyde_space}
-Clyde Space. CubeSat Shop. [Online]. \url{http://www.clyde-space.com/cubesat_shop/obdh/364_mission-interface-computer-grande-em}, visited May 5, 2013. 
- 
-\bibitem{DICE}
-“DICE (Dynamic Ionosphere CubeSat Experiment), DICE-1 and DICE-2”, eoPortal, \url{https://directory.eoportal.org/web/eoportal/satellite-missions/d/dice}, Accessed 4/2013.
 
-\bibitem{ITU-R}
-“ITU-R P.676-9”, \url{http://www.itu.int/dms_pubrec/itu-r/rec/p/R-REC-P.676-9-201202-I!!PDF-E.pdf}, Accessed 4/2013.
+
+%%% PAYLOAD
+
+
+
+%%% POWER
+
+\bibitem{CS image}
+Image from Clyde Space.  URL \url{http://www.clyde-space.com/cubesat_shop/solar_panels_-_deployable}, (visited May 05, 2013).
+
+\bibitem{libertad-1} (2012).  ``CubeSat Kit -- In Space.''  URL \url{http://www.cubesatkit.com/content/space.html}, (visited May 05, 2013).
+
+\bibitem{EPS manual} Strain, A, (February 14, 2011).  ``User Manual: CubeSat 3U Electronic Power System.'' URL \url{http://www.clyde-space.com/documents/2471}, (visited May 05, 2013).
+
+\bibitem{PDM manual} Worrall, K, (March 14, 2011).  ``CubeSat Power Distribution Module User Manual.'' URL \url{http://www.clyde-space.com/documents/2560}, (visited May 05, 2013).
+
+\bibitem{Battery manual} McLaren, V, (April 28 2010).  ``User Manual: Standalone 30Wh Battery.''  URL \url{http://www.clyde-space.com/documents/1902}, (visited May 05, 2013).
+
+\bibitem{Solar panel datasheet} (March 16 2012). ``CubeSat Solar Panels.''  URL \url{http://www.clyde-space.com/documents/2625}, (visited May 05, 2013).
+
+%%% COMMUNICATIONS
+
+\bibitem{DICE}
+``DICE (Dynamic Ionosphere CubeSat Experiment), DICE-1 and DICE-2'', eoPortal, \url{https://directory.eoportal.org/web/eoportal/satellite-missions/d/dice}, Accessed 4/2013.
 
 \bibitem{antenna}
-“JPL LMRST Antenna Deployment Test”, \url{http://www.youtube.com/watch?v=DSvHKzM8scc}, Accessed 4/2013.
+``JPL LMRST Antenna Deployment Test'', \url{http://www.youtube.com/watch?v=DSvHKzM8scc}, Accessed 4/2013.
 
-\bibitem{kim00}
-   Kim. (2000).
-  \emph{\ Simulation Study of A Low-Low Satellite-to-Satellite Tracking Mission}. (Doctoral dissertation)
-  The University of Texas at Austin, TX.
+\bibitem{ITU-R}
+``ITU-R P.676-9'', \url{http://www.itu.int/dms_pubrec/itu-r/rec/p/R-REC-P.676-9-201202-I!!PDF-E.pdf}, Accessed 4/2013.
 
 \bibitem{SMAD}
 Wertz, James, \emph{Space Mission Engineering: The New SMAD}, Microcosm Press, Hawthorne, CA, 2011.
 
 \bibitem{pozar}
 Pozar, David M., \emph{Microwave and RF Design of Wireless Systems}, Wiley, New York City, NY, 2001.
+
+%%% AVIONICS
+
+\bibitem{avionics_clyde_space}
+Clyde Space. CubeSat Shop. [Online]. \url{http://www.clyde-space.com/cubesat_shop/obdh/364_mission-interface-computer-grande-em}, visited May 5, 2013. 
+
+%%% ADCS
+
+%%% THERMAL
+
+%%% STRUCTURES
+
+%%% TO BE SORTED
+
+\bibitem{kim00}
+   Kim. (2000).
+  \emph{\ Simulation Study of A Low-Low Satellite-to-Satellite Tracking Mission}. (Doctoral dissertation)
+  The University of Texas at Austin, TX.
 
 \end{thebibliography}
 
