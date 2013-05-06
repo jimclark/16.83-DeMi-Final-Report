@@ -59,9 +59,71 @@ Alexandra E. Wassenberg
 		\subsection{Motivation}
 \section{Mission Overview}
 		\subsection{Requirements}
-		\subsection{Concept of Operations}
+		\subsection{Concept of Operations -ZG}
+		
+		DeMi will be a 3-unit CubeSat on a low-Earth orbit with an altitude of 500 km at an inclination of 40°. Immediately separation from a standard Poly-PicoSatellite Orbital Deployer (P-POD), the satellite will begin to charge its primary batteries through solar panels covering the long faces of the structure. During this first stage, the satellite’s antenna will be deployed and will emit intermittent signals, or beacons, in order to be located by the ground station. The ADCS torque coils will detumble the satellite and align it in a nadir-pointing position. The detumble stage should last approximately 2 weeks. In case the satellite needs more time to power up, communicate with the ground station and stabilize itself, the science operations could be delayed. 
+		
+		\begin{figure}[!ht]
+				\centering
+				\includegraphics[width=5in]{images/MissionOverview_1.png}
+				\caption{Timeline of the concept of operations for the DeMi Mission}
+				\label{fig:Mission_ConOps}
+			\end{figure}
+		
+		Once the satellite is in fully operational status, the payload will begin to conduct its scientific experiments and collect data. Two different data capture modes will be performed during the mission: internal source experiments will be done during the first 3 months of operations, while external source experiments will occur during the remainder of the mission. The satellite will attempt to downlink the collected data whenever it passes over the NASA Wallops ground station and is given instructions to begin downlink. 
+
+The majority of the time, the satellite will be in stand-by mode; in other words, it will not be capturing or downlinking data. In case of a subsystem malfunction, the satellite will go into safe mode to diagnose the source of the problem. 
+
+Analyses performed using STK predict that the satellite will deorbit within 7.8 years. This timeline agrees with the current 25-year deorbit requirement outlined by NASA standards.2
+
 		\subsection{$N^2$ Diagram}
-		\subsection{System Level Budgets}
+		
+		In the early stages of the design process, the team created an $N^2$ diagram to exchange input and output values. Additionally, this diagram became an essential tool in determining the levels of interaction between the satellite’s different subsystems. 
+		
+		\begin{figure}[!ht]
+				\centering
+				\includegraphics[width=5in]{images/MissionOverview_2.png}
+				\caption{High-Level $N^2$ diagram showing input/output relationships between subsystems}
+				\label{fig:Mission_N2}
+			\end{figure}
+			
+		As highlighted the figure above, the payload requirements drive the design of all the other subsystems. While it does not receive design inputs from other subsystems, its design outputs cascade down effectively driving the design of the rest of the satellite. 
+
+Feedback loops were present between several subsystems, which forced the team to perform trade studies to exchange performance for mass or power cost. One of these trades involved the design of the Power and ADCS subsystems. For example, complex solar panel designs that could absorb more solar energy, such as deployable panels, would require a more robust ADCS subsystem. However, such ADCS design would need to draw more power to maintain the panels facing towards the sun effectively cancelling the power gained. After careful consideration of costs and benefits, the team decided to take this option off the table
+	
+	\subsection{System Level Budgets}
+		\subsubsection{Mass}
+		The mass budget is presented in Figure~\ref{fig:Mission_mass2} below. 
+			\begin{figure}[!ht]
+				\centering
+				\includegraphics[width=5in]{images/MissionOverview_3.png}
+				%\caption{System Mass Budget}
+				\label{fig:Mission_mass1}
+			\end{figure}
+		
+			\begin{figure}[!ht]
+				\centering
+				\includegraphics[width=5in]{images/MissionOverview_5.png}
+				\caption{System Mass Budget}
+				\label{fig:Mission_mass2}
+			\end{figure}
+			
+		\subsubsection{Power}
+		The power budget is presented in Figure~\ref{fig:Mission_power2} below. 
+			\begin{figure}[!ht]
+				\centering
+				\includegraphics[width=5in]{images/MissionOverview_4.png}
+				%\caption{System Power Budget}
+				\label{fig:Mission_power1}
+			\end{figure}
+			
+			\begin{figure}[!ht]
+				\centering
+				\includegraphics[width=5in]{images/MissionOverview_6.png}
+				\caption{System Power Budget}
+				\label{fig:Mission_power2}
+			\end{figure}
+			
 \section{Subsystems}
 		\subsection{Payload}
 			\subsubsection{Requirements}
@@ -498,7 +560,7 @@ There are two risks that avionics faces currently. One risk which is a high cons
 The future work that needs to be conducted is that there should be work done to determine a new solution to interfacing with Payload. The mirror driver interfaces with USB 2.0, however the computer is not able to interface with this. So work should be done into determining how to resolve this. One other thing that should be looked into is ensuring that the system can run all of the necessary calculations at the required speed so that all of the payload data can be processed and sent to the ground. If all of the data can’t be processed, it would be difficult to complete our science goals.
 
 		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-		\subsection{Attitude Determination and Control System (ADCS)} - TN
+		\subsection{Attitude Determination and Control System (ADCS) - TN} 
 		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 			\subsubsection{Requirements}
 		
@@ -769,10 +831,10 @@ Clyde Space. CubeSat Shop. [Online]. \url{http://www.clyde-space.com/cubesat_sho
 
 %%% TO BE SORTED
 
-\bibitem{kim00}
-   Kim. (2000).
-  \emph{\ Simulation Study of A Low-Low Satellite-to-Satellite Tracking Mission}. (Doctoral dissertation)
-  The University of Texas at Austin, TX.
+%\bibitem{kim00}
+   %Kim. (2000).
+  %\emph{\ Simulation Study of A Low-Low Satellite-to-Satellite Tracking Mission}. (Doctoral dissertation)
+  %The University of Texas at Austin, TX.
 
 \end{thebibliography}
 
