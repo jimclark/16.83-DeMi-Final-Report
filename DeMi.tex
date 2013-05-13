@@ -19,6 +19,8 @@
 \usepackage{bigstrut}
 \usepackage{epstopdf}
 \usepackage{hyperref}
+\usepackage{caption}
+\usepackage{subcaption}
 
 
 \title{Deformable Mirror Demonstration}
@@ -160,7 +162,7 @@ Feedback loops were present between several subsystems, which forced the team to
 				\caption{System Power Budget}
 				\label{fig:Mission_power2}
 			\end{figure}
-			
+\newpage			
 \section{Subsystems}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -324,7 +326,8 @@ space to find the best choice of components, Explore thermal effects on beam and
 \item{Stroke Analysis}: Study properties of DM stroke
 
 \end{itemize}
-			
+
+\newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % POWER
 			
@@ -461,22 +464,47 @@ This risk is mitigated by the 32\% margin of available power over the standby po
 			\subsubsection{Future Work}
 The performance of the solar panels and batteries is temperature-dependent.  In particular, the battery becomes more effective as its temperature increases, while the solar panels become less so.  Going forward, it would be useful to perform a more detailed simulation of the satellite that incorporates a thermal model, so that we can more accurately measure the effect of satellite temperature and dissipated excess energy (energy from the solar panels that does not go into charging the battery or powering the satellite).
 
+\newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % COMM
-
-
 		\subsection{Communication}
 
 			\subsubsection{Requirements - ZC}
+			
+			\begin{table}[ht]
+\caption{Communications Driving Requirements}
+\begin{tabular}{l p{5in}} 
+COMM-3.1 & The subsystem shall transmit at $19.2\ kb/s$ for uplink and $1.5\ Mb/s$ for downlink. \\
+& Parent Requirement: COMM-3\\
+COMM-3.2 & The subsystem shall have a bandwidth of $445-455\ MHz$ for uplink and $460-470\ MHz$ for downlink. \\
+& Parent Requirement: COMM-3\\
+\end{tabular}\label{table:comm_requirements}
+\end{table}
 
-Most of the Communications requirements (see Appendix~\ref{app:requirements}) are standard Communications requirements for operability. Comm-1 is simply stating what the main goal of the Communications subsystem is. Comm-2 is there to ensure that the link with the ground station is good enough to transmit all of the data that we need to. Comm-2.1 is there so that if there is an error in the transmission, the system will be able to realize this and ask for a correction. Comm-2.2 is so that it doesn’t try to downlink more data than possible because if it does, then data will be lost. Comm-3 is simply there so that the Communications subsystem can ensure access with the ground station. Comm-3.1 and Comm-3.2 are specifics when it comes to communicating with the ground station. Comm-4 is there because if we do not encrypt it, another satellite may be able to receive our commands and learn about the DeMi system. Comm-5 is there to ensure that if there are errors, there will be very few of them. Comm-6 is just to ensure that DeMi follows all regulations set by different government agencies.
+The driving requirements for the communications subsystem are that it should transmit at the data rates and frequencies (Comm-3.2) that are necessary to transmit all data to the ground station. The required frequencies are $445-455\ MHz$ for uplink and $460-470\ MHz$ for downlink. The required data rates are $19.2\ kb/s$ for uplink and $1.5\ Mb/s$ for downlink.
 
-			\subsubsection{Trade Studies - ZC}\label{sec:comm_tradestudies}
-The main factor in choosing what transceiver to use in our system is the data downlink amount. Because payload is generating so much data, Communications will need to have a high downlink rate to ensure that all of that data can be sent to the ground. Several options were looked into, and shown in Table~\ref{table:comm_transceivers}.
+			\subsubsection{Decisions Made - ZC}\label{sec:comm_decisions}
+
+The L-3 Cadet Nanosat UHF Radio was chosen for use on DeMi. It transmits at the frequencies and data rates outlined in the requirements. The transceiver has an extra $4\ GB$ of storage that avionics uses in addition to any of its storage. 
+
+Because the transceiver is transmitting and receiving at UHF frequencies, a very common antenna choice is to use a measuring tape antenna that is tuned to the frequency that is desired. Because the antenna works like a quarter-wave monopole, the desired length of the antenna is calculated by dividing the wavelength of the signal by 4. Because the transmitting and receiving frequencies are different, the average of these frequencies is used to compute the wavelength. With a frequency of $465\ MHz$, the wavelength equals $.645$ meters. Then, the length of the antenna can be determined using Eq.~\ref{eq:comm-antenna-length}.
+
+
+\begin{equation}\label{eq:comm-antenna-length}
+\lambda = c/f
+\end{equation}
+
+In Eq.~\ref{eq:comm-antenna-length}, $l$ is the length of the antenna, and $\lambda$ is the wavelength. Using a wavelength of $.645$ meters, the desired length of the antenna is about $.16$ meters. The gain of this antenna will be approximately $3\ dB$ and the beam width approximately $65^\circ$.
+
+The ground station that DeMi communicates with will be the NASA Wallops UHF Ground Station. This ground station is being used because the transceiver chosen for DeMi was also used in the Dynamic Ionosphere CubeSat Experiment, and the ground station that was used in that mission was the NASA Wallops UHF Ground Station. The diameter of the dish is $18.29$ meters, the gain is $35\ dB$ and the beam with is $2.9^\circ$.
+
+
+\subsubsection{Trade Studies - ZC} \label{sec:communications-trade-studies}
+
+The main factor in choosing the transceiver on DeMi is the maximum data downlink rate. Because payload is generating so much data, the communications system needs to have a high downlink rate to ensure that all of that data can be sent to the ground. Several options were investigated, and the transceiver with the highest data rate is being used. The transceivers that were considered and their maximum data rates are shown in Table~\ref{table:comm_transceivers}.
 
 \begin{table}[ht]
 \caption{Communications Trade Study for Maximum Downlink Data Rate}
-\label{table:comm_transceivers}
 \begin{center}
     \begin{tabular}{| c | c |} \hline
     	Tranceiver & Maximum Downlink Rate \\ \hline \hline
@@ -486,147 +514,109 @@ ISIS TXS Small Satellite  S-Band Transmitter & $100\ kb/s$ \\
 Tyvak UHF Transceiver & $200\ kb/s$ \\
 L-3 Cadet Nanosat UHF Radio & $1.5\ Mb/s$ \\
 Microhard MHX2420 Modem & $230.4\ kb/s$ \\ \hline 
-    \end{tabular}
+    \end{tabular}\label{table:comm_transceivers}
 \end{center}
 \end{table}
 
-			\subsubsection{Decisions Made - ZC}
-
-Given the information in Section~\ref{sec:comm_tradestudies}, the L-3 Cadet Nanosat UHF Radio was chosen for use on DeMi. It will transmit at the frequencies and data rates outlined in the requirements, which are $445\ -\ 455\ MHz$ for uplink at $19.2\ kb/s$, $460\ -\ 470\ MHz$ for downlink at $1.5\ Mb/s$. The transceiver also has an extra $4\ GB$ of storage that avionics will be able to use in addition to any of its storage. 
-
-\begin{figure}[ht]
-\centering
-  \includegraphics[width=3in]{images/comm-cadet.png}
-\caption{Photo of the custom-designed high-speed L3 Cadet radio \cite{DICE}.}
-\label{fig:comm_Cadet}
-\end{figure}
-
-Because the transceiver will be transmitting and receiving at UHF frequencies, a very common antenna choice is to use a measuring tape antenna that is tuned to the frequency that is desired. Because the antenna works like a quarter-wave monopole, one can determine the desired length of the antenna by dividing the wavelength of the transmitted and received signal by 4. Because the transmitting and receiving frequencies are different, the average of these frequencies was used to compute the wavelength. 
-
-\begin{equation}\label{eq:comm_lambda}
-\lambda = c/f
-\end{equation}
-
-Eq.~\ref{eq:comm_lambda} is used to calculate the wavelength. $\lambda$ is the wavelength, $c$ is the speed of light, and $f$ is the frequency. Using the average frequency of $465\ MHz$, the wavelength equals $0.645\ m$. Then to determine the length of the antenna one can just use the following equation.
-
-\begin{equation}\label{eq:comm_length}
-l = \lambda/4
-\end{equation}
-
-In Eq.~\ref{eq:comm_length}, $l$ is the length of the antenna, and $\lambda$ is the wavelength. Using a wavelength of $0.645\ m$, one can find that the desired length of the antenna is about $0.164\ m$. The gain of this antenna will be approximately $3\ dB$ and the beam width approximately $65^\circ$.
-
-\begin{figure}[ht]
-\centering
-  \includegraphics[width=3in]{images/comm-tape.png}
-\caption{Photo of stored and deployed measuring tape antenna. The pictured CubeSat has four antennas. DeMi will only be using one \cite{antenna}.}
-\label{fig:comm_tape}
-\end{figure}
-
-The ground station that will be used with this system will be the NASA Wallops UHF Ground Station. This was chosen because the transceiver that will be used was also used in the Dynamic Ionosphere CubeSat Experiment, and the ground station that was used in that mission was the NASA Wallops UHF Ground Station. The diameter if the dish is $18.29\ m$, the gain is $35\ dB$ and the beam width is $2.9^\circ$.
-
 			\subsubsection{Analysis - ZC}
 
-One can calculate the maximum amount of data downlink per pass-by by multiplying the downlink data rate and the access duration per pass-by. Given the downlink data rate of $1.5\ Mb/s$, and the access duration of $586\ s$ per pass-by, the maximum amount of data that can be downlinked in one pass-by is $109.9\ MB$. To account for the fact that the data-rate won’t always be able to be at its maximum, and also for space for telemetry data and error correcting code, we have a margin of a factor of 2, so the maximum amount of data from payload that can be downlinked per pass-by is about $54.95\ MB$. Although this is not as much data as payload is creating, there will be on-board processing so that the amount of data that needs to be downlinked is below the maximum amount that is allotted for payload.
+The maximum amount of data downlink per pass-by can be calculated by multiplying the downlink data rate and the access duration per pass-by. Given the downlink data rate of $1.5\ Mb/s$, and the access duration of $586$ seconds per pass-by, the maximum amount of data that can be downlinked in one pass-by is $109.9\ MB$. Because the satellite is not always directly above the ground station, the satellite is not always downlinking at the maximum data rate. To account for this, and for space for telemetry data and error correcting code, a margin of a factor of 2 is added, so the maximum amount of data from payload that can be downlinked per pass-by is about $54.95\ MB$. Although this is not as much data as payload is creating, on-board processing is used so that the amount of data that needs to be downlinked is below the maximum amount that is allotted for payload.
 
-A Link Budget was created in order to determine the Link Margin for a worst case and a best case for uplink and downlink. Appendix~\ref{app:link_budgets} detail these budgets.
+A link budget was created in order to determine the link margin for a worst case and a best case for uplink and downlink. The uplink budget and the downlink budget are detailed in Appendix~\ref{app:link_budgets}.
 
-The first calculation in the Appendix~\ref{app:link_budgets} is to calculate the worst case propagation path length. We know that the best case length is $500\ km$ because that is the altitude at which the satellite is orbiting. Figure~\ref{fig:comm_angles} shows how a wave propagates through that atmosphere and will be explained beneath.
+The first calculation for the link budget is to determine the worst case propagation path length. The best case length is $500\ km$ because that is the altitude at which the satellite is orbiting. Figure~\ref{fig:comm_propagation_path} shows how a wave propagates through that atmosphere.
 
 \begin{figure}[ht]
 \centering
   \includegraphics[width=4in]{images/comm-angles.png}
-\caption{Diagram of propagation path of a signal from a satellite \cite{ITU-R}.}
-\label{fig:comm_angles}
+\caption{Diagram of propagation path of a signal from a satellite \cite[p.~12]{ITU-R}.}
+\label{fig:comm_propagation_path}
 \end{figure}
 
-In order to determine the propagation path length, $r$, one must determine the path length of the first layer and the second layer and add them together. The equation for calculating \cite{ITU-R} the path length of a layer is as follows.
+In order to determine the propagation path length, $r$, the path length of the first layer and the second layer must be determined and added together. The equation for calculating the path length of a layer is as follows in Eq.~\ref{eq:comm_path_length} \cite[p.~9]{ITU-R}.
 
-\begin{equation}\label{eq:path_length}
+\begin{equation}\label{eq:comm_path_length}
 a_n = -r_n\cos(\beta_n) + \frac{1}{2}\sqrt{4r_n^2\cos^2(\beta_n)+8r_n\delta_n+4\delta_n^2} 
 \end{equation}
 
-In Eq.~\ref{eq:path_length}, $a_n$ is the path length through layer $n$, $r_n$ is the radii from the center of the Earth to the beginning of layer $n$, $\beta_n$ is the exiting incidence angle, and $\delta_n$ is the thickness of layer $n$.
-The angle $\beta_n$ can be calculated \cite{ITU-R} using the following equation.
+In this equation, $a_n$ is the path length through layer $n$, $r_n$ is the radius from the center of the Earth to the beginning of layer $n$, $\beta_n$ is the exiting incidence angle, and $\delta_n$ is the thickness of layer $n$.
+The angle $\beta_n$ can be calculated using Eq.~\ref{eq:comm-exit-angle} \cite[p.~10]{ITU-R}.
 
-\begin{equation}\label{eq:betan1}
-\beta_{n+1} = \arcsin\biggl(\frac{n_n}{n_{n+1}}\sin(a_n)\biggr) 
+\begin{equation}\label{eq:comm-exit-angle}
+\beta_{n+1} = \arcsin\biggl(\frac{n_n}{n_{n+1}}\sin(\alpha_n)\biggr) 
 \end{equation}
 
-In Eq.~\ref{eq:betan1}, $n_n$ is the refractive index of layer $n$, and $\alpha_n$ is the entry incidence angle. Angle $\alpha_n$ can be calculated with the last equation needed in order to calculate \cite{ITU-R} the propagation length.
+In this equation, $n_n$ is the refractive index of layer $n$, and $\alpha_n$ is the entry incidence angle. Angle $\alpha_n$ can be calculated with the last equation needed in order to calculate the propagation length, Eq.~\ref{eq:comm-entry-angle \cite[p.~9]{ITU-R}.
 
-\begin{equation}\label{eq:a_n}
-a_n = \pi - \arccos \biggl(\frac{-a_n^2 - 2r_n\delta_n - \delta_n^2}{2a_n r_n + 2a_n \delta_n}\biggr) 
+\begin{equation}\label{eq:comm-entry-angle}
+\alpha_n = \pi - \arccos \biggl(\frac{-a_n^2 - 2r_n\delta_n - \delta_n^2}{2a_n r_n + 2a_n \delta_n}\biggr) 
 \end{equation}
 
-Values that still need to be defined are $\beta_1$ (because it cannot be calculated using Eq.~\ref{eq:a_n}), $\delta_1$, $\delta_2$, $n_1$, and $n_2$. $\beta_1$ is just equal to the complimentary angle to the minimum angle at which the Wallops Ground Station can track, which is $5^\circ$. $\delta_1$ will be equal to the altitude at which the atmosphere ends which one can say is about $100\ km$. $\delta_2$ is just the orbiting altitude minus $\delta_1$. $n_1$, which is simple the refractive index of air, is $1.000293$. The last remaining value to be defined is $n_2$, which is the refractive index of a vacuum, which is just 1. Using these equations, one can find that $a_1$ equals $707\ km$, and $a_2$ equals $1375\ km$. This means that the worst case propagation path length is equal to $2082\ km$.
+Values that still need to be defined are $\beta_1$ (because it cannot be calculated using the Eq.~\ref{eq:comm-entry-angle}), $\delta_1$, $\delta_2$, $n_1$, and $n_2$. $\beta_1$ is just equal to the complimentary angle to the minimum angle at which the Wallops Ground Station can track, which is $5^\circ$. $\delta_1$ will be equal to the altitude at which the atmosphere ends which one can say is about $100\ km$. $\delta_2$ is just the orbiting altitude minus $\delta_1$. $n_1$, which is simple the refractive index of air, is $1.000293$. The last remaining value to be defined is $n_2$, which is the refractive index of a vacuum, which is just 1. Using these equations, one can find that $a_1$ equals $707\ km$, and $a_2$ equals $1375\ km$. This means that the worst case propagation path length is equal to $2082\ km$. The refraction of the wave in air did not change the path length by very much. Without accounting for the refraction, the path length can be calculated using the equation for $a_n$. In this calculation, $r_n$ equals $r_1$, $\beta_n$ equals $\beta_1$, and $\delta_n$ equals $500\ km$ which is the altitude at which DeMi orbits. These values give a path length equal to $2077\ km$, which is only $5\ km$ shorter than the path length when taking refraction into consideration.
 
-The next value calculated in the Link Budgets is the Equivalent, Isotropic Radiated Power (EIRP). In order to calculate the EIRP \cite{SMAD}, the following equation should be used.
+The next value calculated in the link budgets is the Equivalent, Isotropic Radiated Power (EIRP). In order to calculate the EIRP, Eq.~\ref{eq:comm-eirp} should be used \cite[p.~476]{SMAD}.
 
-\begin{equation}\label{eq:EIRP}
+\begin{equation}\label{eq:comm-eirp}
 EIRP = P_{tx} + G_{tx} - L_{output} 
 \end{equation}
 
-In Eq.~\ref{eq:EIRP}, $P_{tx}$ is the transmitter power, $G_{tx}$ is the transmit antenna gain, and $L_{output}$ is the output loss which is equal to all losses associated with the transmitter. All of these values can be found in the Link Budget (Appendix~\ref{app:link_budgets}).
+In Eq.~\ref{eq:comm-eirp}, $P_{tx}$ is the transmitter power, $G_{tx}$ is the transmit antenna gain, and $L_{output}$ is the output loss which is equal to all losses associated with the transmitter. All of these values can be found in the two link budgets in Appendix~\ref{app:link_budgets}.
 
-Another calculated value in the Link Budget is the Space Loss. This is the loss of the signal as it is transmitted through space. It can be calculated \cite{SMAD} using the following equation.
+Another calculated value in the link budget is the space loss. This is the loss of the signal as it is transmitted through space. It can be calculated using Eq.~\ref{eq:comm-space-loss} \cite[p.~476]{SMAD}.
 
-\begin{equation}\label{eq:L_s}
+\begin{equation}\label{eq:comm-space-loss}
 L_s = 92.45 + 20\log_{10}(r) + 20\log_{10}(f) 
 \end{equation}
 
-In Eq.~\ref{eq:L_s}, $L_s$ is space loss, $r$ is the propagation path length, and $f$ is the frequency of the transmitted signal. All of these values can also be found in the Link Budget (Appendix~\ref{app:link_budgets}.
+In Eq.~\ref{eq:comm-space-loss}, $L_s$ is space loss, $r$ is the propagation path length, and $f$ is the frequency of the transmitted signal. All of these values can also be found in the two link budget tables in Appendix~\ref{app:link_budgets}.
 
-The next equation can be used to calculate \cite{pozar} the transmitting antenna temperature.
+Eq.~\ref{eq:comm-antenna-temp} can be used to calculate the transmitting antenna temperature \cite{pozar}.
 
-\begin{equation}\label{eq:t_antenna}
+\begin{equation}\label{eq:comm-antenna-temp}
 T_{antenna} = \eta T_{sky} + (1 + \eta) \frac{T_{sky} + T_{ground}}{2} 
 \end{equation}
 
-In Eq.~\ref{eq:t_antenna}, $\eta$ is the antenna efficiency, $T_{sky}$ is the temperature of the space behind the receiving antenna. The temperatures used for uplink are determined by using the background temperature of space. For downlink, the temperature of the Earth is used. $T_{ground}$ is the temperature of the ground around the antenna. For uplink, this is the temperature of the Earth, and for Downlink, it is the background temperature of space.
+In Eq.~\ref{eq:comm-antenna-temp}, $\eta$ is the antenna efficiency, $T_{sky}$ is the temperature of the space behind the receiving antenna. The temperatures used for uplink are determined by using the background temperature of space. For downlink, the temperature of the Earth is used. $T_{ground}$ is the temperature of the ground around the antenna. For uplink, this is the temperature of the Earth, and for Downlink, it is the background temperature of space.
 
 The system noise temperature, $T_{sys}$, is calculated by adding the transmitting antenna temperature and the receiver temperature \cite{pozar}. The receiver temperature for both cases is unique to the receiver and can be determined by the manufacturer.
 
-The next calculated value is the Receiver Gain to Noise Temperature. This is computed \cite{SMAD} using the following equation.
+The next calculated value is the Receiver Gain to Noise Temperature. This is computed using Eqn.~\ref{eq:comm-gain-to-noise} \cite[p.~477]{SMAD}.
 
-\begin{equation}\label{eq:G/T}
+\begin{equation}\label{eq:comm-gain-to-noise}
 \frac{G}{T} =  G_{rx} - T_{sys} 
 \end{equation}
 
-In Eq.~\ref{eq:G/T}, $\frac{G}{T}$ is the Receiver Gain to Noise Temperature, $G_{rx}$ is the receiving antenna gain, and $T_{sys}$ is the system noise temperature. Using $\frac{G}{T}$, the total losses in the system, and EIRP one can determine \cite{SMAD} the Receiver Carrier to Noise Ratio.
+In Eq.~\ref{eq:comm-gain-to-noise}, $G/T$ is the receiver gain to noise temperature, $G_{rx}$ is the receiving antenna gain, and $T_{sys}$ is the system noise temperature. Using $G/T$, the total losses in the system, and EIRP one can determine the receiver carrier to noise ratio \cite[p.~477]{SMAD}.
 
-\begin{equation}\label{eq:c/n}
+\begin{equation}\label{eq:comm-carrier-to-noise}
 \frac{C}{N_0} = EIRP + \frac{G}{T} - L_{total} + 228.6 
 \end{equation}
 
-Using that value and the data rate in decibels, one can calculate \cite{SMAD} the Energy per bit to Noise Ratio.
+Using the value from Eq.~\ref{eq:comm-carrier-to-noise} and the data rate in decibels, one can calculate the energy per bit to noise ratio \cite[p.~478]{SMAD}.
 
-\begin{equation}\label{eq:eb/n}
+\begin{equation}\label{eq:comm-energy-to-noise}
 \frac{E_b}{N_0} = \frac{C}{N_0} - R_b 
 \end{equation}
 
-Finally, the link margin can be determined by subtracting the required Energy per bit to Noise Ratio from the predicted one. 
+Finally, the link margin can be determined by subtracting the required energy per bit to noise ratio from the predicted one \cite[p.~478]{SMAD}. The best and worst case link margins for uplink and downlink are shown in Figure~\ref{fig:comm_cases}.
 
-\begin{figure}[ht]
-\centering
-  \includegraphics[width=4in]{images/comm-best.png}
-\caption{Representation of Satellite and Ground Station during Best Case Communication.}
-\label{fig:comm_best}
+
+\begin{figure}
+\hfill
+\subfigure[Best Case Communication]{\includegraphics[width=3in]{images/comm-best.png}}
+\hfill
+\subfigure[Worst Case Communication]{\includegraphics[width=3in]{images/comm-worst.png}}
+\hfill
+\caption{Representation of Satellite and Ground Station during a.) Best Case Communication and b.) Worst Case Communication}
+\label{fig:comm_cases}
 \end{figure}
+		
+\subsubsection{Summary of Outputs - ZC}
 
-\begin{figure}[ht]
-\centering
-  \includegraphics[width=4in]{images/comm-worst.png}
-\caption{Representation of Satellite and Ground Station during Worst Case Communication.}
-\label{fig:comm_worst}
-\end{figure}
-
-			\subsubsection{Summary of Outputs - ZC}
-
-There were several outputs during the design process from the Communications subsystem. These outputs include the Ground station to Orbits, which is NASA Wallops UHF Ground Station, the beam width of Wallops UHF Ground Station and DeMi to ADCS, which are $2.9^\circ$ and $65^\circ$ respectively, the operational and survival temperatures of the transceiver to Thermal, which are $-20^\circ$ C to $70^\circ$ C and $-40^\circ$ C to $80^\circ$ C respectively. The power for each mode to Power, and the mass and volume to Structures are detailed in Table~\ref{table:comm_summary_outputs}
-
+There were several outputs during the design process from the communications subsystem. These outputs include the ground station to the orbits subsystem, which is NASA Wallops UHF Ground Station, the beam width of Wallops UHF Ground Station and DeMi to ADCS, which are $2.9^\circ$ and $65^\circ$ respectively. The operational and survival temperatures of the transceiver to the thermal subsystem, the power for each mode to the power subsystem, and the mass and volume to the structures subsystem are detailed in Table~\ref{table:comm_summary_outputs}.
+	
 \begin{table}[ht]
 \caption{Communications Budgets}
-\label{table:comm_summary_outputs}
 \begin{center}
     \begin{tabular}{|c||c|} \hline
     	Output & Value \\ \hline \hline
@@ -635,20 +625,22 @@ There were several outputs during the design process from the Communications sub
     Power (Downlink) & $11.44\ W$ \\
     Power (Uplink) & $0.51\ W$ \\
     Power (Safe Mode) & $0.51\ W$ \\
-    Mass & $0.235\ kg$  \\
-    Volume & $0.069\ U$ \\ \hline 
-    \end{tabular}
+    Mass & $\sim 0.235\ kg$  \\
+    Volume & $0.069\ U$ \\ 
+Operating Temperature Range & $-20^\circ$ to $70^\circ$ \\
+Survival Temperature Range & $-40^\circ$ to $80^\circ$ \\ \hline 
+    \end{tabular}\label{table:comm_summary_outputs}
 \end{center}
 \end{table}
 
 			\subsubsection{Risks - ZC}
-
-As of PDR, there were no risks for the Communications subsystem. Towards the beginning of the design process, there were huge concerns about Communications not being able to downlink enough of the data from Payload, but since then, Avionics has decided that DeMi will be doing on-board processing so that all of the data does not need to be downlinked.
+As of PDR, there were no design risks for the communications subsystem. Initially, there were concerns that communications may not be able to downlink enough of the data from the payload, however, avionics has decided that because of this risk, DeMi will be doing on-board processing so that less data is required to be downlinked.
 
 			\subsubsection{Future Work - ZC}
+	Moving on from here, the main thing that should be done is testing of measuring tape antennas. There is currently not very much information out there that is available to DeMi concerning them, so research to determine the exact gain, beam width and radiation patterns should be conducted.
 
-Moving on from here, the main thing that should be done is research and analysis of measuring tape antennas. There is currently not very much information out there that is available to DeMi concerning them, so research to determine the exact gain, beam width and radiation patterns should be conducted.		
-		
+
+\newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % AVIONICS
 
@@ -767,7 +759,7 @@ There are two risks that avionics faces currently. One risk which is a high cons
 			\subsubsection{Future Work - ZC}
 The future work that needs to be conducted is that there should be work done to determine a new solution to interfacing with Payload. The mirror driver interfaces with USB 2.0, however the computer is not able to interface with this. So work should be done into determining how to resolve this. One other thing that should be looked into is ensuring that the system can run all of the necessary calculations at the required speed so that all of the payload data can be processed and sent to the ground. If all of the data can’t be processed, it would be difficult to complete our science goals.
 
-
+\newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % ADCS
 
@@ -951,6 +943,7 @@ The simulation was run with an initial angular rate of 10$^o$/s, magnetic moment
 			\subsubsection{Future Work}
 			The main future work of the ADCS system is to simulate the flight condition through with external disturbance torques at each position on orbit. The next step would be to create a control loop that takes these environmental torques as inputs to compute the needed magnetic moment of each of the 3 torque coils. 
 
+\newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % THERMAL
 
@@ -1115,7 +1108,7 @@ Surface coating & & & N/A \\\hline
 \end{table}
 
 
-
+\newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % STRUCTURES
 
@@ -1150,6 +1143,7 @@ More iterations in the design process need to be carried out before the design c
 
 
 		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
 
 \section{Acknowledgment}
 	
@@ -1198,7 +1192,25 @@ More iterations in the design process need to be carried out before the design c
 
 
 %%% PAYLOAD
+\bibitem{radiation_optics}
+   Nicoletta, C. A. and A. G. Eubanks.
+   \emph{Effect of Simulated Space Radiation On Selected Optical Materials}. Washington, D.C.: National Aeronautics and Space Administration, 1972.
 
+\bibitem{cahoy2013}
+   Cahoy, K. L., A. Marinan, B. Novak, C. Kerr, M. Webber. 
+   \emph{Wavefront control in space with MEMS deformable mirrors}, Photonics West, MEMS Adaptive Optics VII, Vol. 8617, SPIE, Washington, D.C., 2013.
+ 
+\bibitem{demtroeder}
+   Demtroeder, W.
+   \emph{Laser Spectroscopy: Basic Concepts and Instrumentation}, 3rd ed. Berlin: Spring-Verlag, 2003.
+
+\bibitem {greivenkamp}
+   Greivenkamp, John E. 
+   \emph{Field Guide to Geometrical Optics}, Bellingham, WA: SPIE, 2004. Print.
+   
+\bibitem{FGadaptiveoptics}
+   Tyson, Robert K. and Benjamin W. Frazier. 
+   \emph{Field Guide to Adaptive Optics}. Bellingham, WA: SPIE Press, 2012.  Internet resource.
 
 
 %%% POWER
@@ -1218,31 +1230,8 @@ Image from Clyde Space.  URL \url{http://www.clyde-space.com/cubesat_shop/solar_
 
 %%% COMMUNICATIONS
 
-
-\bibitem{cahoy2013}
-   Cahoy, K. L., A. Marinan, B. Novak, C. Kerr, M. Webber. 
-   \emph{Wavefront control in space with MEMS deformable mirrors}, Photonics West, MEMS Adaptive Optics VII, Vol. 8617, SPIE, Washington, D.C., 2013.
- 
-\bibitem{demtroeder}
-   Demtroeder, W.
-   \emph{Laser Spectroscopy: Basic Concepts and Instrumentation}, 3rd ed. Berlin: Spring-Verlag, 2003.
-
-\bibitem{DICE}
-“DICE (Dynamic Ionosphere CubeSat Experiment), DICE-1 and DICE-2”, eoPortal, \url{https://directory.eoportal.org/web/eoportal/satellite-missions/d/dice}, Accessed 4/2013.
-
-\bibitem {greivenkamp}
-   Greivenkamp, John E. 
-   \emph{Field Guide to Geometrical Optics}, Bellingham, WA: SPIE, 2004. Print.
-
-\bibitem{antenna}
-``JPL LMRST Antenna Deployment Test'', \url{http://www.youtube.com/watch?v=DSvHKzM8scc}, Accessed 4/2013.
-
 \bibitem{ITU-R}
-``ITU-R P.676-9'', \url{http://www.itu.int/dms_pubrec/itu-r/rec/p/R-REC-P.676-9-201202-I!!PDF-E.pdf}, Accessed 4/2013.
-
-\bibitem{radiation_optics}
-   Nicoletta, C. A. and A. G. Eubanks.
-   \emph{Effect of Simulated Space Radiation On Selected Optical Materials}. Washington, D.C.: National Aeronautics and Space Administration, 1972.
+``ITU-R P.676-9'', URL \url{http://www.itu.int/dms_pubrec/itu-r/rec/p/R-REC-P.676-9-201202-I!!PDF-E.pdf}, (visited April 2013).
 
 \bibitem{pozar}
 Pozar, David M., \emph{Microwave and RF Design of Wireless Systems}, Wiley, New York City, NY, 2001.
@@ -1266,9 +1255,7 @@ Clyde Space. CubeSat Shop. [Online]. \url{http://www.clyde-space.com/cubesat_sho
   %\emph{\ Simulation Study of A Low-Low Satellite-to-Satellite Tracking Mission}. (Doctoral dissertation)
   %The University of Texas at Austin, TX.
 
-\bibitem{FGadaptiveoptics}
-   Tyson, Robert K. and Benjamin W. Frazier. 
-   \emph{Field Guide to Adaptive Optics}. Bellingham, WA: SPIE Press, 2012.  Internet resource.
+
 
 \bibitem{SMAD}
 Wertz, James, \emph{Space Mission Engineering: The New SMAD}, Microcosm Press, Hawthorne, CA, 2011.
