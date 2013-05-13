@@ -1126,31 +1126,33 @@ Surface coating & & & N/A \\\hline
 (See separate document.)
 
 \section{Conclusion - AW}
+In this report, it has been shown that a low-cost, quick-access mission can be carried out on a 3U CubeSat platform in order to demonstrate MEMS deformable mirror technology on-orbit.  Continued iterations of the system design based on the current system risks and outlined in the section on future work need to be carried out in order to optimize the design.
 
-In this paper it has been shown that a low-cost, quick-access mission can be carried out on a 3U CubeSat platform in order to demonstrate MEMS deformable mirror technology on-orbit.  Continued iterations of the system design based on the current system risks and outlined in the section on future work need to be carried out in order to optimize the design.
+		\subsection{Risk Summary}
+Although at this stage in the design the DeMi demonstration system supports a functional, on-orbit test of the deformable mirror technology, the mission is still confronted with a number of risks.  Due to the fact that there is only a $9\%$ margin instead of an $18\%$ margin between the power required and the power that can be supplied to the system, there is a high consequence, medium likelihood risk (PO1) that there will not be enough power to supply the system in order to carry out the mission.
 
-		\subsection{Risk Summary - AW}
+There is also a risk (S1) that the center of mass of the structure could move out of range.  With the current design, the center of mass is within range.  However, there still exists the possibility that masses and positions of the parts may change, the center of mass could potentially move out of range.  This risk is low likelihood but high consequence.
 
-Although, at this stage in the design the DeMi demonstration system closes, the mission is still confronted with a number of risks (see Figure~\ref{fig:risk_chart}).  Due to the fact that there is only a $9\%$ margin instead of an $18\%$ margin between the power required and the power that can be supplied to the system, there is a high consequence, medium likelihood risk (PO1) that there will not be enough power to supply the system in order to carry out the mission.
+Two risks exist regarding the avionics subsystem.  The first, a low likelihood, high consequence risk (AV1), is that the avionics subsystem will not be capable of processing all of the incoming data.  The second (AV2), regards the avionics system not being capable of providing the required latency for the payload and ADCS subsystems. 
 
-There is also a risk (S1) that the center of mass of the structure could move out of range.  With the current design, the center of mass is within range.  However, since at this stage in the design there still exists the possibility that masses and positions of the parts may change, the center of mass could potentially move out of range.  This risk is low likelihood but high consequence.
-
-Two risks exist regarding the avionics subsystem.  The first, a low likelihood, high consequence risk (AV1), is that the avionics subsystem will not be capable of processing all of the incoming data.  The second (AV2), regards the avionics system not being capable of providing the required latency for the Payload and ADCS subsystems. 
-
-Additionally, there is a low consequence, low likelihood risk (AD1) that ADCS will exceed the system mass budget.  Since a trade between mass and power was made in the design of the torque coils, both the mass and power budgets of the system are tight, and the system components and design still have the potential to change in this stage of the design, if the torque coil design needs to change in order to reduce the power draw of the system, the mass might increase to above the maximum set by the CubeSat regulations.  However, this is a low consequence, low likelihood risk since currently the system mass is under the maximum for a 3U CubeSat with over a $30\%$ margin.
-
-\begin{figure}[h]
+\begin{figure}[ht]
 \centering
-\includegraphics{images/conclusion_1.png}
+\includegraphics[width=3in]{images/conclusion_1.png}
 \caption{Systems level risk chart.}
 \label{fig:risk_chart}
 \end{figure}
 
-		\subsection{Future Work - AW}
+Additionally, there is a low consequence, low likelihood risk (AD1) that ADCS will exceed the system mass budget.  Since a trade between mass and power was made in the design of the torque coils, both the mass and power budgets of the system are tight.  Additionally, the system components and design still have the potential to change in this stage of the design.  Therefore, if the torque coil design needs to change in order to reduce the power draw of the system, the mass might increase to above the maximum set by the CubeSat regulations.  However, this is a low consequence, low likelihood risk since currently the system mass is under the maximum for a 3U CubeSat with over a $30\%$ margin.
 
-More iterations in the design process need to be carried out before the design can be completed.  Future work for the DeMi demonstration includes creating more detailed models of the temperature dependence of battery and solar panel performance and the temperature gradient across the satellite in order to more accurately calculate the power that can be supplied to the system and to determine whether the proposed heating design will be effective.  Additionally, as the design continues to mature, the structural model will need to continue to be updated.  It also needs to be verified that the structure and components will survive the launch environment. In addition, further research needs to be conducted on the construction and use of the measuring tape antenna.  More research and analysis needs to be carried out regarding the interface with payload and it must be confirmed that the avionics system can process all information at the required speed.  Finally, ADCS needs to create more accurate models of external disturbances and an attitude control loop.
+		\subsection{Future Work}
 
+More iterations in the design process need to be carried out before the design can be completed.  Future work for the DeMi demonstration includes creating more detailed models of the temperature dependence of battery and solar panel performance and the temperature gradient across the satellite in order to more accurately calculate the power that can be supplied to the system and to determine whether the proposed heating design will be effective.  Additionally, as the design continues to mature, the structural model will need to continue to be updated with new parts and part positions.  It also needs to be verified that the structure and components will survive the launch environment. In addition, further research needs to be conducted on the construction and use of the measuring tape antenna.  More research and analysis needs to be carried out regarding the interface with payload and it must be confirmed that the avionics system can process all information at the required speed.  Finally, ADCS needs to create more accurate models of external disturbances and an attitude control loop.
 
+In this paper it has been shown that a low-cost, quick-access mission can be carried out on a 3U CubeSat platform in order to demonstrate MEMS deformable mirror technology on-orbit.  Continued iterations of the system design based on the current system risks and outlined in the section on future work need to be carried out in order to optimize the design.
+
+	
+
+		
 		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 
