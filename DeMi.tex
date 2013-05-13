@@ -494,7 +494,11 @@ Because the transceiver is transmitting and receiving at UHF frequencies, a very
 \lambda = c/f
 \end{equation}
 
-In Eq.~\ref{eq:comm-antenna-length}, $l$ is the length of the antenna, and $\lambda$ is the wavelength. Using a wavelength of $.645$ meters, the desired length of the antenna is about $.16$ meters. The gain of this antenna will be approximately $3\ dB$ and the beam width approximately $65^\circ$.
+In Eq.~\ref{eq:comm-antenna-length}, $l$ is the length of the antenna, and $\lambda$ is the wavelength.
+Using a wavelength of .645 meters, the desired length of the antenna is about .164 meters. The
+gain of this antenna will be approximately 3 dB and the beam width approximately $65^\circ$. DeMi is
+using two of these antennas so that communication can occur even if it is rotated 180 degrees
+from where it is supposed to be.
 
 The ground station that DeMi communicates with will be the NASA Wallops UHF Ground Station. This ground station is being used because the transceiver chosen for DeMi was also used in the Dynamic Ionosphere CubeSat Experiment, and the ground station that was used in that mission was the NASA Wallops UHF Ground Station. The diameter of the dish is $18.29$ meters, the gain is $35\ dB$ and the beam with is $2.9^\circ$.
 
@@ -634,7 +638,12 @@ Survival Temperature Range & $-40^\circ$ to $80^\circ$ \\ \hline
 \end{table}
 
 			\subsubsection{Risks - ZC}
-As of PDR, there were no design risks for the communications subsystem. Initially, there were concerns that communications may not be able to downlink enough of the data from the payload, however, avionics has decided that because of this risk, DeMi will be doing on-board processing so that less data is required to be downlinked.
+			Initially, there were concerns that communications may not be able to downlink enough of the
+data from the payload; however, avionics has decided that because of this risk, DeMi will be
+doing on-board processing so that less data is required to be downlinked. There is the risk
+that there may be a lot of interference at the frequencies that DeMi uses. In order to determine
+this, there would have to be a ground station site survey and if there were a problem with
+interference, specialized receiver software would have to be developed to mitigate the issue.
 
 			\subsubsection{Future Work - ZC}
 	Moving on from here, the main thing that should be done is testing of measuring tape antennas. There is currently not very much information out there that is available to DeMi concerning them, so research to determine the exact gain, beam width and radiation patterns should be conducted.
