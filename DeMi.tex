@@ -23,7 +23,7 @@
 %\usepackage{subcaption} is incompatible with subfigure
 \usepackage{lscape}
 \usepackage{longtable}
-
+\usepackage[section]{placeins}
 
 \title{Deformable Mirror Demonstration}
 \author{Kristin Berry\\
@@ -211,6 +211,7 @@ Curerntly, the solar panels and battery are projected to supply 3.85 Watts, whic
 \newpage			
 \section{Subsystems}
 
+\FloatBarrier
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % PAYLOAD
 
@@ -393,8 +394,7 @@ A Shack-Hartmann lenslet array consists of a matrix of small lenses (called lens
 \label{fig:lenslet_array}
 \end{figure}
 
-To get the best measurement of the wavefront, the maximum number of spots, and therefore lenslets, is desired. As a result, for a constant beam size, a lenslet array should be chosen with the lowest pitch (distance from the center of each lens) in order to get the maximum number of spots for the beam.
-
+To get the best measurement of the wavefront, the maximum number of spots, and therefore lenslets, is desired. As a result, for a constant beam size, a lenslet array should be chosen with the lowest pitch (distance from the center of each lens) in order to get the maximum number of spots for the beam. 
 
 Therefore, the microlens array MLA150 was chosen from ThorLabs \cite{MLA150} (see Figure~\ref{fig:MLA150}), with a pitch of 150 $\mu$m.
 The lenslet is 10 mm square, so it contains about 66 by 66 lenslets. It is mounted in the lens tube on the detector. For an approximate beam size of 2.25 mm (see Paragraph~\ref{par:payload_dms}), approximately 15 by 15 lenslets will be used of the lenslet array.  See Section~\ref{sec:payload_pixels} for a discussion of the pixels used on the detector per lenslet.
@@ -406,10 +406,10 @@ The lenslet is 10 mm square, so it contains about 66 by 66 lenslets. It is mount
 \label{fig:MLA150}
 \end{figure}
 
+\paragraph{Pointing Requirement - KB}\label{sec:pointing_requirement}
 
-%\subsubsection{Analysis - KB}
-                        
-%\paragraph{Pointing Requirement - KB}\label{sec:pointing_requirement}
+To determine the pointing requirement, we first need to calculate the plate scale of the detector, and the amount of time needed to get a reasonable SNR for a star of a reasonable magnitude. To calculate the plate scale of the detector, we need to 
+
 
 %\paragraph{Data Rates to Avionics - KB}
 			
@@ -458,6 +458,7 @@ Lastly, specific properties of the deformable mirror system need to be explored.
 			
 	
 \newpage
+\FloatBarrier
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % POWER
 			
@@ -618,6 +619,7 @@ However, as mentioned in Analysis, the available power from the solar panels was
 The performance of the solar panels and batteries is temperature-dependent.  In particular, the battery becomes more effective as its temperature increases, while the solar panels become less so.  Going forward, it would be useful to perform a more detailed simulation of the satellite that incorporates a thermal model, to more accurately measure the effect of satellite temperature and dissipated excess energy.
 
 \newpage
+\FloatBarrier
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % COMM
 		\subsection{Communication}
@@ -803,6 +805,7 @@ interference, specialized receiver software would have to be developed to mitiga
 
 
 \newpage
+\FloatBarrier
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % AVIONICS
 
@@ -941,6 +944,7 @@ The future work that needs to be conducted is that there should be work done to 
 
 
 \newpage
+\FloatBarrier
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % ADCS
 
@@ -1167,6 +1171,7 @@ The simulation was run with an initial angular rate of 10$^\circ$/s, magnetic mo
 			The main future work of the ADCS system is to simulate the flight condition through with external disturbance torques at each position on orbit. The next step is to create a control loop that takes these environmental torques as inputs to compute the needed magnetic moment of each of the 3 torque coils. 
 
 \newpage
+\FloatBarrier
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % THERMAL
 
@@ -1333,6 +1338,7 @@ Total & 8.0 & 0.007 to 770 &  2\\\hline
 For further work, an analysis which considers thermal gradient across satellite should be paramount. Based on the CAD model of the satellite created by the Structures subsystem and the known average heat fluxes on the faces of the CubeSat, a steady-state thermal analysis of the satellite was begun during the course of the project. However, due to time constraints, the analysis was not completed before the end of the project.
 
 \newpage
+\FloatBarrier
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % STRUCTURES
 
@@ -1502,6 +1508,7 @@ In this paper it has been shown that a low-cost, quick-access mission can be car
 
 		
 		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\FloatBarrier
 \newpage
 
 \section{Acknowledgment}
@@ -1509,7 +1516,7 @@ In this paper it has been shown that a low-cost, quick-access mission can be car
 	
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % APPENDICES
-
+\FloatBarrier
 \newpage
 \appendix
 \section{Requirements} \label{app:requirements}
