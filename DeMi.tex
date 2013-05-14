@@ -954,12 +954,17 @@ The future work that needs to be conducted is that there should be work done to 
 			\subsubsection{Requirements}
 			The driving requirements of the ADCS design is shown below. A complete requirement document can be found in Appendix A. 
 					\begin{itemize}
-					\item ADCS-1.1 ADCS shall meet 4.7 arcmin/s [TBR] slew rate requirement of payload imaging technology during external source science operation mode
-					\item ADCS-2.1 ADCS shall provide attitude knowledge of the satellite to an accuracy within 10$^\circ$[TBR]  for communication operations.
-					\item ADCS-2.2 ADCS shall provide attitude control of the satellite to an accuracy within 15$^\circ$ [TBR] for communication operations.
-					\item ADCS-3 ADCS shall provide momentum capability to despin upon launch vehicle separation within 30 days.
+					\item ADCS-1.1 ADCS shall meet 4.7 arcmin/s slew rate requirement of payload imaging technology during external source science operation mode.\\
+					Parents requirement(s): MLR-3
+					
+					\item ADCS-2.1 ADCS shall provide attitude knowledge of the satellite to an accuracy within 10$^\circ$[TBR]  for communication operations.\\
+					Parents requirement(s): SYS-4
+					\item ADCS-2.2 ADCS shall provide attitude control of the satellite to an accuracy within 15$^\circ$ [TBR] for communication operations.\\
+					Parents requirement(s): SYS-4
+					\item ADCS-3 ADCS shall provide momentum capability to despin upon launch vehicle separation within 30 days.\\
+					Parents requirement(s): MLR-4
 					\end{itemize}
-				The two main requirements during operation modes for the ADCS subsystems are the pointing requirement (15$^\circ$) for communication purpose and the stability (slew rate) requirement (0.08$^\circ$/s) for the payload operation while imaging an external source. This requirement exists to ensure that a photon from the external source stays on the same pixel of the detector during data capture. In addition, the satellite is required to detumble and establish ground station access within a reasonable time frame. This duration is required to be less than 30 days, creating a secondary requirement on the total detumbling time. 
+				The two main requirements during operation modes for the ADCS subsystems are the pointing requirement (15$^\circ$) for communication purpose and the stability (slew rate) requirement (4.7 arcmin/s or 0.08$^\circ$/s) for the payload operation while imaging an external source. This requirement exists to ensure that a photon from the external source stays on the same pixel of the detector during data capture. In addition, the satellite is required to detumble and establish ground station access within a reasonable time frame. This duration is required to be less than 30 days, creating a secondary requirement on the total detumbling time. 
 		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
 					\subsubsection{Decision Made}
 				\paragraph{Control Method}
