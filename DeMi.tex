@@ -21,6 +21,8 @@
 \usepackage{hyperref}
 \usepackage{caption}
 \usepackage{subcaption}
+\usepackage{lscape}
+\usepackage{longtable}
 
 
 \title{Deformable Mirror Demonstration}
@@ -1348,6 +1350,84 @@ In this paper it has been shown that a low-cost, quick-access mission can be car
 
 \includepdf[pages={-}]{images/Requirements.pdf}
 
+\newpage
+
+\begin{landscape}
+\section{Payload Components} \label{app:payload_components}
+\small
+\begin{center}
+\begin{longtable}{| p{3.25cm} | p{2.2cm} | p{3cm} | p{1.75cm} | p{2.5cm} | p{1.55cm} | p{5cm} |}
+\hline
+    \textbf{Assembly} & \textbf{Specific components} & \textbf{Description} & \textbf{Mass (g) - to 0.01} & \textbf{Additional Notes about Mass} & \textbf{Intensity transmission (\%)} &  \\ \hline 
+    \midrule 
+    \multirow{5}{*}{\parbox{3.25cm}{Aperture Lens}} & LA4647-A & lens  & 20    &       & 99.5  & Reflectivity over coating avg $<$ 0.5\% \\ 
+          & LMR05 & housing & 1.75  &       &       &  \\
+          & MSA8  & adapter for post & 0.55  &       &       &  \\
+          & MS05R & miniseries post & 2.43  &       &       &  \\
+          & base  & machined & 11.43 & ESTIMATED$^1$ &       &  \\ \hline
+    \multirow{6}{*}{\parbox{3.25cm}{Collimating Lens}} & A375TM-A & mounted asphere & 0.2   &       & 99.5  & Reflectivity over coating avg $<$ 0.5\% \\ 
+          & S05TM09 & adapter & 1.4   &       &       &  \\
+          & LMR05 & housing & 1.75  &       &       &  \\
+          & MSA8  & adapter for post & 0.55  &       &       &  \\
+          & MS05R & miniseries post & 2.43  &       &       &  \\
+          & base  & machined & 11.43 & ESTIMATED$^1$&       &  \\ \hline
+    \multirow{5}{*}{\parbox{3.25cm}{Polarizer for external source}} & LPVISB050 & mounted linear polarizer & 1.39  &       & 50    & Polarizer \\ 
+          & LMR05 & housing & 1.75  &       & 99.99 & Extinction ratio: $>$ 10,000:1 \\
+          & MSA8  & adapter for post & 0.55  &       &       &  \\
+          & MS05R & miniseries post & 2.43  &       &       &  \\
+          & base  & machined & 11.43 & ESTIMATED$^1$ &       &  \\ \hline
+    \multirow{5}{*}{Laser} & CPS186 & laser & 1.9   &       &       &  \\ 
+          & AD8F  & adapter & 4.36  &       &       &  \\
+          & LMR1  & housing & 3.78  &       &       &  \\
+          & MSA8  & adapter for post & 0.55  &       &       &  \\
+          & MS05R & miniseries post & 2.43  &       &       &  \\
+          & base  & machined & 11.43 & ESTIMATED$^1$  &       &  \\ \hline
+    \multirow{6}{*}{\parbox{3.25cm}{Polarizer for Laser}} & GT5-A & mounted Glan-Taylor polarizer & 1.15  &       & 50    & Polarizer \\ 
+          & SM05PM5 & adapter & 3.04  &       & 99    & Reflectivity over coating avg $<$ 1\% \\
+          & LMR05 & housing & 1.75  &       & 99.999 & Extinction ratio: $>$ 100,000:1 \\
+          & MSA8  & adapter for post & 0.55  &       &       &  \\
+          & MS05R & miniseries post & 2.43  &       &       &  \\
+          & base  & machined & 11.43 & ESTIMATED$^1$ &       &  \\ \hline
+    \multirow{5}{*}{Flat Mirror} & PF05-03-P01 & mirror & 0.76  &       & 97.5  & Reflectivity over coating avg $>$ 97.5\% \\ 
+          & LMR05 & housing & 1.75  &       &       &  \\
+          & MSA8  & adapter for post & 0.55  &       &       &  \\
+          & MS05R & miniseries post & 2.43  &       &       &  \\
+          & base  & machined & 11.43 & ESTIMATED$^1$ &       &  \\ \hline
+    \multirow{6}{*}{\parbox{3.25cm}{Beamsplitter for Sources}} & 05FC16PB.5 & beamsplitting cube & 5.03  & ESTIMATED from glass cube (Newport) & 90 or 99.5 & R\_P $>$ 90\%, R\_S $>$ 99.5\% \\ 
+          & UPH-CH.5 & BS housing & 2.43  &       & 99.8  & Extinction Ratio: $>$ 500:1 \\
+          & U50-A & aperture mount & 4.29  &       &       &  \\
+          & MSA8  & adapter for post & 0.55  &       &       &  \\
+          & MS05R & miniseries post & 2.43  &       &       &  \\
+          & base  & machined & 11.43 & ESTIMATED$^1$ &       &  \\ \hline
+    \multirow{6}{*}{\parbox{3.25cm}{Beamsplitter for Mirrors}} & 05FC16PB.5 & beamsplitting cube & 5.03  &       & 90 or 99.5 & $R_P$ $>$ 90\%, $R_S$ $>$ 99.5\% \\ 
+          & UPH-CH.5 & BS housing & 2.43  &       & 99.8  & Extinction Ratio: $>$ 500:1 \\
+          & U50-A & aperture mount & 4.29  &       &       &  \\
+          & MSA8  & adapter for post & 0.55  &       &       &  \\
+          & MS05R & miniseries post & 2.43  &       &       &  \\
+          & base  & machined & 11.43 & ESTIMATED$^1$ &       &  \\ \hline
+    \multirow{5}{*}{\parbox{3.25cm}{Quarter Waveplate}} & WPQ05M-670 & waveplate & 6.67  &       & 99.5  & Reflectance per surface $<$ 0.25\% \\ 
+          & LMR05 & housing & 1.75  &       &       &  \\
+          & MSA8  & adapter for post & 0.55  &       &       &  \\
+          & MS05R & miniseries post & 2.43  &       &       &  \\
+          & base  & machined & 11.43 & ESTIMATED$^1$ &       &  \\ \hline
+    \multirow{4}{*}{\parbox{3.25cm}{Deformable Mirror System}} & DMs   & BMC   & 73.71 & only 2 sig figs & 99    & Reflectance $>$ 99\% \\ 
+          & Driver &       & 93.55 & only 2 sig figs &       &  \\
+          & post (if nec.) & machined & 7.38  & ESTIMATED from RS05P (upper est.) &       &  \\
+          & base  & machined & 15.26 & ESTIMATED from BE1+CF125 (upper est.) &       &  \\ \hline
+    Shack-Hartmann Lenslet & MLA150-5C-M & micro lenslet array & 2     & will go inside lens tube of detector & 75    & Reflectivity $<$ 25\% (includes chrome mask) \\ \hline
+    \multirow{3}{*}{Detector} & UI-5241LE-M & CMOS  & 24    &       & 46.64 &  \\ 
+          & post  & machined & 7.38  & ESTIMATED from RS05P (upper est.) &       &  \\
+          & base  & machined & 15.26 & ESTIMATED from BE1+CF125 (upper est.) &       &  \\ \hline
+    Optical Platform/Breadboard &       & machined & 250   & ESTIMATED &       &  \\ \hline
+    Optical Enclosure &       &       & 300   & ESTIMATED from XE25C1\_M (upper est.) &       &  \\ \hline
+    TOTAL MASS &       &       & 996.88 &       &       &  \\
+    Mass with 25\% margin &       &       & 1246.1 &       &       &  \\ \hline
+\hline
+\end{longtable}
+$^1$Estimated from ThorLabs miniseries post MS075.
+\end{landscape}
+
+\clearpage
 
 \newpage
 \section{Link Budgets} \label{app:link_budgets}
