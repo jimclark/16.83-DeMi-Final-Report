@@ -73,17 +73,20 @@ Deformable mirror wavefront control systems correct for aberrations in the wavef
 \subsection{Mission Statement}
 The mission of the Deformable Mirror Demonstration is to provide a low-cost, quick-access platform on which to demonstrate microelectromechanical (MEMS) wavefront control deformable mirror imaging technology (See Figure~\ref{fig:Intro_demi}) on-orbit.
 
+
+
+\subsection{Motivation}
+The driving force behind the DeMi mission is the desire to directly image Earth-like exoplanets in the search for signs of life, requiring imaging technology that can produce high contrast and dynamic range images.  However, current high-performance space telescope technology suffers from wavefront aberrations, such as speckles which can result from diffraction, noise, phase errors, and thermal drift and reduce the achievable image contrast.\cite{cahoy-unpublished}
+
+A solution to this problem is to implement adaptable wavefront control imaging technology in the form of a deformable mirror. Specifically, a Boston Micromechanics
+Mini MEMS Deformable Mirror, shown in Figure~\ref{Intro_demi} will be used. In the deformable mirror system, a wavefront sensor measures wavefront aberrations in an approaching wavefront. An adaptive optics computer then calculates the errors in the wavefront reflecting off of the deformable mirror surface by subtracting the wavefront from a reference wavefront.\cite{adaptive-optics-overview} Finally, electrostatic actuators in an array beneath the membrane surface of the mirror individually deform the surface to correct the wavefront. A comparison of the effects of a flat and deformable mirror on an aberrated wavefront is demonstrated in Figure~\ref{fig:Intro_wavefront}.   
+
 \begin{figure}[!ht]
 \centering
 \includegraphics[width=2in]{images/introduction_1.png}
 \caption{Boston Micromechanics MEMS Deformable Mirror\cite{bos-micro-demi}}
 \label{fig:Intro_demi}
 \end{figure}
-
-\subsection{Motivation}
-The driving force behind the DeMi mission is the desire to directly image Earth-like exoplanets in the search for signs of life, requiring imaging technology that can produce high contrast and dynamic range images.  However, current high-performance space telescope technology suffers from wavefront aberrations, such as speckles which can result from diffraction, noise, phase errors, and thermal drift and reduce the achievable image contrast.\cite{cahoy-unpublished}
-
-A solution to this problem is to implement adaptable wavefront control imaging technology in the form of a deformable mirror. In the deformable mirror system, a wavefront sensor measures wavefront aberrations in an approaching wavefront. An adaptive optics computer then calculates the errors in the wavefront reflecting off of the deformable mirror surface by subtracting the wavefront from a reference wavefront.\cite{adaptive-optics-overview} Finally, electrostatic actuators in an array beneath the membrane surface of the mirror individually deform the surface to correct the wavefront. A comparison of the effects of a flat and deformable mirror on an aberrated wavefront is demonstrated in Figure~\ref{fig:Intro_wavefront}.   
 
 \begin{figure}[!ht]
 \centering
@@ -1724,13 +1727,13 @@ $^2$\url{http://www.arrg.us/pages/Loss-Calc.htm}
 %%% OVERVIEW
 
 \bibitem{bos-micro-demi}
-Deformable Mirror from Boston Micromachines Corporation, \url{http://www.bostonmicromachines.com/light-modulator.htm}.
+“Mini-DM.” (2012) URL \url{http://www.bostonmicromachines.com/light-modulator.htm}. (visited April 30, 2013).
 
 \bibitem{cahoy-unpublished}
-Cahoy, K. et al., ``CubeSat Deformable Mirror Demonstration,'' ``unpublished.''
+Cahoy, K., A. Marinan, C. Kerr, K. Cheng, S. Jamil, “CubeSat deformable mirror demonstration,”.In SPIE Conference on Space Telescopes and Instrumentation 2012: Optical, Infrared, and Millimeter Wave. Amsterdam, Netherlands,2012.
 
 \bibitem{adaptive-optics-overview}
-Adaptive Optics Overview from Iris AO, Inc., \url{http://www.irisao.com/technology.html}.
+“Adaptive Optics Overview.” (2012) URL \url{http://www.irisao.com/technology.html}. (visited April 30, 2013).
 
 \bibitem{serabyn2010}
 Serabyn, E., Mawet, D., \& Burruss, R., ``An image of an exoplanets separated by two diffraction beamwidths from a star''. Nature, Vol. 464, 2010, pp. 1018-1020.
