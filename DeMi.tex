@@ -131,11 +131,11 @@ The technology that will tested in the DeMi demonstration has a number of forese
 			Parent Requirement(s): MLR-4
 			\item SYS-2 The system shall include electrical, mechanical, and software interfaces to the payload\\
 			Parent Requirement(s): MLR-3
-			\item SYS-3 The system shall comply with the requirements and constraints listed in the most current CubeSat Design Specification (CDS) document. \\
+			\item SYS-3 The system shall comply with the requirements and constraints listed in the most current CubeSat Design Specification (CDS) document. \cite{mission_cubesat} \\
 			Parent Requirement(s): MLR-1
 			\item SYS-4 The system shall be capable of sending and receiving data and instructions to and from the ground.\\
 			Parent Requirement(s): MLR-3, MLR-4
-			\item SYS-5 The system shall have a deorbit time of 25 years or less. \\
+			\item SYS-5 The system shall have a deorbit time of 25 years or less. \cite{mission_deorbit}\\
 			Parent Requirement(s): MLR-4
 		\end{itemize}
 
@@ -158,7 +158,7 @@ Figure~\ref{fig:Mission_ConOps} shows a timeline of the DeMi concept of operatio
 				\label{fig:Mission_ConOps}
 			\end{figure}
 		
-		Once the satellite is in fully operational status, the payload will begin to conduct its scientific experiments and collect data. Two different data capture modes will be performed during the mission: internal source experiments will be done during the first 3 months of operations, while external source experiments will occur during the remainder of the mission. The satellite will attempt to downlink the collected data whenever it passes over the NASA Wallops ground station and is given instructions to begin downlink. 
+		Once the satellite is in fully operational status, the payload will begin to conduct scientific experiments and collect data. Two different data capture modes will be performed during the mission: internal source experiments will be done during the first 3 months of operations, while external source experiments will occur during the remainder of the mission. The satellite will attempt to downlink the collected data whenever it passes over the NASA Wallops ground station and is given instructions to begin downlink.  
 
 The majority of the time, the satellite will be in stand-by mode; in other words, it will not be capturing or downlinking data. In case of a subsystem malfunction, the satellite will go into safe mode to diagnose the source of the problem. 
 
@@ -180,7 +180,7 @@ Given the satellite’s altitude, inclination, and surface area, analyses perfor
 	
 	\subsection{System Level Budgets}
 		\subsubsection{Mass}
-		In agreement with CubeSat standards, the total mass of the satellite must not exceed 4 kilograms. Table 1 shows the total mss of the satellite broken down by subsystem. As of PDR, the design is projected to weight 3.26 kg and 3.90 kg with added margin. Following industry standards, the subsystem margin percentages used in this analysis correspond to the Mass Growth Allowance values for Preliminary Design published by the American Institute of Aeronautics and Astronautics. Figure 3 illustrates that the mass of the satellite is driven primarily by the payload, which takes up approximately one third of the total. The power and ADCS subsystems closely follow with 26\% and 22\% respectively. 
+		In agreement with CubeSat standards, the total mass of the satellite must not exceed 4 kg. Table 1 shows the total mass of the satellite broken down by subsystem. As of PDR, the design is projected to weight 3.26 kg and 3.90 kg with added margin. Following industry standards, the subsystem margin percentages used in this analysis correspond to the Mass Growth Allowance values for Preliminary Design published by the American Institute of Aeronautics and Astronautics.\cite{mission_aiaa} Figure 3 illustrates that the mass of the satellite is driven primarily by the payload, which takes up approximately one third of the total. The power and ADCS subsystems closely follow with 26\% and 22\% respectively. 
 		
 			\begin{figure}[!ht]
 				\centering
@@ -192,12 +192,16 @@ Given the satellite’s altitude, inclination, and surface area, analyses perfor
 			\end{figure}
 			
 		\subsubsection{Power}
-		The power used by the satellite during each mode is outlined in Table 2. The first two items, “Safe/Uplink” and “Detumbling” do not occur on a regular daily basis during the operational lifetime of the satellite, which is why their duration is not expressed in minutes per day and their valies are not included in the average power calculation. 
+		This section presents the power used by the spacecraft during each of its modes of operation as well as the power supplied by the solar panels and battery. 
+
+The power used by the satellite during each mode is outlined in Table 2. The first two items, “Safe/Uplink” and “Detumbling” do not occur on a regular daily basis during the operational lifetime of the satellite, which is why their duration is not expressed in minutes per day and their values are not included in the average power calculation. 
+
 During its operational period, the satellite will cycle between the data capture downlink and stand by modes. As shown in Figure 4, the most power is drawn by the antenna in the Communications subsystem during downlink. 
 
-The satellite is expected to require an average of 3.54 Watts with up to 4.18 Watts with an 18\% margin applied. This allowance percentage of 18\% was derived from input from course faculty and the fact that most components will be commercial off the shelf. 
+The satellite is expected to require an average of 3.54 Watts with up to 4.18 Watts with an 18\% margin applied. This allowance percentage of 18\% was derived from input from course faculty and the fact that most components will be commercial off the shelf with flight heritage. 
 
-Curerntly, the solar panels and battery are projected to supply 3.85 Watts, which would not satisfy the power with margin requirement at this stage. The power supplied is only 8.5\% higher than the expected power needed without margin.
+Curerntly, the power system design carries a tight margin. The solar panels and battery are projected to supply up to 3.84 Watts; however, this would not satisfy the average power with margin needed at this stage in the design process. The power supplied is only 8.5\% higher than the expected power needed without margin. This issue is discussed in detail in Section ?? Power. 
+
 
 			
 			\begin{figure}[!ht]
