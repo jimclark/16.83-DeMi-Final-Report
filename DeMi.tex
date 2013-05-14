@@ -737,9 +737,9 @@ Finally, the link margin can be determined by subtracting the required energy pe
 
 \begin{figure}
 \hfill
-\subfigure[Best Case Communication]{\includegraphics[width=3in]{images/comm-best.png}}
+\subfigure[Best Case Communication]{\includegraphics[width=3in]{images/communications-best-case.PNG}}
 \hfill
-\subfigure[Worst Case Communication]{\includegraphics[width=3in]{images/comm-worst.png}}
+\subfigure[Worst Case Communication]{\includegraphics[width=3in]{images/communications-worst-case.PNG}}
 \hfill
 \caption{Representation of Satellite and Ground Station during a.) Best Case Communication and b.) Worst Case Communication}
 \label{fig:comm_cases}
@@ -1178,7 +1178,7 @@ The operating and survival temperatures of other subsystems are shown in Table~\
 \begin{figure}[ht]%
 \centering
 \includegraphics{images/thermal-environment}%
-\caption{Thermal environment of satellite considered in analysis.}%
+\caption{Thermal environment of satellite considered in analysis.\cite{satnews}}%
 \label{fig:thermal-environment}%
 \end{figure}
 
@@ -1216,7 +1216,7 @@ The heater being considered was a model HK5586 polyimide thermofoil heater from 
 \begin{figure}[ht]%
 \centering
 \includegraphics{images/thermal-heater}%
-\caption{Thermofoil heater and payload detector.}%
+\caption{Thermofoil heater and payload detector.\cite{minco,ids-imaging}}%
 \label{fig:thermal-heater}%
 \end{figure}
 
@@ -1278,33 +1278,36 @@ Power Distribution Module & 1 \\\hline
 \end{tabular}
 \end{table}
 
-The thermal sensors chosen are model 44004 precision thermistor elements from Omega, each of volume 0.04cm$^3$ and mass 0.4g. Fourteen in all, they will each draw power of about 0.5 $\mu$W and operate within a temperature range of -80 to 120 °C. As shown in Figure~\ref{fig:thermal-thermistor} they consists of a bead and a tail; the bead will be attached to the surface of the component whose temperature is being measured, and the tail goes to the avionics board.
+The thermal sensors chosen are model 44004 precision thermistor elements from Omega, each of volume 0.04 cm$^3$ and mass 0.4 g. Fourteen in all, they will each draw power of about 0.5 $\mu$W and operate within a temperature range of -80 to 120 °C. As shown in Figure~\ref{fig:thermal-thermistor} they consists of a bead and a tail; the bead will be attached to the surface of the component whose temperature is being measured, and the tail goes to the avionics board.
 
 \begin{figure}[ht]%
 \centering
 \includegraphics{images/thermal-thermistor}%
-\caption{Precision Thermistor elements – model 44004 (Omega.com).}%
+\caption{Precision Thermistor elements -- model 44004 (Omega.com).\cite{omega}}%
 \label{fig:thermal-thermistor}%
 \end{figure}
 
 In addition, the zenith and nadir faces will be painted with Chemglaze Z306 ($\alpha= 0.98, \epsilon = 0.89$) in order to improve their absorptivity-emissivity ratio from 0.9 to 1.1.
 
-In summary, the mass, volume, and power budget will be as shown in Table~\ref{table:thermal-outputs}
+In summary, the mass, volume, and power budget will be as shown in Table~\ref{table:thermal-outputs}.  The heater will be used only in emergency to supplement the thermal control action of the multi-layer insulation. As such, the thermal subsystem will take up 8 g, negligible power, and 2 cm$^3$ when the heater is not in use.
 
 \begin{table}[ht]%
 \centering
-\caption{Outputs (mass, power consumed, volume) to other subsystems.}
+\caption{Mass, volume and power budget for the thermal subsystem.}
 \label{table:thermal-outputs}
 \begin{tabular}{|l|l|l|l|}\hline
-& Mass (kg) & Power (W) & Volume (U) \\\hline
-Thermistors & & & \\\hline
-MLI & & & \\\hline
-Heater & & & \\\hline
-Surface coating & & & N/A \\\hline
-
+& Mass [g & Power [mW] & Volume [cm$^3$] \\\hline
+Thermistors & 5.4 & 0.007 & 0.6 \\\hline
+Thermal blanket & 1.1 & -  & 0.8 \\\hline
+Heater (emergency) & 1.5 & 770 & 0.6 \\\hline
+Surface coating & - & - & - \\\hline
+Total & 8.0 & 0.007 to 770 &  2\\\hline
 \end{tabular}
 \end{table}
 
+\subsubsection{Future Work}
+
+For further work, an analysis which considers thermal gradient across satellite should be paramount. Based on the CAD model of the satellite created by the Structures subsystem and the known average heat fluxes on the faces of the CubeSat, a steady-state thermal analysis of the satellite was begun during the course of the project. However, due to time constraints, the analysis was not completed before the end of the project.
 
 \newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1485,6 +1488,7 @@ $^1$Estimated from ThorLabs miniseries post MS075.
 \hline
 \end{longtable}
 $^2$\url{http://www.arrg.us/pages/Loss-Calc.htm}
+\end{center}
 
 \newpage
 
@@ -1533,6 +1537,7 @@ $^2$\url{http://www.arrg.us/pages/Loss-Calc.htm}
 \hline
 \end{longtable}
 $^2$\url{http://www.arrg.us/pages/Loss-Calc.htm}
+\end{center}
 
 \noindent
 \newline
@@ -1565,7 +1570,7 @@ Serabyn, E., Mawet, D., \& Burruss, R., ``An image of an exoplanets separated by
 CubeSat Design Specifications, California Polytechnic State University, \url{http://www.cubesat.org/index.php/documents/developers}
 
 \bibitem{nasa-deorbit}
-NASA‐STD‐8719.14, \url{http://www.hq.nasa.gov/office/codeq/doctree/871914.pdf}
+NASA-STD-8719.14, \url{http://www.hq.nasa.gov/office/codeq/doctree/871914.pdf}
 
 %%% PAYLOAD
 
@@ -1688,6 +1693,18 @@ Aydinlioglu, A. and Hammer, M. \emph{COMPASS-1 Picosatellite: Magnetic Coils for
 \bibitem{adcs_ion}
 Gregory, S. \emph{Attitude Control System Design for ION, the Illinois Observing Satellite}. Urbana, Illinois, 2004.
 %%% THERMAL
+
+\bibitem{satnews}
+\url{http://www.satnews.com/images_upload/604251372/CubeSat_UKSA.jpg}
+
+\bibitem{minco}
+\url{http://ektron.minco.com/uploadedImages/Products/foilheater.jpg}
+
+\bibitem{ids-imaging}
+\url{http://en.ids-imaging.com/}
+
+\bibitem{omega}
+\url{http://www.omega.com/Temperature/pdf/44000_THERMIS_ELEMENTS.pdf}
 
 %%% STRUCTURES
 
