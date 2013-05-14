@@ -56,6 +56,9 @@ Alexandra E. Wassenberg
 \acro{DM}{Deformable Mirror}
 \acro{FOV}{Field of View}
 \acro{PSF}{Point Spread Function}
+\acro{ADCS}{Attitude Determination and Control System}
+\acro{IMU}{Inertial Measurement Unit}
+\acro{STK}{Satellite Tool Kit}
 
 \end{acronym}
 \newpage
@@ -856,23 +859,24 @@ The future work that needs to be conducted is that there should be work done to 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % ADCS
 
-		\subsection{Attitude Determination and Control System (ADCS) - TN} 
+\subsection{Attitude Determination and Control System (ADCS) - TN} 
 		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 			\subsubsection{Requirements}
-		
-				The two main driving requirements for the ADCS subsystems are the 			pointing requirement (15$^o$) for communication purpose and the stability requirement (0.08$^o$/s) for the payload operation while imaging an external source. Another requirement is the time for the satellite to detumble and establish ground station access before starting operation modes. This duration is required to be less than 30 days, creating a secondary requirement on the total detumbling time, which is dependent of the ADCS system. 
+			The driving requirements of the ADCS design is shown below. A complete requirement document can be found in Appendix A. 
+					\begin{itemize}
+					\item ADCS-1.1 ADCS shall meet 4.7 arcmin/s [TBR] slew rate requirement of payload imaging technology during external source science operation mode
+					\item ADCS-2.1 ADCS shall provide attitude knowledge of the satellite to an accuracy within 10$^\circ$[TBR]  for communication operations.
+					\item ADCS-2.2 ADCS shall provide attitude control of the satellite to an accuracy within 15$^\circ$ [TBR] for communication operations.
+					\item ADCS-3 ADCS shall provide momentum capability to despin upon launch vehicle separation within 30 days.
+					\end{itemize}
+				The two main requirements during operation modes for the ADCS subsystems are the pointing requirement (15$^\circ$) for communication purpose and the stability (slew rate) requirement (0.08$^\circ$/s) for the payload operation while imaging an external source. This requirement exists to ensure that a photon from the external source stays on the same pixel of the detector during data capture. In addition, the satellite is required to detumble and establish ground station access within a reasonable time frame. This duration is required to be less than 30 days, creating a secondary requirement on the total detumbling time. 
 		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
-			\subsubsection{Trade Studies}
-			Several control methods were considered in the design process of the ADCS system: passive magnetic control, passive magnetic control, and control using reaction wheels. The main trades to be considered are mass, power usage, pointing accuracy, and pointing stability capability. 
+					\subsubsection{Decision Made}
+				\paragraph{Control Method}
+				Active magnetic control was chosen for this mission due to the low mass and low power requirement and sufficient attitude control performance for both communication requirement and payload science operation. According to documentation on the attitude control system of the 1U CubeSat COMPASS-1 from the University of Applied Sciences, Aachen, Germany, 3 magnetic coils of magnetic moment of  0.097 Am$^2$ can achieve a pointing accuracy of 8$^\circ$ \cite{adcs_compass}. The torque coils can be sized to generate enough torque for a 3U CubeSat. The details of this calculation will be presented in the torque coil specifications and analysis sections below. The stability of this control method is estimated to be $< 0.12^\circ$/s, according to the Illinois Observing Nanosatellite (ION) 2U CubeSat from the University of Illinois \cite{adcs_ion}. The implementation of the active magnetic control the ION mission only includes magnetometer as sensor with low magnetic moment in each torque coils. The performance of the active magnetic control method is expected to improve significantly with the use of more accurate sensors, such as an inertial measurement unit (IMU) and sun sensors, and torque coils with higher magnetic moment. More analysis and testing is needed to determine the stability of the system. 
 
-In passive magnetic control, restoring torque is generated through the alignment of the satellite magnetic moment with the local geomagnetic field. The magnetic moment is created through the use of permanent magnets. Hysteresis rods are used for vibration damping. This control option requires low mass and no power. Based on past CubeSat missions, the pointing accuracy of a passive magnetic control system in the same scale as DeMi can achieve 10 – 20 $^o$ [SMAD, cubesat survey], sufficient for communication requirement purpose. However, there are limitations in the ability to stabilize the satellite. Passive magnetic control systems stability performance is not reliable as the hysteresis rods do not provide fast and robust vibration damping. The expected stability achieved by this method is $1^o – 10 ^o$/s [cubesat survey]. Since the satellite will only have access to the external sources for a short amount of time, this method is not practical for capturing light from the stars. In addition, this control method limits the possible orientation of the satellite to only the direction along the local magnetic field. In a LEO orbit of 40$^o$ inclination such as that of DeMi’s, the direction of the local magnetic field varies at different orbital parameters, causing difficulties in placing antenna and external source aperture so that ground station access and external source capture can be guaranteed. 
-
-Reaction wheels provide robust 3-axis stabilization control of the satellite. This control mechanism provides high accuracy ($~ 0.0001^o – 1^o$) in pointing direction and quick response in vibration damping providing high stability (0.05$^o$/s). However, the necessary sensors and actuators require high mass and power usage. The main mass contribution and power draw are from the reaction wheels. In addition, magnet torquers are also needed to desaturate reaction wheels, adding more mass and power strain on the system. This option is not practical for a small satellite such as DeMi. 
-
-Active magnetic control was chosen for this mission due to the low mass and low power requirement and sufficient attitude control performance for both communication requirement and payload science operation. According to documentation on the attitude control system of the 1U CubeSat COMPASS-1 from the Univesity of Applied Sciences, Aachen, Germany, 3 magnetic coils of magnetic moment of  0.097 $A \cdot m^2$ can achieve a pointing accuracy of 8$^o$[reference]. The torque coils can be sized to generate enough torque for a 3U CubeSat. The details of this calculation will be presented in the decision made and analysis section. The stability of this control method is estimated to be $< 0.12^o$/s, according to the ION 2U CubeSat from the University of Illinois [ref.]. The implementation of the active magnetic control the ION mission only includes magnetometer as sensor with low magnetic moment in each torque coils. The performance of the active magnetic control method is expected to improve significantly with the use of more accurate sensors, such as an IMU and sun sensors, and torque coils with higher magnetic moment. More analysis and testing will be needed to determine the stability of the system. 
-			\subsubsection{Decision Made}
 				\paragraph{Orientation}
-				The satellite will be in nadir pointing orientation with the nadir face being one of the two 10 cm x 10 cm faces. This orientation can be easily achieved by active magnetic control through sending control commands based on sensors readings to the active actuators. The 3U structure of the satellite provides gravity-gradient stability along the long axis in the nadir pointing configuration. By placing an antenna on the nadir face, this orientation facilitates access to the ground station. The satellite will travel with a corner-first configuration, to optimize the amount of power acquired from solar panels (see power section for more details). The orientation of the satellite is illustrated in Figure~\ref{fig:ADCS_orientation} below. 
+				The satellite will be in nadir pointing orientation with the nadir face being one of the two 10 cm $\times$ 10 cm faces. This orientation can be easily achieved by active magnetic control through sending control commands based on sensors readings to the active actuators. The 3U structure of the satellite provides gravity-gradient stability along the long axis in the nadir pointing configuration. By placing an antenna on the nadir face, this orientation facilitates access to the ground station. The satellite will travel with a corner-first configuration, to optimize the amount of power acquired from solar panels (see power section for more details). The orientation of the satellite is illustrated in Figure~\ref{fig:ADCS_orientation} below. 
 			
 			\begin{figure}[!h]
 				\centering
@@ -889,17 +893,17 @@ Active magnetic control was chosen for this mission due to the low mass and low 
   \caption{ADCS Sensors and Actuators}
     \begin{tabular}{|r|r|r|r|r|}
     \hline
-    Sensors/Actuators & Quantity & Vendor & Performance &  \bigstrut\\
+    Sensors/Actuators & Quantity & Vendor & Performance  &\bigstrut\\
     \hline
-    Sun sensors & 5     & CubeSat shop & \multicolumn{1}{r}{- Field of view: 114$^o$} &  \bigstrut[t]\\
-          &       &       & \multicolumn{1}{r}{- Accuracy: $< 0.5^o$} &  \bigstrut[b]\\
+    Sun sensors & 5     & CubeSat shop & \multicolumn{1}{r}{- Field of view: 114$^\circ$} &  \bigstrut[t]\\
+          &       &       & \multicolumn{1}{r}{- Accuracy: $< 0.5^\circ$} &  \bigstrut[b]\\
     \hline
     Magnetometer & 1     & Analog Devices  & \multicolumn{1}{r}{- Dynamic range: ± 3.5 gauss} &  \bigstrut[t]\\
           &       & (ADIS16405) & \multicolumn{1}{r}{- Initial bias: ± 4 mgauss} &  \bigstrut[b]\\
     \hline
-    IMU   & 1     & Analog Devices  & \multicolumn{1}{r}{- Dynamic range: ±300$^o$/s} &  \bigstrut[t]\\
-          &       & (ADIS16405) & \multicolumn{1}{r}{- Initial bias: 3$^o$/s} &  \\
-          &       &       & \multicolumn{1}{r}{- In-run bias stability: 0.007$^o$/s} &  \bigstrut[b]\\
+    IMU   & 1     & Analog Devices  & \multicolumn{1}{r}{- Dynamic range: ±300$^\circ$/s} &  \bigstrut[t]\\
+          &       & (ADIS16405) & \multicolumn{1}{r}{- Initial bias: 3$^\circ$/s} &  \\
+          &       &       & \multicolumn{1}{r}{- In-run bias stability: 0.007$^\circ$/s} &  \bigstrut[b]\\
     \hline
     Torque coils & 3     & N/A   & \multicolumn{1}{r}{- Max magnetic moment: 0.060, 0.063 $Am^2$} &  \bigstrut\\
     \hline
@@ -907,9 +911,9 @@ Active magnetic control was chosen for this mission due to the low mass and low 
   \label{tab:ADCS_sensors}%
 \end{table}%
 
-			For attitude knowledge, a combination of sensors was chosen: sun sensors, magnetometers, and IMU.  The sun sensors are low mass and low power attitude sensors that provides accurate sun angle during day time, providing the orientation of the satellite relative to an inertial frame. 5 sun sensors will be places on the faces of the satellite other than the nadir face. This sensor, from CubeSat shop provides an accuracy of $< 0.5^o$ and a wide field of view of 114$^o$. The magnetometer will be used to measure the local geomagnetic field to compute the magnetic moment needed to generate needed restoring torques. In addition, the magnetometer will be used as the main attitude sensing device during eclipse periods. An IMU is used to measure the angular rate of the satellite to provide more accurate vibration knowledge to yield a robust vibration damping control loop. The IMU and magnetometer are in the same sensor unit from Analog devices. Both sensors have initial biases that can be corrected through computation. 
+			For attitude knowledge, a combination of sensors was chosen: sun sensors, magnetometers, and IMU.  The sun sensors are low mass and low power attitude sensors that provides accurate sun angle during day time, providing the orientation of the satellite relative to an inertial frame. Five sun sensors will be places on the faces of the satellite other than the nadir face. These sensors provides an accuracy of $< 0.5^\circ$ and a wide field of view of 114$^\circ$. The magnetometer will be used to measure the local geomagnetic field to compute the magnetic moment needed to generate needed restoring torques. In addition, the magnetometer will be used as the main attitude sensing device during eclipse periods. An IMU is used to measure the angular rate of the satellite to provide more accurate vibration knowledge to yield a robust vibration damping control loop. The IMU and magnetometer are in the same sensor unit from Analog devices. Both sensors have initial biases that can be corrected for through computation. 
 
-For actuation, 3 custom-made orthogonal torque coils will be used for 3-axis stabilization control. The coils will be sized so to meet the mass and power constraint of the satellite and to provide sufficient magnetic moment to counter environmental disturbances. More detailed calculation will be presented in the analysis section. The specifications of the torque coils are presented in Table~\ref{tab:ADCS_torquecoils} below.
+For actuation, 3 custom-made orthogonal torque coils will be used for 3-axis stabilization control. The coils will be sized to meet the mass and power constraint of the satellite and to provide sufficient magnetic moment to counter environmental disturbances. More detailed calculation will be presented in the analysis section. The specifications of the torque coils are presented in Table~\ref{tab:ADCS_torquecoils} below.
 			% Table generated by Excel2LaTeX from sheet 'Sheet2'
 \begin{table}[htbp]
   \centering
@@ -918,7 +922,7 @@ For actuation, 3 custom-made orthogonal torque coils will be used for 3-axis sta
     \hline
     Direction & Z     & X, Y \bigstrut\\
     \hline
-    Size  & 10 cm × 10 cm  & 10 cm x 30 cm \bigstrut\\
+    Size  & 10 cm $\times$ 10 cm  & 10 cm $\times$ 30 cm \bigstrut\\
     \hline
     Quantity & 1     & 2 \bigstrut\\
     \hline
@@ -928,13 +932,13 @@ For actuation, 3 custom-made orthogonal torque coils will be used for 3-axis sta
     \hline
     Wire Gauge & 28 AWG & 28 AWG \bigstrut\\
     \hline
-    Magnetic moment & 0.60 $Am^2$ & 0.63 $Am^2$ \bigstrut\\
+    Magnetic moment & 0.60 Am$^2$ & 0.63 Am$^2$ \bigstrut\\
     \hline
     \end{tabular}%
   \label{tab:ADCS_torquecoils}%
 \end{table}%
 				\paragraph{System Schematics and Interfaces}
-				The system schematics are shown in Figure~\ref{fig:ADCS_schem}. The IMU/magnetometer unit, which will be mounted on an interface board, and the sun sensors will be read out through the analog channels of the power distribution module. The module will be used as an interface to the avionics subsystem. The attitude knowledge data will be processed in the avionics subsystem. Combining with the local magnetic field, the magnetic moment vector needed for the torque coils can be computed. This information will be sent to the torque coils through the Power Distribution Module (PDM), into the torque coil driver, which consist of a current driver and an H-bridge, which controls the current in each coils and their directions. 
+				The system schematics are shown in Figure~\ref{fig:ADCS_schem}. The IMU/magnetometer unit, which will be mounted on an interface board, and the sun sensors will be read out through the analog channels of the power distribution module. The module will be used as an interface to the avionics subsystem. The attitude knowledge data will be processed in the avionics subsystem. Combining with the local magnetic field, the magnetic moment vector needed for the torque coils can be computed. This information will be sent to the torque coils through the Power Distribution Module (PDM), into the torque coil driver. The driver consists of a current driver and an H-bridge, which controls the current in each coils and their directions, respectively. 
 			
 			\begin{figure}[!ht]
 				\centering
@@ -942,10 +946,42 @@ For actuation, 3 custom-made orthogonal torque coils will be used for 3-axis sta
 				\caption{ADCS components interactions and Avionics interface}
 				\label{fig:ADCS_schem}
 			\end{figure}
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\subsubsection{Trade Studies}
+			Several control methods were considered in the design process of the ADCS system: passive magnetic control, passive magnetic control, and control using reaction wheels. The main trades to be considered are mass, power usage, pointing accuracy, and pointing stability capability. 
+
+In passive magnetic control, restoring torque is generated through the alignment of the satellite magnetic moment with the local geomagnetic field. The magnetic moment is created through the use of permanent magnets. Hysteresis rods are used for vibration damping. This control option requires low mass and no power. Based on past CubeSat missions, the pointing accuracy of a passive magnetic control system in the same scale as DeMi can achieve 10$^\circ$ –- $20 ^\circ$, sufficient for communication requirement purpose \cite{adcs_survey} \cite{adcs_smad1}. However, there are limitations in the ability to stabilize the satellite. Passive magnetic control systems stability performance is not reliable because the hysteresis rods do not provide fast and robust vibration damping. The expected stability achieved by this method is $1^\circ$ –- $10 ^\circ$/s \cite{adcs_survey}. Since the satellite will only have access to the external sources for a short amount of time, this method is not practical for capturing light from the stars. In addition, this control method limits the possible orientation of the satellite to only the direction along the local magnetic field. In a LEO orbit of 40$^\circ$ inclination such as that of DeMi’s, the direction of the local magnetic field varies at different orbital parameters. This variation causes difficulties in placing antenna and external source aperture so that ground station access and external source capture can be guaranteed. 
+
+Reaction wheels provide robust 3-axis stabilization control of the satellite. This control mechanism provides high accuracy ($~ 0.0001^\circ$ -– $1^\circ$) in pointing direction and quick response in vibration damping providing high stability (0.05$^\circ$/s) \cite{adcs_smad1}. However, the necessary sensors and actuators require high mass and power usage. The main mass contribution and power draw are from the reaction wheels. In addition, magnet torquers are also needed to desaturate reaction wheels, adding more mass and power strain on the system. This option is not practical for a small satellite such as DeMi. 
+
+A summary of the control methods performances is presented in table~\ref{tab:ADCS_trade} below. Based on this information, active magnetic control was chosen for this mission. 
+
+\begin{table}[htbp]
+  \centering
+  \caption{Performance of control methods considered in trade studies}
+    \begin{tabular}{|p{4cm}|p{3cm}|p{3cm}|p{3cm}|}
+    \hline
+          & \textbf{Passive Magnetic Control} & \textbf{Active Magnetic Control} & \textbf{Reaction Wheels Control } \bigstrut\\
+    \hline
+    \textbf{Mass } & Low   & Moderately Low & High  \bigstrut\\
+    \hline
+    \textbf{Power} & Low   & Moderately Low & High \bigstrut\\
+    \hline
+    \textbf{Pointing  Accuracy} &  10$^\circ$ -- 20$^\circ$ &  1$^\circ$ -- 10$^\circ$ &  0.0001$^\circ$ -- 1$^\circ$ \bigstrut\\
+    \hline
+    \textbf{Pointing Stabilization} & 1$^\circ$/s  -- 10$^\circ$/s & $<$ 0.12 $^\circ$/s & $<$ 0.05 $^\circ$/s \bigstrut\\
+    \hline
+    \end{tabular}%
+  \label{tab:ADCS_trade}%
+\end{table}%
+
+
+
+
 			
 			\subsubsection{Analysis}
 				\paragraph{Environmental Torque Calculation}
-				The main environmental disturbances on orbit are gravity gradient, magnetic field, aerodynamics drag, and solar radiation pressure. The governing equations of these external sources are presented in details in SMAD ADCS section. Using the satellite properties, these values can be computed and presented in Table~\ref{tab:ADCS_envtorque}. 
+				The main environmental disturbances on orbit are gravity gradient, magnetic field, aerodynamics drag, and solar radiation pressure. The governing equations of these external sources are presented in details in SMAD ADCS section \cite{adcs_smad2}. Using the satellite properties, these values can be computed and presented in Table~\ref{tab:ADCS_envtorque}. 
 				
 				% Table generated by Excel2LaTeX from sheet 'Sheet3'
 \begin{table}[htbp!]
@@ -968,19 +1004,26 @@ For actuation, 3 custom-made orthogonal torque coils will be used for 3-axis sta
 \end{table}%
 
 			\paragraph{Torque coil sizing calculation}
-			Magnetic control relies on the torque provided by the aligning of the satellite magnetic moment and the local magnetic field. Equation~\ref{eqn:ADCS_torque} shows the governing equation of magnetic control, where $\vec{T}$ represent the generated torque vector, $\vec{\mu}$ is the satellite magnetic moment, $\vec{B}$ is the local geomagnetic field vector. 
+			Magnetic control relies on the torque provided by the aligning of the satellite magnetic moment and the local magnetic field. Equation~\ref{eqn:ADCS_torque} shows the governing equation of magnetic control, where $\vec{T}$ represents the generated torque vector, $\vec{\mu}$ is the satellite magnetic moment, $\vec{B}$ is the local geomagnetic field vector. 
 			
 			\begin{equation}
 				\vec{T} = \vec{\mu} \times \vec{B}
 				\label{eqn:ADCS_torque}
 			\end{equation}
 			
-			Taking the torque vector to be the total environmental torque, Equation~\ref{eqn:ADCS_torque} above yields the required maximum magnetic moment of the coils to be $~ 0.6 Am^2$. Since the area of each coil is chosen to be the same as the size of each of the face of the satellite, the main trade of the design is the number of turns and current in each coil. This corresponds to a mass/power trade. The results of the torque coil sizing are presented above in Table~\ref{tab:ADCS_torquecoils} in Decision Made section. 
+			Taking the torque vector to be the total environmental torque, Equation~\ref{eqn:ADCS_torque} yields the required maximum magnetic moment of the coils to be $~ 0.6$ A$\cdot$m$^2$. The magnetic moment of each coil can be calculated from the coil parameters as shown in Equation~\ref{eqn:ADCS_mu} below, where $\mu$ is the magnitude of the magnetic moment generated by the coil, $I$ is the current in the coil, $N$ is the number of turns, and $A$ is the area of enclosed by the coil. 
+			
+			\begin{equation}
+				\mu = I \cdot N \cdot A
+				\label{eqn:ADCS_mu}
+			\end{equation}
+			
+			Since the area of each coil is chosen to be the same as the size of each of the face of the satellite, the main trade of the design is the number of turns and current in each coil. This corresponds to a mass/power trade. The results of the torque coil sizing are presented above in Table~\ref{tab:ADCS_torquecoils} in Decision Made section. 
 			
 			\paragraph{Detumbling Analysis}
-				Using Princeton Satellite Systems MATLAB simulation, the momentum unloading as a response to an initial angular rate can be computed. The input parameters are the magnitude and direction of initial angular momentum, the direction of magnetic moment, and the gain of the control loop. The initial momentum was calculated by assuming an initial angular rate. The magnetic moment direction is the direction of the torque coils. The control gain is adjusted so that the maximum magnetic moments along all 3 axes are less than the maximum magnetic moments provided by the torque coils. The detumbling time can be calculated through determining the time where the momentum in all direction is less than an arbitrary low threshold. 
+				Using the Princeton Satellite Systems MATLAB simulation, the momentum unloading as a response to an initial angular rate can be computed. The input parameters are the magnitude and direction of initial angular momentum, the direction of magnetic moment, and the gain of the control loop. The initial momentum was calculated by assuming an initial angular rate. The magnetic moment direction is the direction of the torque coils. The control gain is adjusted so that the maximum magnetic moments along all 3 axes are less than the maximum magnetic moments provided by the torque coils. The detumbling time can be calculated through determining the time where the momentum in all direction is less than an arbitrary low threshold. 
 
-The simulation was run with an initial angular rate of 10$^o$/s, magnetic moment along x, y, z and a control gain of $k =0.008$. The angular momenta and magnetic moments are presented in Figure~\ref{fig:ADCS_detumbling}.
+The simulation was run with an initial angular rate of 10$^\circ$/s, magnetic moment along x, y, z and a control gain of $k =0.008$. The angular momenta and magnetic moments are presented in Figure~\ref{fig:ADCS_detumbling}.
 			
 			\begin{figure}[!ht]
 				\centering
@@ -989,10 +1032,10 @@ The simulation was run with an initial angular rate of 10$^o$/s, magnetic moment
 				\label{fig:ADCS_detumbling}
 			\end{figure}
 
-			The maximum magnetic moment needed in x, y, z are 0.6092 $Am^2$ , 0.6052 $Am^2$, 0.0938 $Am^2$, respectively, which is within the range of magnetic moment the torque coils can provide. The total detumbling time is less than 1 orbit (90 minutes). 
+			The maximum magnetic moment needed in x, y, z are 0.6092 Am$^2$ , 0.6052 Am$^2$, 0.0938 Am$^2$, respectively, which is within the range of magnetic moment the torque coils can provide. The total detumbling time is less than 1 orbit (94 minutes). 
 			
 			\paragraph{Ground Access Duration}
-			The duration of access to ground station was computed using an STK model. The orbit was set to a LEO orbit of 500 km altitude and an inclination of 40$^o$. The satellite configuration is set to be in nadir pointing with a possible offset of 8$^o$. The design of the antenna is a monopole antenna of 16 cm in length. The ground station is set to NASA Wallops flight facility UHF parabolic dish of 18 m diameter. A screen shot of the STK model is presented in Figure~\ref{fig:ADCS_STK}. 
+			The duration of access to ground station was computed using an STK model. The orbit was set to a LEO orbit of 500 km altitude and an inclination of 40$^\circ$. The satellite configuration is set to be in nadir pointing with a possible offset of 8$^\circ$. The design of the antenna is a monopole antenna of 16 cm long (beamwidth of 65$^\circ$), transmitting at 465 MHz and receiving at 450 MHz. The corresponding length/wavelength ratio is 0.24. The ground station is set to NASA Wallops flight facility UHF parabolic dish of 18.29 m diameter (beamwidth of 2.9$^\circ$). A screen shot of the STK model is presented in Figure~\ref{fig:ADCS_STK}. 
 			
 			\begin{figure}[!ht]
 				\centering
@@ -1001,11 +1044,12 @@ The simulation was run with an initial angular rate of 10$^o$/s, magnetic moment
 				\label{fig:ADCS_STK}
 			\end{figure}
 			
-			The simulation is run over the course of a day. There are a total of 5 access opportunities of about 9 minutes each. The total ground station access time per day is about 45 minutes. The exact access duration varies with each orbit. 
+			The simulation was run over the course of a day. There are a total of 5 access opportunities of about 9 minutes each. The total ground station access time per day is about 45 minutes. The exact access duration varies with each orbit. 
 		
 			\subsubsection{Summary of Budgets}
 			
-			The mass, power, and volume budgets of the ADCS system are presented in Table~\ref{tab:ADCS_budget}
+			The mass, power, and volume budgets of the ADCS system are presented in Table~\ref{tab:ADCS_budget}. As expected, the main power draw and mass contribution of the ADCS system is from the torque coils. The power presented in the table (1.35 W) represents the power required by the actuators in the worst case scenario. The interface board takes up the most volume (0.318 U) and will stacked in the chassis along with the avionics boards. 
+			
 		% Table generated by Excel2LaTeX from sheet 'Sheet4'
 \begin{table}[htbp]
   \centering
@@ -1018,7 +1062,7 @@ The simulation was run with an initial angular rate of 10$^o$/s, magnetic moment
     \hline
     Sun sensors & 6.530 $cm^3$ & 0.02 kg & 0.25 W \bigstrut\\
     \hline
-    Torque coils & 58.32 $cm^3$ & 0.52 kg & 1.35 W \bigstrut\\
+    Torque coils & 58.32 $cm^3$ & 0.52 kg & 1.35 W (max power)\bigstrut\\
     \hline
     Interface board & 248.0 $cm^3$ & 0.17 kg & -- \bigstrut\\
     \hline
@@ -1032,9 +1076,9 @@ The simulation was run with an initial angular rate of 10$^o$/s, magnetic moment
 
 
 			\subsubsection{Risks}
-			The main design risk in the ADCS system is the pointing stability requirement and the mass and power budget. As previously mentioned, the stability of the satellite will need to be < 0.08$^o$/s for payload science operation of capturing light from a star. The sensors and actuators are expected to provide this performance based on the survey of past CubeSat missions. However, more analysis through simulation and testing will need to be implemented to determine the exact performance of the system. The second risk is due to the narrow margin on the power budget of the whole system. To compensate for this, the mass of the torque coils is higher than previously expected. More iterations will be needed to determine the optimal power consumption and mass of the torque coils. 
+			The main design risk in the ADCS system is the pointing stability requirement and the mass and power budget. As previously mentioned, the stability of the satellite will need to be $<$ 0.08$^\circ$/s for payload science operation of capturing light from a star. The sensors and actuators are expected to provide this performance based on the survey of past CubeSat missions. However, more analysis through simulation and testing will need to be implemented to determine the exact performance of the system. The second risk is due to the narrow margin on the power budget of the whole system. To compensate for this, the mass of the torque coils is higher than previously expected. More iterations are needed to determine the optimal power consumption and mass of the torque coils. 
 			\subsubsection{Future Work}
-			The main future work of the ADCS system is to simulate the flight condition through with external disturbance torques at each position on orbit. The next step would be to create a control loop that takes these environmental torques as inputs to compute the needed magnetic moment of each of the 3 torque coils. 
+			The main future work of the ADCS system is to simulate the flight condition through with external disturbance torques at each position on orbit. The next step is to create a control loop that takes these environmental torques as inputs to compute the needed magnetic moment of each of the 3 torque coils. 
 
 \newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1381,7 +1425,20 @@ Pozar, David M., \emph{Microwave and RF Design of Wireless Systems}, Wiley, New 
 Clyde Space. CubeSat Shop. [Online]. \url{http://www.clyde-space.com/cubesat_shop/obdh/364_mission-interface-computer-grande-em}, visited May 5, 2013. 
 
 %%% ADCS
+\bibitem{adcs_survey}
+Sofyali, A. and Aslan, A.R. \emph{Magnetic Attitude Control of Small Satellites: A Survey of Applications and A Domestic Example}. Istanbul Technical University. Istanbul, Turkey. 
 
+\bibitem{adcs_smad1}
+Wertz, James, \emph{Space Mission Engineering: The New SMAD}, Microcosm Press, Hawthorne, CA, 2011. pp. 578. 
+
+\bibitem{adcs_smad2}
+Wertz, James, \emph{Space Mission Engineering: The New SMAD}, Microcosm Press, Hawthorne, CA, 2011. pp. 570-573. 
+
+\bibitem{adcs_compass}
+Aydinlioglu, A. and Hammer, M. \emph{COMPASS-1 Picosatellite: Magnetic Coils for Attitude Control}. University of Applied Sciences Aachen, Aachen, Germany. 
+
+\bibitem{adcs_ion}
+Gregory, S. \emph{Attitude Control System Design for ION, the Illinois Observing Satellite}. Urbana, Illinois, 2004.
 %%% THERMAL
 
 %%% STRUCTURES
