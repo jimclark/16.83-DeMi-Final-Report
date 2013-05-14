@@ -459,22 +459,32 @@ Lastly, specific properties of the deformable mirror system need to be explored.
 			
 		\subsection{Power - JC}
 			\subsubsection{Requirements}
-			The Power subsystem is required to supply power to all other subsystems under all conditions.  In particular, it must supply an average of 3.54 watts on average over the course of the orbit (calculated in Section~\ref{subsubsec:power-analysis}, Analysis), sustain a maximum load of 13.84 watts during certain operational modes (downlink mode, per Systems), have a minimum battery capacity of 3.9 watt-hours (calculated in Section~\ref{subsubsec:power-analysis}, Analysis), and meet these requirements for up to 1 year, or approximately 6,000 cycles (calculated in Section~\ref{subsubsec:power-analysis}, Analysis).
+			The Power subsystem is required to supply power to all other subsystems under all conditions.  In particular, it must supply an average of 3.54 watts on average over the course of the orbit (calculated in Equation~\ref{eq:power-required}), sustain a maximum load of 13.84 watts during certain operational modes (downlink mode, per Systems), have a minimum battery capacity of 3.9 watt-hours (calculated in Equation~\ref{eq:power-batt-req}), and meet these requirements for up to 1 year, or approximately 6,000 cycles (calculated in Equation~\ref{eq:power-num-cycles}).
 			
-			\subsubsection{Trade Studies and Decisions Made}
-			Using STK, we compared the average power obtained by the solar panels under several circumstances.  The two variables were the inclusion or omission of a solar panel on the top face of the satellite, in addition to the four side-mounted panels, and the orientation of the satellite in its orbit -- whether it few ``face-first'', with the normal vector of one of its sides aligned with its velocity, ``corner-first'', where it is tilted by 45 degrees about its long axis from the face-first orientation, or spinning about its long axis.  The face-first and corner-first attitudes are illustrated below:
+			\subsubsection{Decisions Made}
+			
+			The chosen solar panel configuration is four body-mounted side panels.  Body-mounted panels were chosen over deployable panels because they minimized the surface area of the satellite, which minimized the disturbance torques, and they are symmetrical, reducing the pointing constraints on the ADCS.  The zenith and nadir faces are left bare so that they can be coated with a paint that improves the thermal characteristics of the satellite.  The zenith face is also left bare to accommodate an aperture that will allow the payload to image external light sources; the limitations imposed by the placement of the aperture and the required shape of a top-mounted solar panel .
+
+The remainder of the power system is composed of a stack of modules to manage power distribution throughout the satellite.  An EPS (Electrical Power System) takes power from the solar panels and manages the current and voltage levels to ensure that the panels deliver power at maximum efficiency.  A secondary (rechargeable) battery supplies the satellite with energy during eclipse.  A PDM (Power Distribution Module) supplies power to systems which are not part of the main system stack, such as the torque coils.
+
+The satellite's power subsystem does not include a primary battery.  A primary battery was never included in the design because the satellite is covered on most sides by solar panels and is power-positive in detumbling mode, so it will charge as soon as it exits the P-POD.  The only reference to a Cubesat containing a primary battery was a description of a Cubesat that lacked solar panels entirely.\cite{libertad-1}
+
+\subsubsection{Trade Studies}
+			
+			STK was used to compare the average power obtained by the solar panels under several circumstances.  The two variables were the inclusion or omission of a solar panel on the top face of the satellite, in addition to the four side-mounted panels, and the orientation of the satellite in its orbit.  The three orientations considered were ``face-first'', ``corner-first'', and spinning about its long axis.  The face-first and corner-first attitudes are illustrated in Figure \ref{fig:power-orientations}.
 			
 			\begin{figure}[ht]%
-			\centering
-			\includegraphics{images/power-face-first.png}%
-			\hspace{0.5in}
-			\includegraphics{images/power-corner-first.png}
-			\caption{The ``face-first'' and ``corner-first'' attitudes.  Images generated from STK.}%
-			\label{fig:power-face-first}%
-			\end{figure}
+\centering
+\includegraphics{images/power-face-first.png}%
+\hspace{0.5in}
+\includegraphics{images/power-corner-first.png}
+\caption{The ``face-first'' and ``corner-first'' attitudes.  Images generated from STK.}%
+\label{fig:power-orientations}%
+\end{figure}
 			
-			\begin{table}[ht]\label{table:power-trade-study}
+			\begin{table}[ht]
 \caption{Power values for various panel configurations and satellite attitudes.}
+\label{tab:power-trade-study}
 \begin{center}
     \begin{tabular}{|c|c|c|c|} \hline
     	 & Face-first & Spinning & Corner-first \\ \hline
@@ -484,58 +494,43 @@ Side and top panels & 4.45 W & 4.84 W & 5.19 W \\\hline
 \end{center}
 \end{table}
 
-Note that these power values are averaged over the entire orbit -- that is, taking the incoming power to be zero during local night and including that in the average.  This was done because the satellite is active during the entire orbit, and its average power needs are calculated over the entire orbit; to ensure that we are comparing likes against likes, we did the same for the power generated.
-			
-			\subsubsection{Decisions Made}
-			
-			\begin{figure}%
-			\centering
-			\includegraphics[trim = 0 2cm 0 0, clip]{images/power-3U-side-paneled.png}%
-			\caption{The solar panel configuration to be used on the DeMi satellite.  Image from Clyde Space.\cite{CS-image}}%
-			\label{fig:power-panels}%
-			\end{figure}
-			
-In general, the power subsystem was designed to be as simple as possible while meeting the satellite's power needs.  We chose to use stock parts as much as possible because they have known performance, which helps us verify that requirements are met and reduces the margins we need to hold.
+After confirming with ADCS that the satellite could orbit in the corner-first attitude without difficulty, the corner-first attitude was chosen because it maximized available power.
 
-The chosen solar panel configuration was four body-mounted side panels.  Body-mounted panels were chosen over deployable panels because they minimized the surface area of the satellite, which minimized the disturbance torques, and they are symmetrical, reducing the pointing constraints on the ADCS.  The satellite would be oriented in a nadir-pointing configuration, so the nadir face would almost never see any sunlight, so we chose not to panel it, and we chose not to panel the zenith face to allow the payload to have an aperture in that face, so that it could potentially image external light sources.
-
-The remainder of the power system is similar to that of most other satellites: an electrical power system module takes power from the solar panels and manages the current and voltage levels to ensure that the panels deliver power at maximum efficiency, a secondary (rechargeable) battery supplies the satellite with energy during eclipse, and a power distribution module supplies power to systems which are not part of the main system stack, like the torque coils.
-
-The satellite's power subsystem does not include a primary battery.  A primary battery was never included in the design because the satellite was to be covered on most sides by solar panels and would be power-positive in detumbling mode, so it would charge as soon as it exited the P-POD.  The only reference to a Cubesat containing a primary battery was a description of a Cubesat that lacked solar panels entirely.\cite{libertad-1}
+Note that these power values are averaged over the entire orbit, that is, taking the incoming power to be zero during local night and including that in the average.  This was done because the satellite is active during the entire orbit, and its average power needs are calculated over the entire orbit.  To ensure that likes were compared against likes, the same was done for the power generated.
 			
-			\subsubsection{Analysis}\label{subsubsec:power-analysis}
+			\subsubsection{Analysis}
 			
-The average power required is the time-weighted average of the power required during the various modes of the satellite:
+The average power required by the satellite subsystems is the time-weighted average of the power required during the various modes of the satellite:
 
 \begin{equation}
 P_{req,avg} = \frac{1}{T_{total}}\sum_{modes}{ \sum_{systems}{T_{mode} \: P_{sys,mode}} } = 3.54 \ \text{W} 
 \label{eq:power-required}
 \end{equation}
 
-The solar panels are required to gather enough power during the day to power the satellite for the entire orbit, when taking the inefficiency of the EPS into account ($\eta = 0.85$ in the worst case\cite{EPS-manual}):
+To meet those needs, the solar panels are required to gather more power, to account for the inefficiency of the EPS ($\eta = 0.85$ in the worst case\cite{EPS-manual}).  This required orbital-averaged power is compared to the results from the STK simulation in Table \ref{tab:power-trade-study}.  This requirement can then be scaled by a factor of $\frac{T_d + T_e}{T_d}$ to compute the power required from the solar panels while in sunlight.
 
 \begin{equation}
 P_{req,panels} = \frac{T_d + T_e}{T_d}\frac{P_{req,avg}}{\eta} = 6.61 \ \text{W (cold)}, 5.21 \ \text{W (hot)}, 4.16 \ \text{W (orbit avg)}
 \label{eq:power-required-panels}
 \end{equation}
 
-``Hot'' and ``cold''\footnote{Perhaps ``bright'' and ``dark'' would be better terms from a power perspective, because it is not temperature that gives us power but sunlight.} here refer to the two orbital cases which have the most and least solar exposure for the satellite – because the orbit is fixed in inertial space, it appears to rotate with respect to the Earth-Sun vector over the course of a year.  Every six months, it goes from a “cold” orbit, which is in the sunlight 63\% of the time, to a “hot” orbit, which is 80\% sunlit, and back again.  The two orbits are illustrated below.
+``Bright'' and ``dark'' here refer to the two orbital cases which have the most and least solar exposure for the satellite – because the orbit is fixed in inertial space, it appears to rotate with respect to the Earth-Sun vector over the course of a year.  Every six months, it moves from a ``dark'' orbit, which is in the sunlight 63\% of the time, to a ``bright'' orbit, which is 80\% sunlit, and back again.  The two orbits are illustrated in Figures \ref{fig:power-bright-orbit} and \ref{fig:power-dark-orbit}, respectively.  The incoming power values, described in the Trade Studies section and tabulated in Table \ref{tab:power-trade-study}, were computed in a ``dark'' orbit.
 
 \begin{figure}[ht]%
 \centering
-\includegraphics{images/power-hot-orbit}%
-\caption{A ``hot'' orbit, where the satellite is exposed to the sun 80\% of the time.  Image generated from STK.}%
-\label{fig:power-hot-orbit}%
+\includegraphics{images/power-bright-orbit}%
+\caption{A ``bright'' orbit, where the satellite is exposed to the sun 80\% of the time.  Image generated from STK.}%
+\label{fig:power-bright-orbit}%
 \end{figure}
 
 \begin{figure}[ht]%
 \centering
-\includegraphics{images/power-cold-orbit}%
-\caption{A ``cold'' orbit, where the satellite is exposed to the sun 63\% of the time.  Image generated from STK.}%
-\label{fig:power-cold-orbit}%
+\includegraphics{images/power-dark-orbit}%
+\caption{A ``dark'' orbit, where the satellite is exposed to the sun 63\% of the time.  Image generated from STK.}%
+\label{fig:power-dark-orbit}%
 \end{figure}
 
-The satellite drains the most energy from the battery if it performs a ground station pass (maximum duration: 9.77 minutes, per Comm) and scientific operation (nominal duration: 5 minutes, per Payload) during local night:
+The satellite drains the most energy from the battery if it performs a ground station pass (maximum duration: 9.77 minutes) and scientific operation (maximum duration: 5 minutes) during local night:
 
 \begin{equation}
 E_{req,batt} = T_{sci} P_{sci} + T_{comm} P_{comm} + (T_e - T_{sci} - T_{comm}) P_{standby} = 3.9 \ \text{Wh}
@@ -563,10 +558,12 @@ N_{cycles} = \frac{T_{year}}{T_{orbit}} = 5500 \approx 6000 \ \text{(with 10\% m
 \label{eq:power-num-cycles}
 \end{equation}
 
+
+
 			\subsubsection{Summary of Outputs}
 
-\begin{table}[ht]\label{table:power-outputs}
-\caption{Outputs to other systems (mass, volume, power consumed, and survival and operating temperatures).\cite{EPS-manual} \cite{PDM-manual} \cite{Battery-manual} \cite{Solar-panel-datasheet}}
+\begin{table}[ht]\label{tab:power-outputs}
+\caption{Outputs to other systems (mass, volume, power consumed, and survival and operating temperatures).\cite[p.a,p.b,p.c,p.d]{EPS-manual,PDM-manual,Battery-manual,Solar-panel-datasheet}}
 \begin{center}
     \begin{tabular}{|l|l|l|p{0.8in}|p{1in}|p{1.1in}|} \hline
 Component & Mass (kg) & Volume (U) & Power consumed (W) & Survival temperature ($^\circ$ C) & Operating temperature ($^\circ$ C) \\ \hline \hline
@@ -583,12 +580,16 @@ The solar panels do not literally have zero volume, but because they are fixed t
 
 			\subsubsection{Risks}
 
-The primary risk facing the Power subsystem is that our incoming power is fundamentally limited, so we will have to be careful to not exceed our budget.  As computed in Analysis (Section~\ref{subsubsec:power-analysis}), the average power drawn by the satellite for nominal mode durations is 3.54 watts.  While the orbit-averaged power coming in from the solar panels is 4.52 watts, which is a 28\% margin over the power needs, when we take the worst-case efficiency of the EPS's solar-panel connection into account\cite{EPS-manual}, we find that as little as 3.84 watts are actually getting to the battery power bus, leaving only a 9\% margin (which might then be further eroded by inefficiencies in the power lines).  This is less than the 18\% margin goal we had set for ourselves, and substantially less than the 30\% margin that JPL informed us was their usual standard for satellite missions.
+The solar panels will supply 4.52 watts on average over an orbit, which is a 28\% margin over the power needs.  However, the EPS is not perfectly efficient.  The connection to the solar panels is the least efficient, with a minimum efficiency of 85\%\cite{EPS-manual}.  When this is taken into account, as few as 3.84 watts may actually be supplied to the battery power bus.  This has a margin of 9\% over the satellite's average power needs (which might then be further eroded by inefficiencies in the power lines), which is less than the 18\% margin goal set by Systems, and substantially less than the 30\% margin recommended by JPL.
 
-This risk is mitigated by the 32\% margin of available power over the standby power need of 2.91 watts.  From this, we can be confident that, even in the worst possible case, the satellite will be power-positive during its standby mode.  This means that, if the satellite should find itself unable to meet its power needs for nominal mode durations, it could be commanded to spend more time in standby mode and less in data capture or downlink mode to restore balance to its power budget.  As mentioned in the Analysis section, the available power was calculated for the coldest, darkest orbit that the satellite will be in.  For the brightest orbit, the average power generated by the solar panels over the entire orbit increases to 7.42 watts, which, taking the worst-case EPS efficiency into account, results in 6.31 watts reaching the power line, which is a 78\% margin over the average power required.  In fact, we could spend 29 minutes -- nearly six times the nominal data capture mode duration -- of such a bright orbit in data capture mode (leaving the downlink mode duration constant, as ground pass durations are independent of available power) while maintaining a 30\% margin of available (post-EPS) power over required power.  We can thus be assured that, even if the satellite is forced to reduce the duration of data capture and downlink modes during darker orbits to conserve power, we can make up for any shortfalls of captured data during better orbits.
+This system risk is mitigated by the 32\% margin of available power over the standby power need of 2.91 watts.  This provides assurance that the satellite will be power-positive during its standby mode.  Should the satellite find itself unable to meet its power needs with the nominal five minutes of data capture every orbit, it can be commanded to spend more time in standby and downlink modes to restore balance to the power budget.
+
+This strategy brings with it a mission risk: that if the 9\% margin is not enough, and the satellite is forced to spend more time in standby mode, it will not spend enough time on data capture and downlink modes to complete its science objectives.
+
+However, as mentioned in Analysis, the available power from the solar panels was calculated for the darkest orbit that the satellite will experience.  For the brightest orbit, the average power generated by the solar panels over the entire orbit increases to 7.42 watts, which, taking the worst-case EPS efficiency into account, results in 6.31 watts reaching the power line.  This has a 78\% margin over the average power required.  In fact, the duration of data capture mode could be increased nearly six-fold to 29 minutes per orbit while maintaining a 30\% margin.  This possibility mitigates the mission risk: if the satellite is forced to reduce the duration of data capture and downlink modes during darker orbits to conserve power, it can make up for any shortfalls of captured data during sunnier orbits.
 
 			\subsubsection{Future Work}
-The performance of the solar panels and batteries is temperature-dependent.  In particular, the battery becomes more effective as its temperature increases, while the solar panels become less so.  Going forward, it would be useful to perform a more detailed simulation of the satellite that incorporates a thermal model, so that we can more accurately measure the effect of satellite temperature and dissipated excess energy (energy from the solar panels that does not go into charging the battery or powering the satellite).
+The performance of the solar panels and batteries is temperature-dependent.  In particular, the battery becomes more effective as its temperature increases, while the solar panels become less so.  Going forward, it would be useful to perform a more detailed simulation of the satellite that incorporates a thermal model, to more accurately measure the effect of satellite temperature and dissipated excess energy.
 
 \newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -676,7 +677,7 @@ The angle $\beta_n$ can be calculated using Eq.~\ref{eq:comm-exit-angle} \cite[p
 \beta_{n+1} = \arcsin\biggl(\frac{n_n}{n_{n+1}}\sin(\alpha_n)\biggr) 
 \end{equation}
 
-In this equation, $n_n$ is the refractive index of layer $n$, and $\alpha_n$ is the entry incidence angle. Angle $\alpha_n$ can be calculated with the last equation needed in order to calculate the propagation length, Eq.~\ref{eq:comm-entry-angle \cite[p.~9]{ITU-R}.
+In this equation, $n_n$ is the refractive index of layer $n$, and $\alpha_n$ is the entry incidence angle. Angle $\alpha_n$ can be calculated with the last equation needed in order to calculate the propagation length, Eq.~\ref{eq:comm-entry-angle} \cite[p.~9]{ITU-R}.
 
 \begin{equation}\label{eq:comm-entry-angle}
 \alpha_n = \pi - \arccos \biggl(\frac{-a_n^2 - 2r_n\delta_n - \delta_n^2}{2a_n r_n + 2a_n \delta_n}\biggr) 
