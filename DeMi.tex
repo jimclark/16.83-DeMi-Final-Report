@@ -1155,14 +1155,16 @@ operating temperature ranges.
 
 \subsubsection{Analysis/Results}
 
-The analysis of the thermal environment of the satellite took into consideration the radiation fluxes from the sun and earth (albedo and infrared) on all six faces of the cubeSat as shown in Figure~\ref{fig:thermal-environment}. For each face, an energy balance was carried out and the average energy over all faces used to determine the average temperature of the satellite. The energy balance equations were are as follows:
+The analysis of the thermal environment of the satellite took into consideration the radiation fluxes from the sun and earth (albedo and infrared) on all six faces of the CubeSat as shown in Figure~\ref{fig:thermal-environment}. For each face, an energy balance was carried out and the average energy over all faces used to determine the average temperature of the satellite. The energy balance equations were as follows:
 
 \begin{equation}
 Q_{in} + Q_{internal} = Q_{out} \rightarrow [\alpha(S + S_A) + \epsilon S_{IR}] A + Q_{internal} = A_S \epsilon \sigma T^4
 \label{eq:thermal-balance}
-\end{equation}		
+\end{equation}
 
-Values for radiation flux over the course of an orbit were taken from the new SMAD, the main text for this course. Temperatures were calculated for two extremes, cold case, $\beta = 0$; hot case, $\beta =45$, where $\beta$ is the angle subtended by the orbit relative to the sun. 
+Where $\alpha$, $\epsilon$, and $A_S$ are the absorptivity, emissivity, and area of the surface, $\sigma$ is the Stefan-Boltzmann constant, and $Q$ and $S$ correspond to the energy and radiation fluxes respectively. Values for radiation flux over the course of an orbit were taken from The New SMAD \cite[p.~688,~table~22-11]{SMAD}, the main text for this course. Temperatures were calculated for two extremes of thermal environment, the cold case, $\beta$ = 0; and hot case, $\beta$ =45, where $\beta$ is the angle subtended by the orbit relative to the sun.  Different values of radiation flux correspond to each value of $\beta$.
+
+The operating and survival temperatures of other subsystems are shown in Table~\ref{table:thermal-inputs}. These figures were used to determine the desired temperature range of the satellite during each mode of operation. The results of the analysis are shown in Table~\ref{table:thermal-results}. These show that during the cold case, the satellite will experience temperatures below the operation and survival temperatures of the payload during data-capture and other modes respectively.
 
 \begin{figure}[ht]%
 \centering
@@ -1170,8 +1172,6 @@ Values for radiation flux over the course of an orbit were taken from the new SM
 \caption{Thermal environment of satellite considered in analysis.}%
 \label{fig:thermal-environment}%
 \end{figure}
-
-The operating and survival temperatures of other subsystems are shown in Table~\ref{table:thermal-inputs}. These figures were used to determine the desired temperature range of the satellite during each mode of operation. The results of the analysis are shown in Table~\ref{table:thermal-results}. These show that during the cold case, the satellite will experience temperatures below the operation and survival temperatures of the payload during data-capture and other modes respectively.
 
 \begin{table}[ht]%
 \caption{Operating and survival temperatures of different subsystems and components.}
@@ -1193,14 +1193,14 @@ The operating and survival temperatures of other subsystems are shown in Table~\
 \begin{tabular}{|l|r|r|r|r|r|}\hline
 \textbf{Mode} & \textbf{Data Capture} & \textbf{Standby} & \textbf{Uplink} & \textbf{Downlink} & \textbf{Safe} \\\hline
 \textbf{Operating temp. ($^\circ$C)} & 0 to 35 & -10 to 40 & -10 to 40 & -10 to 40 & -10 to 40 \\\hline
-\textbf{Temp. Cold case ($^\circ$C)} & -3.68 & -13.40 & -13.40 & 5.79 & -15.72 \\\hline
+\textbf{Temp. Cold case ($^\circ$C)} & \textbf{-3.68} & \textbf{-13.40} & \textbf{-13.40} & 5.79 & \textbf{-15.72} \\\hline
 \textbf{Temp. Hot case ($^\circ$C)} & 21.99 & 14.72 & 14.72 & 29.31 & 13.02 \\\hline
 \end{tabular}
 \end{table}
 
 \subsubsection{Trade Studies}
 
-Based on the results of the thermal analysis, the need to augment the thermal control was evident. Amongst the myriad of possible options, the inclusion of a heater, multi-layer insulation (MLI aka thermal blanket), and surface coating stood out as more feasible for a cubeSat mission given the limited mass, volume, and power available. Since the payload’s detector was the main component whose temperature needed to be kept above the average satellite temperature for most modes of operation, a decision needed to be made on whether  a heater or thermal blanket would be used as the primary thermal control for the payload.
+Based on the results of the thermal analysis, the need to augment the thermal control was evident. Amongst the myriad of possible options, the inclusion of a heater, thermal blanket, and surface coating were more feasible for a CubeSat mission given the limited mass, volume, and power available. The payload’s detector was the main component whose temperature needed to be kept above the average satellite temperature for most modes of operation, so either a heater or thermal blanket needed to be chosen as the primary thermal control for the payload.
 
 The heater being considered was a model HK5586 polyimide thermofoil heater from Minco (see Figure~\ref{fig:thermal-heater}). It takes up an area of 4.50 cm x 2.54 cm, operates within -200 to 200 $^\circ$C, and with an input voltage of 3.3V, would require a maximum wattage of 0.83 W. 
 
@@ -1211,18 +1211,18 @@ The heater being considered was a model HK5586 polyimide thermofoil heater from 
 \label{fig:thermal-heater}%
 \end{figure}
 
-Computing the heat exchange between the heater and the detector, we obtained values for the average power required by the heater to keep the detector above 0 °C during data capture mode, and above -10°C during other modes. The equation used:
+Computing the heat exchange between the heater and the detector, we obtained values for the average power required by the heater to keep the detector above 0 $^\circ$C during data capture mode, and above -10 $^\circ$C during other modes. The equation used:
 
 \begin{equation}
 P_{req} = \frac{\text{Energy transferred}}{\text{Time}} = \frac{m_{sat} Cp_{sat} (T_{min} - T_{sat})}{\text{Time}}
 \label{eq:thermal-power-required}
 \end{equation}
 
-Where a maximum of ten seconds is allowed for the detector to attain desired temperatures, and $T_{min}$ corresponds to the minimum operational and survival temperature during data capture and other modes respectively. The results are shown in Figure~\ref{fig:thermal-power-usage}. Excepting downlink mode, the heater will require power ranging from 0.44 to 0.75W, which is a significant percentage of the average power available to the entire satellite.
+Where a maximum of ten seconds is allowed for the detector to attain desired temperatures, $m$ and $Cp$ are the mass and effective specific heat capacity of the detector, and $T_{min}$ corresponds to the minimum operational and survival temperature during data capture and other modes respectively. The results are shown in Figure~\ref{fig:thermal-power-usage}. Besides downlink mode, the heater will require power ranging from 0.44 to 0.75W which is a significant percentage of the average power available to the entire satellite.
 
 \begin{figure}[ht]%
 \centering
-%\includegraphics{images/thermal-power-usage}%
+\includegraphics{images/thermal-power-usage}
 \caption{Power usage by heater during different modes of operation.}%
 \label{fig:thermal-power-usage}%
 \end{figure}
@@ -1240,7 +1240,7 @@ Where $\tau$ is the time constant for temperature decay, $R_{ext}$ is the therma
 
 \begin{figure}[ht]%
 \centering
-%\includegraphics{images/thermal-decay}%
+\includegraphics{images/thermal-decay}%
 \caption{Temperature decay of inner face of MLI for different modes of operation.}%
 \label{fig:thermal-decay}%
 \end{figure}
@@ -1249,9 +1249,7 @@ Where $\tau$ is the time constant for temperature decay, $R_{ext}$ is the therma
 
 Given the results of the aforementioned analysis, the thermal blanket was chosen for primary thermal control. Initially, the thermal subsystem chose dispense with idea of a payload heater, and use solely the MLI for thermal control, but after further discussion with other subsystems, it was agreed upon to still have the heater installed. The rationale behind this decision was that in the event that the average satellite temperature falls below the predicted value, the heater would be used to augment the action of the thermal blanket.
  
-Thus, the design will include a double layer thermal blanket surrounding the payload, aluminized 25 gauge polyester with nylon scrim taking up approximately 1g and 0.8cm$^3$ of mass and volume respectively. In addition, the heater will be attached to the detector within the thermal blanket as shown in Figure~\ref{fig:thermal-heater}.
-
-Furthermore, in order to fully meet the third requirement of the subsystem, the temperatures of key components of other subsystems will be monitored via thermal sensors.  These components are listed in Table~\ref{table:thermal-sensors} below.
+Thus, the design will include a double layer thermal blanket surrounding the payload, aluminized 25 gauge polyester with nylon scrim taking up approximately 1g and 0.8cm$^3$ of mass and volume respectively. In addition, the heater will be attached to the detector within the thermal blanket as shown in Figure~\ref{fig:thermal-heater}.  Furthermore, in order to fully meet the third requirement of the subsystem, the temperatures of key components of other subsystems will be monitored via thermal sensors.  These components are listed in Table~\ref{table:thermal-sensors} below.
 
 \begin{table}[ht]%
 \centering
@@ -1271,16 +1269,16 @@ Power Distribution Module & 1 \\\hline
 \end{tabular}
 \end{table}
 
-The thermal sensors chosen are model 44004 precision thermistor elements from Omega, each of volume 0.04cm3 and mass 0.4g. Fourteen in all, they will each draw power of about 0.5 μW and operate within a temperature range of -80 to 120 °C. As shown in Figure~\ref{fig:thermal-thermistor} they consists of a bead and a tail; the bead will be attached to the surface of the component whose temperature is being measured, and the tail goes to the avionics board.
+The thermal sensors chosen are model 44004 precision thermistor elements from Omega, each of volume 0.04cm$^3$ and mass 0.4g. Fourteen in all, they will each draw power of about 0.5 $\mu$W and operate within a temperature range of -80 to 120 °C. As shown in Figure~\ref{fig:thermal-thermistor} they consists of a bead and a tail; the bead will be attached to the surface of the component whose temperature is being measured, and the tail goes to the avionics board.
 
 \begin{figure}[ht]%
 \centering
-%\includegraphics{images/thermal-thermistor}%
+\includegraphics{images/thermal-thermistor}%
 \caption{Precision Thermistor elements – model 44004 (Omega.com).}%
 \label{fig:thermal-thermistor}%
 \end{figure}
 
-In addition, the zenith and nadir faces will be painted with Chemglaze Z306 ( $\alpha= 0.98, \epsilon = 0.89$) in order to improve their absorptivity-emissivity ratio from 0.9 to 1.1.
+In addition, the zenith and nadir faces will be painted with Chemglaze Z306 ($\alpha= 0.98, \epsilon = 0.89$) in order to improve their absorptivity-emissivity ratio from 0.9 to 1.1.
 
 In summary, the mass, volume, and power budget will be as shown in Table~\ref{table:thermal-outputs}
 
