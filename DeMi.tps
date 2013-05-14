@@ -17,8 +17,8 @@ Class=LaTeXView
 Document=DeMi.tex
 
 [Frame0_View0,0]
-TopLine=103
-Cursor=5448
+TopLine=252
+Cursor=15580
 
 [SessionInfo]
 FrameCount=1

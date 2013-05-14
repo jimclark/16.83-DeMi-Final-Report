@@ -109,11 +109,44 @@ The technology that will tested in the DeMi demonstration has a number of forese
 \section{Mission Overview}
 		\subsection{Requirements}
 		 
-		See Appendix~\ref{app:requirements}.
+		\paragraph{Mission Level Requirements}
+		\begin{itemize}
+				\item MLR-1 The system design shall follow a 3-unit CubeSat platform.\\
+				Rationale: Low-cost, quick access space platform
+				\item MLR-2 The system shall primarily use commercial off the shelf (COTS) and CubeSat parts and components.\\
+				Rationale: Low-cost option for a university project
+				\item MLR-3 The system shall accommodate and operate a MEMS deformable mirror demonstration experimental payload.\\
+				Rationale: Mission goal
+				\item MLR-4 The system shall operate and produce operational and experimental data for a period of <3 months> [goal of 12 months].\\
+				Rationale: Mission goal
+		\end{itemize}
+		
+		\paragraph{Systems Requirements}
+		
+		\begin{itemize}
+			\item SYS-1 The system shall survive launch conditions.\\
+Rationale: Safety and mission requirement
+			\item SYS-2 The system shall include electrical, mechanical, and software interfaces to the payload\\
+Rationale: Mission requirement
+			\item SYS-3 The system shall comply with the requirements and constraints listed in the most current CubeSat Design Specification (CDS) document. \\
+Rationale: CDS is the standard for CubeSat mission design
+			\item SYS-4 The system shall be capable of sending and receiving data and instructions to and from the ground.\\
+Rationale: Mission requirement
+			\item SYS-5 The system shall have a deorbit time of 25 years or less. \\
+Rationale: Current regulation
+		\end{itemize}
+
+		\subsection{Design Overview}
+		The DeMi mission will consist of one small satellite following the 3-unit CubeSat Design Specifications established by the California Polytechnic State University. The satellite will be the size of three stacked 10cm cubes (called “units”), measuring a total of 10 cm $|times$ 10 cm $\times$ 30 cm. In accordance to CubeSat specifications, the satellite’s mass will not exceed 4 kilograms. In general, CubeSats are launched as secondary hosted payloads inside a standard Poly-PicoSatellite Orbital Deployer (P-POD). \footnote{CubeSat Design Specifications, California Polytechnic State University, http://www.cubesat.org/index.php/documents/developers}
+The CubeSat platform was selected because it offers a low-cost quick access option. Multiple vendors already sell many off-the-shelf CubeSat components with flight heritage for most standard satellite subsystems. Over the past several years, many university projects have been designed and flown on CubeSats. 
+
 		
 		\subsection{Concept of Operations -ZG}
 		
-		DeMi will be a 3-unit CubeSat on a low-Earth orbit with an altitude of 500 km at an inclination of 40°. Immediately separation from a standard Poly-PicoSatellite Orbital Deployer (P-POD), the satellite will begin to charge its primary batteries through solar panels covering the long faces of the structure. During this first stage, the satellite’s antenna will be deployed and will emit intermittent signals, or beacons, in order to be located by the ground station. The ADCS torque coils will detumble the satellite and align it in a nadir-pointing position. The detumble stage should last approximately 2 weeks. In case the satellite needs more time to power up, communicate with the ground station and stabilize itself, the science operations could be delayed. 
+		DeMi will be a 3-unit CubeSat on a low-Earth orbit with an altitude of 500 km at an inclination of 40$^\circ$. This orbit inclination was selected in order to reach the NASA Wallops ground station located in the state of Virginia. The altitude of 500 km positions the satellite well within Low-Earth Orbit exposing the payload to the space environment while still allowing 6 to 7 ground access opportunities per day for communications with the ground station. 
+
+Figure~\ref{fig:Mission_ConOps} shows a timeline of the DeMi concept of operations and mission milestones. Immediately following separation from a standard P-POD, the satellite will begin to charge its primary batteries through solar panels covering the long faces of the structure. During this first stage, the satellite’s antenna will be deployed and will emit intermittent beacon signals in order to be located by the ground station. The ADCS (Attitude Determination and Control System) torque coils will detumble the satellite and align it in a nadir-pointing position. The detumble stage will last approximately 2 weeks assuming a tip off rate of 10$^\circ$/sec. A detailed detumbling analysis can be found in Section~\ref{adcs_analysis}. The mission schedule allows up to one month for detumbling, yet any short delays during this stage would not be detrimental to the mission overall.
+
 		
 		\begin{figure}[!ht]
 				\centering
@@ -126,11 +159,12 @@ The technology that will tested in the DeMi demonstration has a number of forese
 
 The majority of the time, the satellite will be in stand-by mode; in other words, it will not be capturing or downlinking data. In case of a subsystem malfunction, the satellite will go into safe mode to diagnose the source of the problem. 
 
-Analyses performed using STK predict that the satellite will deorbit within 7.8 years. This timeline agrees with the current 25-year deorbit requirement outlined by NASA standards.2
+Given the satellite’s altitude, inclination, and surface area, analyses performed using STK predict that the satellite will deorbit within 7.8 years. This timeline agrees with the current 25-year deorbit requirement outlined by NASA standards. \footnote{25 year deorbit requirement from NASA‐STD‐8719.14, http://www.hq.nasa.gov/office/codeq/doctree/871914.pdf}
+
 
 		\subsection{$N^2$ Diagram}
 		
-		In the early stages of the design process, the team created an $N^2$ diagram to exchange input and output values. Additionally, this diagram became an essential tool in determining the levels of interaction between the satellite’s different subsystems. 
+		The N$^2$ diagram was an essential tool in the early stages of the design process. It allowed the design team to determine the levels of interaction between different subsystems and exchange input and output variables and values. 
 		
 		\begin{figure}[!ht]
 				\centering
@@ -139,13 +173,11 @@ Analyses performed using STK predict that the satellite will deorbit within 7.8 
 				\label{fig:Mission_N2}
 			\end{figure}
 			
-		As highlighted the figure above, the payload requirements drive the design of all the other subsystems. While it does not receive design inputs from other subsystems, its design outputs cascade down effectively driving the design of the rest of the satellite. 
-
-Feedback loops were present between several subsystems, which forced the team to perform trade studies to exchange performance for mass or power cost. One of these trades involved the design of the Power and ADCS subsystems. For example, complex solar panel designs that could absorb more solar energy, such as deployable panels, would require a more robust ADCS subsystem. However, such ADCS design would need to draw more power to maintain the panels facing towards the sun effectively cancelling the power gained. After careful consideration of costs and benefits, the team decided to take this option off the table
+		As highlighted Figure~\ref{fig:Mission_N2}, the payload requirements drive the design of all the other subsystems. While the payload does not receive design inputs from other subsystems, its design outputs cascade down effectively driving the design of the rest of the satellite. A more detailed view of the DeMi N$^2$ diagram can be found in Appendix 1.
 	
 	\subsection{System Level Budgets}
 		\subsubsection{Mass}
-		The mass budget is presented in Figure~\ref{fig:Mission_mass2} below.
+		In agreement with CubeSat standards, the total mass of the satellite must not exceed 4 kilograms. Table 1 shows the total mss of the satellite broken down by subsystem. As of PDR, the design is projected to weight 3.26 kg and 3.90 kg with added margin. Following industry standards, the subsystem margin percentages used in this analysis correspond to the Mass Growth Allowance values for Preliminary Design published by the American Institute of Aeronautics and Astronautics. Figure 3 illustrates that the mass of the satellite is driven primarily by the payload, which takes up approximately one third of the total. The power and ADCS subsystems closely follow with 26\% and 22\% respectively. 
 		
 			\begin{figure}[!ht]
 				\centering
@@ -157,7 +189,13 @@ Feedback loops were present between several subsystems, which forced the team to
 			\end{figure}
 			
 		\subsubsection{Power}
-		The power budget is presented in Figure~\ref{fig:Mission_power2} below.
+		The power used by the satellite during each mode is outlined in Table 2. The first two items, “Safe/Uplink” and “Detumbling” do not occur on a regular daily basis during the operational lifetime of the satellite, which is why their duration is not expressed in minutes per day and their valies are not included in the average power calculation. 
+During its operational period, the satellite will cycle between the data capture downlink and stand by modes. As shown in Figure 4, the most power is drawn by the antenna in the Communications subsystem during downlink. 
+
+The satellite is expected to require an average of 3.54 Watts with up to 4.18 Watts with an 18\% margin applied. This allowance percentage of 18\% was derived from input from course faculty and the fact that most components will be commercial off the shelf. 
+
+Curerntly, the solar panels and battery are projected to supply 3.85 Watts, which would not satisfy the power with margin requirement at this stage. The power supplied is only 8.5\% higher than the expected power needed without margin.
+
 			
 			\begin{figure}[!ht]
 				\centering
@@ -981,6 +1019,7 @@ A summary of the control methods performances is presented in table~\ref{tab:ADC
 
 			
 			\subsubsection{Analysis}
+			\label{adcs_analysis}
 				\paragraph{Environmental Torque Calculation}
 				The main environmental disturbances on orbit are gravity gradient, magnetic field, aerodynamics drag, and solar radiation pressure. The governing equations of these external sources are presented in details in SMAD ADCS section \cite{adcs_smad2}. Using the satellite properties, these values can be computed and presented in Table~\ref{tab:ADCS_envtorque}. 
 				
