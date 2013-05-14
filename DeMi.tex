@@ -1429,24 +1429,102 @@ $^1$Estimated from ThorLabs miniseries post MS075.
 
 \clearpage
 
-\newpage
+
+
 \section{Link Budgets} \label{app:link_budgets}
-
-\begin{figure}[ht]
-\centering 
-\caption{Uplink Budget}
-\includegraphics[width=6.5in]{images/comm-uplink-budget}
-\end{figure}
+\textbf{Uplink Budget}
+\small
+\begin{center}
+\begin{longtable}{| p{3.9cm} | p{1.6cm} | p{1.4cm} | p{1.4cm} | p{1.4cm} | p{5cm} |}
+\hline
+    \textbf{Item}  & \textbf{Symbol} & \textbf{Units}  & \textbf{Worst Case} & \textbf{Best Case} & \textbf{Source}  \\
+    \hline \hline
+    frequency & f     & GHz   & 0.45  & 0.45  & Hardware \\ \hline
+    wavelength & lambda & m     & 0.667 & 0.667 & Lambda=c/f \\ \hline
+    propagation path length & r     & km    & 2082  & 500   & Mission/ ITU-R P.676-9 eq 17, 18, 19 \\\hline
+    data rate & R     & bps   & 19200 & 19200 & Hardware \\\hline
+    data rate & R     & dB    & 42.833 & 42.833 &  \\\hline
+    transmit antenna diameter & D\_t  & m     & 18.29 & 18.29 & Wallops \\\hline
+    transmit antenna beam width & theta\_t & deg   & 2.9   & 2.9   & Wallops \\\hline
+    transmitter power & P     & W     & 1     & 2     & from DICE mission \\\hline
+    transmitter power & P     & dBW   & 0     & 3.01  &  \\\hline
+    transmit antenna gain & G\_t  & dBi   & 35    & 35    & Wallops \\\hline
+    transmit antenna pointing offset & e\_t  & deg   & 1     & 0     &  \\\hline
+    transmit antenna pointing loss & L\_pt & dB    & 1.5   & 0     & Antenna Gain Pattern \\\hline
+    transmitter line loss & L\_l  & dBW   & 1     & 0.5   & Line Loss for Coax Cable$^2$ \\\hline
+    equivalent isotropic radiated power & EIRP  & dbW   & 32.5  & 37.51 & SMAD 16-20 \\\hline
+    receive antenna efficiency & eta   &       & 0.5   & 0.5   & approximate efficiency \\\hline
+    receive antenna beam width & theta\_r & deg   & 65    & 65    & Antenna Gain pattern \\\hline
+    receive antenna gain & G\_r  & dBi   & -4    & 3     &  \\\hline
+    receive antenna pointing offset & e\_r  & deg   & 5     & 1     & SMAD \\\hline
+    receive antenna pointing loss & L\_pr & dB    & 3     & 0     &  \\\hline
+    space loss & L\_s  & dB    & 151.884 & 139.494 & SMAD 16-22 \\\hline
+    Dry-air and water vapor loss & L\_atm & dB    & 0.02  & 0.02  & ITU-R P.676-9 Figure 6 \\\hline
+    total loss & L\_comb & dB    & 157.404 & 140.014 &  \\\hline
+    Sky Temperature & T\_sky & K     & 60    & 30    &  \\\hline
+    Ground Temperature & T\_ground & K     & 290   & 290   &  \\\hline
+    Antenna Temperature & T\_antenna & K     & 117.5 & 95    & Pozar Eq \\\hline
+    Receiver Temperature & T\_receiver & K     & 3270  & 3270  & Hardware \\\hline
+    System Noise Temperature & T\_s  & K     & 3387.5 & 3365  & Pozar Eq \\\hline
+    System Noise Temperature & T\_s  & dB    & 35.299 & 35.27 &  \\\hline
+    receiver G/T & --    & dB    & -39.299 & -32.27 & SMAD 16-27 \\\hline
+    Boltzmann constant & k\_b  & dB    & -228.599 & -228.599 & -- \\\hline
+    C/N0  & --    & dB    & 64.397 & 93.826 & SMAD 16-30 \\\hline
+    Eb/N0 & --    & dB    & 21.563 & 50.993 & SMAD 16-31 \\\hline
+    Bit Error Rate & BER   & \%    & 10\^-5 & 10\^-5 &  \\\hline
+    Required Eb/N0 & --    & dB    & 9.5   & 9.5   & SMAD figure 16-16 \\\hline
+    margin & --    & dB    & 12.064 & 41.493 & SMAD16-33 \\
+\hline
+\end{longtable}
+$^2$\url{http://www.arrg.us/pages/Loss-Calc.htm}
 
 \newpage
-\noindent
-\newline
 
-\begin{figure}[ht]
-\centering 
-\caption{Downlink Budget}
-\includegraphics[width=6.5in]{images/comm-downlink-budget}
-\end{figure}
+\textbf{Downlink Budget}
+\small
+\begin{center}
+\begin{longtable}{| p{3.9cm} | p{1.6cm} | p{1.4cm} | p{1.4cm} | p{1.4cm} | p{5cm} |}
+\hline
+    \textbf{Item}  & \textbf{Symbol} & \textbf{Units}  & \textbf{Worst Case} & \textbf{Best Case} & \textbf{Source}  \\
+    \hline \hline
+    frequency & f     & GHz   & 0.465 & 0.465 & Hardware \\\hline
+    wavelength & lambda & m     & 0.645 & 0.645 & Lambda=c/f \\\hline
+    propagation path length & r     & km    & 2082  & 500   & Mission/ITU-R P.676-9 eq 17, 18, 19 \\\hline
+    data rate & R     & bps   & 1500000 & 1500000 & Hardware \\\hline
+    data rate & R     & dB    & 61.761 & 61.761 &  \\\hline
+    transmit antenna length & l     & m     & 0.164 & 0.164 & quarter-wave monopole \\\hline
+    transmit antenna beam width & theta\_t & deg   & 65    & 65    & Antenna Gain Pattern \\\hline
+    transmitter power & P     & W     & 1     & 2     & from DICE mission \\\hline
+    transmitter power & P     & dBW   & 0     & 3.01  &  \\\hline
+    transmit antenna gain & G\_t  & dBi   & -4    & 3     &  \\\hline
+    transmit antenna pointing offset & e\_t  & deg   & 5     & 1     & SMAD \\\hline
+    transmit antenna pointing loss & L\_pt & dB    & 3     & 0     &  \\\hline
+    transmitter line loss & L\_l  & dBW   & -1    & -0.8  & Line Loss for Coax Cable$^2$ \\\hline
+    equivalent isotropic radiated power & EIRP  & dbW   & -6    & 6.81  & SMAD 16-20 \\\hline
+    receive antenna efficiency & eta   & --    & 0.5   & 0.5   & approximate efficiency \\\hline
+    receive antenna beam width & theta\_r & deg   & 2.9   & 2.9   & Wallops \\\hline
+    receive antenna gain & G\_r  & dBi   & 35    & 35    & Wallops \\\hline
+    receive antenna pointing offset & e\_r  & deg   & 1     & 0     &  \\\hline
+    receive antenna pointing loss & L\_pr & dB    & 1.5   & 0     & Antenna Gain pattern \\\hline
+    space loss & L\_s  & dB    & 152.169 & 139.778 & SMAD 16-22 \\\hline
+    Dry-air and water vapor loss & L\_atm & dB    & 0.02  & 0.02  & ITU-R P.676-9 Figure 6 \\hline\
+    total loss & L\_comb & dB    & 155.689 & 138.998 &  \\\hline
+    Sky Temperature & T\_sky & K     & 290   & 290   &  \\\hline
+    Ground Temperature & T\_ground & K     & 60    & 30    &  \\\hline
+    Antenna Temperature & T\_antenna & K     & 232.5 & 225   & Pozar Eq \\\hline
+    Receiver Temperature & T\_receiver & K     & 66    & 66    & Wallops \\\hline
+    System Noise Temperature & T\_s  & K     & 298.5 & 291   & Pozar Eq \\\hline
+    System Noise Temperature & T\_s  & dB    & 24.749 & 24.639 &  \\\hline
+    receiver G/T & --    & dB    & 10.251 & 10.361 & SMAD 16-27 \\\hline
+    Boltzmann constant & k\_b  & dB    & -228.599 & -228.599 &  \\\hline
+    C/N0  & --    & dB    & 77.161 & 106.772 & SMAD 16-30 \\\hline
+    Eb/N0 & --    & dB    & 15.4  & 45.011 & SMAD 16-31 \\\hline
+    Bit Error Rate & BER   & \%    & 10\^-5 & 10\^-5 &  \\\hline
+    Required Eb/N0 & --    & dB    & 9.5   & 9.5   & SMAD figure 16-16 \\\hline
+    margin & --    & dB    & 5.9   & 35.511 & SMAD 16-33 \\
+\hline
+\end{longtable}
+$^2$\url{http://www.arrg.us/pages/Loss-Calc.htm}
 
 \noindent
 \newline
