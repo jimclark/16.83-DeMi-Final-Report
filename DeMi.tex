@@ -51,6 +51,7 @@ Alexandra E. Wassenberg
 \section*{List of Acronyms}
 \begin{acronym}
 
+\acro{COTS}{Commercial off the shelf}
 \acro{DeMi}{Deformable Mirror Demonstration}
 \acro{DM}{Deformable Mirror}
 \acro{FOV}{Field of View}
@@ -169,164 +170,247 @@ Feedback loops were present between several subsystems, which forced the team to
 % PAYLOAD
 
 		\subsection{Payload}
+The payload for DeMi is an optical system that allows for the testing
+and technology demonstration of a deformable mirror system.  It must include the following  elements: the deformable mirrors the
+mission aims to test, a light source to create a wavefront, and a detector to measure the wavefront.  These components are attached
+to an optical breadboard and are in an enclosure to block out external
+light.  The challenge in this project is to create an optical system capable of testing the accuracy of current deformable mirror technology and evaluate its future applications while meeting the mass, volume and other constraints imposed by the 3U CubeSat platform.
+			
+\subsubsection{Requirements - AC}\label{sec:payload_requirements}
 
-			\subsubsection{Requirements - AC}
-There are two types of payload requirements, the first set applies to the deformable mirror system.  The second set pertains to the measurement and reconstruction of the wavefront.  (All requirements are displayed in Appendix~\ref{app:requirements}.) 
+\begin{table}[ht]
+\caption{Payload Requirements}
+\begin{tabular}{l p{5in}} 
+PLD-1 & The payload shall command a MEMS deformable mirror to run a pre-defined test sequence for at least 5 minutes each orbit. \\
+& Parent Requirement: MLR-3, MLR-4\\
+PLD-1.1 & The payload shall have the ability to control any combination of actuators within 0.001 s of each other, at a minimum rate of 100 Hz, with a minimum stroke of 1.5  $\mu$m, and with a precision of at least 1 nm.\\
+& Parent Requirement: PLD-1\\
+PLD-2 & The payload shall have the ability to measure and reconstruct the optical wavefront at one wavelength for the duration of a 5 minute test sequence each orbit at a frequency of at least 10 Hz.\\
+& Parent Requirement: MLR-3, MLR-4\\
+PLD-2.1 & The payload shall have the ability to measure the optical wavefront at a minimum rate of 10 Hz for at least one minute each orbit.\\
+& Parent Requirement: PLD-2\\
+PLD-2.2 & The payload shall have the ability to measure the optical wavefront at a minimum rate of 100 Hz for at least 30 seconds each orbit.\\
+& Parent Requirement: PLD-2\\
+PLD-2.3 & The payload shall have the ability to reconstruct the optical wavefront with a minimum accuracy of 100 nm rms.\\
+& Parent Requirement: PLD-2\\
+\end{tabular}\label{table:payload_requirements}
+\end{table}
 
-The deformable mirrors must operate for at least 5 minutes per orbit (PLD-1).  This requirement comes from the mission level requirements (MLR-3, MLR-4) to characterize the deformable mirrors.  The individual actuators that make up the deformable mirror must have a response time of less than or equal to $0.001\ s$, with a control rate of at least $100\ Hz$.  The stroke must be at least $1.5\ \mu m$, with control precision of less than or equal to $1\ nm$.
+There are two types of requirements on the payload.  The first set (PLD-1) applies to the features of the deformable mirror system.  The second set (PLD-2) pertains to the measurement and reconstruction of the wavefront.  The complete requirements document can be found in Appendix~\ref{app:requirements}. 
 
-The requirements on measuring and reconstructing the wavefront are requirements on the detector.  Nominally, the detector must operate (take images) for at least 5 minutes per orbit, and be able to function at at least $10\ Hz$ (PLD-2). The requirement is further separated into a “Diagnostic Mode”, used for calibration and for full frame images, and a “Burst Mode”, used for data capture.  “Diagnostic Mode” is required to take images for at least a minute per orbit at $10\ Hz$ (PLD-2.1).  “Burst Mode” is required to take images for at least 30 seconds per orbit at least $100\ Hz$ (PLD-2.2).  For both modes, the reconstruction accuracy must be less than or equal to $100\ nm\ rms$ (PLD-2.3).
-
-			\subsubsection{Trade Studies and Decisions Made - AC and KB}
+The requirements on measuring and reconstructing the wavefront (PLD-2) apply to the detector.  Nominally, the detector must operate (capture images) for at least 5 minutes per orbit, and be able to function at a minimum of 10 Hz (PLD-2). The requirement is further separated into a ``Diagnostic Mode'' used for calibration and full frame images, and a ``Burst Mode'', used for data capture.  In ``Diagnostic Mode'', the payload is required to take images for at least a minute per orbit at 10 Hz (PLD-2.1).  In ``Burst Mode'', the payload is required to take images for at least 30 seconds per orbit a minimum of 100 Hz (PLD-2.2).  For both modes, the reconstruction accuracy must be a maximum of 100 nm rms (PLD-2.3).
+			
+			\subsubsection{Decisions Made and Trade Studies}
 
 \paragraph{Payload Architecture - AC}
 
-While in future applications the deformable mirror will be used to aid in observing stars or other objects, the mission goal is to characterize the deformable mirrors in an easy platform, making the internal laser source desirable for this technology demonstration. There are many different techniques to measuring and reconstructing a wavefront \cite{FGadaptiveoptics}. Only sensored approaches are considered for this platform due to the compact form factor and desire for simple components. There are many wavefront sensing approaches that could be implemented, as well as improved or modified versions of those presented here, which could be considered in future analyses, but the two approaches discussed in detail are a Michelson Interferometer and a Shack-Hartmann Wavefront Sensor.
+While in future applications the deformable mirror system will be used to aid
+in observing stars or other objects, the mission goal of DeMi is to characterize the deformable 
+mirror system, and to accomplish this with commercial off the shelf (COTS) components
+whenever possible, providing a quick and simple platform for space (MLR-3, MLR-4).
+As mentioned previously, there are a few key components that are integral to the design: the 
+deformable mirror system to test, a light source to create a wavefront, and a detector to measure the wavefront.
+To keep the design as simple as possible, the use of an internal light source, such as a laser, is  desirable for the technology demonstration. 
 
-\subparagraph{Michelson Interferometer with Linear Stager}
-The interferometer design shown in Figure~\ref{fig:interferometer} is slightly modified from a typical interferometer due to volume constraints on the payload and the requirement for high contrast imaging. It has an internal source (laser diode), whose path is denoted by a dotted red line.
-The laser beam is first resized, then is reflected 90 degrees by a flat mirror. The light is then divided by a beam splitter oriented 45 degrees to the beam. The transmitted beam travels to the deformable mirror where it is reflected back towards the beam splitter. Half of the beam is deflected by 90 degrees at the beam splitter and strikes the detector. The reflected beam travels to the flat mirror on the linear stager where it is reflected and half of it then is transmitted through the beam splitter and reaches the detector. The two beams that reach the detector interfere to produce fringes that are analytically well understood as a function of beam coherence/divergence and mirror tip/tilt \cite{demtroeder} and that can be simulated for a variety of different deformable mirror shapes.
+Many techniques exist for measuring and reconstructing a wavefront \cite{FGadaptiveoptics}.  These can be divided into sensored and sensorless approaches.
+Sensorless approaches, such as the Gerchberg-Saxton-Based Estimation Scheme \cite{gerchberg}, are likely to be used for a direct imaging application of a large space telescope mission for their ability to eliminate non-common path optical errors.  However, sensorless approaches require additional computational resources, time, and occasionally additional detectors or detector translation \cite{cahoy2013}.  
+Therefore, only sensored
+approaches are considered for this platform due to the compact form
+factor, the desire to use simple COTS components, and processing capabilities. There are numerous wavefront
+sensing approaches that could be implemented, as well as
+modified versions of those presented here, but the two designs discussed are chosen for their ability to be simply implemented in a compact platform.
+While other designs (see Section~\ref{sec:payload_interferometer}) may be able to achieve higher precision, the Shack-Hartmann wavefront sensing system fits in the allotted volume with minor modifications to components, and allows for sufficient mirror characterization, meeting our mission goal and requirements (Table~\ref{table:payload_requirements}). Therefore, the Shack-Hartmann wavefront sensing design in Figure~\ref{fig:SHWFS} has been chosen to image the wavefront.
 
-\begin{figure}[ht]
-\centering
-  \includegraphics[width=5in]{images/payload_interferometer.jpg}
-\caption{This is the Michelson Interferometer with the flat mirror on a linear stager.  This is a payload design possibility.}
-\label{fig:interferometer}
-\end{figure}
+\subparagraph{Design Decision: Shack-Hartmann Wavefront Sensor - AC}
 
-For this particular design, as mentioned previously, a flat mirror is on a piezo linear stager which moves in increments of fractions of the incoming wavelength. This allows for higher precision fringe patterns (reference?), allowing for better mirror characterization.
-
-What is not shown in Figure~\ref{fig:interferometer} is the controller for the linear stager. It does not currently fit within the constraints of the satellite in terms of mass, volume, and power needs. It would require significant modifications, if it were to be implemented. Also, the additional moving part increases the risk and complexity of the mission.
-
-\subparagraph{Shack-Hartmann Wavefront Sensing System}
-For the wavefront sensing design in Figure~\ref{fig:SHWFS}, a Shack-Hartmann lenslet array on the detector is used, allowing for accurate wavefront measurement and reconstruction sensitivity. The design has an internal source (laser diode), whose path is denoted by a dotted red line, and an aperture for imaging an external source, whose path is denoted by a dotted green line.
+For the wavefront sensing design in Figure~\ref{fig:SHWFS}, a Shack-Hartmann lenslet array is used, allowing for accurate wavefront measurement and reconstruction sensitivity. The design has an internal source (laser diode), whose path is denoted by a dotted red line, and an aperture for imaging an external source, whose path is denoted by a dotted green line.
 
 \begin{figure}[ht]
 \centering
   \includegraphics[width=5in]{images/payload_SHWFS.jpg}
-\caption{This is the Wavefront Sensing design with a Shack-Hartmann lenslet array.  This is a payload design possibility.}
+\caption{Design decision: Wavefront Sensing design with a Shack-Hartmann lenslet array}
 \label{fig:SHWFS}
 \end{figure}
 
-For the internal source, the laser diode module emits a collimated elliptical beam. This beam enters a linear polarizer (where its intensity is halved). The beam then encounters a flat mirror at 45 degrees, reflecting the beam 90 degrees, and proceeds to a primary beam splitter. Here, the beam is reflected 90 degrees to secondary polarizing beamsplitter, and reflected another 90 degrees. The beam then goes through a quarter waveplate (where the beam is now elliptically polarized) before striking the deformable mirrors. The deformable mirrors reflect the beam back through the quarter waveplate, rendering the beam now linearly polarized with an orientation that allows it to pass through the secondary beam splitter. The beam then proceeds through the microlenslet array, creating a spot diagram on the detector corresponding to shape of the wavefront.
+For the internal source, the laser diode module emits a collimated elliptical beam. This beam enters a linear polarizer (where its intensity is halved). The beam then encounters a flat mirror at 45 degrees, reflecting the beam 90 degrees, and proceeds to a primary beam splitter. Here, the beam is reflected 90 degrees to a secondary polarizing beamsplitter, and reflected another 90 degrees. The beam then goes through a quarter waveplate (where the beam is now elliptically polarized) before striking the deformable mirrors. The deformable mirrors reflect the beam back through the quarter waveplate, rendering the beam now linearly polarized with an orientation that allows it to pass through the secondary beam splitter. The beam then proceeds through the lenslet array, creating a spot diagram on the detector corresponding to shape of the wavefront (see Section~\ref{sec:payload_sh}).
 
-For the external source, the wavefront beam enters a plano-convex lens and then passes through a collimating lens. The beam then enters a linear polarizer (where the intensity is halved). The beam then passes through the primary beam splitter, and then to the secondary polarizing beamsplitter, which reflects the beam 90 degrees towards the quarter waveplate and the deformable mirrors, as mentioned previously, and follows an identical path to the detector.
+For the external source, the wavefront beam enters a plano-convex lens and passes through a collimating lens. The beam then enters a linear polarizer (where the intensity is halved). The beam passes through the primary beam splitter, and then to the secondary polarizing beamsplitter, which reflects the beam 90 degrees towards the quarter waveplate and the deformable mirrors, as mentioned previously, and follows an identical path as the internal light source to the detector.
 
-\subparagraph{Design Decision}
-The mission goal is to characterize the deformable mirror system, and to accomplish this with COTS as much as possible to allow for a quick and easy platform for space (MLR-3, MLR-4). While the interferometer with the linear stager is able to achieve higher precision, the Shack-Hartmann wavefront sensing system will fit with minor modifications to components, and allows for sufficient mirror characterization, meeting our mission goal and requirements. Therefore, the Shack-Hartmann wavefront sensing design in Figure~\ref{fig:SHWFS} has been chosen to image the wavefront.
+The chosen design allows the detector to image both an internal and external source. While the mission goal can be accomplished with just an internal source, the ultimate goal of using this technology on a larger space telescope for imaging of bright stars motivates the use of an external source. Therefore, the option for an external source is included in the design.
 
-The chosen design allows the detector to image both an internal and external source. While the mission goal can be accomplished with just an internal source, the ultimate goal of using this technology on a larger space telescope for imaging of bright stars motivates the use of an external source. Therefore, the option for an external source will be included in the design.
+Due to the added complexity required of the ADCS system on a CubeSat platform, the external source imaging will not require a precise star acquisition and navigation system. In contrast, with pointing knowledge from ADCS, the shutter on the aperture will be commanded open when a bright star is in the field of view (FOV). The maximum slew rate for imaging the external source is discussed in Paragraph~\ref{sec:pointing_requirement}.  Based on preliminary models looking at five bright stars (Alpha Centauri, Arcturis, Canopus, Sirius, and Vega), the satellite would expect to see the same bright star every orbit for an average of three to five minutes\footnote{Based on an STK simulation performed by Annie Marinan.}.  The pointing requirement on the maximum ADCS slew rate to keep the star on the same pixel on the detector is discussed in Section~\ref{sec:pointing_requirement}.
 
-Due to the added complexity required of the ADCS system on a CubeSat platform, the external source imaging will not require knowledge of particular stars and navigating there. In contrast, with pointing knowledge from ADCS, the shutter on the aperture will be commanded open when a bright star is in the field of view (FOV). Additional work is need to evaluate revisit times to particular stars. Pointing requirements on the maximum ADCS slew rate to keep the star on the same pixels on the detector are discussed in Section~\ref{sec:pointing_requirement}.
+It is necessary that the aperture for imaging an external source be small, given the volume constraints of the CubeSat platform after accommodating all of the key elements of the system (deformable mirror, mirror driver electronics, detector, and necessary imaging optics). Due to the physical size of these key elements, it is not practical to design the external source imaging as a typical reflecting telescope. While it may be possible to accommodate an aperture lens with relatively large diameter ($>60$ mm), the corresponding longer focal length would not fit in the volume, and the space for resizing the beam is limited. While the smaller aperture will limit the angular resolution and sensitivity and increase the size of the point spread function (PSF), tight angular resolution is not a requirement for this technology demonstration. Therefore, this design has an aperture lens with diameter 12.7 mm, with a minimum focal length on the order of its diameter. Using the Rayleigh criterion, the angular resolution (width of the center of the PSF) at 500 nm is 9.907".
 
-The aperture for imaging an external source will necessarily be small, given the volume constraints of the CubeSat platform after accommodating all of the key elements of the system (deformable mirror, mirror driver electronics, detector, and necessary imaging optics). Due to these key elements, it is not practical to design the external source imaging as a reflecting telescope. While it may be possible to accommodate a larger aperture lens ($>60\ mm$), the corresponding longer focal length would not fit in the space, and the space for resizing the beam is limited. While the smaller aperture will limit the angular resolution and sensitivity and increase the size of the point spread function (PSF), tight angular resolution is not a requirement for this technology demonstration. Therefore, an aperture lens with diameter $12.7\ mm$ has been chosen, with a minimum focal length on the order of its diameter. Using the Rayleigh criterion, the angular resolution (width of the center of the PSF) at $500\ nm$ would be $2.436"$ (NEED TO CHECK number, because I’m getting double this.).
+The current design allows for open and closed loop control.  Images and centroid solutions can be sent to the ground, allowing for evaluation of the mirror performance over time.  In addition, closed loop control (active correction of the wavefront on orbit) can also be implemented on board using the centroids and calculated slopes to command the mirrors.  Calculating mirror response from slopes requires little additional processing \cite{centroids}. 
 
-The current design is an open loop system, where images and centroid solutions (reference to how centroids are found?) are sent to the ground, and analyzed there. Then, commands can be sent to the payload about how to correct the wavefront. However, the choice of a Shack-Hartmann design makes it easier to incorporate closed loop control for future follow up missions. The option of active correction of the wavefront on-orbit with the current design can be accomplished by the addition of a few components and requiring more on-orbit processing.
+All optical elements of the system are preliminarily chosen.
+(See Appendix~\ref{app:payload_components} for the full list of
+elements with part numbers and mass totals.)  Glass elements are
+chosen to be UV fused silica over other glasses whenever possible for
+their better performance in space \cite{radiation_optics} due to a
+high coefficient of thermal expansion and better UV transmission.  All
+elements also have anti-reflective coatings that are efficient in the
+visible spectrum (400 - 700 nm).  All components in Figure~\ref{fig:SHWFS} are shown with their mounts.  However, the mass and volume of the mounts are only estimates of the custom mounts that will be built for all optics.  Custom mounts will be built to adapt the optics for space applications.  All elements must be mounted in stress-free mounts (e.g., no glass touching metal) and mounted to an optical breadboard with multi-footed lens tubes that are made of aluminum, or of a metal that has a similar coefficients of thermal expansion as the lens it holds.  Future modeling and optimization of the optical design will yield more exact component choices.
 
-All optical elements of the system have been preliminarily chosen.  See Appendix~\ref{app:payload_components} for the full list of elements with part numbers and mass totals.  Glass elements were chosen to be UV fused silica over other glasses whenever possible for their better performance in space \cite{radiation_optics} due to a high coefficient of thermal expansion and better UV transmission.  All elements also have anti-reflective coatings that are efficient in the visible spectrum (400 - 700 $nm$).  Mounts have been chosen for all components, however, these are only estimates of the custom mounts that will be built for all optics.  The reason for this is due to the space application.  All elements must be mounted in stress-free mounts (no glass touching metal, etc.) and mounted to an optical breadboard with multi-footed lens tubes that are made of aluminum, or of a metal that has the same coefficient of thermal expansion as the lenses they hold.  Future modeling and optimization of the optical design will yield more exact component choices.
+\subparagraph{Other Designs Considered: Michelson Interferometer with Nanopositioner - AC}\label{sec:payload_interferometer}
+The interferometer design shown in Figure~\ref{fig:interferometer} is slightly modified from a typical interferometer due to volume constraints on the payload and the requirement for high contrast imaging. It has an internal source (laser diode), whose path is denoted by a dotted red line.
+The laser beam is first resized, passes through a neutral density filter, then is reflected 90 degrees by a
+flat mirror. The light is then divided by a beam splitter oriented 45
+degrees to the beam. The transmitted beam travels to the deformable
+mirror where it is reflected back towards the beam splitter. Half of
+the beam is deflected by 90 degrees at the beam splitter and strikes
+the detector. The reflected beam travels to the flat mirror on the
+nanopositioner where it is reflected and half of it then is transmitted
+through the beam splitter and reaches the detector. The two beams that
+reach the detector interfere to produce fringes \cite{traeger} that are analytically well understood as a function of beam coherence/divergence and mirror tip/tilt \cite{demtroeder} and that can be simulated for a variety of different deformable mirror shapes.
 
-\subparagraph{Payload Operations}
-For the initial demonstration and on-orbit testing, we will use an internal light source. This eliminates any payload specific requirements on the satellite's attitude and inclination. For the latter half of the mission, we will use an external light source, attempting to image the optical wavefront from a star.
+\begin{figure}[ht]
+\centering
+  \includegraphics[width=5in]{images/payload_interferometer.jpg}
+\caption{Other considered design: Michelson Interferometer with the flat mirror on a nanopositioner.}
+\label{fig:interferometer}
+\end{figure}
 
-After detumbling, and thirty days of commissioning, as describe in Section~???, the payload will perform a status check of all instruments. This includes the deformable mirror system, the detector, and the laser. Each element will be turned on and checked for any error or status codes. Then, the payload with take some TBD sequence of test images, with TBD sequence of mirror positions (not very many, not very frequently). The full-frame images will be sent down with centroid solutions and any available status information directly from the deformable mirrors and the detector.
+For this particular design, as mentioned previously, a flat mirror is on a nanopositioner, or a piezo linear stage, which moves in increments of fractions of the incoming wavelength. This allows for higher precision fringe patterns, allowing for better mirror characterization.
 
-The next phase is to calibrate the system. This involves turning on the laser and recording several images in this configuration with the detector, without deforming the mirrors (acts as a flat mirror). From these images, one can find the centroids and average them to obtain new 'standard centroids' which will be used for wavefront comparison calculations throughout the remainder of the mission. These images, averages, and new centroid solutions will be sent to the ground.
+What is not shown in Figure~\ref{fig:interferometer} is the controller for the nanopositioner \cite{newport_nanopositioner}. It does not currently fit within the constraints of the satellite in terms of mass, volume, and power needs, and would require significant modifications, if it were to be implemented. Also, the additional moving part (nanopositioner) increases the risk and complexity of the mission, making the Shack-Hartmann wavefront sensor the design choice.
 
-The next, and primary, stage is data capture using the internal source. The laser is turned on, then the mirror is deformed by a predetermined test sequence of commands, and the wavefront is imaged on the detector. The test sequence will include 'poking' one actuator at a time, and 'poking' combinations of actuators. Then, the images are read from the detector, centroids are found, and one full image and the collection of centroid solutions are sent down to the ground.
+\subparagraph{Payload Operations - AC}
+For the initial demonstration and on-orbit testing, an internal light
+source will be used. This eliminates any payload specific requirements
+on the satellite's attitude and inclination. For the latter half of
+the mission, an external light source will be used, in order to attempt to image the optical wavefront from a star.  All downlinked files will be timestamped.
 
-The second part of data capture will be with an external source. With knowledge from ADCS, the shutter will be commanded open, and the laser will be commanded off, allowing some TBD external source to be imaged. The images are read from the detector, the centroids are found, and one full frame image along with the collection of centroid solutions are sent to the ground. All downlinked files are timestamped.
+\begin{enumerate}
+\item{\textbf{Status Checks}}
+After detumbling, and two weeks of commissioning, as describe in
+Section~\ref{sec:systems_conops}, the payload will perform a status check of all instruments. This includes the deformable mirror system, the detector, and the laser. Each element will be turned on and checked for error or status codes. Any available status information directly from the deformable mirrors, detector, and laser will be sent to the ground.
 
-\paragraph{Deformable Mirror System - KB}
+\item{\textbf{Calibration}}
+The next phase is to calibrate the system using the ``Diagnostic Mode" requirements outlined in Section~\ref{sec:payload_requirements}.  This involves turning on the laser and recording several images in this configuration with the detector, without deforming the mirrors (acts as a flat mirror). From these images, on-board processing algorithms can find the centroids \cite{centroids} and average them to obtain new `standard centroids', which will be used for wavefront comparison calculations throughout the remainder of the mission. These images, averages, and new centroid solutions will be sent to the ground and stored on-board.
+
+\item{\textbf{Data Capture: Internal Source}}
+The next, and most important, stage is data capture using the internal source. The laser is turned on, then the mirror is deformed by a predetermined test sequence of commands, and the wavefront is imaged on the detector. The test sequence will include `poking' one actuator at a time, and `poking' combinations of actuators in commonly known shapes, such as Zernike polynomials and Fourier modes.  Then, the images are read from the detector, centroids are found, and one full image and the collection of centroid solutions are sent down to the ground and stored on-board.  Local wavefront slopes will be found from the centroid solutions using simple on-board algorithms, and the mirrors will be commanded for active wavefront correction on-board.
+
+\item{\textbf{Data Capture: External Source}}
+The second part of data capture will be with an external source. This external source will be a bright star, such as Vega or Sirius, as mentioned previously.  With
+knowledge from ADCS, the shutter will be commanded open, and the laser
+will be commanded off, allowing an external source to be imaged. The
+images will be read from the detector, the centroids found, and one
+full frame image along with the collection of centroid solutions will be
+sent to the ground and stored on-board.  Identical to data capture with an internal source, local wavefront slopes will be found from the centroid solutions using simple on-board algorithms, and the mirrors will be commanded for active wavefront correction on-board. 
+
+\end{enumerate}
+
+\paragraph{Deformable Mirror System - KB} \label{par:payload_dms}
 
 There are only two vendors which sell commercial off-the-self options for MEMS deformable mirrors that will fit inside a CubeSat: Boston Micromachines, and Iris Adaptive Optics. The Boston Micromachines Mini DM comes in three different sizes of stroke and aperture. Stroke
 referes to the maximum amount the mirror can 'push' a segment outward, and the aperture is simply the aperture of the DM. Since there is little room for resizing optics in our system, the aperture of the DM
 acts as a stop. As such, larger apertures are strictly better for the accuracy of the wavefront we can reconstruct. While the Iris AO PT111 does have a larger aperture \emph{and} a larger stroke, which are both
 better for accuracy, its driver board is larger and much more difficult to modify than the BMC Mini's. As such, we selected the largest BMC mini DM, with a 2.25 mm aperture and a stroke of 5.5 $\mu \text{m}$.
 
-\paragraph{Detector - KB}
+\paragraph{Detector - KB} \label{par:payload_detector}
 
-For a detector, we chose the UI52-41LE-M CMOS detector from IDS. Critically, it has a 5.2$\mu m$ pixel size, which is smaller than the pixel sizes we looked at for the alternatives. Since accuracy is a function of pixel size, maximizing pixels per subaperture is very important. Alternatives we considered included the DCC1545M and the e2v CCD47-20 frame transfer CCD. 
+For a detector, we chose the UI52-41LE-M CMOS detector from
+IDS. Critically, it has a 5.2$\mu m$ pixel size, which is smaller than
+the pixel sizes we looked at for the alternatives. Since accuracy is a
+function of pixel size, maximizing pixels per subaperture is very
+important. Alternatives we considered included the DCC1545M and the
+e2v CCD47-20 frame transfer CCD (Table~\ref{table:payload_detectors}). 
 %clearly planning to write more here -KB
-\begin{table}
-    \begin{tabular}{|l|lllll|}
+\begin{table}[!ht]
+  \caption{This needs a caption.}
+    \begin{tabular}{|l||l|llll|}
     \hline
-    Detector                      & Req. PLD-2 &47-20&DCC1545M&UI1221LE-M&UI5241LE-M\\ \hline
+    Detector                      & Req. PLD-2
+    &47-20&DCC1545M&UI1221LE-M&UI5241LE-M\\ \hline \hline
     Manufacturer&-&e2v&Thorlabs&IDS&IDS\\ \hline
     Type&-&Frame transfer CCD&CMOS&CMOS&CMOS\\ \hline
     Full frame rate&  10 Hz            & 5 MHz                       & 25 fps                 & 87.2 fps            & 50 fps              \\ \hline
     Subframe rate& 100 Hz            & -                           & 79 fps                 & 100 fps             & 102 fps             \\ \hline
     Accuracy       & 100 nm rms        & 11.2 nm rms                 & 45 nm rms              & 45 nm rms           & 45 nm rms           \\ \hline
     Data Rate& -                 & 52.4 Tbit/sec               & 259 Mbit/sec           & 207 Mbit/sec        & 310 Mbit/sec        \\\hline
-    \end{tabular}
+    \end{tabular}\label{table:payload_detectors}
 \end{table}
 
 
-\paragraph{Shack-Hartmann Lenslet Array - AC}
+\paragraph{Shack-Hartmann Lenslet Array - AC} \label{sec:payload_sh}
 
-A Shack-Hartmann lenslet array consists of an array of lenses (called lenslets) of the same focal length, where the array is focused on the detector. Each lens creates a “spot”, creating a spot diagram on the detector. Figure~\ref{fig:lenslet_array} demonstrates incoming light through a lenslet array. The local tilt of the wavefront across each lens can then be calculated from the position of the focal spot on the sensor; the displacement, $\Delta x$, equals the local slope of the wavefront. Any phase aberration can be approximated to a set of discrete tilts. By sampling an array of lenslets all of these tilts can be measured and the whole wavefront approximated. One thing to note: since only tilts are measured, the lenslet array cannot detect discontinuous steps in the wavefront.
+A Shack-Hartmann lenslet array consists of a matrix of small lenses (called lenslets) of the same focal length, where the array is focused on the detector. Each lenslet forms a “spot”, creating a spot diagram on the detector. Figure~\ref{fig:lenslet_array} demonstrates incoming light through a lenslet array. The local tilt of the wavefront across each lenslet can then be calculated from the position of the focal spot on the sensor; the displacement, $\Delta x$, equals the local slope of the wavefront. Any phase aberration can be approximated to a set of discrete tilts. By sampling an array of lenslets, all of these tilts can be measured and the whole wavefront approximated. Only tilts are measured, so the lenslet array cannot detect discontinuous steps in the wavefront.
 
 \begin{figure}[ht]
 \centering
   \includegraphics[width=5in]{images/payload_SH.png}
-\caption{This figure demonstrates the result of two wavefronts, plane and abberated, entering a Shack-Hartmann lenslet array, and their resulting spot diagrams on the detector.}
+\caption{The result of two wavefronts, plane (top)
+  and abberated (bottom), entering a Shack-Hartmann lenslet array, and their
+  resulting spot diagrams on the detector \cite{ctio_AO}.}
 \label{fig:lenslet_array}
 \end{figure}
 
-To get the best measurement of the wavefront, the maximum number of spots, and therefore lenses, is desired. As a result, for a constant beam size, a lenslet array should be chosen with the lowest pitch (distance from the center of each lens) in order to get the maximum number of spots for the beam.
+To get the best measurement of the wavefront, the maximum number of spots, and therefore lenslets, is desired. As a result, for a constant beam size, a lenslet array should be chosen with the lowest pitch (distance from the center of each lens) in order to get the maximum number of spots for the beam.
 
 
-Therefore, MLA150 (Figure~\ref{fig:MLA150}) was chosen from ThorLabs, with a pitch of $150\ \mu m$.
-The lenslet is $10\ mm^2$ square, so it contains about 66 by 66 microlenses. It has a $9\ mm^2$ square effective aperture, with a focal length of $5.2\ mm$, and will be mounted in the lens tube on the detector (see Paragraph~\ref{sec:detector}). For an approximate beam size of $2.25\ mm$ (see Paragraph~\ref{sec:dms}), approximately 15 by 15 lenses will be used of the lenslet array. As discussed in Paragraph~\ref{sec:detector}, a $2.25\ mm$ incoming beam corresponds to about $425\ px^2$ square, allowing for over 20 pixels per spot, so there is no concern for multiple spots falling on the same pixel. 
+Therefore, the microlens array MLA150 was chosen from ThorLabs \cite{MLA150} (see Figure~\ref{fig:MLA150}), with a pitch of 150 $\mu$m.
+The lenslet is 10 mm square, so it contains about 66 by 66 lenslets. It is mounted in the lens tube on the detector. For an approximate beam size of 2.25 mm (see Paragraph~\ref{par:payload_dms}), approximately 15 by 15 lenslets will be used of the lenslet array.  See Section~\ref{sec:payload_pixels} for a discussion of the pixels used on the detector per lenslet.
 
 \begin{figure}[ht]
 \centering
-  \includegraphics[width=2in]{images/payload_MLA150.jpg}
-\caption{This is the MLA150 lenslet array from ThorLabs choosen for the Shack-Hartmann Wavefront Sensing design.}
+  \includegraphics[width=4in]{images/payload_MLA.jpg}
+\caption{The MLA150 lenslet array from ThorLabs \cite{MLA150} chosen for the Shack-Hartmann Wavefront Sensing design consists of many microlenses, aligned closely together.}
 \label{fig:MLA150}
 \end{figure}
 
 
-%			\subsubsection{Analysis}
+			\subsubsection{Analysis - KB}
+                        
+			\paragraph{Pointing Requirement - KB}\label{sec:pointing_requirement}
+			\paragraph{Data Rates to Avionics - KB}
+			
+			\paragraph{Shack-Hartmann Lenslet Array - AC}
+				
+				\subparagraph{Pixels per Lenslet Spot}\label{sec:payload_pixels}
+In order to image the spots created by the Shack-Hartmann microlenslet array, spots must fall on their own unique pixels.  At least four pixels are required per lenslet spot (a two by two square of pixels) to account for the event in which a spot lands between two pixels, or at the center of four pixels.
+The incoming beam is 2.25 mm (Paragraph~\ref{par:payload_detector}).  This corresponds to about 15 by 15 spots. The detector has a pixel size of 5.2 $\mu$m, so a 2.25 mm beam corresponds to about 425 px square.  Therefore, over twenty pixels are available for each lenslet spot, so there is no concern for multiple spots falling on the same pixel. 
+				
+				\subparagraph{Actuators per Lens}
+The chosen BMC deformable mirrors have a total of 32 actuators (a 6 by 6 array, with no corners) with an actuator pitch of 450 $\mu$m \cite{BMC}.  The Shack-Hartmann lenslets have a pitch of 150 $\mu$m, so there will be a minimum of four spots devoted to each actuator.  Therefore, there is no concern for individual actuators to be untested or characterized properly.
 
 			\subsubsection{Summary of Outputs - AC}
 
-The payload`s operational requirements are major drivers for the design of the rest of the satellite. A summary of mass totals, power needs, and thermal requirements of all major Payload components can be found in Table~\ref{fig:payload_summary_table}.  
-During data capture mode, the payload needs to be kept within $0^\circ$C to $50^\circ$C, will draw a maximum power of $4.5\ W$, will output a maximum data rate of $550\ Mbit/s$, and, during external data acquisition only, has a maximum slew rate of $4.7'/s$. 
-With all components, the Payload is about $997\ g$, or $1.25\ kg$ with a $25\%$ margin.  
+The payload's operational requirements are major drivers for the design of the rest of the satellite. A summary of mass totals, power needs, and thermal requirements of all major payload components can be found in Table~\ref{fig:payload_summary_table}.  
+During data capture mode, the payload must be kept within $0^\circ$C to $50^\circ$C, will draw a maximum power of 4.5 W, will output a maximum data rate of 550 Mbit/s, and, during external data acquisition only, has a maximum slew rate of 4.7'/s. 
+With all components, the payload is 1.00 g, and 1.25 kg with a 25% margin.  
 
 \begin{table}
-\caption{This is a summary of the mass totals, power needs, and thermal needs of the major payload components.}
-\label{fig:payload_summary_table}
+\caption{Summary of the mass totals, power needs, and thermal needs of the major payload components.}
 \begin{tabular}{|c||c|c|c|c|} \hline
 	Component & Mass (g) & Power (W) & Thermal, operating ($^\circ$C) & Thermal, storage ($^\circ$C) \\ \hline \hline
-Laser diode & $24.45$ & $0.0045$ & $-10$ to $50$ & unknown \\
-Detector & $46.64$ & $<\ 2\ W$ & $0$ to $50$ & $-20$ to $80$ \\
-Def. Mirrors + Driver & $189.9$ & $<\ 2.5\ W$ & $-10$ to $50$ & unknown \\
-Optical Breadboard & $\sim 250$ & ~ & ~ & \\
-Optical Enclosure & $\sim 300$ & ~ & ~ & \\ \hline \hline
-Totals & $996.9$ & $4.5\ W$ max & $0$ to $50$ & $-20$ to $80$ \\ \hline
-\end{tabular}
+Laser diode & 24.45 & 0.0045 & -10 to 50 & unknown \\
+Detector & 46.64 & $<$ 2 W & 0 to 50 & -20 to 80 \\
+Def. Mirrors + Driver & 189.9 & $<$ 2.5 W & -10 to 50 & unknown \\
+Optical Breadboard & $\sim$250 & -- & -- & -- \\
+Optical Enclosure & $\sim$300 & -- & -- & -- \\ \hline \hline
+Totals & 996.9 & 4.5 W max & 0 to 50 & -20 to 80 \\ \hline
+\end{tabular}\label{fig:payload_summary_table}
 \end{table}
-
-
-
 
 			\subsubsection{Future Work - AC}
 
-\begin{itemize}
-\item{Optical Modeling in ZEMAX}: Determine final beam profile on the detector, Optimization of 
-space to find the best choice of components, Explore thermal effects on beam and optical components
+Future work includes optical modeling of the system using the software ZEMAX \cite{zemax}. Modeling the system with ZEMAX will determine the
+  final beam profile on the detector.  This will allow for more precise calculations of data rates, for example.  Optimization of the space will
+  be determined to find the best choice of components.  Thermal
+  effects on the beam and optical components will be also analyzed, along with the effects of slight misalignments (i.e. with lenslet array).
 
-\item{Interferometer with Linear Stager Design Feasibility}: Can nanopositioner elements be scaled down for a CubeSat platform?, What would the effects be on other subsystems?
+Also, to determine the feasibility of the interferometer with the nanopositioner design, discussions with various nanopositioner manufacturers are needed to resolve if the nanopositioner elements can be appropriately modified for a CubeSat platform.  Preliminarily, a nanopositioner would require additional power and processing.  Further effects on other subsystems needs to be determined. 
 
-\item{Imaging External Sources}: Need to determine when and how to image an external source (FOV, star sensors)
+Furthermore, while the design allows for imaging of an external source, when and how to image an external
+  source still needs to be determined. Specific bright stars need to be chosen, and their revisit times calculated more precisely based on the orbital parameters unique to DeMi.
 
-\item{Closed Loop Control}: Determine difficulty in implementation
+Lastly, specific properties of the deformable mirror system need to be explored.  For example, a stroke analysis needs to be performed.  Also, research needs to be done to try to predict the deformable mirror system's performance in a space environment, and how this might be quantified and corrected.
 
-\item{Stroke Analysis}: Study properties of DM stroke
-
-\end{itemize}
-
+			
+	
 \newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % POWER
@@ -1201,27 +1285,70 @@ In this paper it has been shown that a low-cost, quick-access mission can be car
 % REFERENCES
 
 
-
 %%% PAYLOAD
-\bibitem{radiation_optics}
-   Nicoletta, C. A. and A. G. Eubanks.
-   \emph{Effect of Simulated Space Radiation On Selected Optical Materials}. Washington, D.C.: National Aeronautics and Space Administration, 1972.
+
+\bibitem{FGadaptiveoptics}
+   Tyson, Robert K. and Benjamin W. Frazier. 
+   \emph{Field Guide to Adaptive Optics}. Bellingham, WA: SPIE Press,
+   2012.  Internet resource.
+
+\bibitem{gerchberg}
+   Kay J., Kasdin, N. J., Belikov, R.
+   \emph{Wavefront correction in a shaped-pupil coronagraph using a Gerchberg-Saxton-based estimation scheme}, Astronomical Adaptive Optics Systems and Applications III, Vol. 6691, SPIE Proceedings, Washington, D.C., 2007.
 
 \bibitem{cahoy2013}
    Cahoy, K. L., A. Marinan, B. Novak, C. Kerr, M. Webber. 
-   \emph{Wavefront control in space with MEMS deformable mirrors}, Photonics West, MEMS Adaptive Optics VII, Vol. 8617, SPIE, Washington, D.C., 2013.
- 
+   \emph{Wavefront control in space with MEMS deformable mirrors},
+   Photonics West, MEMS Adaptive Optics VII, Vol. 8617, SPIE,
+   Washington, D.C., 2013.
+
+\bibitem{radiation_optics}
+   Nicoletta, C. A. and A. G. Eubanks.
+   \emph{Effect of Simulated Space Radiation On Selected Optical
+     Materials}. Washington, D.C.: National Aeronautics and Space
+   Administration, 1972.
+
+\bibitem{traeger}
+   Traeger, F., \emph{Springer Handbook of Lasers and Optics}. New
+   York: Springer, 2007.
+
 \bibitem{demtroeder}
    Demtroeder, W.
-   \emph{Laser Spectroscopy: Basic Concepts and Instrumentation}, 3rd ed. Berlin: Spring-Verlag, 2003.
+   \emph{Laser Spectroscopy: Basic Concepts and Instrumentation}, 3rd
+   ed. Berlin: Spring-Verlag, 2003.
+
+\bibitem{newport_nanopositioner}
+   NPX NanoPositioning Linear Stages, Newport Corporation,
+   URL \url{http://www.newport.com/NPX-Series-NanoPositioning-Linear-Stages/843084/1033/info.aspx}
+   (visited May 10, 2013).
+
+\bibitem{centroids}
+Thomas, S., et al. "Comparison of centroid computation algorithms in a Shack-Hartmann sensor". \emph{Monthly Notices of the Royal Astronomical Society}, MN-06-0231-MJ.R1, 2006.
+
+\bibitem{ctio_AO}
+   Tokovinin, A., (May 28, 2001). ``Adaptive optics tutorial at CTIO'' URL
+   \url{http://www.ctio.noao.edu/~atokovin/tutorial/part3/wfs.html}, 
+   (visited 10 May 2013).
+
+\bibitem{MLA150}
+   MLA150-5C, ThorLabs Inc.,
+   URL \url{http://thorlabs.com/thorProduct.cfm?partNumber=MLA150-5C}
+   (visited 5 May 2013).
+
+\bibitem{BMC}
+Boston Micromachines Corporation, <http://www.bostonmicromachines.com/light-modulator.htm> (accessed 5 May 2013).
+
+\bibitem{zemax}
+   ZEMAX, Software Package, Ver. 13, Radiant Zemax LLC, Redmond, WA, 2013.
+
+
+
+\bibitem{correia2010}
+  Correia, C., H.-F. Raynaud, C. Kulcsar, J.-M. Conan, "On the optimal reconstruction and control of adaptive optical systems with mirror dynamics," JOSA A, 27(2), 333-349, doi:10.1364/JOSAA.27.000333 (2010).
 
 \bibitem {greivenkamp}
    Greivenkamp, John E. 
    \emph{Field Guide to Geometrical Optics}, Bellingham, WA: SPIE, 2004. Print.
-   
-\bibitem{FGadaptiveoptics}
-   Tyson, Robert K. and Benjamin W. Frazier. 
-   \emph{Field Guide to Adaptive Optics}. Bellingham, WA: SPIE Press, 2012.  Internet resource.
 
 
 %%% POWER
