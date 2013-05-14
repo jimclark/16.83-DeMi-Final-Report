@@ -223,7 +223,7 @@ Curerntly, the power system design carries a tight margin. The solar panels and 
 % PAYLOAD
 
 		\subsection{Payload}
-The payload for DeMi is an optical system that allows for the testing
+The Payload for DeMi is an optical system that allows for the testing
 and technology demonstration of a deformable mirror system.  It must include the following  elements: the deformable mirrors the
 mission aims to test, a light source to create a wavefront, and a detector to measure the wavefront.  These components are attached
 to an optical breadboard and are in an enclosure to block out external
@@ -231,27 +231,24 @@ light.  The challenge in this project is to create an optical system capable of 
 			
 \subsubsection{Requirements - AC}\label{sec:payload_requirements}
 
-\begin{table}[ht]
-\caption{Payload Requirements}
-\begin{tabular}{l p{5in}} 
-PLD-1 & The payload shall command a MEMS deformable mirror to run a pre-defined test sequence for at least 5 minutes each orbit. \\
-& Parent Requirement: MLR-3, MLR-4\\
-PLD-1.1 & The payload shall have the ability to control any combination of actuators within 0.001 s of each other, at a minimum rate of 100 Hz, with a minimum stroke of 1.5  $\mu$m, and with a precision of at least 1 nm.\\
-& Parent Requirement: PLD-1\\
-PLD-2 & The payload shall have the ability to measure and reconstruct the optical wavefront at one wavelength for the duration of a 5 minute test sequence each orbit at a frequency of at least 10 Hz.\\
-& Parent Requirement: MLR-3, MLR-4\\
-PLD-2.1 & The payload shall have the ability to measure the optical wavefront at a minimum rate of 10 Hz for at least one minute each orbit.\\
-& Parent Requirement: PLD-2\\
-PLD-2.2 & The payload shall have the ability to measure the optical wavefront at a minimum rate of 100 Hz for at least 30 seconds each orbit.\\
-& Parent Requirement: PLD-2\\
-PLD-2.3 & The payload shall have the ability to reconstruct the optical wavefront with a minimum accuracy of 100 nm rms.\\
-& Parent Requirement: PLD-2\\
-\end{tabular}\label{table:payload_requirements}
-\end{table}
+\begin{itemize}
+\item{PLD-1} The Payload shall command a MEMS deformable mirror to run a pre-defined test sequence for at least 5 minutes each orbit. \\ 
+Parent Requirement: MLR-3, MLR-4
+\item{PLD-1.1} The Payload shall have the ability to control any combination of actuators within 0.001 s of each other, at a minimum rate of 100 Hz, with a minimum stroke of 1.5  $\mu$m, and with a precision of at least 1 nm.\\
+Parent Requirement: PLD-1
+\item PLD-2 The Payload shall have the ability to measure and reconstruct the optical wavefront at one wavelength for the duration of a 5 minute test sequence each orbit at a frequency of at least 10 Hz.\\
+Parent Requirement: MLR-3, MLR-4
+\item PLD-2.1 The Payload shall have the ability to measure the optical wavefront at a minimum rate of 10 Hz for at least one minute each orbit.\\
+Parent Requirement: PLD-2
+\item PLD-2.2 The Payload shall have the ability to measure the optical wavefront at a minimum rate of 100 Hz for at least 30 seconds each orbit.\\
+Parent Requirement: PLD-2
+\item PLD-2.3 The Payload shall have the ability to reconstruct the optical wavefront with a minimum accuracy of 100 nm rms.\\
+Parent Requirement: PLD-2
+\end{itemize}
 
-There are two types of requirements on the payload.  The first set (PLD-1) applies to the features of the deformable mirror system.  The second set (PLD-2) pertains to the measurement and reconstruction of the wavefront.  The complete requirements document can be found in Appendix~\ref{app:requirements}. 
+There are two types of requirements on the Payload.  The first set (PLD-1) applies to the features of the deformable mirror system.  The second set (PLD-2) pertains to the measurement and reconstruction of the wavefront.  The complete requirements document can be found in Appendix~\ref{app:requirements}. 
 
-The requirements on measuring and reconstructing the wavefront (PLD-2) apply to the detector.  Nominally, the detector must operate (capture images) for at least 5 minutes per orbit, and be able to function at a minimum of 10 Hz (PLD-2). The requirement is further separated into a ``Diagnostic Mode'' used for calibration and full frame images, and a ``Burst Mode'', used for data capture.  In ``Diagnostic Mode'', the payload is required to take images for at least a minute per orbit at 10 Hz (PLD-2.1).  In ``Burst Mode'', the payload is required to take images for at least 30 seconds per orbit a minimum of 100 Hz (PLD-2.2).  For both modes, the reconstruction accuracy must be a maximum of 100 nm rms (PLD-2.3).
+The requirements on measuring and reconstructing the wavefront (PLD-2) apply to the detector.  Nominally, the detector must operate (capture images) for at least 5 minutes per orbit, and be able to function at a minimum of 10 Hz (PLD-2). The requirement is further separated into a ``Diagnostic Mode'' used for calibration and full frame images, and a ``Burst Mode'', used for data capture.  In ``Diagnostic Mode'', the Payload is required to take images for at least a minute per orbit at 10 Hz (PLD-2.1).  In ``Burst Mode'', the Payload is required to take images for at least 30 seconds per orbit a minimum of 100 Hz (PLD-2.2).  For both modes, the reconstruction accuracy must be a maximum of 100 nm rms (PLD-2.3).
 			
 			\subsubsection{Decisions Made and Trade Studies}
 
@@ -307,7 +304,7 @@ elements also have anti-reflective coatings that are efficient in the
 visible spectrum (400 - 700 nm).  All components in Figure~\ref{fig:SHWFS} are shown with their mounts.  However, the mass and volume of the mounts are only estimates of the custom mounts that will be built for all optics.  Custom mounts will be built to adapt the optics for space applications.  All elements must be mounted in stress-free mounts (e.g., no glass touching metal) and mounted to an optical breadboard with multi-footed lens tubes that are made of aluminum, or of a metal that has a similar coefficients of thermal expansion as the lens it holds.  Future modeling and optimization of the optical design will yield more exact component choices.
 
 \subparagraph{Other Designs Considered: Michelson Interferometer with Nanopositioner - AC}\label{sec:payload_interferometer}
-The interferometer design shown in Figure~\ref{fig:interferometer} is slightly modified from a typical interferometer due to volume constraints on the payload and the requirement for high contrast imaging. It has an internal source (laser diode), whose path is denoted by a dotted red line.
+The interferometer design shown in Figure~\ref{fig:interferometer} is slightly modified from a typical interferometer due to volume constraints on the Payload and the requirement for high contrast imaging. It has an internal source (laser diode), whose path is denoted by a dotted red line.
 The laser beam is first resized, passes through a neutral density filter, then is reflected 90 degrees by a
 flat mirror. The light is then divided by a beam splitter oriented 45
 degrees to the beam. The transmitted beam travels to the deformable
@@ -331,14 +328,14 @@ What is not shown in Figure~\ref{fig:interferometer} is the controller for the n
 
 \subparagraph{Payload Operations - AC}
 For the initial demonstration and on-orbit testing, an internal light
-source will be used. This eliminates any payload specific requirements
+source will be used. This eliminates any Payload specific requirements
 on the satellite's attitude and inclination. For the latter half of
 the mission, an external light source will be used, in order to attempt to image the optical wavefront from a star.  All downlinked files will be timestamped.
 
 \begin{enumerate}
 \item{\textbf{Status Checks}}
 After detumbling, and two weeks of commissioning, as describe in
-Section~\ref{sec:systems_conops}, the payload will perform a status check of all instruments. This includes the deformable mirror system, the detector, and the laser. Each element will be turned on and checked for error or status codes. Any available status information directly from the deformable mirrors, detector, and laser will be sent to the ground.
+Section~\ref{sec:systems_conops}, the Payload will perform a status check of all instruments. This includes the deformable mirror system, the detector, and the laser. Each element will be turned on and checked for error or status codes. Any available status information directly from the deformable mirrors, detector, and laser will be sent to the ground.
 
 \item{\textbf{Calibration}}
 The next phase is to calibrate the system using the ``Diagnostic Mode" requirements outlined in Section~\ref{sec:payload_requirements}.  This involves turning on the laser and recording several images in this configuration with the detector, without deforming the mirrors (acts as a flat mirror). From these images, on-board processing algorithms can find the centroids \cite{centroids} and average them to obtain new `standard centroids', which will be used for wavefront comparison calculations throughout the remainder of the mission. These images, averages, and new centroid solutions will be sent to the ground and stored on-board.
@@ -430,12 +427,12 @@ The chosen BMC deformable mirrors have a total of 32 actuators (a 6 by 6 array, 
 
 			\subsubsection{Summary of Outputs - AC}
 
-The payload's operational requirements are major drivers for the design of the rest of the satellite. A summary of mass totals, power needs, and thermal requirements of all major payload components can be found in Table~\ref{fig:payload_summary_table}.  
-During data capture mode, the payload must be kept within $0^\circ$C to $50^\circ$C, will draw a maximum power of 4.5 W, will output a maximum data rate of 550 Mbit/s, and, during external data acquisition only, has a maximum slew rate of 4.7'/s. 
-With all components, the payload is 1.00 g, and 1.25 kg with a 25% margin.  
+The Payload's operational requirements are major drivers for the design of the rest of the satellite. A summary of mass totals, power needs, and thermal requirements of all major Payload components can be found in Table~\ref{fig:payload_summary_table}.  
+During data capture mode, the Payload must be kept within $0^\circ$C to $50^\circ$C, will draw a maximum power of 4.5 W, will output a maximum data rate of 550 Mbit/s, and, during external data acquisition only, has a maximum slew rate of 4.7'/s. 
+With all components, the Payload is 1.00 g, and 1.25 kg with a 25% margin.  
 
 \begin{table}
-\caption{Summary of the mass totals, power needs, and thermal needs of the major payload components.}
+\caption{Summary of the mass totals, power needs, and thermal needs of the major Payload components.}
 \begin{tabular}{|c||c|c|c|c|} \hline
 	Component & Mass (g) & Power (W) & Thermal, operating ($^\circ$C) & Thermal, storage ($^\circ$C) \\ \hline \hline
 Laser diode & 24.45 & 0.0045 & -10 to 50 & unknown \\
