@@ -75,14 +75,14 @@ The mission of the Deformable Mirror Demonstration is to provide a low-cost, qui
 \begin{figure}[!ht]
 \centering
 \includegraphics[width=2in]{images/introduction_1.png}
-\caption{Boston Micromechanics MEMS Deformable Mirror \footnote{Deformable Mirror from Boston Micromachines Corporation, http://www.bostonmicromachines.com/light-modulator.htm.}}
+\caption{Boston Micromechanics MEMS Deformable Mirror\cite{bos-micro-demi}}
 \label{fig:Intro_demi}
 \end{figure}
 
 \subsection{Motivation}
-The driving force behind the DeMi mission is the desire to directly image Earth-like exoplanets in the search for signs of life, requiring imaging technology that can produce high contrast and dynamic range images.  However, current high-performance space telescope technology suffers from wavefront aberrations, such as speckles which can result from diffraction, noise, phase errors, and thermal drift and reduce the achievable image contrast.\footnote{Cahoy, K. et al., “CubeSat Deformable Mirror Demonstration,” “unpublished.”}
+The driving force behind the DeMi mission is the desire to directly image Earth-like exoplanets in the search for signs of life, requiring imaging technology that can produce high contrast and dynamic range images.  However, current high-performance space telescope technology suffers from wavefront aberrations, such as speckles which can result from diffraction, noise, phase errors, and thermal drift and reduce the achievable image contrast.\cite{cahoy-unpublished}
 
-A solution to this problem is to implement adaptable wavefront control imaging technology in the form of a deformable mirror. In the deformable mirror system, a wavefront sensor measures wavefront aberrations in an approaching wavefront. An adaptive optics computer then calculates the errors in the wavefront reflecting off of the deformable mirror surface by subtracting the wavefront from a reference wavefront. \footnote{Adaptive Optics Overview from Iris AO, Inc., http://www.irisao.com/technology.html.} Finally, electrostatic actuators in an array beneath the membrane surface of the mirror individually deform the surface to correct the wavefront. A comparison of the effects of a flat and deformable mirror on an aberrated wavefront is demonstrated in Figure~\ref{fig:Intro_wavefront}.   
+A solution to this problem is to implement adaptable wavefront control imaging technology in the form of a deformable mirror. In the deformable mirror system, a wavefront sensor measures wavefront aberrations in an approaching wavefront. An adaptive optics computer then calculates the errors in the wavefront reflecting off of the deformable mirror surface by subtracting the wavefront from a reference wavefront.\cite{adaptive-optics-overview} Finally, electrostatic actuators in an array beneath the membrane surface of the mirror individually deform the surface to correct the wavefront. A comparison of the effects of a flat and deformable mirror on an aberrated wavefront is demonstrated in Figure~\ref{fig:Intro_wavefront}.   
 
 \begin{figure}[!ht]
 \centering
@@ -91,7 +91,7 @@ A solution to this problem is to implement adaptable wavefront control imaging t
 \label{fig:Intro_wavefront}
 \end{figure}
 
-Adaptive optics technology is currently being used in conjunction with coronographs in ground telescopes to correct for distortions caused by Earth’s atmosphere and to resolve light from nearby objects.  An example is seen in Figure~\ref{fig:Intro_exo} of three exoplanets imaged using the Palomar Observatory’s Hale Telescope with adaptive optics technology. \footnote{Serabyn, E., Mawet, D., \& Burruss, R., ``An image of an exoplanets separated by two diffraction beamwidths from a star''. Nature, Vol. 464, 2010, pp. 1018-1020.} 
+Adaptive optics technology is currently being used in conjunction with coronographs in ground telescopes to correct for distortions caused by Earth's atmosphere and to resolve light from nearby objects.  An example is seen in Figure~\ref{fig:Intro_exo} of three exoplanets imaged using the Palomar Observatory's Hale Telescope with adaptive optics technology. \cite{serabyn2010}
 
 
 %insert figure here
@@ -106,7 +106,7 @@ However, factors such as high speeds of atmospheric turbulence and limited numbe
 
 A space telescope utilizing a high performance coronograph and deformable mirror wavefront control system to directly image Earth-like exoplanets could potentially cost over a billion dollars.  Therefore, a 3U CubeSat platform was selected to conduct the DeMi demonstration.  The 3U CubeSat is a simple, standard platform, with low volume (10cm $\times$ 10cm $\times$ 30cm) and mass (maximum 4kg).   CubeSats additionally have low manufacturing and launch costs and can provide relatively quick and easy access to space, as opportunities exist for them to fly as auxiliary payloads on rockets for other planned missions. 
 
-The technology that will tested in the DeMi demonstration has a number of foreseeable future applications, including implementation on high performance space telescopes, such as for direct imaging of Earth-like exoplanets, or for use with free-space laser communication in order to correct for aberrations in the atmosphere. \footnote{Cahoy, K. et al., “CubeSat Deformable Mirror Demonstration,” “unpublished.”}
+The technology that will tested in the DeMi demonstration has a number of foreseeable future applications, including implementation on high performance space telescopes, such as for direct imaging of Earth-like exoplanets, or for use with free-space laser communication in order to correct for aberrations in the atmosphere.\cite{cahoy-unpublished}
 
 \section{Mission Overview}
 		\subsection{Requirements}
@@ -139,7 +139,7 @@ Rationale: Current regulation
 		\end{itemize}
 
 		\subsection{Design Overview}
-		The DeMi mission will consist of one small satellite following the 3-unit CubeSat Design Specifications established by the California Polytechnic State University. The satellite will be the size of three stacked 10cm cubes (called “units”), measuring a total of 10 cm $|times$ 10 cm $\times$ 30 cm. In accordance to CubeSat specifications, the satellite’s mass will not exceed 4 kilograms. In general, CubeSats are launched as secondary hosted payloads inside a standard Poly-PicoSatellite Orbital Deployer (P-POD). \footnote{CubeSat Design Specifications, California Polytechnic State University, http://www.cubesat.org/index.php/documents/developers}
+		The DeMi mission will consist of one small satellite following the 3-unit CubeSat Design Specifications established by the California Polytechnic State University. The satellite will be the size of three stacked 10cm cubes (called “units”), measuring a total of 10 cm $|times$ 10 cm $\times$ 30 cm. In accordance to CubeSat specifications, the satellite’s mass will not exceed 4 kilograms. In general, CubeSats are launched as secondary hosted payloads inside a standard Poly-PicoSatellite Orbital Deployer (P-POD). \cite{cubesat-specs}
 The CubeSat platform was selected because it offers a low-cost quick access option. Multiple vendors already sell many off-the-shelf CubeSat components with flight heritage for most standard satellite subsystems. Over the past several years, many university projects have been designed and flown on CubeSats. 
 
 		
@@ -161,10 +161,10 @@ Figure~\ref{fig:Mission_ConOps} shows a timeline of the DeMi concept of operatio
 
 The majority of the time, the satellite will be in stand-by mode; in other words, it will not be capturing or downlinking data. In case of a subsystem malfunction, the satellite will go into safe mode to diagnose the source of the problem. 
 
-Given the satellite’s altitude, inclination, and surface area, analyses performed using STK predict that the satellite will deorbit within 7.8 years. This timeline agrees with the current 25-year deorbit requirement outlined by NASA standards. \footnote{25 year deorbit requirement from NASA‐STD‐8719.14, http://www.hq.nasa.gov/office/codeq/doctree/871914.pdf}
+Given the satellite’s altitude, inclination, and surface area, analyses performed using STK predict that the satellite will deorbit within 7.8 years. This timeline agrees with the current 25-year deorbit requirement outlined by NASA standards.\cite{nasa-deorbit}
 
 
-		\subsection{$N^2$ Diagram}
+		\subsection{N2 Diagram}
 		
 		The N$^2$ diagram was an essential tool in the early stages of the design process. It allowed the design team to determine the levels of interaction between different subsystems and exchange input and output variables and values. 
 		
@@ -401,7 +401,7 @@ The lenslet is 10 mm square, so it contains about 66 by 66 lenslets. It is mount
 
 \begin{figure}[ht]
 \centering
-  \includegraphics[width=4in]{images/payload_MLA.jpg}
+  \includegraphics[width=4in]{images/payload_MLA150.jpg}
 \caption{The MLA150 lenslet array from ThorLabs \cite{MLA150} chosen for the Shack-Hartmann Wavefront Sensing design consists of many microlenses, aligned closely together.}
 \label{fig:MLA150}
 \end{figure}
@@ -782,6 +782,9 @@ interference, specialized receiver software would have to be developed to mitiga
 \newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % AVIONICS
+
+\subsection{Avionics}
+
 \subsubsection{Requirements - VE}
 The main avionics subsystem requirements are to provide the necessary interfaces, calculations and data storing capability to support functioning of all other subsystems during the mission operation. Other than that avionics shall be able to recover from potential single event effects and permit software updates and reprogramming in orbit.
 However, the most important requirements to consider are the memory and processor capabilities because they are the most difficult to satisfy with a current level of technology.
@@ -790,8 +793,9 @@ However, the most important requirements to consider are the memory and processo
 There are two main avionics configurations to be considered that are both able to satisfy subsystem’s requirements. They are presented in Table~\ref{table:avionics_hardware_options}. The major difference between configurations is a capability of the first system to do real time image processing, which results in higher complexity and power consumption of that system (see The Steepest Ascent Mission Interface Computer in Table~\ref{table:avionics_hardware_options}). The second configuration only allows downloading raw images to the ground stations without processing them.
 
 
-\begin{table}[ht]\label{table:avionics_hardware_options}
+\begin{table}[ht]
 \caption{Hardware Options}
+\label{table:avionics_hardware_options}
 \begin{center}
     \begin{tabular}{| c || p{6cm} | p{6cm} |} \hline
      &	Processing on-board & Raw images to the ground \\ \hline \hline
@@ -808,8 +812,9 @@ There are two main avionics configurations to be considered that are both able t
 
 To select an appropriate hardware, payload requirements should be considered first, since they introduce the most limitations to the processor and memory capabilities.
 
-\begin{table}[ht]\label{table:avionics_modes}
+\begin{table}[ht]
 \caption{Payload modes}
+\label{table:avionics_modes}
 \begin{center}
     \begin{tabular}{| c || c | c | c |} \hline
     	Mode & 640x480 px ``subframe'' &  640x480 px ``subframe'' & 1280x1024 px  ``full frame'' \\ \hline \hline
@@ -838,21 +843,23 @@ The CS-MIC-G-EM meets these demands, supporting telemetry and telecommand operat
 
 Other key features of the CS-MIC-G-EM include its mass storage capability, allowing data from multiple payload units to be stored centrally and the ability to reprogram the on-board processing units, allowing in-flight updates of algorithms to be performed as well as novel concepts to be supported.
 
-\begin{figure}[ht]\label{fig:avionics_MIC}
+\begin{figure}[ht]
 \centering
-  \includegraphics[width=4in]{avionicsMIC.jpg}
+  \includegraphics[width=4in]{images/avionics-MIC.jpg}
 \caption{Structure diagram of Mission Interface Computer CS-MIC-G-EM  \cite{avionics_clyde_space}}
+\label{fig:avionics_MIC}
 \end{figure}
 
 CS-MIC-G-EM provides a number of options that allow different system architectures to be accommodated. The FPGA Fabric (see Figure~\ref{fig:avionics_MIC}) can be used to implement data processing algorithms, allowing data to be pre-processed before being transmitted to the ground. The attached ROM, RAM and Mass Storage can be used to accommodate more complex algorithms that require buffering of data as well as filter weights/ lookup table values to be stored.
 
 The decision to use CS-MIC-G-EM (see Figure~\ref{fig:avionics_MIC}) is made mainly because it enables the fastest possible onboard image processing \cite{avionics_FPGA} which reduces the amount of data which is sent to the ground and provides with a capability to build a closed loop deformable mirror control system.
-General system architecture is shown in Figure~\ref{fig:avionics_architecture}. Selected Mission Interface Computer also allows us to separate telemetry from image processing data. The first is processed on CPU (TI MSP430 microcontroller), which runs an operating system and performs general control tasks, while the latter is done on FPGA (see Table~\ref{table:avionics_hardware_options) and written into Mass Storage device (see Figure~\ref{fig:avionics_MIC}).
+General system architecture is shown in Figure~\ref{fig:avionics_architecture}. Selected Mission Interface Computer also allows us to separate telemetry from image processing data. The first is processed on CPU (TI MSP430 microcontroller), which runs an operating system and performs general control tasks, while the latter is done on FPGA (see Table~\ref{table:avionics_hardware_options}) and written into Mass Storage device (see Figure~\ref{fig:avionics_MIC}).
 
-\begin{figure}[ht]\label{fig:avionics_architecture}
+\begin{figure}[ht]
 \centering
-  \includegraphics[width=7in]{avionicsarchitecture.jpg}
+  \includegraphics[width=7in]{images/avionics-architecture.jpg}
 \caption{System's structure diagram}
+\label{fig:avionics_architecture}
 \end{figure}
 
 Another important component to be mentioned is an operating system that is required to control the satellite. Since low power microcontrollers (MSP430) are used, FreeRTOS from Real Time Engineers Ltd. \cite{avionics_RTOS} or Salvo from Pumpkin, Inc. \cite{avionics_pumpkin} real-time operating systems are the best options. Image processing software is supposed to be embedded into FPGA as synthesized hardware architecture which can be done from MATLAB code using HDL Coder.
@@ -860,8 +867,9 @@ Another important component to be mentioned is an operating system that is requi
 Avionics provides the following interfaces with other subsystems (see Table~\ref{table:avionics_interfaces}). It is important to mention that all analog interfaces are implemented in a Power Distribution Module (PDM). It allows collecting all the data from analog sensors and sending over a single I2C interface to the avionics board. PDM implements torque coil drivers as well.
 
 
-\begin{table}[ht]\label{table:avionics_interfaces}
+\begin{table}[ht]
 \caption{Avionics hardware interfaces with other subsystems}
+\label{table:avionics_interfaces}
 \begin{center}
     \begin{tabular}{| p{2cm} | l | c | c |} \hline
     	Subsytem & Component & Interface & Data rate \\ \hline \hline
@@ -886,8 +894,9 @@ $^1$Assuming update 10 times per second
 The avionics system gives values to Thermal for operational temperature range, to power for power consumed during the different modes, and to structures for the mass and volume. These outputs are detailed in the chart below (see Table~\ref{table:avionics_summary_outputs}). The survival temperatures of the components are unknown.
 
 
-\begin{table}[ht]\label{table:avionics_summary_outputs}
+\begin{table}[ht]
 \caption{Avionics budgets}
+\label{table:avionics_summary_outputs}
 \begin{center}
     \begin{tabular}{|c||c|} \hline
     	Output & Value \\ \hline \hline
@@ -1423,6 +1432,7 @@ In this paper it has been shown that a low-cost, quick-access mission can be car
 \hline
 \end{longtable}
 $^1$Estimated from ThorLabs miniseries post MS075.
+\end{center}
 \end{landscape}
 
 \clearpage
@@ -1536,6 +1546,26 @@ $^2$\url{http://www.arrg.us/pages/Loss-Calc.htm}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % REFERENCES
 
+
+%%% OVERVIEW
+
+\bibitem{bos-micro-demi}
+Deformable Mirror from Boston Micromachines Corporation, \url{http://www.bostonmicromachines.com/light-modulator.htm}.
+
+\bibitem{cahoy-unpublished}
+Cahoy, K. et al., ``CubeSat Deformable Mirror Demonstration,'' ``unpublished.''
+
+\bibitem{adaptive-optics-overview}
+Adaptive Optics Overview from Iris AO, Inc., \url{http://www.irisao.com/technology.html}.
+
+\bibitem{serabyn2010}
+Serabyn, E., Mawet, D., \& Burruss, R., ``An image of an exoplanets separated by two diffraction beamwidths from a star''. Nature, Vol. 464, 2010, pp. 1018-1020.
+
+\bibitem{cubesat-specs}
+CubeSat Design Specifications, California Polytechnic State University, \url{http://www.cubesat.org/index.php/documents/developers}
+
+\bibitem{nasa-deorbit}
+NASA‐STD‐8719.14, \url{http://www.hq.nasa.gov/office/codeq/doctree/871914.pdf}
 
 %%% PAYLOAD
 
