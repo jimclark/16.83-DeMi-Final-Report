@@ -462,13 +462,27 @@ Lastly, specific properties of the deformable mirror system need to be explored.
 			
 		\subsection{Power - JC}
 			\subsubsection{Requirements}
-			The Power subsystem is required to supply power to all other subsystems under all conditions.  In particular, it must supply an average of 3.54 watts on average over the course of the orbit (calculated in Equation~\ref{eq:power-required}), sustain a maximum load of 13.84 watts during certain operational modes (downlink mode, per Systems), have a minimum battery capacity of 3.9 watt-hours (calculated in Equation~\ref{eq:power-batt-req}), and meet these requirements for up to 1 year, or approximately 6,000 cycles (calculated in Equation~\ref{eq:power-num-cycles}).
+			
+			\begin{itemize}
+				\item POW-1.  Power subsystem shall supply 3.54 watts (calculated in Equation~\ref{eq:power-required}) to power bus on average over each orbit.
+				\begin{itemize}
+					\item POW-1.1.  Power subsystem shall have solar panels to supply power to other systems while satellite is in sunlight and recharge batteries for eclipse.
+					\begin{itemize}
+						\item POW-1.1.1.  Solar panels shall supply 3.54 watts after 12 months of operation.
+					\end{itemize}
+					\item POW-1.2.  Power subsystem shall have rechargeable (secondary) batteries to supply power during eclipse.
+					\begin{itemize}
+						\item Secondary batteries shall have 6.5 watt-hours of capacity (calculated in Equation~\ref{eq:power-batt-size}) after 12 months / 6,000 cycles. (calculated in Equation~\ref{eq:power-num-cycles})
+					\end{itemize}
+				\end{itemize}
+				\item POW-2.  Power subsystem shall supply 13.84 watts of power for peak operations
+			\end{itemize}
 			
 			\subsubsection{Decisions Made}
 			
 			The chosen solar panel configuration is four body-mounted side panels.  Body-mounted panels were chosen over deployable panels because they minimized the surface area of the satellite, which minimized the disturbance torques, and they are symmetrical, reducing the pointing constraints on the ADCS.  The zenith and nadir faces are left bare so that they can be coated with a paint that improves the thermal characteristics of the satellite.  The zenith face is also left bare to accommodate an aperture that will allow the payload to image external light sources; the limitations imposed by the placement of the aperture and the required shape of a top-mounted solar panel .
 
-The remainder of the power system is composed of a stack of modules to manage power distribution throughout the satellite.  An EPS (Electrical Power System) takes power from the solar panels and manages the current and voltage levels to ensure that the panels deliver power at maximum efficiency.  A secondary (rechargeable) battery supplies the satellite with energy during eclipse.  A PDM (Power Distribution Module) supplies power to systems which are not part of the main system stack, such as the torque coils.
+The remainder of the power system is composed of a stack of modules to manage power distribution throughout the satellite.  An EPS (Electrical Power System) takes power from the solar panels and manages the current and voltage levels to ensure that the panels deliver power at maximum efficiency.  A secondary (rechargeable) battery supplies the satellite with energy during eclipse; the 10-watt-hour model was chosen, as this satisfies the required capacity and depth-of-discharge (see Equation \ref{eq:power-batt-size}).  A PDM (Power Distribution Module) supplies power to systems which are not part of the main system stack, such as the torque coils.
 
 The satellite's power subsystem does not include a primary battery.  A primary battery was never included in the design because the satellite is covered on most sides by solar panels and is power-positive in detumbling mode, so it will charge as soon as it exits the P-POD.  The only reference to a Cubesat containing a primary battery was a description of a Cubesat that lacked solar panels entirely.\cite{libertad-1}
 
@@ -510,7 +524,7 @@ P_{req,avg} = \frac{1}{T_{total}}\sum_{modes}{ \sum_{systems}{T_{mode} \: P_{sys
 \label{eq:power-required}
 \end{equation}
 
-To meet those needs, the solar panels are required to gather more power, to account for the inefficiency of the EPS ($\eta = 0.85$ in the worst case\cite{EPS-manual}).  This required orbital-averaged power is compared to the results from the STK simulation in Table \ref{tab:power-trade-study}.  This requirement can then be scaled by a factor of $\frac{T_d + T_e}{T_d}$ to compute the power required from the solar panels while in sunlight.
+To meet those needs, the solar panels are required to gather more power, to account for the inefficiency of the EPS ($\eta = 0.85$ in the worst case\cite[p.~9]{EPS-manual}).  This required orbital-averaged power is compared to the results from the STK simulation in Table \ref{tab:power-trade-study}.  This requirement can then be scaled by a factor of $\frac{T_d + T_e}{T_d}$ to compute the power required from the solar panels while in sunlight.
 
 \begin{equation}
 P_{req,panels} = \frac{T_d + T_e}{T_d}\frac{P_{req,avg}}{\eta} = 6.61 \ \text{W (cold)}, 5.21 \ \text{W (hot)}, 4.16 \ \text{W (orbit avg)}
@@ -561,12 +575,20 @@ N_{cycles} = \frac{T_{year}}{T_{orbit}} = 5500 \approx 6000 \ \text{(with 10\% m
 \label{eq:power-num-cycles}
 \end{equation}
 
+According to SMAD, the depth-of-discharge of a lithium-ion battery expected to survive approximately 10,000 cycles should be limited to 60\% \cite[p.~651,~Fig.~21-16]{SMAD}.  This means that the minimum battery size is:
+
+\begin{equation}
+E_{batt} \geq \frac{E_{batt,req}}{DOD} = \frac{3.9 \ \text{Wh}}{0.60} = 6.5 \ \text{Wh}
+\label{eq:power-batt-size}
+\end{equation}
+
 
 
 			\subsubsection{Summary of Outputs}
 
-\begin{table}[ht]\label{tab:power-outputs}
-\caption{Outputs to other systems (mass, volume, power consumed, and survival and operating temperatures).\cite[p.a,p.b,p.c,p.d]{EPS-manual,PDM-manual,Battery-manual,Solar-panel-datasheet}}
+\begin{table}[ht]
+\caption{Outputs to other systems (mass, volume, power consumed, and survival and operating temperatures).\cite[p.~9]{EPS-manual}\cite[p.~11,~21]{PDM-manual}\cite[p.~9]{Battery-manual}\cite[p.~2]{Solar-panel-datasheet}}
+\label{tab:power-outputs}
 \begin{center}
     \begin{tabular}{|l|l|l|p{0.8in}|p{1in}|p{1.1in}|} \hline
 Component & Mass (kg) & Volume (U) & Power consumed (W) & Survival temperature ($^\circ$ C) & Operating temperature ($^\circ$ C) \\ \hline \hline
@@ -583,7 +605,7 @@ The solar panels do not literally have zero volume, but because they are fixed t
 
 			\subsubsection{Risks}
 
-The solar panels will supply 4.52 watts on average over an orbit, which is a 28\% margin over the power needs.  However, the EPS is not perfectly efficient.  The connection to the solar panels is the least efficient, with a minimum efficiency of 85\%\cite{EPS-manual}.  When this is taken into account, as few as 3.84 watts may actually be supplied to the battery power bus.  This has a margin of 9\% over the satellite's average power needs (which might then be further eroded by inefficiencies in the power lines), which is less than the 18\% margin goal set by Systems, and substantially less than the 30\% margin recommended by JPL.
+The solar panels will supply 4.52 watts on average over an orbit, which is a 28\% margin over the power needs.  However, the EPS is not perfectly efficient.  The connection to the solar panels is the least efficient, with a minimum efficiency of 85\%\cite[p.~9]{EPS-manual}.  When this is taken into account, as few as 3.84 watts may actually be supplied to the battery power bus.  This has a margin of 9\% over the satellite's average power needs (which might then be further eroded by inefficiencies in the power lines), which is less than the 18\% margin goal set by Systems, and substantially less than the 30\% margin recommended by JPL.
 
 This system risk is mitigated by the 32\% margin of available power over the standby power need of 2.91 watts.  This provides assurance that the satellite will be power-positive during its standby mode.  Should the satellite find itself unable to meet its power needs with the nominal five minutes of data capture every orbit, it can be commanded to spend more time in standby and downlink modes to restore balance to the power budget.
 
