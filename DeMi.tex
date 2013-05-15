@@ -112,35 +112,35 @@ A space telescope utilizing a high performance coronograph and deformable mirror
 
 The technology that will tested in the DeMi mission has a number of foreseeable future applications, including implementation on high performance space telescopes, such as for direct imaging of Earth-like exoplanets, or for use with free-space laser communication in order to correct for aberrations in the atmosphere \cite{cahoy-unpublished}.
 
-
+\newpage
 \section{Mission Overview}
 		\subsection{Requirements}
 		 
 		\paragraph{Mission Level Requirements}
 		\begin{itemize}
 				\item \textbf{MLR-1} The system design shall follow a 3-unit CubeSat platform.\\
-				Parent Requirement(s): MS-1
+				Parent Requirement: MS-1
 				\item \textbf{MLR-2} The system shall primarily use commercial off the shelf (COTS) and CubeSat parts and components.\\
-				Parent Requirement(s): MS-1
+				Parent Requirement: MS-1
 				\item \textbf{MLR-3} The system shall accommodate and operate a MEMS deformable mirror demonstration experimental payload.\\
-				Parent Requirement(s): MS-1
+				Parent Requirement: MS-1
 				\item \textbf{MLR-4} The system shall operate and produce operational and experimental data for a period of $<$3 months$>$ [goal of 12 months].\\
-				Parent Requirement(s): MS-1
+				Parent Requirement: MS-1
 		\end{itemize}
 		
 		\paragraph{Systems Requirements}
 		
 		\begin{itemize}
 			\item \textbf{SYS-1} The system shall survive launch conditions.\\
-			Parent Requirement(s): MLR-4
+			Parent Requirement: MLR-4
 			\item \textbf{SYS-2} The system shall include electrical, mechanical, and software interfaces to the payload\\
-			Parent Requirement(s): MLR-3
+			Parent Requirement: MLR-3
 			\item \textbf{SYS-3} The system shall comply with the requirements and constraints listed in the most current CubeSat Design Specification (CDS) document. \cite{mission_cubesat} \\
-			Parent Requirement(s): MLR-1
+			Parent Requirement: MLR-1
 			\item \textbf{SYS-4} The system shall be capable of sending and receiving data and instructions to and from the ground.\\
-			Parent Requirement(s): MLR-3, MLR-4
+			Parent Requirements: MLR-3, MLR-4
 			\item \textbf{SYS-5} The system shall have a deorbit time of 25 years or less. \cite{mission_deorbit}\\
-			Parent Requirement(s): MLR-4
+			Parent Requirement: MLR-4
 		\end{itemize}
 
 		\subsection{Design Overview}
@@ -233,11 +233,11 @@ light.  The challenge in this project is to create an optical system capable of 
 
 \begin{itemize}
 \item \textbf{PLD-1} The Payload shall command a MEMS deformable mirror to run a pre-defined test sequence for at least 5 minutes each orbit. \\ 
-Parent Requirement: MLR-3, MLR-4
+Parent Requirements: MLR-3, MLR-4
 \item \textbf{PLD-1.1} The Payload shall have the ability to control any combination of actuators within 0.001 s of each other, at a minimum rate of 100 Hz, with a minimum stroke of 1.5  $\mu$m, and with a precision of at least 1 nm.\\
 Parent Requirement: PLD-1
 \item \textbf{PLD-2} The Payload shall have the ability to measure and reconstruct the optical wavefront at one wavelength for the duration of a 5 minute test sequence each orbit at a frequency of at least 10 Hz.\\
-Parent Requirement: MLR-3, MLR-4
+Parent Requirements: MLR-3, MLR-4
 \item \textbf{PLD-2.1} The Payload shall have the ability to measure the optical wavefront at a minimum rate of 10 Hz for at least one minute each orbit.\\
 Parent Requirement: PLD-2
 \item \textbf{PLD-2.2} The Payload shall have the ability to measure the optical wavefront at a minimum rate of 100 Hz for at least 30 seconds each orbit.\\
@@ -462,10 +462,10 @@ With all components, the Payload is 1.00 g, and 1.25 kg with a 25\% margin.
 \begin{table}
 \caption{Summary of the mass totals, power needs, and thermal needs of the major Payload components.}
 \begin{tabular}{|c||c|c|c|c|} \hline
-	Component & Mass (g) & Power (W) & Thermal, operating ($^\circ$C) & Thermal, storage ($^\circ$C) \\ \hline \hline
+	\textbf{Component} & \textbf{Mass (g)} & \textbf{Power (W)} & \textbf{Thermal, operating ($^\circ$C)} & \textbf{Thermal, storage ($^\circ$C)} \\ \hline \hline
 Laser diode & 24.45 & 0.0045 & -10 to 50 & unknown \\
 Detector & 46.64 & $<$ 2 W & 0 to 50 & -20 to 80 \\
-Def. Mirrors + Driver & 189.9 & $<$ 2.5 W & -10 to 50 & unknown \\
+DMs + Driver & 189.9 & $<$ 2.5 W & -10 to 50 & unknown \\
 Optical Breadboard & $\sim$250 & -- & -- & -- \\
 Optical Enclosure & $\sim$300 & -- & -- & -- \\ \hline \hline
 Totals & 996.9 & 4.5 max & 0 to 50 & -20 to 80 \\ \hline
@@ -628,7 +628,7 @@ E_{batt} \geq \frac{E_{batt,req}}{DOD} = \frac{3.9 \ \text{Wh}}{0.60} = 6.5 \ \t
 \label{tab:power-outputs}
 \begin{center}
     \begin{tabular}{|l|l|l|p{0.8in}|p{1in}|p{1.1in}|} \hline
-Component & Mass (kg) & Volume (U) & Power consumed (W) & Survival temperature ($^\circ$ C) & Operating temperature ($^\circ$ C) \\ \hline \hline
+\textbf{Component} & \textbf{Mass (kg)} & \textbf{Volume (U)} & \textbf{Power consumed (W)} & \textbf{Survival temperature ($^\circ$ C)} & \textbf{Operating temperature ($^\circ$ C)} \\ \hline \hline
 Solar panels & 0.540 & 0 & 0 & -40 to 80 & -40 to 80 \\\hline
 EPS & 0.083 & 0.15 & 0.1 & -50 to 100 & -40 to 85 \\\hline
 Battery & 0.256 & 0.2 & 0.1 & -10 to 50 & 0 to 50 \\\hline
@@ -880,7 +880,7 @@ To select an appropriate hardware, payload requirements should be considered fir
 \caption{Camera imaging modes}
 \label{table:avionics_modes}
 \begin{center}
-    \begin{tabular}{| c || c | c | c |} \hline
+    \begin{tabular}{| c || p{3cm} | p{3cm} | p{3cm} |} \hline
     	\textbf{Mode} & \textbf{640x480 px ``subframe''} &  \textbf{640x480 px ``subframe''} & \textbf{1280x1024 px  ``full frame''} \\ \hline \hline
     Frame Rate & 100 fps & 10 fps & 10 fps \\ \hline
     Data Rate & 310 Mbit/s & 31 Mbit/s & 131 Mbit/s \\ \hline
@@ -909,7 +909,7 @@ Other key features of the CS-MIC-G-EM include its mass storage capability, allow
 
 \begin{figure}[ht]
 \centering
-  \includegraphics[width=4in]{images/Avionics_fig1.png}
+  \includegraphics[width=5in]{images/Avionics_fig1.png}
 \caption{Structure diagram of Mission Interface Computer CS-MIC-G-EM  \cite{avionics_clyde_space}}
 \label{fig:avionics_MIC}
 \end{figure}
@@ -992,14 +992,14 @@ The future work that needs to be conducted is that there should be work done to 
 			The driving requirements of the ADCS design is shown below. A complete requirement document can be found in Appendix A. 
 					\begin{itemize}
 					\item \textbf{ADCS-1.1} ADCS shall meet 4.7 arcmin/s slew rate requirement of payload imaging technology during external source science operation mode.\\
-					Parents requirement(s): MLR-3
+					Parent Requirement: MLR-3
 					
 					\item \textbf{ADCS-2.1} ADCS shall provide attitude knowledge of the satellite to an accuracy within 10$^\circ$[TBR]  for communication operations.\\
-					Parents requirement(s): SYS-4
+					Parent Requirement: SYS-4
 					\item \textbf{ADCS-2.2} ADCS shall provide attitude control of the satellite to an accuracy within 15$^\circ$ [TBR] for communication operations.\\
-					Parents requirement(s): SYS-4
+					Parent Requirement: SYS-4
 					\item \textbf{ADCS-3} ADCS shall provide momentum capability to despin upon launch vehicle separation within 30 days.\\
-					Parents requirement(s): MLR-4
+					Parent Requirement: MLR-4
 					\end{itemize}
 				The two main requirements during operation modes for the ADCS subsystems are the pointing requirement (15$^\circ$) for communication purpose and the stability (slew rate) requirement (4.7 arcmin/s or 0.08$^\circ$/s) for the payload operation while imaging an external source. This requirement exists to ensure that a photon from the external source stays on the same pixel of the detector during data capture. In addition, the satellite is required to detumble and establish ground station access within a reasonable time frame. This duration is required to be less than 30 days, creating a secondary requirement on the total detumbling time. 
 		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
@@ -1025,7 +1025,7 @@ The future work that needs to be conducted is that there should be work done to 
   \caption{ADCS Sensors and Actuators}
     \begin{tabular}{|r|r|r|r|r|}
     \hline
-    Sensors/Actuators & Quantity & Vendor & Performance  &\bigstrut\\
+    \textbf{Sensors/Actuators} & \textbf{Quantity} & \textbf{Vendor} & \textbf{Performance}  &\bigstrut\\
     \hline
     Sun sensors & 5     & CubeSat shop & \multicolumn{1}{r}{- Field of view: 114$^\circ$} &  \bigstrut[t]\\
           &       &       & \multicolumn{1}{r}{- Accuracy: $< 0.5^\circ$} &  \bigstrut[b]\\
@@ -1239,13 +1239,13 @@ The simulation was run with an initial angular rate of 10$^\circ$/s, magnetic mo
 \begin{itemize}
 	\item \textbf{THM-1} The thermal subsystem shall ensure that all components are kept within their survival temperature ranges for the duration of the mission.
 	\\
-	Parent requirements: SYS-2, MLR-3
+	Parent Requirements: SYS-2, MLR-3
 \item \textbf{THM-2} The thermal subsystem shall ensure that all operating components are kept within their operating temperature ranges.
 \\
-Parent requirements: SYS-2, MLR-3
+Parent Requirements: SYS-2, MLR-3
 \item \textbf{THM-3} The thermal system shall be able to monitor the temperatures of all key components.
 \\
-Parent requirement: SYS-2
+Parent Requirement: SYS-2
 \end{itemize}
 
 
