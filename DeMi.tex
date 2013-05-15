@@ -79,7 +79,7 @@ The mission of the Deformable Mirror Demonstration is to provide a low-cost, qui
 The driving force behind the DeMi mission is the desire to directly image Earth-like exoplanets in the search for signs of life, requiring imaging technology that can produce high contrast and dynamic range images.  However, current high-performance space telescope technology suffers from wavefront aberrations, such as speckles which can result from diffraction, noise, phase errors, and thermal drift and reduce the achievable image contrast.\cite{cahoy-unpublished}
 
 A solution to this problem is to implement adaptable wavefront control imaging technology in the form of a deformable mirror. Specifically, a Boston Micromechanics
-Mini MEMS Deformable Mirror, shown in Figure~\ref{Intro_demi} will be used. In the deformable mirror system, a wavefront sensor measures wavefront aberrations in an approaching wavefront. An adaptive optics computer then calculates the errors in the wavefront reflecting off of the deformable mirror surface by subtracting the wavefront from a reference wavefront.\cite{adaptive-optics-overview} Finally, electrostatic actuators in an array beneath the membrane surface of the mirror individually deform the surface to correct the wavefront. A comparison of the effects of a flat and deformable mirror on an aberrated wavefront is demonstrated in Figure~\ref{fig:Intro_wavefront}.   
+Mini MEMS Deformable Mirror, shown in Figure~\ref{fig:Intro_demi} will be used. In the deformable mirror system, a wavefront sensor measures wavefront aberrations in an approaching wavefront. An adaptive optics computer then calculates the errors in the wavefront reflecting off of the deformable mirror surface by subtracting the wavefront from a reference wavefront.\cite{adaptive-optics-overview} Finally, electrostatic actuators in an array beneath the membrane surface of the mirror individually deform the surface to correct the wavefront. A comparison of the effects of a flat and deformable mirror on an aberrated wavefront is demonstrated in Figure~\ref{fig:Intro_wavefront}.   
 
 \begin{figure}[!ht]
 \centering
@@ -203,8 +203,7 @@ During its operational period, the satellite will cycle between the data capture
 
 The satellite is expected to require an average of 3.54 Watts with up to 4.18 Watts with an 18\% margin applied. This allowance percentage of 18\% was derived from input from course faculty and the fact that most components will be commercial off the shelf with flight heritage. 
 
-Curerntly, the power system design carries a tight margin. The solar panels and battery are projected to supply up to 3.84 Watts; however, this would not satisfy the average power with margin needed at this stage in the design process. The power supplied is only 8.5\% higher than the expected power needed without margin. This issue is discussed in detail in Section ?? Power. 
-
+Curerntly, the power system design carries a tight margin. The solar panels and battery are projected to supply up to 3.84 Watts; however, this would not satisfy the average power with margin needed at this stage in the design process. The power supplied is only 8.5\% higher than the expected power needed without margin. This issue is discussed in detail in Section \ref{sec:power} Power.
 
 			
 			\begin{figure}[!ht]
@@ -269,7 +268,7 @@ approaches are considered for this platform due to the compact form
 factor, the desire to use simple COTS components, and processing capabilities. There are numerous wavefront
 sensing approaches that could be implemented, as well as
 modified versions of those presented here, but the two designs discussed are chosen for their ability to be simply implemented in a compact platform.
-While other designs (see Section~\ref{sec:payload_interferometer}) may be able to achieve higher precision, the Shack-Hartmann wavefront sensing system fits in the allotted volume with minor modifications to components, and allows for sufficient mirror characterization, meeting our mission goal and requirements (Table~\ref{table:payload_requirements}). Therefore, the Shack-Hartmann wavefront sensing design in Figure~\ref{fig:SHWFS} has been chosen to image the wavefront.
+While other designs (see Section~\ref{sec:payload_interferometer}) may be able to achieve higher precision, the Shack-Hartmann wavefront sensing system fits in the allotted volume with minor modifications to components, and allows for sufficient mirror characterization, meeting our mission goal and requirements (Section~\ref{sec:payload_requirements}). Therefore, the Shack-Hartmann wavefront sensing design in Figure~\ref{fig:SHWFS} has been chosen to image the wavefront.
 
 \subparagraph{Design Decision: Shack-Hartmann Wavefront Sensor - AC}
 
@@ -491,7 +490,7 @@ Lastly, specific properties of the deformable mirror system need to be explored.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % POWER
 			
-		\subsection{Power - JC}
+		\subsection{Power - JC} \label{sec:power}
 			\subsubsection{Requirements}
 			
 			\begin{itemize}
@@ -558,7 +557,7 @@ P_{req,avg} = \frac{1}{T_{total}}\sum_{modes}{ \sum_{systems}{T_{mode} \: P_{sys
 To meet those needs, the solar panels are required to gather more power, to account for the inefficiency of the EPS ($\eta = 0.85$ in the worst case\cite[p.~9]{EPS-manual}).  This required orbital-averaged power is compared to the results from the STK simulation in Table \ref{tab:power-trade-study}.  This requirement can then be scaled by a factor of $\frac{T_d + T_e}{T_d}$ to compute the power required from the solar panels while in sunlight.
 
 \begin{equation}
-P_{req,panels} = \frac{T_d + T_e}{T_d}\frac{P_{req,avg}}{\eta} = 6.61 \ \text{W (cold)}, 5.21 \ \text{W (hot)}, 4.16 \ \text{W (orbit avg)}
+P_{req,panels} = \frac{T_d + T_e}{T_d}\frac{P_{req,avg}}{\eta} = 6.61 \ \text{W (dark)}, 5.21 \ \text{W (bright)}, 4.16 \ \text{W (orbit avg)}
 \label{eq:power-required-panels}
 \end{equation}
 
@@ -588,14 +587,14 @@ E_{req,batt} = T_{sci} P_{sci} + T_{comm} P_{comm} + (T_e - T_{sci} - T_{comm}) 
 The excess power is the power actually generated by the panels that does not go into powering the satellite or charging the battery -- in other words, the difference between the power required power and the power actually generated:
 
 \begin{equation}
-P_{excess} = P_{panels} - P_{req,panels} = 0.63 \ \text{W (cold)}, 2.57 \ \text{W (hot)}
+P_{excess} = P_{panels} - P_{req,panels} = 0.63 \ \text{W (dark)}, 2.57 \ \text{W (bright)}
 \label{eq:power-excess}
 \end{equation}
 
 It can be useful to model the excess power as an average over the entire orbit, rather than just happening during local day (for first-order approximations of the equilibrium satellite temperature):
 
 \begin{equation}
-P_{excess,avg} = P_{excess} \: \frac{T_d}{T_d + T_e} = 0.40 \ \text{W (cold)}, 2.06 \ \text{W (hot)}
+P_{excess,avg} = P_{excess} \: \frac{T_d}{T_d + T_e} = 0.40 \ \text{W (dark)}, 2.06 \ \text{W (bright)}
 \label{eq:power-excess-avg}
 \end{equation}
 
@@ -632,13 +631,15 @@ Total & 0.939 & 0.6 & 0.36 & N/A & N/A \\\hline
 \end{center}
 \end{table}
 
-The solar panels do not literally have zero volume, but because they are fixed to the sides of the Cubesat, they do not occupy any of the three units of internal volume.
+The power subsystem's outputs were the mass and volume of its components, the power consumed, and the survival and operating temperatures.  The mass and volume were supplied to the Structures subsystem, to ensure that the components would meet the mass and volume constraints of a 3U Cubesat.  The power consumed was taken into consideration in the power budget.  The survival and operating temperatures were used by the Thermal subsystem, to establish the required temperatures in each operating mode.  The values are summarized in Table \ref{tab:power-outputs}.
+
+Some of the components did not contribute to the outputs to other subsystems.  The solar panels are fixed to the sides of the Cubesat, so they do not occupy any of the three units of internal volume, indicated by assigning them a volume of zero.  The battery's low-temperature constraint was not taken into account for the total survival and operating temperature ranges, because the battery has a built-in heater that keeps it above zero degrees Celsius.\cite[p.~12]{Battery-manual}
 
 			\subsubsection{Risks}
 
 The solar panels will supply 4.52 watts on average over an orbit, which is a 28\% margin over the power needs.  However, the EPS is not perfectly efficient.  The connection to the solar panels is the least efficient, with a minimum efficiency of 85\%\cite[p.~9]{EPS-manual}.  When this is taken into account, as few as 3.84 watts may actually be supplied to the battery power bus.  This has a margin of 9\% over the satellite's average power needs (which might then be further eroded by inefficiencies in the power lines), which is less than the 18\% margin goal set by Systems, and substantially less than the 30\% margin recommended by JPL.
 
-This system risk is mitigated by the 32\% margin of available power over the standby power need of 2.91 watts.  This provides assurance that the satellite will be power-positive during its standby mode.  Should the satellite find itself unable to meet its power needs with the nominal five minutes of data capture every orbit, it can be commanded to spend more time in standby and downlink modes to restore balance to the power budget.
+This system risk is mitigated by the 32\% margin of available power over the standby power need of 2.92 watts.  This provides assurance that the satellite will be power-positive during its standby mode.  Should the satellite find itself unable to meet its power needs with the nominal five minutes of data capture every orbit, it can be commanded to spend more time in standby and downlink modes to restore balance to the power budget.
 
 This strategy brings with it a mission risk: that if the 9\% margin is not enough, and the satellite is forced to spend more time in standby mode, it will not spend enough time on data capture and downlink modes to complete its science objectives.
 
