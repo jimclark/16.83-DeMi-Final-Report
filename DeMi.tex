@@ -627,30 +627,26 @@ The performance of the solar panels and batteries is temperature-dependent.  In 
 
 			\subsubsection{Requirements - ZC}
 			
-			\begin{table}[ht]
-\caption{Communications Driving Requirements}
-\begin{tabular}{l p{5in}} 
-COMM-3.1 & The subsystem shall transmit at $19.2\ kb/s$ for uplink and $1.5\ Mb/s$ for downlink. \\
-& Parent Requirement: COMM-3\\
-COMM-3.2 & The subsystem shall have a bandwidth of $445-455\ MHz$ for uplink and $460-470\ MHz$ for downlink. \\
-& Parent Requirement: COMM-3\\
-\end{tabular}\label{table:comm_requirements}
-\end{table}
+\begin{itemize}
+\item COMM-3.1 The subsystem shall transmit at $19.2\ kb/s$ for uplink and $1.5\ Mb/s$ for downlink. \\
+Parent Requirement: COMM-3
+\item COMM-3.2 The subsystem shall have a bandwidth of $445-455\ MHz$ for uplink and $460-470\ MHz$ for downlink. \\
+Parent Requirement: COMM-3
+\end{itemize}
 
-The driving requirements for the communications subsystem are that it should transmit at the data rates and frequencies (Comm-3.2) that are necessary to transmit all data to the ground station. The required frequencies are $445-455\ MHz$ for uplink and $460-470\ MHz$ for downlink. The required data rates are $19.2\ kb/s$ for uplink and $1.5\ Mb/s$ for downlink.
+The driving requirements for the Communications subsystem are that it should transmit at the data rates and frequencies (Comm-3.2) that are necessary to transmit all data to the ground station. The required frequencies are $445-455\ MHz$ for uplink and $460-470\ MHz$ for downlink. The required data rates are $19.2\ kb/s$ for uplink and $1.5\ Mb/s$ for downlink.
 
 			\subsubsection{Decisions Made - ZC}\label{sec:comm_decisions}
 
 The L-3 Cadet Nanosat UHF Radio was chosen for use on DeMi. It transmits at the frequencies and data rates outlined in the requirements. The transceiver has an extra $4\ GB$ of storage that avionics uses in addition to any of its storage. 
 
-Because the transceiver is transmitting and receiving at UHF frequencies, a very common antenna choice is to use a measuring tape antenna that is tuned to the frequency that is desired. Because the antenna works like a quarter-wave monopole, the desired length of the antenna is calculated by dividing the wavelength of the signal by 4. Because the transmitting and receiving frequencies are different, the average of these frequencies is used to compute the wavelength. With a frequency of $465\ MHz$, the wavelength equals $.645$ meters. Then, the length of the antenna can be determined using Eq.~\ref{eq:comm-antenna-length}.
-
+Because the transceiver is transmitting and receiving at UHF frequencies, a very common antenna choice is to use a measuring tape antenna that is tuned to the frequency that is desired. Because the antenna works like a quarter-wave monopole, the desired length of the antenna is calculated by dividing the wavelength of the signal by 4. Because the transmitting and receiving frequencies are different, the average of these frequencies is used to compute the wavelength. With a frequency of $465\ MHz$, the wavelength equals $.645$ meters. Then, the length of the antenna can be determined using Equation~\ref{eq:comm-antenna-length}.
 
 \begin{equation}\label{eq:comm-antenna-length}
 \lambda = c/f
 \end{equation}
 
-In Eq.~\ref{eq:comm-antenna-length}, $l$ is the length of the antenna, and $\lambda$ is the wavelength.
+In Equation~\ref{eq:comm-antenna-length}, $l$ is the length of the antenna, and $\lambda$ is the wavelength.
 Using a wavelength of .645 meters, the desired length of the antenna is about .164 meters. The
 gain of this antenna will be approximately 3 dB and the beam width approximately $65^\circ$. DeMi is
 using two of these antennas so that communication can occur even if it is rotated 180 degrees
@@ -661,7 +657,7 @@ The ground station that DeMi communicates with will be the NASA Wallops UHF Grou
 
 \subsubsection{Trade Studies - ZC} \label{sec:communications-trade-studies}
 
-The main factor in choosing the transceiver on DeMi is the maximum data downlink rate. Because payload is generating so much data, the communications system needs to have a high downlink rate to ensure that all of that data can be sent to the ground. Several options were investigated, and the transceiver with the highest data rate is being used. The transceivers that were considered and their maximum data rates are shown in Table~\ref{table:comm_transceivers}.
+The main factor in choosing the transceiver on DeMi is the maximum data downlink rate. Because Payload is generating so much data, the Communications system needs to have a high downlink rate to ensure that all of that data can be sent to the ground. Several options were investigated, and the transceiver with the highest data rate is being used. The transceivers that were considered and their maximum data rates are shown in Table~\ref{table:comm_transceivers}.
 
 \begin{table}[ht]
 \caption{Communications Trade Study for Maximum Downlink Data Rate}
@@ -688,55 +684,55 @@ The first calculation for the link budget is to determine the worst case propaga
 
 \begin{figure}[ht]
 \centering
-  \includegraphics[width=4in]{images/comm-angles.png}
+  \includegraphics[width=5in]{images/comm-angles.png}
 \caption{Diagram of propagation path of a signal from a satellite \cite[p.~12]{ITU-R}.}
 \label{fig:comm_propagation_path}
 \end{figure}
 
-In order to determine the propagation path length, $r$, the path length of the first layer and the second layer must be determined and added together. The equation for calculating the path length of a layer is as follows in Eq.~\ref{eq:comm_path_length} \cite[p.~9]{ITU-R}.
+In order to determine the propagation path length, $r$, the path length of the first layer and the second layer must be determined and added together. The equation for calculating the path length of a layer is as follows in Equation~\ref{eq:comm_path_length} \cite[p.~9]{ITU-R}.
 
 \begin{equation}\label{eq:comm_path_length}
 a_n = -r_n\cos(\beta_n) + \frac{1}{2}\sqrt{4r_n^2\cos^2(\beta_n)+8r_n\delta_n+4\delta_n^2} 
 \end{equation}
 
 In this equation, $a_n$ is the path length through layer $n$, $r_n$ is the radius from the center of the Earth to the beginning of layer $n$, $\beta_n$ is the exiting incidence angle, and $\delta_n$ is the thickness of layer $n$.
-The angle $\beta_n$ can be calculated using Eq.~\ref{eq:comm-exit-angle} \cite[p.~10]{ITU-R}.
+The angle $\beta_n$ can be calculated using Equation~\ref{eq:comm-exit-angle} \cite[p.~10]{ITU-R}.
 
 \begin{equation}\label{eq:comm-exit-angle}
 \beta_{n+1} = \arcsin\biggl(\frac{n_n}{n_{n+1}}\sin(\alpha_n)\biggr) 
 \end{equation}
 
-In this equation, $n_n$ is the refractive index of layer $n$, and $\alpha_n$ is the entry incidence angle. Angle $\alpha_n$ can be calculated with the last equation needed in order to calculate the propagation length, Eq.~\ref{eq:comm-entry-angle} \cite[p.~9]{ITU-R}.
+In this equation, $n_n$ is the refractive index of layer $n$, and $\alpha_n$ is the entry incidence angle. Angle $\alpha_n$ can be calculated with the last equation needed in order to calculate the propagation length, Equation~\ref{eq:comm-entry-angle} \cite[p.~9]{ITU-R}.
 
 \begin{equation}\label{eq:comm-entry-angle}
 \alpha_n = \pi - \arccos \biggl(\frac{-a_n^2 - 2r_n\delta_n - \delta_n^2}{2a_n r_n + 2a_n \delta_n}\biggr) 
 \end{equation}
 
-Values that still need to be defined are $\beta_1$ (because it cannot be calculated using the Eq.~\ref{eq:comm-entry-angle}), $\delta_1$, $\delta_2$, $n_1$, and $n_2$. $\beta_1$ is just equal to the complimentary angle to the minimum angle at which the Wallops Ground Station can track, which is $5^\circ$. $\delta_1$ will be equal to the altitude at which the atmosphere ends which one can say is about $100\ km$. $\delta_2$ is just the orbiting altitude minus $\delta_1$. $n_1$, which is simple the refractive index of air, is $1.000293$. The last remaining value to be defined is $n_2$, which is the refractive index of a vacuum, which is just 1. Using these equations, one can find that $a_1$ equals $707\ km$, and $a_2$ equals $1375\ km$. This means that the worst case propagation path length is equal to $2082\ km$. The refraction of the wave in air did not change the path length by very much. Without accounting for the refraction, the path length can be calculated using the equation for $a_n$. In this calculation, $r_n$ equals $r_1$, $\beta_n$ equals $\beta_1$, and $\delta_n$ equals $500\ km$ which is the altitude at which DeMi orbits. These values give a path length equal to $2077\ km$, which is only $5\ km$ shorter than the path length when taking refraction into consideration.
+Values that still need to be defined are $\beta_1$ (because it cannot be calculated using the Equation~\ref{eq:comm-entry-angle}), $\delta_1$, $\delta_2$, $n_1$, and $n_2$. $\beta_1$ is just equal to the complimentary angle to the minimum angle at which the Wallops Ground Station can track, which is $5^\circ$. $\delta_1$ will be equal to the altitude at which the atmosphere ends which one can say is about $100\ km$. $\delta_2$ is just the orbiting altitude minus $\delta_1$. $n_1$, which is simple the refractive index of air, is $1.000293$. The last remaining value to be defined is $n_2$, which is the refractive index of a vacuum, which is just 1. Using these equations, one can find that $a_1$ equals $707\ km$, and $a_2$ equals $1375\ km$. This means that the worst case propagation path length is equal to $2082\ km$. The refraction of the wave in air did not change the path length by very much. Without accounting for the refraction, the path length can be calculated using the equation for $a_n$. In this calculation, $r_n$ equals $r_1$, $\beta_n$ equals $\beta_1$, and $\delta_n$ equals $500\ km$ which is the altitude at which DeMi orbits. These values give a path length equal to $2077\ km$, which is only $5\ km$ shorter than the path length when taking refraction into consideration.
 
-The next value calculated in the link budgets is the Equivalent, Isotropic Radiated Power (EIRP). In order to calculate the EIRP, Eq.~\ref{eq:comm-eirp} should be used \cite[p.~476]{SMAD}.
+The next value calculated in the link budgets is the Equivalent, Isotropic Radiated Power (EIRP). In order to calculate the EIRP, Equation~\ref{eq:comm-eirp} should be used \cite[p.~476]{SMAD}.
 
 \begin{equation}\label{eq:comm-eirp}
 EIRP = P_{tx} + G_{tx} - L_{output} 
 \end{equation}
 
-In Eq.~\ref{eq:comm-eirp}, $P_{tx}$ is the transmitter power, $G_{tx}$ is the transmit antenna gain, and $L_{output}$ is the output loss which is equal to all losses associated with the transmitter. All of these values can be found in the two link budgets in Appendix~\ref{app:link_budgets}.
+In Equation~\ref{eq:comm-eirp}, $P_{tx}$ is the transmitter power, $G_{tx}$ is the transmit antenna gain, and $L_{output}$ is the output loss which is equal to all losses associated with the transmitter. All of these values can be found in the two link budgets in Appendix~\ref{app:link_budgets}.
 
-Another calculated value in the link budget is the space loss. This is the loss of the signal as it is transmitted through space. It can be calculated using Eq.~\ref{eq:comm-space-loss} \cite[p.~476]{SMAD}.
+Another calculated value in the link budget is the space loss. This is the loss of the signal as it is transmitted through space. It can be calculated using Equation~\ref{eq:comm-space-loss} \cite[p.~476]{SMAD}.
 
 \begin{equation}\label{eq:comm-space-loss}
 L_s = 92.45 + 20\log_{10}(r) + 20\log_{10}(f) 
 \end{equation}
 
-In Eq.~\ref{eq:comm-space-loss}, $L_s$ is space loss, $r$ is the propagation path length, and $f$ is the frequency of the transmitted signal. All of these values can also be found in the two link budget tables in Appendix~\ref{app:link_budgets}.
+In Equation~\ref{eq:comm-space-loss}, $L_s$ is space loss, $r$ is the propagation path length, and $f$ is the frequency of the transmitted signal. All of these values can also be found in the two link budget tables in Appendix~\ref{app:link_budgets}.
 
-Eq.~\ref{eq:comm-antenna-temp} can be used to calculate the transmitting antenna temperature \cite{pozar}.
+Equation~\ref{eq:comm-antenna-temp} can be used to calculate the transmitting antenna temperature \cite{pozar}.
 
 \begin{equation}\label{eq:comm-antenna-temp}
 T_{antenna} = \eta T_{sky} + (1 + \eta) \frac{T_{sky} + T_{ground}}{2} 
 \end{equation}
 
-In Eq.~\ref{eq:comm-antenna-temp}, $\eta$ is the antenna efficiency, $T_{sky}$ is the temperature of the space behind the receiving antenna. The temperatures used for uplink are determined by using the background temperature of space. For downlink, the temperature of the Earth is used. $T_{ground}$ is the temperature of the ground around the antenna. For uplink, this is the temperature of the Earth, and for Downlink, it is the background temperature of space.
+In Equation~\ref{eq:comm-antenna-temp}, $\eta$ is the antenna efficiency, $T_{sky}$ is the temperature of the space behind the receiving antenna. The temperatures used for uplink are determined by using the background temperature of space. For downlink, the temperature of the Earth is used. $T_{ground}$ is the temperature of the ground around the antenna. For uplink, this is the temperature of the Earth, and for Downlink, it is the background temperature of space.
 
 The system noise temperature, $T_{sys}$, is calculated by adding the transmitting antenna temperature and the receiver temperature \cite{pozar}. The receiver temperature for both cases is unique to the receiver and can be determined by the manufacturer.
 
@@ -746,13 +742,13 @@ The next calculated value is the Receiver Gain to Noise Temperature. This is com
 \frac{G}{T} =  G_{rx} - T_{sys} 
 \end{equation}
 
-In Eq.~\ref{eq:comm-gain-to-noise}, $G/T$ is the receiver gain to noise temperature, $G_{rx}$ is the receiving antenna gain, and $T_{sys}$ is the system noise temperature. Using $G/T$, the total losses in the system, and EIRP one can determine the receiver carrier to noise ratio \cite[p.~477]{SMAD}.
+In Equation~\ref{eq:comm-gain-to-noise}, $G/T$ is the receiver gain to noise temperature, $G_{rx}$ is the receiving antenna gain, and $T_{sys}$ is the system noise temperature. Using $G/T$, the total losses in the system, and EIRP one can determine the receiver carrier to noise ratio \cite[p.~477]{SMAD}.
 
 \begin{equation}\label{eq:comm-carrier-to-noise}
 \frac{C}{N_0} = EIRP + \frac{G}{T} - L_{total} + 228.6 
 \end{equation}
 
-Using the value from Eq.~\ref{eq:comm-carrier-to-noise} and the data rate in decibels, one can calculate the energy per bit to noise ratio \cite[p.~478]{SMAD}.
+Using the value from Equation~\ref{eq:comm-carrier-to-noise} and the data rate in decibels, one can calculate the energy per bit to noise ratio \cite[p.~478]{SMAD}.
 
 \begin{equation}\label{eq:comm-energy-to-noise}
 \frac{E_b}{N_0} = \frac{C}{N_0} - R_b 
@@ -773,20 +769,20 @@ Finally, the link margin can be determined by subtracting the required energy pe
 		
 \subsubsection{Summary of Outputs - ZC}
 
-There were several outputs during the design process from the communications subsystem. These outputs include the ground station to the orbits subsystem, which is NASA Wallops UHF Ground Station, the beam width of Wallops UHF Ground Station and DeMi to ADCS, which are $2.9^\circ$ and $65^\circ$ respectively. The operational and survival temperatures of the transceiver to the thermal subsystem, the power for each mode to the power subsystem, and the mass and volume to the structures subsystem are detailed in Table~\ref{table:comm_summary_outputs}.
+There were several outputs during the design process from the Communications subsystem. These outputs include the ground station to the orbits subsystem, which is NASA Wallops UHF Ground Station, the beam width of Wallops UHF Ground Station and DeMi to ADCS, which are $2.9^\circ$ and $65^\circ$ respectively. The operational and survival temperatures of the transceiver to the Thermal subsystem, the power for each mode to the Power subsystem, and the mass and volume to the Structures subsystem are detailed in Table~\ref{table:comm_summary_outputs}.
 	
 \begin{table}[ht]
 \caption{Communications Budgets}
 \begin{center}
     \begin{tabular}{|c||c|} \hline
     	Output & Value \\ \hline \hline
-    Power (Standby) & $0.51\ W$  \\
-    Power (Data Capture) & $0.51\ W$ \\
-    Power (Downlink) & $11.44\ W$ \\
-    Power (Uplink) & $0.51\ W$ \\
-    Power (Safe Mode) & $0.51\ W$ \\
-    Mass & $\sim 0.235\ kg$  \\
-    Volume & $0.069\ U$ \\ 
+    Power (Standby) & 0.51 W  \\
+    Power (Data Capture) & 0.51 W \\
+    Power (Downlink) & 11.44 W \\
+    Power (Uplink) & 0.51 W \\
+    Power (Safe Mode) & 0.51 W \\
+    Mass & $\sim$ 0.235 kg  \\
+    Volume & 0.069 U \\ 
 Operating Temperature Range & $-20^\circ$ to $70^\circ$ \\
 Survival Temperature Range & $-40^\circ$ to $80^\circ$ \\ \hline 
     \end{tabular}\label{table:comm_summary_outputs}
@@ -794,8 +790,8 @@ Survival Temperature Range & $-40^\circ$ to $80^\circ$ \\ \hline
 \end{table}
 
 			\subsubsection{Risks - ZC}
-			Initially, there were concerns that communications may not be able to downlink enough of the
-data from the payload; however, avionics has decided that because of this risk, DeMi will be
+			Initially, there were concerns that Communications may not be able to downlink enough of the
+data from the Payload; however, Avionics has decided that because of this risk, DeMi will be
 doing on-board processing so that less data is required to be downlinked. There is the risk
 that there may be a lot of interference at the frequencies that DeMi uses. In order to determine
 this, there would have to be a ground station site survey and if there were a problem with
@@ -813,11 +809,17 @@ interference, specialized receiver software would have to be developed to mitiga
 \subsection{Avionics}
 
 \subsubsection{Requirements - VE}
-The main avionics subsystem requirements are to provide the necessary interfaces, calculations and data storing capability to support functioning of all other subsystems during the mission operation. Other than that avionics shall be able to recover from potential single event effects and permit software updates and reprogramming in orbit.
+\begin{itemize}
+\item AVI-1 Avionics shall provide the necessary interfaces to support all subsystems.\\
+Parent requirement: MLR-3, SYS-2
+\item AVI-3 Avionics shall write and store data to a mass storage device onboard the satellite.\\
+Parent requirement: MLR-4, SYS-2
+\end{itemize}
+The main Avionics subsystem requirements are to provide the necessary interfaces, calculations and data storing capability to support functioning of all other subsystems during the mission operation. Other than that Avionics shall be able to recover from potential single event effects and permit software updates and reprogramming in orbit.
 However, the most important requirements to consider are the memory and processor capabilities because they are the most difficult to satisfy with a current level of technology.
 
 			\subsubsection{Trade Studies - VE}
-There are two main avionics configurations to be considered that are both able to satisfy subsystem’s requirements. They are presented in Table~\ref{table:avionics_hardware_options}. The major difference between configurations is a capability of the first system to do real time image processing, which results in higher complexity and power consumption of that system (see The Steepest Ascent Mission Interface Computer in Table~\ref{table:avionics_hardware_options}). The second configuration only allows downloading raw images to the ground stations without processing them.
+There are two main Avionics configurations to be considered that are both able to satisfy subsystem’s requirements. They are presented in Table~\ref{table:avionics_hardware_options}. The major difference between configurations is a capability of the first system to do real time image processing, which results in higher complexity and power consumption of that system (see The Steepest Ascent Mission Interface Computer in Table~\ref{table:avionics_hardware_options}). The second configuration only allows downloading raw images to the ground stations without processing them.
 
 
 \begin{table}[ht]
@@ -840,7 +842,7 @@ There are two main avionics configurations to be considered that are both able t
 To select an appropriate hardware, payload requirements should be considered first, since they introduce the most limitations to the processor and memory capabilities.
 
 \begin{table}[ht]
-\caption{Payload modes}
+\caption{Camera imaging modes}
 \label{table:avionics_modes}
 \begin{center}
     \begin{tabular}{| c || c | c | c |} \hline
@@ -857,7 +859,7 @@ If an approach where all the generated by payload data is sent to ground station
 
 That is why the second approach is considered. It assumes all necessary calculations to be done onboard and only results are sent to the ground. It dramatically reduces the amount of transferred data to around 10-100 KB instead of gigabytes and enables to implement a closed loop deformable mirror control system.
 
-The next step is avionics subsystem - its processor. Now we have higher but still reasonable requirements for processing power according to the computation tasks that it will be solving:
+The next step is Avionics subsystem - its processor. Now we have higher but still reasonable requirements for processing power according to the computation tasks that it will be solving:
 1) centroid, delta x and delta y computations, 2) slope reconstruction, and 3) linear algebra for mirror controller.
 
 The Steepest Ascent Mission Interface Computer CS-MIC-G-EM is a good fit for such tasks because it has an FPGA to be configured for image processing and a microcontroller for general tasks such as telemetry and ADCS computations (see Section~\ref{adcs_analysis}).
@@ -868,7 +870,7 @@ The Steepest Ascent Mission Interface Computer CS-MIC-G-EM is a good fit for suc
 
 The CS-MIC-G-EM meets these demands, supporting telemetry and telecommand operations, as well as providing a platform to perform advanced on-board pre-processing of data, allowing for more sophisticated analysis to be performed and more efficient use of available downlink bandwidths. 
 
-Other key features of the CS-MIC-G-EM include its mass storage capability, allowing data from multiple payload units to be stored centrally and the ability to reprogram the on-board processing units, allowing in-flight updates of algorithms to be performed as well as novel concepts to be supported.
+Other key features of the CS-MIC-G-EM include its mass storage capability, allowing data from multiple Payload units to be stored centrally and the ability to reprogram the on-board processing units, allowing in-flight updates of algorithms to be performed as well as novel concepts to be supported.
 
 \begin{figure}[ht]
 \centering
@@ -891,7 +893,7 @@ General system architecture is shown in Figure~\ref{fig:avionics_architecture}. 
 
 Another important component to be mentioned is an operating system that is required to control the satellite. Since low power microcontrollers (MSP430) are used, FreeRTOS from Real Time Engineers Ltd. \cite{avionics_RTOS} or Salvo from Pumpkin, Inc. \cite{avionics_pumpkin} real-time operating systems are the best options. Image processing software is supposed to be embedded into FPGA as synthesized hardware architecture which can be done from MATLAB code using HDL Coder.
 
-Avionics provides the following interfaces with other subsystems (see Table~\ref{table:avionics_interfaces}). It is important to mention that all analog interfaces are implemented in a Power Distribution Module (PDM). It allows collecting all the data from analog sensors and sending over a single I2C interface to the avionics board. PDM implements torque coil drivers as well.
+Avionics provides the following interfaces with other subsystems (see Table~\ref{table:avionics_interfaces}). It is important to mention that all analog interfaces are implemented in a Power Distribution Module (PDM). It allows collecting all the data from analog sensors and sending over a single I2C interface to the Avionics board. PDM implements torque coil drivers as well.
 
 
 \begin{table}[ht]
@@ -918,7 +920,7 @@ $^1$Assuming update 10 times per second
 
 			\subsubsection{Summary of Outputs - ZC}
 
-The avionics system gives values to Thermal for operational temperature range, to power for power consumed during the different modes, and to structures for the mass and volume. These outputs are detailed in the chart below (see Table~\ref{table:avionics_summary_outputs}). The survival temperatures of the components are unknown.
+The Avionics subsystem gives values to the Thermal subsystem for operational temperature range, to the Power subsystem for power consumed during the different modes, and to structures for the mass and volume. These outputs are detailed in the chart below (see Table~\ref{table:avionics_summary_outputs}). The survival temperatures of the components are unknown.
 
 
 \begin{table}[ht]
@@ -938,10 +940,10 @@ The avionics system gives values to Thermal for operational temperature range, t
 \end{table}
 
 			\subsubsection{Risks - ZC}
-There are two risks that avionics currently faces. One risk, that has a high consequence but a very low likelihood, is that the system may not be capable of processing all of the incoming data for payload. Payload is outputting a lot of data, and because the design of the code that will do the process has not yet been done, it is unclear how quickly the avionics system will be able to process incoming data. The other risk that avionics currently faces, which is of very low likelihood, but very high consequence, is that it may not be capable of providing the required latency for payload or for ADCS. Research needs to be conducted to determine how fast avionics can receive and issue orders to ensure that the computer is fast enough for the system. If it is not fast enough there could be major failures in the system because the attitude of the craft is not correct.
+There are two risks that Avionics currently faces. One risk, that has a high consequence but a very low likelihood, is that the system may not be capable of processing all of the incoming data for payload. Payload is outputting a lot of data, and because the design of the code that will do the process has not yet been done, it is unclear how quickly the Avionics system will be able to process incoming data. The other risk that Avionics currently faces, which is of very low likelihood, but very high consequence, is that it may not be capable of providing the required latency for payload or for ADCS. Research needs to be conducted to determine how fast Avionics can receive and issue orders to ensure that the computer is fast enough for the system. If it is not fast enough there could be major failures in the system because the attitude of the craft is not correct.
 
 			\subsubsection{Future Work - ZC}
-The future work that needs to be conducted is that there should be work done to determine a solution to interfacing with payload. The mirror driver interfaces with USB 2.0, however the avionics board is not able to interface with this. A custom board may be needed to interface the mirror driver with the avionics board. Research should also be done to ensure that the system can run all of the necessary calculations at the required speed so that all of the payload data can be processed and sent to the ground. If all of the data cannot be processed, it would be difficult to complete the science goals.
+The future work that needs to be conducted is that there should be work done to determine a solution to interfacing with payload. The mirror driver interfaces with USB 2.0, however the Avionics board is not able to interface with this. A custom board may be needed to interface the mirror driver with the Avionics board. Research should also be done to ensure that the system can run all of the necessary calculations at the required speed so that all of the payload data can be processed and sent to the ground. If all of the data cannot be processed, it would be difficult to complete the science goals.
 
 
 \newpage
@@ -1619,45 +1621,45 @@ $^1$Estimated from ThorLabs miniseries post MS075.
 \hline
     \textbf{Item}  & \textbf{Symbol} & \textbf{Units}  & \textbf{Worst Case} & \textbf{Best Case} & \textbf{Source}  \\
     \hline \hline
-    frequency & f     & GHz   & 0.45  & 0.45  & Hardware \\ \hline
-    wavelength & lambda & m     & 0.667 & 0.667 & Lambda=c/f \\ \hline
-    propagation path length & r     & km    & 2082  & 500   & Mission/ ITU-R P.676-9 eq 17, 18, 19 \\\hline
-    data rate & R     & bps   & 19200 & 19200 & Hardware \\\hline
-    data rate & R     & dB    & 42.833 & 42.833 &  \\\hline
-    transmit antenna diameter & D\_t  & m     & 18.29 & 18.29 & Wallops \\\hline
-    transmit antenna beam width & theta\_t & deg   & 2.9   & 2.9   & Wallops \\\hline
-    transmitter power & P     & W     & 1     & 2     & from DICE mission \\\hline
-    transmitter power & P     & dBW   & 0     & 3.01  &  \\\hline
-    transmit antenna gain & G\_t  & dBi   & 35    & 35    & Wallops \\\hline
-    transmit antenna pointing offset & e\_t  & deg   & 1     & 0     &  \\\hline
-    transmit antenna pointing loss & L\_pt & dB    & 1.5   & 0     & Antenna Gain Pattern \\\hline
-    transmitter line loss & L\_l  & dBW   & 1     & 0.5   & Line Loss for Coax Cable$^2$ \\\hline
-    equivalent isotropic radiated power & EIRP  & dbW   & 32.5  & 37.51 & SMAD 16-20 \\\hline
-    receive antenna efficiency & eta   &       & 0.5   & 0.5   & approximate efficiency \\\hline
-    receive antenna beam width & theta\_r & deg   & 65    & 65    & Antenna Gain pattern \\\hline
-    receive antenna gain & G\_r  & dBi   & -4    & 3     &  \\\hline
-    receive antenna pointing offset & e\_r  & deg   & 5     & 1     & SMAD \\\hline
-    receive antenna pointing loss & L\_pr & dB    & 3     & 0     &  \\\hline
-    space loss & L\_s  & dB    & 151.884 & 139.494 & SMAD 16-22 \\\hline
-    Dry-air and water vapor loss & L\_atm & dB    & 0.02  & 0.02  & ITU-R P.676-9 Figure 6 \\\hline
-    total loss & L\_comb & dB    & 157.404 & 140.014 &  \\\hline
-    Sky Temperature & T\_sky & K     & 60    & 30    &  \\\hline
-    Ground Temperature & T\_ground & K     & 290   & 290   &  \\\hline
-    Antenna Temperature & T\_antenna & K     & 117.5 & 95    & Pozar Eq \\\hline
-    Receiver Temperature & T\_receiver & K     & 3270  & 3270  & Hardware \\\hline
-    System Noise Temperature & T\_s  & K     & 3387.5 & 3365  & Pozar Eq \\\hline
-    System Noise Temperature & T\_s  & dB    & 35.299 & 35.27 &  \\\hline
+    frequency & $f$     & GHz   & 0.45  & 0.45  & Hardware \\ \hline
+    wavelength & $\lambda$ & m     & 0.667 & 0.667 & Lambda=c/f \\ \hline
+    propagation path length & $r$     & km    & 2082  & 500   & Mission/ ITU-R P.676-9 eq 17, 18, 19 \\\hline
+    data rate & $R$     & bps   & 19200 & 19200 & Hardware \\\hline
+    data rate & $R$     & dB    & 42.833 & 42.833 &  \\\hline
+    transmit antenna diameter & $D_t$  & m     & 18.29 & 18.29 & Wallops \\\hline
+    transmit antenna beam width & $\theta_t$ & deg   & 2.9   & 2.9   & Wallops \\\hline
+    transmitter power & $P$     & W     & 1     & 2     & from DICE mission \\\hline
+    transmitter power & $P$     & dBW   & 0     & 3.01  &  \\\hline
+    transmit antenna gain & $G_t$  & dBi   & 35    & 35    & Wallops \\\hline
+    transmit antenna pointing offset & $e_t$  & deg   & 1     & 0     &  \\\hline
+    transmit antenna pointing loss & $L_{pt}$ & dB    & 1.5   & 0     & Antenna Gain Pattern \\\hline
+    transmitter line loss & $L_l$  & dBW   & 1     & 0.5   & Line Loss for Coax Cable \cite{loss-calc} \\\hline
+    equivalent isotropic radiated power & $EIRP$  & dbW   & 32.5  & 37.51 & SMAD 16-20 \\\hline
+    receive antenna efficiency & $\eta$   &       & 0.5   & 0.5   & approximate efficiency \\\hline
+    receive antenna beam width & $\theta_r$ & deg   & 65    & 65    & Antenna Gain pattern \\\hline
+    receive antenna gain & $G_r$  & dBi   & -4    & 3     &  \\\hline
+    receive antenna pointing offset & $e_r$  & deg   & 5     & 1     & SMAD \\\hline
+    receive antenna pointing loss & $L_{pr}$ & dB    & 3     & 0     &  \\\hline
+    space loss & $L_s$  & dB    & 151.884 & 139.494 & SMAD 16-22 \\\hline
+    Dry-air and water vapor loss & $L_{atm}$ & dB    & 0.02  & 0.02  & ITU-R P.676-9 Figure 6 \\\hline
+    total loss & $L_{comb}$ & dB    & 157.404 & 140.014 &  \\\hline
+    Sky Temperature & $T_{sky}$ & K     & 60    & 30    &  \\\hline
+    Ground Temperature & $T_{ground}$ & K     & 290   & 290   &  \\\hline
+    Antenna Temperature & $T_{antenna}$ & K     & 117.5 & 95    & Pozar Eq \\\hline
+    Receiver Temperature & $T_{receiver}$ & K     & 3270  & 3270  & Hardware \\\hline
+    System Noise Temperature & $T_s$  & K     & 3387.5 & 3365  & Pozar Eq \\\hline
+    System Noise Temperature & $T_s$  & dB    & 35.299 & 35.27 &  \\\hline
     receiver G/T & --    & dB    & -39.299 & -32.27 & SMAD 16-27 \\\hline
-    Boltzmann constant & k\_b  & dB    & -228.599 & -228.599 & -- \\\hline
+    Boltzmann constant & $k_b$  & dB    & -228.599 & -228.599 & -- \\\hline
     C/N0  & --    & dB    & 64.397 & 93.826 & SMAD 16-30 \\\hline
     Eb/N0 & --    & dB    & 21.563 & 50.993 & SMAD 16-31 \\\hline
-    Bit Error Rate & BER   & \%    & 10\^-5 & 10\^-5 &  \\\hline
+    Bit Error Rate & $BER$   & \%    & 10\^-5 & 10\^-5 &  \\\hline
     Required Eb/N0 & --    & dB    & 9.5   & 9.5   & SMAD figure 16-16 \\\hline
     margin & --    & dB    & 12.064 & 41.493 & SMAD16-33 \\
 \hline
 \end{longtable}
 \end{center}
-$^2$\url{http://www.arrg.us/pages/Loss-Calc.htm}
+
 
 \newpage
 
@@ -1668,45 +1670,44 @@ $^2$\url{http://www.arrg.us/pages/Loss-Calc.htm}
 \hline
     \textbf{Item}  & \textbf{Symbol} & \textbf{Units}  & \textbf{Worst Case} & \textbf{Best Case} & \textbf{Source}  \\
     \hline \hline
-    frequency & f     & GHz   & 0.465 & 0.465 & Hardware \\\hline
-    wavelength & lambda & m     & 0.645 & 0.645 & Lambda=c/f \\\hline
-    propagation path length & r     & km    & 2082  & 500   & Mission/ITU-R P.676-9 eq 17, 18, 19 \\\hline
-    data rate & R     & bps   & 1500000 & 1500000 & Hardware \\\hline
-    data rate & R     & dB    & 61.761 & 61.761 &  \\\hline
-    transmit antenna length & l     & m     & 0.164 & 0.164 & quarter-wave monopole \\\hline
-    transmit antenna beam width & theta\_t & deg   & 65    & 65    & Antenna Gain Pattern \\\hline
-    transmitter power & P     & W     & 1     & 2     & from DICE mission \\\hline
-    transmitter power & P     & dBW   & 0     & 3.01  &  \\\hline
-    transmit antenna gain & G\_t  & dBi   & -4    & 3     &  \\\hline
-    transmit antenna pointing offset & e\_t  & deg   & 5     & 1     & SMAD \\\hline
-    transmit antenna pointing loss & L\_pt & dB    & 3     & 0     &  \\\hline
-    transmitter line loss & L\_l  & dBW   & -1    & -0.8  & Line Loss for Coax Cable$^2$ \\\hline
-    equivalent isotropic radiated power & EIRP  & dbW   & -6    & 6.81  & SMAD 16-20 \\\hline
-    receive antenna efficiency & eta   & --    & 0.5   & 0.5   & approximate efficiency \\\hline
-    receive antenna beam width & theta\_r & deg   & 2.9   & 2.9   & Wallops \\\hline
-    receive antenna gain & G\_r  & dBi   & 35    & 35    & Wallops \\\hline
-    receive antenna pointing offset & e\_r  & deg   & 1     & 0     &  \\\hline
-    receive antenna pointing loss & L\_pr & dB    & 1.5   & 0     & Antenna Gain pattern \\\hline
-    space loss & L\_s  & dB    & 152.169 & 139.778 & SMAD 16-22 \\\hline
-    Dry-air and water vapor loss & L\_atm & dB    & 0.02  & 0.02  & ITU-R P.676-9 Figure 6 \\hline\
-    total loss & L\_comb & dB    & 155.689 & 138.998 &  \\\hline
-    Sky Temperature & T\_sky & K     & 290   & 290   &  \\\hline
-    Ground Temperature & T\_ground & K     & 60    & 30    &  \\\hline
-    Antenna Temperature & T\_antenna & K     & 232.5 & 225   & Pozar Eq \\\hline
-    Receiver Temperature & T\_receiver & K     & 66    & 66    & Wallops \\\hline
-    System Noise Temperature & T\_s  & K     & 298.5 & 291   & Pozar Eq \\\hline
-    System Noise Temperature & T\_s  & dB    & 24.749 & 24.639 &  \\\hline
+    frequency & $f$     & GHz   & 0.465 & 0.465 & Hardware \\\hline
+    wavelength & $\lambda$ & m     & 0.645 & 0.645 & Lambda=c/f \\\hline
+    propagation path length & $r$     & km    & 2082  & 500   & Mission/ITU-R P.676-9 eq 17, 18, 19 \\\hline
+    data rate & $R$     & bps   & 1500000 & 1500000 & Hardware \\\hline
+    data rate & $R$     & dB    & 61.761 & 61.761 &  \\\hline
+    transmit antenna length & $l$     & m     & 0.164 & 0.164 & quarter-wave monopole \\\hline
+    transmit antenna beam width & $\theta_t$ & deg   & 65    & 65    & Antenna Gain Pattern \\\hline
+    transmitter power & $P$     & W     & 1     & 2     & from DICE mission \\\hline
+    transmitter power & $P$     & dBW   & 0     & 3.01  &  \\\hline
+    transmit antenna gain & $G_t$  & dBi   & -4    & 3     &  \\\hline
+    transmit antenna pointing offset & $e_t$  & deg   & 5     & 1     & SMAD \\\hline
+    transmit antenna pointing loss & $L_{pt}$ & dB    & 3     & 0     &  \\\hline
+    transmitter line loss & $L_l$  & dBW   & -1    & -0.8  & Line Loss for Coax Cable \cite{loss-calc} \\\hline
+    equivalent isotropic radiated power & $EIRP$  & dbW   & -6    & 6.81  & SMAD 16-20 \\\hline
+    receive antenna efficiency & $\eta$   & --    & 0.5   & 0.5   & approximate efficiency \\\hline
+    receive antenna beam width & $\theta_r$ & deg   & 2.9   & 2.9   & Wallops \\\hline
+    receive antenna gain & $G_r$  & dBi   & 35    & 35    & Wallops \\\hline
+    receive antenna pointing offset & $e_r$  & deg   & 1     & 0     &  \\\hline
+    receive antenna pointing loss & $L_{pr}$ & dB    & 1.5   & 0     & Antenna Gain pattern \\\hline
+    space loss & $L_s$  & dB    & 152.169 & 139.778 & SMAD 16-22 \\\hline
+    Dry-air and water vapor loss & $L_{atm}$ & dB    & 0.02  & 0.02  & ITU-R P.676-9 Figure 6 \\\hline
+    total loss & $L_{comb}$ & dB    & 155.689 & 138.998 &  \\\hline
+    Sky Temperature & $T_{sky}$ & K     & 290   & 290   &  \\\hline
+    Ground Temperature & $T_{ground}$ & K     & 60    & 30    &  \\\hline
+    Antenna Temperature & $T_{antenna}$ & K     & 232.5 & 225   & Pozar Eq \\\hline
+    Receiver Temperature & $T_{receiver}$ & K     & 66    & 66    & Wallops \\\hline
+    System Noise Temperature & $T_s$  & K     & 298.5 & 291   & Pozar Eq \\\hline
+    System Noise Temperature & $T_s$  & dB    & 24.749 & 24.639 &  \\\hline
     receiver G/T & --    & dB    & 10.251 & 10.361 & SMAD 16-27 \\\hline
-    Boltzmann constant & k\_b  & dB    & -228.599 & -228.599 &  \\\hline
+    Boltzmann constant & $k_b$  & dB    & -228.599 & -228.599 &  \\\hline
     C/N0  & --    & dB    & 77.161 & 106.772 & SMAD 16-30 \\\hline
     Eb/N0 & --    & dB    & 15.4  & 45.011 & SMAD 16-31 \\\hline
-    Bit Error Rate & BER   & \%    & 10\^-5 & 10\^-5 &  \\\hline
+    Bit Error Rate & $BER$   & \%    & 10\^-5 & 10\^-5 &  \\\hline
     Required Eb/N0 & --    & dB    & 9.5   & 9.5   & SMAD figure 16-16 \\\hline
     margin & --    & dB    & 5.9   & 35.511 & SMAD 16-33 \\
 \hline
 \end{longtable}
 \end{center}
-$^2$\url{http://www.arrg.us/pages/Loss-Calc.htm}
 
 \noindent
 \newline
@@ -1899,7 +1900,12 @@ Tamamoto, M., W. Shiroma. \emph{Active Antennas and UHF Antennas for CubeSat App
 \bibitem{cubesat-leo} %[5]
 Waydo, S., D. Henry, M. Campbell. \emph{CubeSat Design for LEO-Based Earth Science Missions, Seattle, WA, 2001}, page 8.
 
+%%% Appendices
+\bibitem{loss-calc}
+Amateur Radio Repeater Geezers, \emph{Types of Coax Cable and Line Loss Calculator}, URL \url{http://www.arrg.us/pages/Loss-Calc.htm}, (visited May 5, 2013).
+
 %%% TO BE SORTED
+
 
 %\bibitem{kim00}
    %Kim. (2000).
