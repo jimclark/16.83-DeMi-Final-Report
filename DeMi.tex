@@ -234,17 +234,17 @@ light.  The challenge in this project is to create an optical system capable of 
 \subsubsection{Requirements - AC}\label{sec:payload_requirements}
 
 \begin{itemize}
-\item{PLD-1} The Payload shall command a MEMS deformable mirror to run a pre-defined test sequence for at least 5 minutes each orbit. \\ 
+\item \textbf{PLD-1} The Payload shall command a MEMS deformable mirror to run a pre-defined test sequence for at least 5 minutes each orbit. \\ 
 Parent Requirement: MLR-3, MLR-4
-\item{PLD-1.1} The Payload shall have the ability to control any combination of actuators within 0.001 s of each other, at a minimum rate of 100 Hz, with a minimum stroke of 1.5  $\mu$m, and with a precision of at least 1 nm.\\
+\item \textbf{PLD-1.1} The Payload shall have the ability to control any combination of actuators within 0.001 s of each other, at a minimum rate of 100 Hz, with a minimum stroke of 1.5  $\mu$m, and with a precision of at least 1 nm.\\
 Parent Requirement: PLD-1
-\item PLD-2 The Payload shall have the ability to measure and reconstruct the optical wavefront at one wavelength for the duration of a 5 minute test sequence each orbit at a frequency of at least 10 Hz.\\
+\item \textbf{PLD-2} The Payload shall have the ability to measure and reconstruct the optical wavefront at one wavelength for the duration of a 5 minute test sequence each orbit at a frequency of at least 10 Hz.\\
 Parent Requirement: MLR-3, MLR-4
-\item PLD-2.1 The Payload shall have the ability to measure the optical wavefront at a minimum rate of 10 Hz for at least one minute each orbit.\\
+\item \textbf{PLD-2.1} The Payload shall have the ability to measure the optical wavefront at a minimum rate of 10 Hz for at least one minute each orbit.\\
 Parent Requirement: PLD-2
-\item PLD-2.2 The Payload shall have the ability to measure the optical wavefront at a minimum rate of 100 Hz for at least 30 seconds each orbit.\\
+\item \textbf{PLD-2.2} The Payload shall have the ability to measure the optical wavefront at a minimum rate of 100 Hz for at least 30 seconds each orbit.\\
 Parent Requirement: PLD-2
-\item PLD-2.3 The Payload shall have the ability to reconstruct the optical wavefront with a minimum accuracy of 100 nm rms.\\
+\item \textbf{PLD-2.3} The Payload shall have the ability to reconstruct the optical wavefront with a minimum accuracy of 100 nm rms.\\
 Parent Requirement: PLD-2
 \end{itemize}
 
@@ -505,16 +505,16 @@ Lastly, specific properties of the deformable mirror system need to be explored.
 				Parent Requirement: POW-1
 				\item \textbf{POW-1.1.1}  Solar panels shall supply 3.54 watts after 12 months of operation.
 				\\
-				Parent requirement: POW-1.1
+				Parent Requirement: POW-1.1
 				\item \textbf{POW-1.2}  Power subsystem shall have rechargeable (secondary) batteries to supply power during eclipse.
 				\\
-				Parent requirement: POW-1
+				Parent Requirement: POW-1
 				\item \textbf{POW-1.2.1}  Secondary batteries shall have 6.5 watt-hours of capacity (calculated in Equation~\ref{eq:power-batt-size}) after 12 months / 6,000 cycles (calculated in Equation~\ref{eq:power-num-cycles}).
 				\\
-				Parent requirement: POW-1.2
+				Parent Requirement: POW-1.2
 				\item \textbf{POW-2}  Power subsystem shall supply 13.84 watts of power for peak operations
 				\\
-				Parent requirement: MLR-3
+				Parent Requirement: MLR-3
 			\end{itemize}
 			
 			\subsubsection{Decisions Made}
@@ -666,9 +666,9 @@ The performance of the solar panels and batteries is temperature-dependent.  In 
 			\subsubsection{Requirements}
 			
 \begin{itemize}
-\item COMM-3.1 The subsystem shall transmit at $19.2\ kb/s$ for uplink and $1.5\ Mb/s$ for downlink. \\
+\item \textbf{COMM-3.1} The subsystem shall transmit at $19.2\ kb/s$ for uplink and $1.5\ Mb/s$ for downlink. \\
 Parent Requirement: COMM-3
-\item COMM-3.2 The subsystem shall have a bandwidth of $445-455\ MHz$ for uplink and $460-470\ MHz$ for downlink. \\
+\item \textbf{COMM-3.2} The subsystem shall have a bandwidth of $445-455\ MHz$ for uplink and $460-470\ MHz$ for downlink. \\
 Parent Requirement: COMM-3
 \end{itemize}
 
@@ -847,9 +847,9 @@ The main issue to be addressed is testing of measuring tape antennas. There is c
 
 \subsubsection{Requirements - VE}
 \begin{itemize}
-\item AVI-1 Avionics shall provide the necessary interfaces to support all subsystems.\\
+\item \textbf{AVI-1} Avionics shall provide the necessary interfaces to support all subsystems.\\
 Parent Requirements: MLR-3, SYS-2
-\item AVI-3 Avionics shall write and store data to a mass storage device onboard the satellite.\\
+\item \textbf{AVI-3} Avionics shall write and store data to a mass storage device onboard the satellite.\\
 Parent Requirements: MLR-4, SYS-2
 \end{itemize}
 The main Avionics subsystem requirements are to provide the necessary interfaces, calculations and data storing capability to support functioning of all other subsystems during the mission operation. Other than that Avionics shall be able to recover from potential single event effects and permit software updates and reprogramming in orbit.
@@ -911,7 +911,7 @@ Other key features of the CS-MIC-G-EM include its mass storage capability, allow
 
 \begin{figure}[ht]
 \centering
-  \includegraphics[width=4in]{images/avionics-MIC.jpg}
+  \includegraphics[width=4in]{images/Avionics_fig1.png}
 \caption{Structure diagram of Mission Interface Computer CS-MIC-G-EM  \cite{avionics_clyde_space}}
 \label{fig:avionics_MIC}
 \end{figure}
@@ -923,7 +923,7 @@ General system architecture is shown in Figure~\ref{fig:avionics_architecture}. 
 
 \begin{figure}[ht]
 \centering
-  \includegraphics[width=7in]{images/avionics-architecture.jpg}
+  \includegraphics[width=7in]{images/Avionics_fig2.PNG}
 \caption{System's structure diagram}
 \label{fig:avionics_architecture}
 \end{figure}
