@@ -57,7 +57,9 @@ Massachusetts Institute of Technology\\
 \acro{COTS}{Commercial off the shelf}
 \acro{DeMi}{Deformable Mirror Demonstration}
 \acro{DM}{Deformable Mirror}
+\acro{EPS}{Electrical Power System}
 \acro{FOV}{Field of View}
+\acro{PDM}{Power Distribution Module}
 \acro{PSF}{Point Spread Function}
 \acro{ADCS}{Attitude Determination and Control System}
 \acro{IMU}{Inertial Measurement Unit}
@@ -494,18 +496,24 @@ Lastly, specific properties of the deformable mirror system need to be explored.
 			\subsubsection{Requirements}
 			
 			\begin{itemize}
-				\item POW-1.  Power subsystem shall supply 3.54 watts (calculated in Equation~\ref{eq:power-required}) to power bus on average over each orbit.
-				\begin{itemize}
-					\item POW-1.1.  Power subsystem shall have solar panels to supply power to other systems while satellite is in sunlight and recharge batteries for eclipse.
-					\begin{itemize}
-						\item POW-1.1.1.  Solar panels shall supply 3.54 watts after 12 months of operation.
-					\end{itemize}
-					\item POW-1.2.  Power subsystem shall have rechargeable (secondary) batteries to supply power during eclipse.
-					\begin{itemize}
-						\item Secondary batteries shall have 6.5 watt-hours of capacity (calculated in Equation~\ref{eq:power-batt-size}) after 12 months / 6,000 cycles. (calculated in Equation~\ref{eq:power-num-cycles})
-					\end{itemize}
-				\end{itemize}
-				\item POW-2.  Power subsystem shall supply 13.84 watts of power for peak operations
+				\item \textbf{POW-1}  Power subsystem shall supply 3.54 watts (calculated in Equation~\ref{eq:power-required}) to power bus on average over each orbit.
+				\\
+				Parent Requirement: MLR-3
+				\item \textbf{POW-1.1}  Power subsystem shall have solar panels to supply power to other systems while satellite is in sunlight and recharge batteries for eclipse.
+				\\
+				Parent Requirement: POW-1
+				\item \textbf{POW-1.1.1}  Solar panels shall supply 3.54 watts after 12 months of operation.
+				\\
+				Parent requirement: POW-1.1
+				\item \textbf{POW-1.2}  Power subsystem shall have rechargeable (secondary) batteries to supply power during eclipse.
+				\\
+				Parent requirement: POW-1
+				\item \textbf{POW-1.2.1}  Secondary batteries shall have 6.5 watt-hours of capacity (calculated in Equation~\ref{eq:power-batt-size}) after 12 months / 6,000 cycles (calculated in Equation~\ref{eq:power-num-cycles}).
+				\\
+				Parent requirement: POW-1.2
+				\item \textbf{POW-2}  Power subsystem shall supply 13.84 watts of power for peak operations
+				\\
+				Parent requirement: MLR-3
 			\end{itemize}
 			
 			\subsubsection{Decisions Made}
@@ -1216,14 +1224,16 @@ The simulation was run with an initial angular rate of 10$^\circ$/s, magnetic mo
 		
 \subsubsection{Requirements}
 
-The requirements of the thermal subsystem were as follows:
-
 \begin{itemize}
-	\item THM1: The thermal subsystem shall ensure that all components are kept within their survival
-temperature ranges for the duration of the mission.
-\item THM2: The thermal subsystem shall ensure that all operating components are kept within their
-operating temperature ranges.
-\item THM3: Monitor the temperatures of all key components.
+	\item \textbf{THM-1} The thermal subsystem shall ensure that all components are kept within their survival temperature ranges for the duration of the mission.
+	\\
+	Parent requirements: SYS-2, MLR-3
+\item \textbf{THM-2} The thermal subsystem shall ensure that all operating components are kept within their operating temperature ranges.
+\\
+Parent requirements: SYS-2, MLR-3
+\item \textbf{THM-3} The thermal system shall be able to monitor the temperatures of all key components.
+\\
+Parent requirement: SYS-2
 \end{itemize}
 
 
