@@ -370,7 +370,7 @@ important. Alternatives we considered included the DCC1545M and the
 e2v CCD47-20 frame transfer CCD (Table~\ref{table:payload_detectors}). 
 %clearly planning to write more here -KB
 \begin{table}[!ht]
-  \caption{This needs a caption.}
+  \caption{Detectors Considered for Payload Design}
     \begin{tabular}{|l||l|llll|}
     \hline
     Detector                      & Req. PLD-2
@@ -412,13 +412,41 @@ The lenslet is 10 mm square, so it contains about 66 by 66 lenslets. It is mount
 
 \paragraph{Pointing Requirement - KB}\label{sec:pointing_requirement}
 
-To determine the pointing requirement, we first need to calculate the plate scale of the detector, and the amount of time needed to get a reasonable SNR for a star of a reasonable magnitude. The plate scale of the detector is the mapping between angular distance on the sky and physical distance on the detector. 
+To determine the pointing requirement, we first need to calculate the plate scale of the detector.
+%and the amount of time needed to get a reasonable SNR for a star of a reasonable magnitude. 
+The plate scale of the detector is the relationship between angular distance on the sky and pixel size on the detector, and is typically measured in arcseconds per pixel.  
+%%% (INSERT MATH) 
 
-%\paragraph{Data Rates to Avionics - KB}
-			
+$\text{maximum slew rate} = \frac{\text{plate scale}}{\text{minimum exposure time}}$
+%is there a better way to do simple formulas that don't really need to be in equation form? 
+
+\paragraph{Data Rates to Avionics - KB}
+
+The rate at which payload will output data to avionics is a function of the number of pixels of the image selected for output (either the full frame or a subframe,) the number of bits per pixel, and the rate at which images are taken in frames per second (fps.) The formula is simply: $r_{out} = \text{pixels} \times \frac{\text{bits}}{\text{pixel}} \times \text{fps}$
+%is there a better way to do simple formulas that don't really need to be in equation form? 
+These values and the calculated data output rate for our selected detector is shown in Table~\ref{table:payload-data-rates}. Note that the 640 x 480 subframe is the mode we will use for ``Burst Mode,'' and the 1280 x 1024 full-frame will be used for ``Diagnostic Mode.'' Each meets their respective requirements. 
+
+\begin{table}
+\begin{center}
+\caption{Data output rates by detector and subframe mode}
+\begin{tabular}{|c||c|c|} 
+\hline
+& Fullframe & Subframe \\
+\hline
+IDS CMOS UI5241LE-M  &  &   \\
+\hline
+Bits Per Pixel &  10 & 10\\
+Pixel Resolution  & 1280 x 1024 & 640 x 480 \\
+Image rate &  50 fps & 102 fps\\
+Data Rate & 655.4 Mbit/sec & 310 Mbit/sec \\
+\hline
+\end{tabular}\label{table:payload-data-rates}
+\end{center}
+\end{table}
+
 \paragraph{Shack-Hartmann Lenslet Array - AC}
-				
-				\subparagraph{Pixels per Lenslet Spot}\label{sec:payload_pixels}
+			
+\subparagraph{Pixels per Lenslet Spot}\label{sec:payload_pixels}
 In order to image the spots created by the Shack-Hartmann microlenslet array, spots must fall on their own unique pixels.  At least four pixels are required per lenslet spot (a two by two square of pixels) to account for the event in which a spot lands between two pixels, or at the center of four pixels.
 The incoming beam is 2.25 mm (Paragraph~\ref{par:payload_detector}).  This corresponds to about 15 by 15 spots. The detector has a pixel size of 5.2 $\mu$m, so a 2.25 mm beam corresponds to about 425 px square.  Therefore, over twenty pixels are available for each lenslet spot, so there is no concern for multiple spots falling on the same pixel. 
 				
