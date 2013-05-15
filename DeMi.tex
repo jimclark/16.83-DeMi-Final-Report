@@ -661,9 +661,9 @@ The performance of the solar panels and batteries is temperature-dependent.  In 
 \FloatBarrier
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % COMM
-		\subsection{Communication}
+		\subsection{Communication - ZC}
 
-			\subsubsection{Requirements - ZC}
+			\subsubsection{Requirements}
 			
 \begin{itemize}
 \item COMM-3.1 The subsystem shall transmit at $19.2\ kb/s$ for uplink and $1.5\ Mb/s$ for downlink. \\
@@ -693,7 +693,7 @@ from where it is supposed to be.
 The ground station that DeMi communicates with will be the NASA Wallops UHF Ground Station. This ground station is being used because the transceiver chosen for DeMi was also used in the Dynamic Ionosphere CubeSat Experiment, and the ground station that was used in that mission was the NASA Wallops UHF Ground Station. The diameter of the dish is $18.29$ meters, the gain is $35\ dB$ and the beam with is $2.9^\circ$.
 
 
-\subsubsection{Trade Studies - ZC} \label{sec:communications-trade-studies}
+\subsubsection{Trade Studies} \label{sec:communications-trade-studies}
 
 The main factor in choosing the transceiver on DeMi is the maximum data downlink rate. Because Payload is generating so much data, the Communications system needs to have a high downlink rate to ensure that all of that data can be sent to the ground. Several options were investigated, and the transceiver with the highest data rate is being used. The transceivers that were considered and their maximum data rates are shown in Table~\ref{table:comm_transceivers}.
 
@@ -701,7 +701,7 @@ The main factor in choosing the transceiver on DeMi is the maximum data downlink
 \caption{Communications Trade Study for Maximum Downlink Data Rate}
 \begin{center}
     \begin{tabular}{| c | c |} \hline
-    	Tranceiver & Maximum Downlink Rate \\ \hline \hline
+    	\textbf{Tranceiver} & \textbf{Maximum Downlink Rate} \\ \hline \hline
 Espace Payload Telemetry System & $1\ Mb/s$ \\
 AstroDev Li-1 UHF Transceiver & $38.4\ kb/s$ \\
 ISIS TXS Small Satellite  S-Band Transmitter & $100\ kb/s$ \\
@@ -712,7 +712,7 @@ Microhard MHX2420 Modem & $230.4\ kb/s$ \\ \hline
 \end{center}
 \end{table}
 
-			\subsubsection{Analysis - ZC}
+			\subsubsection{Analysis}
 
 The maximum amount of data downlink per pass-by can be calculated by multiplying the downlink data rate and the access duration per pass-by. Given the downlink data rate of $1.5\ Mb/s$, and the access duration of $586$ seconds per pass-by, the maximum amount of data that can be downlinked in one pass-by is $109.9\ MB$. Because the satellite is not always directly above the ground station, the satellite is not always downlinking at the maximum data rate. To account for this, and for space for telemetry data and error correcting code, a margin of a factor of 2 is added, so the maximum amount of data from payload that can be downlinked per pass-by is about $54.95\ MB$. Although this is not as much data as payload is creating, on-board processing is used so that the amount of data that needs to be downlinked is below the maximum amount that is allotted for payload.
 
@@ -722,7 +722,7 @@ The first calculation for the link budget is to determine the worst case propaga
 
 \begin{figure}[ht]
 \centering
-  \includegraphics[width=5in]{images/comm-angles.png}
+  \includegraphics[width=5.5in]{images/comm-angles.png}
 \caption{Diagram of propagation path of a signal from a satellite \cite[p.~12]{ITU-R}.}
 \label{fig:comm_propagation_path}
 \end{figure}
@@ -805,7 +805,7 @@ Finally, the link margin can be determined by subtracting the required energy pe
 \label{fig:comm_cases}
 \end{figure}
 		
-\subsubsection{Summary of Outputs - ZC}
+\subsubsection{Summary of Outputs}
 
 There were several outputs during the design process from the Communications subsystem. These outputs include the ground station to the orbits subsystem, which is NASA Wallops UHF Ground Station, the beam width of Wallops UHF Ground Station and DeMi to ADCS, which are $2.9^\circ$ and $65^\circ$ respectively. The operational and survival temperatures of the transceiver to the Thermal subsystem, the power for each mode to the Power subsystem, and the mass and volume to the Structures subsystem are detailed in Table~\ref{table:comm_summary_outputs}.
 	
@@ -813,7 +813,7 @@ There were several outputs during the design process from the Communications sub
 \caption{Communications Budgets}
 \begin{center}
     \begin{tabular}{|c||c|} \hline
-    	Output & Value \\ \hline \hline
+    	\textbf{Output} & \textbf{Value} \\ \hline \hline
     Power (Standby) & 0.51 W  \\
     Power (Data Capture) & 0.51 W \\
     Power (Downlink) & 11.44 W \\
@@ -827,7 +827,7 @@ Survival Temperature Range & $-40^\circ$ to $80^\circ$ \\ \hline
 \end{center}
 \end{table}
 
-			\subsubsection{Risks - ZC}
+			\subsubsection{Risks}
 			Initially, there were concerns that Communications may not be able to downlink enough of the
 data from the Payload; however, Avionics has decided that because of this risk, DeMi will be
 doing on-board processing so that less data is required to be downlinked. There is the risk
@@ -835,9 +835,8 @@ that there may be a lot of interference at the frequencies that DeMi uses. In or
 this, there would have to be a ground station site survey and if there were a problem with
 interference, specialized receiver software would have to be developed to mitigate the issue.
 
-			\subsubsection{Future Work - ZC}
-	Moving on from here, the main thing that should be done is testing of measuring tape antennas. There is currently not very much information out there that is available to DeMi concerning them, so research to determine the exact gain, beam width and radiation patterns should be conducted.
-
+			\subsubsection{Future Work}
+The main issue to be addressed is testing of measuring tape antennas. There is currently not very much information out there that is available to DeMi concerning them, so research to determine the exact gain, beam width and radiation patterns should be conducted.
 
 \newpage
 \FloatBarrier
@@ -849,9 +848,9 @@ interference, specialized receiver software would have to be developed to mitiga
 \subsubsection{Requirements - VE}
 \begin{itemize}
 \item AVI-1 Avionics shall provide the necessary interfaces to support all subsystems.\\
-Parent requirement: MLR-3, SYS-2
+Parent Requirements: MLR-3, SYS-2
 \item AVI-3 Avionics shall write and store data to a mass storage device onboard the satellite.\\
-Parent requirement: MLR-4, SYS-2
+Parent Requirements: MLR-4, SYS-2
 \end{itemize}
 The main Avionics subsystem requirements are to provide the necessary interfaces, calculations and data storing capability to support functioning of all other subsystems during the mission operation. Other than that Avionics shall be able to recover from potential single event effects and permit software updates and reprogramming in orbit.
 However, the most important requirements to consider are the memory and processor capabilities because they are the most difficult to satisfy with a current level of technology.
@@ -865,7 +864,7 @@ There are two main Avionics configurations to be considered that are both able t
 \label{table:avionics_hardware_options}
 \begin{center}
     \begin{tabular}{| c || p{6cm} | p{6cm} |} \hline
-     &	Processing on-board & Raw images to the ground \\ \hline \hline
+     &	\textbf{Processing on-board} & \textbf{Raw images to the ground} \\ \hline \hline
     Component name & The Steepest Ascent Mission Interface Computer CS-MIC-G-EM & Single Board Computer Motherboard + Pluggable Processor Module with Texas Instruments MSP430F2618 \\ \hline
     Power consumption & 0.5 - 1.25 W & 10 mW \\ \hline
     Capabilities & Telemetry/Telecommand + Real time image processing on FPGA & Telemetry/Telecommand\\ \hline
@@ -884,7 +883,7 @@ To select an appropriate hardware, payload requirements should be considered fir
 \label{table:avionics_modes}
 \begin{center}
     \begin{tabular}{| c || c | c | c |} \hline
-    	Mode & 640x480 px ``subframe'' &  640x480 px ``subframe'' & 1280x1024 px  ``full frame'' \\ \hline \hline
+    	\textbf{Mode} & \textbf{640x480 px ``subframe''} &  \textbf{640x480 px ``subframe''} & \textbf{1280x1024 px  ``full frame''} \\ \hline \hline
     Frame Rate & 100 fps & 10 fps & 10 fps \\ \hline
     Data Rate & 310 Mbit/s & 31 Mbit/s & 131 Mbit/s \\ \hline
     Duration & 30 s & 300 s & 60 s \\ \hline
@@ -939,7 +938,7 @@ Avionics provides the following interfaces with other subsystems (see Table~\ref
 \label{table:avionics_interfaces}
 \begin{center}
     \begin{tabular}{| p{2cm} | l | c | c |} \hline
-    	Subsytem & Component & Interface & Data rate \\ \hline \hline
+    	\textbf{Subsytem} & \textbf{Component} & \textbf{Interface} & \textbf{Data rate} \\ \hline \hline
     Payload & Detector (IDS UI-5241LE-M) & GbE & 550 Mbit/s max  \\
      & Mirror driver (BMC Mini-Driver) & USB 2.0 & 480 Mbit/s max \\
      & Laser (ThorLabs CPS 186) & GPIO & -- \\ \hline
@@ -966,7 +965,7 @@ The Avionics subsystem gives values to the Thermal subsystem for operational tem
 \label{table:avionics_summary_outputs}
 \begin{center}
     \begin{tabular}{|c||c|} \hline
-    	Output & Value \\ \hline \hline
+    	\textbf{Output} & \textbf{Value} \\ \hline \hline
     Power (Standby) & 0.5 W  \\
     Power (Data Capture) & 1.25 W \\
     Power (Downlink/Uplink) & 0.5 W \\
