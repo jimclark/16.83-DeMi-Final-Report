@@ -120,28 +120,28 @@ The technology that will tested in the DeMi demonstration has a number of forese
 		 
 		\paragraph{Mission Level Requirements}
 		\begin{itemize}
-				\item MLR-1 The system design shall follow a 3-unit CubeSat platform.\\
+				\item \textbf{MLR-1} The system design shall follow a 3-unit CubeSat platform.\\
 				Parent Requirement(s): MS-1
-				\item MLR-2 The system shall primarily use commercial off the shelf (COTS) and CubeSat parts and components.\\
+				\item \textbf{MLR-2} The system shall primarily use commercial off the shelf (COTS) and CubeSat parts and components.\\
 				Parent Requirement(s): MS-1
-				\item MLR-3 The system shall accommodate and operate a MEMS deformable mirror demonstration experimental payload.\\
+				\item \textbf{MLR-3} The system shall accommodate and operate a MEMS deformable mirror demonstration experimental payload.\\
 				Parent Requirement(s): MS-1
-				\item MLR-4 The system shall operate and produce operational and experimental data for a period of $<$3 months$>$ [goal of 12 months].\\
+				\item \textbf{MLR-4} The system shall operate and produce operational and experimental data for a period of $<$3 months$>$ [goal of 12 months].\\
 				Parent Requirement(s): MS-1
 		\end{itemize}
 		
 		\paragraph{Systems Requirements}
 		
 		\begin{itemize}
-			\item SYS-1 The system shall survive launch conditions.\\
+			\item \textbf{SYS-1} The system shall survive launch conditions.\\
 			Parent Requirement(s): MLR-4
-			\item SYS-2 The system shall include electrical, mechanical, and software interfaces to the payload\\
+			\item \textbf{SYS-2} The system shall include electrical, mechanical, and software interfaces to the payload\\
 			Parent Requirement(s): MLR-3
-			\item SYS-3 The system shall comply with the requirements and constraints listed in the most current CubeSat Design Specification (CDS) document. \cite{mission_cubesat} \\
+			\item \textbf{SYS-3} The system shall comply with the requirements and constraints listed in the most current CubeSat Design Specification (CDS) document. \cite{mission_cubesat} \\
 			Parent Requirement(s): MLR-1
-			\item SYS-4 The system shall be capable of sending and receiving data and instructions to and from the ground.\\
+			\item \textbf{SYS-4} The system shall be capable of sending and receiving data and instructions to and from the ground.\\
 			Parent Requirement(s): MLR-3, MLR-4
-			\item SYS-5 The system shall have a deorbit time of 25 years or less. \cite{mission_deorbit}\\
+			\item \textbf{SYS-5} The system shall have a deorbit time of 25 years or less. \cite{mission_deorbit}\\
 			Parent Requirement(s): MLR-4
 		\end{itemize}
 
@@ -993,14 +993,14 @@ The future work that needs to be conducted is that there should be work done to 
 			\subsubsection{Requirements}
 			The driving requirements of the ADCS design is shown below. A complete requirement document can be found in Appendix A. 
 					\begin{itemize}
-					\item ADCS-1.1 ADCS shall meet 4.7 arcmin/s slew rate requirement of payload imaging technology during external source science operation mode.\\
+					\item \textbf{ADCS-1.1} ADCS shall meet 4.7 arcmin/s slew rate requirement of payload imaging technology during external source science operation mode.\\
 					Parents requirement(s): MLR-3
 					
-					\item ADCS-2.1 ADCS shall provide attitude knowledge of the satellite to an accuracy within 10$^\circ$[TBR]  for communication operations.\\
+					\item \textbf{ADCS-2.1} ADCS shall provide attitude knowledge of the satellite to an accuracy within 10$^\circ$[TBR]  for communication operations.\\
 					Parents requirement(s): SYS-4
-					\item ADCS-2.2 ADCS shall provide attitude control of the satellite to an accuracy within 15$^\circ$ [TBR] for communication operations.\\
+					\item \textbf{ADCS-2.2} ADCS shall provide attitude control of the satellite to an accuracy within 15$^\circ$ [TBR] for communication operations.\\
 					Parents requirement(s): SYS-4
-					\item ADCS-3 ADCS shall provide momentum capability to despin upon launch vehicle separation within 30 days.\\
+					\item \textbf{ADCS-3} ADCS shall provide momentum capability to despin upon launch vehicle separation within 30 days.\\
 					Parents requirement(s): MLR-4
 					\end{itemize}
 				The two main requirements during operation modes for the ADCS subsystems are the pointing requirement (15$^\circ$) for communication purpose and the stability (slew rate) requirement (4.7 arcmin/s or 0.08$^\circ$/s) for the payload operation while imaging an external source. This requirement exists to ensure that a photon from the external source stays on the same pixel of the detector during data capture. In addition, the satellite is required to detumble and establish ground station access within a reasonable time frame. This duration is required to be less than 30 days, creating a secondary requirement on the total detumbling time. 
@@ -1211,10 +1211,12 @@ The simulation was run with an initial angular rate of 10$^\circ$/s, magnetic mo
 
 
 			\subsubsection{Risks}
-			The main design risk in the ADCS system is the pointing stability requirement and the mass and power budget. As previously mentioned, the stability of the satellite will need to be $<$ 0.08$^\circ$/s for payload science operation of capturing light from a star. The sensors and actuators are expected to provide this performance based on the survey of past CubeSat missions. However, more analysis through simulation and testing will need to be implemented to determine the exact performance of the system. The second risk is due to the narrow margin on the power budget of the whole system. To compensate for this, the mass of the torque coils is higher than previously expected. More iterations are needed to determine the optimal power consumption and mass of the torque coils. 
+			%The main design risk in the ADCS system is the pointing stability requirement and the mass and power budget. As previously mentioned, the stability of the satellite will need to be $<$ 0.08$^\circ$/s for payload science operation of capturing light from a star. The sensors and actuators are expected to provide this performance based on the survey of past CubeSat missions. However, more analysis through simulation and testing will need to be implemented to determine the exact performance of the system. The second risk is due to the narrow margin on the power budget of the whole system. To compensate for this, the mass of the torque coils is higher than previously expected. More iterations are needed to determine the optimal power consumption and mass of the torque coils. 
+			One risk in the design of the ADCS system is the ability to achieve the stability requirement of 0.08$^\circ$/s for payload science operation of capturing light from an external source. As previously mentioned, a similar CubeSat active magnetic control system (from ION from University of Illinois) can achieve the stability of $<$0.12$^\circ$/s. The design of DeMi ADCS system is more robust than that of ION and is expected to yield sufficient stability control of the satellite (see Decision Made section for more details). However, this stands as a design risk and can be mitigated through further analysis and testing. This is a low likelihood risk since the ADCS design can be modified with little effect on the whole system. The consequence of this risk is also moderately low since external source light capturing is not the primary objective of the mission. 
 			\subsubsection{Future Work}
-			The main future work of the ADCS system is to simulate the flight condition through with external disturbance torques at each position on orbit. The next step is to create a control loop that takes these environmental torques as inputs to compute the needed magnetic moment of each of the 3 torque coils. 
-
+			The main future work of the ADCS system is to simulate the flight condition through computation of the external disturbance torques at each position on orbit on the satellite frame of reference. The next step is to create a control loop that takes these environmental torques as inputs to compute the needed magnetic moment of each of the 3 torque coils. 
+			
+			
 \newpage
 \FloatBarrier
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
