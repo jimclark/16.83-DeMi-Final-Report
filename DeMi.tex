@@ -71,23 +71,22 @@ Massachusetts Institute of Technology\\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction - AW}
-Deformable mirror wavefront control systems correct for aberrations in the wavefront to produce high contrast images.  This technology has been employed in ground telescope observation to counter wavefront distortions induced by Earth’s atmosphere.  However, deformable mirrors have yet to be utilized on a space platform.  Such an implementation could remove aberrations in the wavefront due to speckles from diffraction, noise, phase errors, and thermal drift.  A proposed CubeSat Deformable Mirror (DeMi) demonstration will begin the process of testing adaptive optics technology in the space environment for future implementation on space telescopes and potentially free-space laser communication.  The use of deformable mirrors in conjunction with coronographs onboard space telescopes will be able to produce images with higher achievable contrast in the direct imaging of exoplanets.  This document presents a detailed overview of the role and design of the payload for the DeMi mission, a high actuator count MEMS deformable mirror yet to be tested in space, as well as the preliminary designs of the various satellite subsystems which support the flight of the payload in low Earth orbit.  
+
+Deformable mirror wavefront control systems correct for aberrations in the wavefront to produce high contrast images.  This technology has been employed in ground telescope observation to counter wavefront distortions induced by Earth’s atmosphere.  However, deformable mirrors have yet to be utilized on a space platform.  Such an implementation could remove aberrations in the wavefront due to speckles from diffraction, noise, phase errors, and thermal drift.  A proposed CubeSat Deformable Mirror demonstration (DeMi) will begin the process of testing adaptive optics technology in the space environment for future implementation on space telescopes and potentially free-space laser communication.  The use of deformable mirrors in conjunction with coronographs onboard space telescopes will be able to produce images with higher achievable contrast in the direct imaging of exoplanets.  This document presents a detailed overview of the role and design of the payload for the DeMi mission, a high actuator count MEMS deformable mirror yet to be tested in space, as well as the preliminary designs of the various satellite subsystems which support the flight of the payload in low Earth orbit.  
 
 \subsection{Mission Statement}
 The mission of the Deformable Mirror Demonstration is to provide a low-cost, quick-access platform on which to demonstrate microelectromechanical (MEMS) wavefront control deformable mirror imaging technology (See Figure~\ref{fig:Intro_demi}) on-orbit.
 
-
-
 \subsection{Motivation}
-The driving force behind the DeMi mission is the desire to directly image Earth-like exoplanets in the search for signs of life, requiring imaging technology that can produce high contrast and dynamic range images.  However, current high-performance space telescope technology suffers from wavefront aberrations, such as speckles which can result from diffraction, noise, phase errors, and thermal drift and reduce the achievable image contrast.\cite{cahoy-unpublished}
+The driving force behind the DeMi mission is the desire to directly image Earth-like exoplanets in the search for signs of life, requiring imaging technology that can produce high contrast and dynamic range images.  However, current high-performance space telescope technology suffers from wavefront aberrations, such as speckles, which can result from diffraction, noise, phase errors, and thermal drift and reduce the achievable image contrast \cite{cahoy-unpublished}.
 
-A solution to this problem is to implement adaptable wavefront control imaging technology in the form of a deformable mirror. Specifically, a Boston Micromechanics
-Mini MEMS Deformable Mirror, shown in Figure~\ref{fig:Intro_demi} will be used. In the deformable mirror system, a wavefront sensor measures wavefront aberrations in an approaching wavefront. An adaptive optics computer then calculates the errors in the wavefront reflecting off of the deformable mirror surface by subtracting the wavefront from a reference wavefront.\cite{adaptive-optics-overview} Finally, electrostatic actuators in an array beneath the membrane surface of the mirror individually deform the surface to correct the wavefront. A comparison of the effects of a flat and deformable mirror on an aberrated wavefront is demonstrated in Figure~\ref{fig:Intro_wavefront}.   
+A solution to this problem is to implement adaptable wavefront control imaging technology in the form of a deformable mirror system. Specifically, a Boston Micromechanics
+Mini MEMS Deformable Mirror, shown in Figure~\ref{fig:Intro_demi} will be used. In the deformable mirror system, a wavefront sensor measures wavefront aberrations in an approaching wavefront. An adaptive optics computer then calculates the errors in the wavefront reflecting off of the deformable mirror surface by subtracting the wavefront from a reference wavefront \cite{adaptive-optics-overview}. Finally, electrostatic actuators in an array beneath the membrane surface of the mirror individually deform the surface to correct the wavefront. A comparison of the effects of a flat and deformable mirror on an aberrated wavefront is demonstrated in Figure~\ref{fig:Intro_wavefront}.   
 
 \begin{figure}[!ht]
 \centering
 \includegraphics[width=2in]{images/introduction_1.png}
-\caption{Boston Micromechanics MEMS Deformable Mirror\cite{bos-micro-demi}}
+\caption{Boston Micromechanics MEMS Deformable Mirror \cite{bos-micro-demi}}
 \label{fig:Intro_demi}
 \end{figure}
 
@@ -98,10 +97,8 @@ Mini MEMS Deformable Mirror, shown in Figure~\ref{fig:Intro_demi} will be used. 
 \label{fig:Intro_wavefront}
 \end{figure}
 
-Adaptive optics technology is currently being used in conjunction with coronographs in ground telescopes to correct for distortions caused by Earth's atmosphere and to resolve light from nearby objects.  An example is seen in Figure~\ref{fig:Intro_exo} of three exoplanets imaged using the Palomar Observatory's Hale Telescope with adaptive optics technology. \cite{serabyn2010}
+Adaptive optics technology is currently being used in conjunction with coronographs in ground telescopes to correct for distortions caused by Earth's atmosphere and to resolve light from nearby objects.  An example is seen in Figure~\ref{fig:Intro_exo} of three exoplanets imaged using the Palomar Observatory's Hale Telescope with adaptive optics technology \cite{serabyn2010}.
 
-
-%insert figure here
 \begin{figure}[!ht]
 \centering
 \includegraphics[width=4in]{images/introduction_3.PNG}
@@ -109,11 +106,12 @@ Adaptive optics technology is currently being used in conjunction with coronogra
 \label{fig:Intro_exo}
 \end{figure}
 
-However, factors such as high speeds of atmospheric turbulence and limited numbers of photons from targeted exoplanets reduce the achievable image contrast.  A solution to this issue is to incorporate deformable mirror wavefront control technology in high performance space telescope missions.  The DeMi demonstration will take the initial step by testing the stability, calibration, and predictability of a more complex, higher actuator count deformable mirror system in space.     
+However, factors such as high speeds of atmospheric turbulence and limited numbers of photons from targeted exoplanets reduce the achievable image contrast.  A solution to this issue is to incorporate deformable mirror wavefront control technology in high performance space telescope missions.  The DeMi mission will take the initial step by testing the stability, calibration, and predictability of a more complex, higher actuator count deformable mirror system in space.     
 
-A space telescope utilizing a high performance coronograph and deformable mirror wavefront control system to directly image Earth-like exoplanets could potentially cost over a billion dollars.  Therefore, a 3U CubeSat platform was selected to conduct the DeMi demonstration.  The 3U CubeSat is a simple, standard platform, with low volume (10cm $\times$ 10cm $\times$ 30cm) and mass (maximum 4kg).   CubeSats additionally have low manufacturing and launch costs and can provide relatively quick and easy access to space, as opportunities exist for them to fly as auxiliary payloads on rockets for other planned missions. 
+A space telescope utilizing a high performance coronograph and deformable mirror wavefront control system to directly image Earth-like exoplanets could potentially cost over a billion dollars.  Therefore, a 3U CubeSat platform was selected to conduct the DeMi mission.  The 3U CubeSat is a simple, standard platform, with low volume (10 cm x 10 cm x 30 cm) and mass (maximum 4 kg for a 3U CubeSat set by the CubeSat Design Specification document \cite{cubesat-specs}).   CubeSats additionally have low manufacturing and launch costs and can provide relatively quick and easy access to space, as opportunities exist for them to fly as auxiliary payloads on rockets for other planned missions. 
 
-The technology that will tested in the DeMi demonstration has a number of foreseeable future applications, including implementation on high performance space telescopes, such as for direct imaging of Earth-like exoplanets, or for use with free-space laser communication in order to correct for aberrations in the atmosphere.\cite{cahoy-unpublished}
+The technology that will tested in the DeMi mission has a number of foreseeable future applications, including implementation on high performance space telescopes, such as for direct imaging of Earth-like exoplanets, or for use with free-space laser communication in order to correct for aberrations in the atmosphere \cite{cahoy-unpublished}.
+
 
 \section{Mission Overview}
 		\subsection{Requirements}
