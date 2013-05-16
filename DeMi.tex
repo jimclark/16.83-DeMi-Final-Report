@@ -1434,7 +1434,7 @@ Q_{in} + Q_{internal} = Q_{out} \rightarrow [\alpha(S + S_A) + \epsilon S_{IR}] 
 \label{eq:thermal-balance}
 \end{equation}
 
-Where $\alpha$, $\epsilon$, and $A_S$ are the absorptivity, emissivity, and area of the surface, $\sigma$ is the Stefan-Boltzmann constant, and $Q$ and $S$ correspond to the energy and radiation fluxes respectively. Values for radiation flux over the course of an orbit were taken from The New SMAD \cite[p.~688,~table~22-11]{SMAD}, the main text for this course.  All values used in the above equation can be found in Appendix~\ref{app:thermal} (Table~\ref{tab:thermal-raw-cold}  and Table~\ref{tab:thermal-raw-hot}).  Temperatures were calculated for two extremes of thermal environment, the cold case, $\beta$ = 0; and hot case, $\beta$ =45, where $\beta$ is the angle subtended by the orbit relative to the sun.  Different values of radiation flux correspond to each value of $\beta$.
+Where $\alpha$, $\epsilon$, and $A_S$ are the absorptivity, emissivity, and area of the surface, $\sigma$ is the Stefan-Boltzmann constant, and $Q$ and $S$ correspond to the energy and radiation fluxes respectively. Values for radiation flux over the course of an orbit were taken from The New SMAD \cite[p.~688,~table~22-11]{SMAD}, the main text for this course.  All values used in the above equation can be found in the attached file ``Thermal Analysis.xlsx''.  Temperatures were calculated for two extremes of thermal environment, the cold case, $\beta$ = 0; and hot case, $\beta$ =45, where $\beta$ is the angle subtended by the orbit relative to the sun.  Different values of radiation flux correspond to each value of $\beta$.
 
 \begin{figure}[ht]%
 \centering
@@ -1854,7 +1854,7 @@ $^1$Estimated from ThorLabs miniseries post MS075.
     System Noise Temperature & $T_s$  & K     & 298.5 & 291   & Pozar Eq \\\hline
     System Noise Temperature & $T_s$  & dB    & 24.749 & 24.639 &  \\\hline
     receiver G/T & --    & dB    & 10.251 & 10.361 & SMAD 16-27 \\\hline
-    Boltzmann constant & $k_b$  & dB    & -228.599 & -228.599 &  \\\hline
+    Boltzmann constant & $k_b$ & dB    & -228.599 & -228.599 &  \\\hline
     C/N0  & --    & dB    & 77.161 & 106.772 & SMAD 16-30 \\\hline
     Eb/N0 & --    & dB    & 15.4  & 45.011 & SMAD 16-31 \\\hline
     Bit Error Rate & $BER$   & \%    & 10\^-5 & 10\^-5 &  \\\hline
@@ -1863,25 +1863,6 @@ $^1$Estimated from ThorLabs miniseries post MS075.
 \hline
 \end{longtable}
 \end{center}
-
-\newpage
-
-\section{Thermal Heat Fluxes} \label{app:thermal}
-%\begin{landscape}
-%\begin{center}
-%\begin{longtable}{| p{2cm} | p{1.1cm} | p{1.1cm} | p{1.1cm} | p{1.1cm} | p{1.1cm} | p{1.1cm} | p{1cm} | p{1cm} | p{1cm} | p{1cm} | p{1cm} | p{1cm} | p{1cm} |}
-%\caption{Raw results of thermal calculations for cold case.}
-%\label{tab:thermal-raw-cold}\\
-%\hline
-    %\multicolumn{8}{|l|}{Cold Case 500 km $\beta = 0$} & \multicolumn{6}{|l|}{Total (modes)}  \\
-    %\hline \hline
-    %Surface \# & 1 & 2 & 3 & 4 & 5 & 6 & \multirow{2}{1.1cm}{Total (initial estimate)} &  \multirow{2}{1.1cm}{Data capture} &  \multirow{2}{1.1cm}{Standby} &  \multirow{2}{1.1cm}{Uplink} & \multirow{2}{1.1cm}{Downlink} &  \multirow{2}{1.1cm}{Safe Mode} &  \multirow{2}{1.1cm}{Detumbling} \\\cline{1-7}
-    %Description & Zenith-Y & Nadir-Y & Sun-P & A-Sun-P & Ram-R & A-Ram-R & \\\hline
-%\end{longtable}
-%\end{center}
-%
-%\end{landscape}
-
 
 
 \noindent
