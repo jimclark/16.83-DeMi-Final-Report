@@ -493,9 +493,11 @@ Totals & 996.9 & 4.5 max & 0 to 50 & -20 to 80 \\ \hline
 \end{table}
 
 \subsubsection{Risks - KB}
+Payload has two major risks that may present a problem moving forward with the design. Several of the smaller components needed to assemble the optical system (mounts, o-rings, spacers) are not available commercially in sizes small enough to fit within the CubeSat. As such, these components will need to be custom machined. (Their masses and volumes were estimated by scaling down similar COTS components for the purposes of mass budgeting.) It is possible that these estimates will prove to be incorrect, or that it will prove difficult to machine these components at the small sizes necessary. This presents a low probability, but high impact risk, as we are already close to exceeding our mass budget. 
 
+The other major risk that Payload faces is that it will produce data too quickly for Avionics to consume it, or that it will require too much processing power for Avionics to make space for incoming data quickly enough by processing the incoming images and outputting much smaller files with wavefront solutions. This risk has largely been obviated by Avionics's move to a FPGA architecture, but since the performance of the wavefront reconstruction algorithm on the FPGA has not yet been tested, there is still some chance that this will prove to be problematic. This risk is low probabilty and low impact, as nearly the same amount of useful data can be extracted about the DM's performance by outputting simple centroid solutions for the images, rather than a full wavefront reconstruction. 
 
-			\subsubsection{Future Work - AC}
+\subsubsection{Future Work - AC}
 
 Future work includes optical modeling of the system using the software ZEMAX \cite{zemax}. Modeling the system with ZEMAX will determine the
   final beam profile on the detector.  This will allow for more precise calculations of data rates, for example.  Optimization of the space will
