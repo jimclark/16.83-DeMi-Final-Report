@@ -431,11 +431,14 @@ The lenslet is 10 mm square, so it contains about 66 by 66 lenslets. It is mount
 
 To determine the pointing requirement, we first need to calculate the plate scale of the detector.
 %and the amount of time needed to get a reasonable SNR for a star of a reasonable magnitude. 
-The plate scale of the detector is the relationship between angular distance on the sky and pixel size on the detector, and is typically measured in arcseconds per pixel.  
-%%% (INSERT MATH) 
+The plate scale of the detector is the relationship between angular distance on the sky and pixel size on the detector, and is typically measured in arcseconds per pixel. The plate scale we used to calculate the pointing requirement was estimated to be 28 arcseconds/pixel by Eduardo Bendek\footnote{Eduardo.A.Bendek@nasa.gov} at NASA AMES. 
+%%% insert calculations to get to this point. 
 
-$\text{maximum slew rate} = \frac{\text{plate scale}}{\text{minimum exposure time}}$
+The pointing requirement for ADCS during external source imaging can then be determined by using 
+$\text{maximum slew rate} = \frac{\text{plate scale}}{\text{maximum exposure time}}$
 %is there a better way to do simple formulas that don't really need to be in equation form? 
+
+The maximum exposure time used occurs during ``Diagnostic Mode'' at 10 fps, which corresponds to a maximum exposure time of 0.1 seconds. Plugging everything into this equation, we find a maximum slew rate requirement of $\frac{22 \text{ arcseconds/pixel}}{0.1 \text{ s}} \approx 4.7$ arcminutes/s during external source acquisition.
 
 \paragraph{Data Rates to Avionics - KB}
 
