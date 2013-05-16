@@ -61,7 +61,7 @@ Massachusetts Institute of Technology\\
 \acro{DOD}{Depth of Discharge}
 \acro{EPS}{Electrical Power System}
 \acro{FOV}{Field of View}
-\acro{LEO}{Low Earth Orbit}
+\acro{LEO}{Low-Earth Orbit}
 \acro{MEMS}{Microelectromechanical Systems}
 \acro{P-POD}{Poly-Picosatellite Orbital Deployer}
 \acro{PDM}{Power Distribution Module}
@@ -85,7 +85,7 @@ The mission of the Deformable Mirror Demonstration is to provide a low-cost, qui
 The driving force behind the DeMi mission is the desire to directly image Earth-like exoplanets in the search for signs of life, requiring imaging technology that can produce high contrast and dynamic range images.  However, current high-performance space telescope technology suffers from wavefront aberrations, such as speckles, which can result from diffraction, noise, phase errors, and thermal drift and reduce the achievable image contrast \cite{cahoy-unpublished}.
 
 A solution to this problem is to implement adaptable wavefront control imaging technology in the form of a deformable mirror system. Specifically, a Boston Micromechanics
-Mini MEMS Deformable Mirror, shown in Figure~\ref{fig:Intro_demi} will be used. In the deformable mirror system, a wavefront sensor measures wavefront aberrations in an approaching wavefront. An adaptive optics computer then calculates the errors in the wavefront reflecting off of the deformable mirror surface by subtracting the wavefront from a reference wavefront \cite{adaptive-optics-overview}. Finally, electrostatic actuators in an array beneath the membrane surface of the mirror individually deform the surface to correct the wavefront. A comparison of the effects of a flat and deformable mirror on an aberrated wavefront is demonstrated in Figure~\ref{fig:Intro_wavefront}.   
+Mini MEMS Deformable Mirror \cite{bos-micro-demi}, shown in Figure~\ref{fig:Intro_demi} will be used. In the deformable mirror system, a wavefront sensor measures aberrations in an approaching wavefront. An adaptive optics computer then calculates the errors in the wavefront reflecting off of the deformable mirror surface by subtracting the wavefront from a reference wavefront \cite{adaptive-optics-overview}. Finally, electrostatic actuators in an array beneath the membrane surface of the mirror individually deform the surface to correct the wavefront. A comparison of the effects of a flat and deformable mirror on an aberrated wavefront is demonstrated in Figure~\ref{fig:Intro_wavefront}.   
 
 \begin{figure}[!ht]
 \centering
@@ -105,8 +105,8 @@ Adaptive optics technology is currently being used in conjunction with coronogra
 
 \begin{figure}[!ht]
 \centering
-\includegraphics[width=4in]{images/introduction_3.PNG}
-\caption{Three exoplanets directly imaged using a combination of adaptive optics and a coronagraph with the Palomar Observatory’s Hale Telescope.}
+\includegraphics[width=3.75in]{images/introduction_3.PNG}
+\caption{Three exoplanets directly imaged using a combination of adaptive optics and a coronagraph with the Palomar Observatory's Hale Telescope.}
 \label{fig:Intro_exo}
 \end{figure}
 
@@ -114,12 +114,12 @@ However, factors such as high speeds of atmospheric turbulence and limited numbe
 
 A space telescope utilizing a high performance coronograph and deformable mirror wavefront control system to directly image Earth-like exoplanets could potentially cost over a billion dollars.  Therefore, a 3U CubeSat platform was selected to conduct the DeMi mission.  The 3U CubeSat is a simple, standard platform, with low volume (10 cm x 10 cm x 30 cm) and mass (maximum 4 kg for a 3U CubeSat set by the CubeSat Design Specification document \cite{cubesat-specs}).   CubeSats additionally have low manufacturing and launch costs and can provide relatively quick and easy access to space, as opportunities exist for them to fly as auxiliary payloads on rockets for other planned missions. 
 
-The technology that will tested in the DeMi mission has a number of foreseeable future applications, including implementation on high performance space telescopes, such as for direct imaging of Earth-like exoplanets, or for use with free-space laser communication in order to correct for aberrations in the atmosphere \cite{cahoy-unpublished}.
+The technology that will be tested in the DeMi mission has a number of foreseeable future applications, including implementation on high performance space telescopes, such as for direct imaging of Earth-like exoplanets, or for use with free-space laser communication in order to correct for aberrations in the atmosphere \cite{cahoy-unpublished}.
 
 \newpage
 \section{Mission Overview - ZG}
 		\subsection{Requirements}
-		 
+
 		\paragraph{Mission Level Requirements}
 		\begin{itemize}
 				\item \textbf{MLR-1} The system design shall follow a 3-unit CubeSat platform.\\
@@ -131,90 +131,90 @@ The technology that will tested in the DeMi mission has a number of foreseeable 
 				\item \textbf{MLR-4} The system shall operate and produce operational and experimental data for a period of $<$3 months$>$ [goal of 12 months].\\
 				Parent Requirement: MS-1
 		\end{itemize}
-		
+
 		\paragraph{Systems Requirements}
-		
+
 		\begin{itemize}
 			\item \textbf{SYS-1} The system shall survive launch conditions.\\
 			Parent Requirement: MLR-4
 			\item \textbf{SYS-2} The system shall include electrical, mechanical, and software interfaces to the payload\\
 			Parent Requirement: MLR-3
-			\item \textbf{SYS-3} The system shall comply with the requirements and constraints listed in the most current CubeSat Design Specification (CDS) document. \cite{mission_cubesat} \\
+			\item \textbf{SYS-3} The system shall comply with the requirements and constraints listed in the most current CubeSat Design Specification (CDS) document \cite{mission_cubesat}. \\
 			Parent Requirement: MLR-1
 			\item \textbf{SYS-4} The system shall be capable of sending and receiving data and instructions to and from the ground.\\
 			Parent Requirements: MLR-3, MLR-4
-			\item \textbf{SYS-5} The system shall have a deorbit time of 25 years or less. \cite{mission_deorbit}\\
+			\item \textbf{SYS-5} The system shall have a deorbit time of 25 years or less \cite{mission_deorbit}.\\
 			Parent Requirement: MLR-4
 		\end{itemize}
 
 		\subsection{Design Overview}
-		The DeMi mission will consist of one small satellite following the 3-unit CubeSat Design Specifications established by the California Polytechnic State University. The satellite will be the size of three stacked 10cm cubes (called “units”), measuring a total of 10 cm $|times$ 10 cm $\times$ 30 cm. In accordance to CubeSat specifications, the satellite’s mass will not exceed 4 kilograms. In general, CubeSats are launched as secondary hosted payloads inside a standard Poly-PicoSatellite Orbital Deployer (P-POD). \cite{cubesat-specs}
+		The DeMi mission will consist of one small satellite following the 3-unit CubeSat Design Specifications established by the California Polytechnic State University. The satellite will be the size of three stacked 10 cm cubes (called ``units''), measuring a total of 10 cm $\times$ 10 cm $\times$ 30 cm. In accordance to CubeSat specifications, the satellite's mass will not exceed 4 kilograms. In general, CubeSats are launched as secondary hosted payloads inside a standard Poly-PicoSatellite Orbital Deployer (P-POD) \cite{cubesat-specs}.
 The CubeSat platform was selected because it offers a low-cost quick access option. Multiple vendors already sell many off-the-shelf CubeSat components with flight heritage for most standard satellite subsystems. Over the past several years, many university projects have been designed and flown on CubeSats. 
 
-		
+
 		\subsection{Concept of Operations}\label{sec:systems_conops}
-		
-		DeMi will be a 3-unit CubeSat on a low-Earth orbit with an altitude of 500 km at an inclination of 40$^\circ$. This orbit inclination was selected in order to reach the NASA Wallops ground station located in the state of Virginia. The altitude of 500 km positions the satellite well within Low-Earth Orbit exposing the payload to the space environment while still allowing 6 to 7 ground access opportunities per day for communications with the ground station. 
 
-Figure~\ref{fig:Mission_ConOps} shows a timeline of the DeMi concept of operations and mission milestones. Immediately following separation from a standard P-POD, the satellite will begin to charge its primary batteries through solar panels covering the long faces of the structure. During this first stage, the satellite’s antenna will be deployed and will emit intermittent beacon signals in order to be located by the ground station. The ADCS (Attitude Determination and Control System) torque coils will detumble the satellite and align it in a nadir-pointing position. The detumble stage will last approximately 2 weeks assuming a tip off rate of 10$^\circ$/sec. A detailed detumbling analysis can be found in Section~\ref{adcs_analysis}. The mission schedule allows up to one month for detumbling, yet any short delays during this stage would not be detrimental to the mission overall.
+		DeMi will be a 3-unit CubeSat on a Low-Earth Orbit (LEO) with an altitude of 500 km at an inclination of 40$^\circ$. This orbit inclination was selected in order to reach the NASA Wallops ground station located in the state of Virginia. The altitude of 500 km positions the satellite well within Low-Earth Orbit exposing the Payload to the space environment while still allowing 6 to 7 ground access opportunities per day for communications with the ground station. 
 
-		
+Figure~\ref{fig:Mission_ConOps} shows a timeline of the DeMi concept of operations and mission milestones. Immediately following separation from a standard P-POD, the satellite will begin to charge its primary batteries through solar panels covering the long faces of the structure. During this first stage, the satellite's antenna will be deployed and will emit intermittent beacon signals in order to be located by the ground station. The ADCS (Attitude Determination and Control System) torque coils will detumble the satellite and align it in a nadir-pointing position. The detumble stage will last approximately 2 weeks assuming a tip off rate of 10$^\circ$/sec. A detailed detumbling analysis can be found in Section~\ref{adcs_analysis}. The mission schedule allows up to one month for detumbling, yet any short delays during this stage would not be detrimental to the mission overall.
+
+
 		\begin{figure}[!ht]
 				\centering
 				\includegraphics[width=5in]{images/MissionOverview_1.png}
 				\caption{Timeline of the concept of operations for the DeMi Mission}
 				\label{fig:Mission_ConOps}
 			\end{figure}
-		
-		Once the satellite is in fully operational status, the payload will begin to conduct scientific experiments and collect data. Two different data capture modes will be performed during the mission: internal source experiments will be done during the first 3 months of operations, while external source experiments will occur during the remainder of the mission. The satellite will attempt to downlink the collected data whenever it passes over the NASA Wallops ground station and is given instructions to begin downlink.  
+
+		Once the satellite is in fully operational status, the Payload will begin to conduct scientific experiments and collect data. Two different data capture modes will be performed during the mission: internal source experiments will be done during the first 3 months of operations, while external source experiments will occur during the remainder of the mission. The satellite will attempt to downlink the collected data whenever it passes over the NASA Wallops ground station and is given instructions to begin downlink.  
 
 The majority of the time, the satellite will be in stand-by mode; in other words, it will not be capturing or downlinking data. In case of a subsystem malfunction, the satellite will go into safe mode to diagnose the source of the problem. 
 
-Given the satellite’s altitude, inclination, and surface area, analyses performed using STK predict that the satellite will deorbit within 7.8 years. This timeline agrees with the current 25-year deorbit requirement outlined by NASA standards.\cite{nasa-deorbit}
+Given the satellite's altitude, inclination, and surface area, analyses performed using STK predict that the satellite will deorbit within 7.8 years. This timeline agrees with the current 25-year deorbit requirement outlined by NASA standards \cite{nasa-deorbit}.
 
 
 \subsection{$N^2$ Diagram}
-		
+
 		The N$^2$ diagram was an essential tool in the early stages of the design process. It allowed the design team to determine the levels of interaction between different subsystems and exchange input and output variables and values. 
-		
+
 		\begin{figure}[!ht]
 				\centering
 				\includegraphics[width=5in]{images/MissionOverview_2.png}
 				\caption{High-Level $N^2$ diagram showing input/output relationships between subsystems}
 				\label{fig:Mission_N2}
 			\end{figure}
-			
-		As highlighted Figure~\ref{fig:Mission_N2}, the payload requirements drive the design of all the other subsystems. While the payload does not receive design inputs from other subsystems, its design outputs cascade down effectively driving the design of the rest of the satellite. A more detailed view of the DeMi N$^2$ diagram can be found in Appendix 1.
-	
+
+		As highlighted Figure~\ref{fig:Mission_N2}, the Payload requirements drive the design of all the other subsystems. While the Payload does not receive design inputs from other subsystems, its design outputs cascade down effectively driving the design of the rest of the satellite. A more detailed view of the DeMi N$^2$ diagram can be found in Appendix 1.
+
 	\subsection{System Level Budgets}
 		\subsubsection{Mass}
-		In agreement with CubeSat standards, the total mass of the satellite must not exceed 4 kg. Table 1 shows the total mass of the satellite broken down by subsystem. As of PDR, the design is projected to weight 3.26 kg and 3.90 kg with added margin. Following industry standards, the subsystem margin percentages used in this analysis correspond to the Mass Growth Allowance values for Preliminary Design published by the American Institute of Aeronautics and Astronautics.\cite{mission_aiaa} Figure 3 illustrates that the mass of the satellite is driven primarily by the payload, which takes up approximately one third of the total. The power and ADCS subsystems closely follow with 26\% and 22\% respectively. 
-		
+		In agreement with CubeSat standards, the total mass of the satellite must not exceed 4 kg. Figure~\ref{fig:Mission_mass2} shows the total mass of the satellite broken down by subsystem. As of PDR, the design is projected to weight 3.26 kg and 3.90 kg with added margin. Following industry standards, the subsystem margin percentages used in this analysis correspond to the Mass Growth Allowance values for Preliminary Design published by the American Institute of Aeronautics and Astronautics \cite{mission_aiaa}. Figure~\ref{fig:Mission_mass2} illustrates that the mass of the satellite is driven primarily by the Payload, which takes up approximately one third of the total. The Power and ADCS subsystems closely follow with 26\% and 22\% respectively. 
+
 			\begin{figure}[!ht]
 				\centering
 				\includegraphics[width=5in]{images/MissionOverview_3.png}
-				
+
 				\includegraphics[width=5in]{images/MissionOverview_5.png}
 				\caption{System Mass Budget}
 				\label{fig:Mission_mass2}
 			\end{figure}
-			
+
 		\subsubsection{Power}
 		This section presents the power used by the spacecraft during each of its modes of operation as well as the power supplied by the solar panels and battery. 
 
-The power used by the satellite during each mode is outlined in Table 2. The first two items, “Safe/Uplink” and “Detumbling” do not occur on a regular daily basis during the operational lifetime of the satellite, which is why their duration is not expressed in minutes per day and their values are not included in the average power calculation. 
+The power used by the satellite during each mode is outlined in Figure~\ref{fig:Mission_power2}. The first two items, ``Safe/Uplink'' and ``Detumbling'', do not occur on a regular daily basis during the operational lifetime of the satellite, which is why their duration is not expressed in minutes per day and their values are not included in the average power calculation. 
 
-During its operational period, the satellite will cycle between the data capture downlink and stand by modes. As shown in Figure 4, the most power is drawn by the antenna in the Communications subsystem during downlink. 
+During its operational period, the satellite will cycle between the data capture, downlink, and stand by modes. As shown in Figure~\ref{fig:Mission_power2}, the most power is drawn by the antenna in the Communications subsystem during downlink. 
 
-The satellite is expected to require an average of 3.54 Watts with up to 4.18 Watts with an 18\% margin applied. This allowance percentage of 18\% was derived from input from course faculty and the fact that most components will be commercial off the shelf with flight heritage. 
+The satellite is expected to require an average of 3.54 Watts with up to 4.18 Watts with an 18\% margin applied. This allowance percentage of 18\% was derived from input from course faculty and the fact that most components will be commercial off the shelf (COTS) with flight heritage. 
 
-Curerntly, the power system design carries a tight margin. The solar panels and battery are projected to supply up to 3.84 Watts; however, this would not satisfy the average power with margin needed at this stage in the design process. The power supplied is only 8.5\% higher than the expected power needed without margin. This issue is discussed in detail in Section \ref{sec:power} Power.
+Curerntly, the Power system design carries a tight margin. The solar panels and battery are projected to supply up to 3.84 Watts; however, this would not satisfy the average power with margin needed at this stage in the design process. The power supplied is only 8.5\% higher than the expected power needed without margin. This issue is discussed in detail in Section~\ref{sec:power}.
 
-			
+
 			\begin{figure}[!ht]
 				\centering
 				\includegraphics[width=5in]{images/MissionOverview_4.png}
-				
+
 				\includegraphics[width=5in]{images/MissionOverview_6.png}
 				\caption{System Power Budget}
 				\label{fig:Mission_power2}
