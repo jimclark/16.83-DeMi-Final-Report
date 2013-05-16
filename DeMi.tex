@@ -54,12 +54,16 @@ Massachusetts Institute of Technology\\
 \section*{List of Acronyms}
 \begin{acronym}
 
-\acro{COTS}{Commercial off the shelf}
+\acro{COTS}{Commercial Off The Shelf}
+\acro{CG}{Center of Gravity}
 \acro{DeMi}{Deformable Mirror Demonstration}
 \acro{DM}{Deformable Mirror}
-\acro{DOD}{Depth of discharge}
+\acro{DOD}{Depth of Discharge}
 \acro{EPS}{Electrical Power System}
 \acro{FOV}{Field of View}
+\acro{LEO}{Low Earth Orbit}
+\acro{MEMS}{Microelectromechanical Systems}
+\acro{P-POD}{Poly-Picosatellite Orbital Deployer}
 \acro{PDM}{Power Distribution Module}
 \acro{PSF}{Point Spread Function}
 \acro{ADCS}{Attitude Determination and Control System}
@@ -72,10 +76,10 @@ Massachusetts Institute of Technology\\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction - AW}
 
-Deformable mirror wavefront control systems correct for aberrations in the wavefront to produce high contrast images.  This technology has been employed in ground telescope observation to counter wavefront distortions induced by Earth’s atmosphere.  However, deformable mirrors have yet to be utilized on a space platform.  Such an implementation could remove aberrations in the wavefront due to speckles from diffraction, noise, phase errors, and thermal drift.  A proposed CubeSat Deformable Mirror demonstration (DeMi) will begin the process of testing adaptive optics technology in the space environment for future implementation on space telescopes and potentially free-space laser communication.  The use of deformable mirrors in conjunction with coronographs onboard space telescopes will be able to produce images with higher achievable contrast in the direct imaging of exoplanets.  This document presents a detailed overview of the role and design of the payload for the DeMi mission, a high actuator count MEMS deformable mirror yet to be tested in space, as well as the preliminary designs of the various satellite subsystems which support the flight of the payload in low Earth orbit.  
+Deformable mirror wavefront control systems correct for aberrations in the wavefront to produce high contrast images.  This technology has been employed in ground telescope observation to counter wavefront distortions induced by Earth's atmosphere.  However, deformable mirrors have yet to be utilized on a space platform.  Such an implementation could remove aberrations in the wavefront due to speckles from diffraction, noise, phase errors, and thermal drift.  A proposed CubeSat Deformable Mirror demonstration (DeMi) will begin the process of testing adaptive optics technology in the space environment for future implementation on space telescopes and potentially free-space laser communication.  The use of deformable mirrors in conjunction with coronographs on-board space telescopes will be able to produce images with higher achievable contrast in the direct imaging of exoplanets.  This document presents a detailed overview of the role and design of the payload for the DeMi mission, a high actuator count MEMS deformable mirror yet to be tested in space, as well as the preliminary designs of the various satellite subsystems which support the flight of the payload in low Earth orbit.  
 
 \subsection{Mission Statement}
-The mission of the Deformable Mirror Demonstration is to provide a low-cost, quick-access platform on which to demonstrate microelectromechanical (MEMS) wavefront control deformable mirror imaging technology (See Figure~\ref{fig:Intro_demi}) on-orbit.
+The mission of the Deformable Mirror Demonstration is to provide a low-cost, quick-access platform on which to demonstrate microelectromechanical (MEMS) wavefront control deformable mirror imaging technology on-orbit.
 
 \subsection{Motivation}
 The driving force behind the DeMi mission is the desire to directly image Earth-like exoplanets in the search for signs of life, requiring imaging technology that can produce high contrast and dynamic range images.  However, current high-performance space telescope technology suffers from wavefront aberrations, such as speckles, which can result from diffraction, noise, phase errors, and thermal drift and reduce the achievable image contrast \cite{cahoy-unpublished}.
@@ -113,7 +117,7 @@ A space telescope utilizing a high performance coronograph and deformable mirror
 The technology that will tested in the DeMi mission has a number of foreseeable future applications, including implementation on high performance space telescopes, such as for direct imaging of Earth-like exoplanets, or for use with free-space laser communication in order to correct for aberrations in the atmosphere \cite{cahoy-unpublished}.
 
 \newpage
-\section{Mission Overview}
+\section{Mission Overview - ZG}
 		\subsection{Requirements}
 		 
 		\paragraph{Mission Level Requirements}
@@ -148,7 +152,7 @@ The technology that will tested in the DeMi mission has a number of foreseeable 
 The CubeSat platform was selected because it offers a low-cost quick access option. Multiple vendors already sell many off-the-shelf CubeSat components with flight heritage for most standard satellite subsystems. Over the past several years, many university projects have been designed and flown on CubeSats. 
 
 		
-		\subsection{Concept of Operations -ZG}\label{sec:systems_conops}
+		\subsection{Concept of Operations}\label{sec:systems_conops}
 		
 		DeMi will be a 3-unit CubeSat on a low-Earth orbit with an altitude of 500 km at an inclination of 40$^\circ$. This orbit inclination was selected in order to reach the NASA Wallops ground station located in the state of Virginia. The altitude of 500 km positions the satellite well within Low-Earth Orbit exposing the payload to the space environment while still allowing 6 to 7 ground access opportunities per day for communications with the ground station. 
 
@@ -250,7 +254,7 @@ There are two types of requirements on the Payload.  The first set (PLD-1) appli
 
 The requirements on measuring and reconstructing the wavefront (PLD-2) apply to the detector.  Nominally, the detector must operate (capture images) for at least 5 minutes per orbit, and be able to function at a minimum of 10 Hz (PLD-2). The requirement is further separated into a ``Diagnostic Mode'' used for calibration and full frame images, and a ``Burst Mode'', used for data capture.  In ``Diagnostic Mode'', the Payload is required to take images for at least a minute per orbit at 10 Hz (PLD-2.1).  In ``Burst Mode'', the Payload is required to take images for at least 30 seconds per orbit a minimum of 100 Hz (PLD-2.2).  For both modes, the reconstruction accuracy must be a maximum of 100 nm rms (PLD-2.3).
 			
-			\subsubsection{Decisions Made and Trade Studies}
+			\subsubsection{Decisions Made and Trade Studies - AC, KB}
 
 \paragraph{Payload Architecture - AC}
 
@@ -485,6 +489,9 @@ Totals & 996.9 & 4.5 max & 0 to 50 & -20 to 80 \\ \hline
 \end{tabular}\label{fig:payload_summary_table}
 \end{table}
 
+\subsubsection{Risks - KB}
+
+
 			\subsubsection{Future Work - AC}
 
 Future work includes optical modeling of the system using the software ZEMAX \cite{zemax}. Modeling the system with ZEMAX will determine the
@@ -685,7 +692,7 @@ Parent Requirement: COMM-3
 
 The driving requirements for the Communications subsystem are that it should transmit at the data rates and frequencies (Comm-3.2) that are necessary to transmit all data to the ground station. The required frequencies are $445-455\ MHz$ for uplink and $460-470\ MHz$ for downlink. The required data rates are $19.2\ kb/s$ for uplink and $1.5\ Mb/s$ for downlink.
 
-			\subsubsection{Decisions Made - ZC}\label{sec:comm_decisions}
+			\subsubsection{Decisions Made}\label{sec:comm_decisions}
 
 The L-3 Cadet Nanosat UHF Radio was chosen for use on DeMi. It transmits at the frequencies and data rates outlined in the requirements. The transceiver has an extra $4\ GB$ of storage that avionics uses in addition to any of its storage. 
 
