@@ -1454,26 +1454,8 @@ Parent Requirement: STR-1
 \item \textbf{STR-1.6} The structure shall pass a minimum of 1 fit check.\\
 Parent Requirement: STR-1
 
-\item \textbf{STR-2} The structure shall provide space and attachment points for the payload, the avionics system, the power system, and the ADCS.\\
-Parent Requirement: SYS-1
-
-\item \textbf{STR-2.1} Attachment points shall ensure no relative motion of attached modules during launch as well as during nominal operating conditions.\\
-Parent Requirement: STR-2
-
-\item \textbf{STR-2.2} Interfaces shall survive thermal expansion and contraction across a range of $-150^\circ$ C to $60^\circ$ C.\\
-Parent Requirement: STR-2
-
-\item \textbf{STR-2.3} The lowest resonant frequency of all CubeSat components shall be higher than the resonant frequency of the launch vehicle.\\
-Parent Requirement: STR-2
-
-\item \textbf{STR-3} The structure shall facilitate interfaces between other subsystems.\\
-Parent Requirement: SYS-3
-
-\item \textbf{STR-4} The structure shall not interfere with payload field of view.\\
+\item \textbf{STR-4} The structure shall not interfere with Payload field of view.\\
 Parent Requirement: PLD-2
-
-\item \textbf{STR-5} The structure shall allow for workmanship screening of the avionics boards.\\
-Parent Requirement: MS-1
 
 \end{itemize}
 
@@ -1600,7 +1582,7 @@ Although at this stage in the design, the DeMi system supports a functional, on-
 
 Currently, the margin between the average power required by the system and the average power that can be supplied is 9\%, lower than the 18\% margin set by DeMi Systems and significantly lower than the 30\% margin recommended by JPL.  However, the system remains power-positive during standby with a margin of 32\%, mitigating the risk.  Therefore, a high consequence, medium likelihood risk (PO1) exists that insufficient power to carry out the mission will be supplied to the system. 
 
-ADCS has a moderately low likelihood, medium consequence risk (AD1) that it will not achieve the stability requirement of 0.08$^\circ$/s required for Payload science operations mode when the Payload will be capturing light from an external source. A similar CubeSat mission utilizing active magnetic control (ION from University of Illinois \cite{ION-mission}) achieved stability of $<$0.12$^\circ$/s, and, while the design of DeMi ADCS system is more robust than that of ION and is expected to satisfy the stability requirement of the Payload, achieving adequate stability still remains a design risk. However, the risk can be mitigated through further analysis and testing, and the ADCS design can be altered with low impact on the system design as a whole.  Additionally, data capture utilizing light from an external source is not a requirement of the mission.
+ADCS has a moderately low likelihood, medium consequence risk (AD1) that it will not achieve the stability requirement of 0.08$^\circ$/s required for Payload science operations mode when the Payload will be capturing light from an external source. A similar CubeSat mission utilizing active magnetic control (ION from University of Illinois \cite{ION-mission}) achieved a stability of $<$0.12$^\circ$/s, and, while the design of DeMi ADCS system is more robust than that of ION and is expected to satisfy the stability requirement of the Payload, achieving adequate stability still remains a design risk. However, the risk can be mitigated through further analysis and testing, and the ADCS design can be altered with low impact on the system design as a whole.  Additionally, data capture utilizing light from an external source is not a requirement of the mission.
 
 In the current design, the center of mass is within the range set by CubeSat standards, but since the masses and positions of parts may change as the design progresses, there is a risk (S1) that the center of mass could move out of range.  This would prevent the CubeSat from being accepted for launch.  Given that the total mass of the system with margin is below the maximum mass for a 3U CubeSat set by CubeSat standards, additional mass could be added to the system to maintain the location of the center of mass and mitigate the risk. Thus, S1 is of low likelihood but high consequence. 
 
@@ -1613,9 +1595,8 @@ In the current design, the center of mass is within the range set by CubeSat sta
 
 Two risks exist regarding the Avionics subsystem.  The higher priority risk of two (AV2) is a low likelihood, high consequence risk that the Avionics system will not be capable of providing the required latency for ADCS and the Payload subsystem.  The second risk (AV1) is a low likelihood, medium consequence risk that the Avionics subsystem will not be capable of processing all of the incoming data.  
 
-Finally, there is a low consequence, low likelihood risk (AD1) that ADCS will exceed the system mass budget.  A trade between mass and power was carried out in the design of the torque coils since both the mass and power budgets of the system are tight.  Additionally, in this stage of the design, the system components and properties still have the potential to change.  Therefore, if the torque coil design needs to be altered in order to reduce the power draw of the system, the mass might increase to be over the maximum set by the CubeSat standards for a 3U Cubesat.  However, this is a low consequence, low likelihood risk since currently the system mass with margin is under the maximum.
 
-		\subsection{Future Work}\label{sec:conclustions_futurework}
+		\subsection{Future Work}\label{sec:conclusion_futurework}
 More iterations in the design process need to be carried out before the design can be completed.  Discussed below, in priority order, is future work for the DeMi system:
 \begin{itemize}
 \item A more detailed model of the temperature dependence of battery and solar panel performance needs to be developed in order to more accurately calculate the power that can be supplied to the system.  
