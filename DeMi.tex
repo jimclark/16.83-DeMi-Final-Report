@@ -46,6 +46,31 @@ Massachusetts Institute of Technology\\
 \maketitle
 \newpage
 
+\renewcommand{\abstractname}{Executive Summary - ZG, AW}
+\begin{abstract}
+%\section*{Payload}
+The search for signs of life on Earth-like exoplanets requires imaging technology that can produce high contrast and dynamic range images.  Current high-performance space telescopes struggle to correct for aberrations in the light wavefront, causing the achievable contrast of images to be reduced.  However, adaptable wavefront control imaging technology, specifically deformable mirrors, provide a viable solution to this problem.  In the deformable mirror system, a wavefront sensor measures aberrations in an approaching wavefront, and an adaptive optics computer calculates the errors in the wavefront.  Electrostatic actuators then deform the surface to correct the wavefront. 
+
+Utilizing deformable mirrors in conjunction with coronographs onboard space telescopes could produce images with higher achievable contrast in the direct imaging of exoplanets.  
+A proposed CubeSat Deformable Mirror demonstration (DeMi) will begin the process of testing the stability, calibration, and predictability of more complex, higher actuator count deformable mirror systems in space which could later be used in high performance space telescope missions. 
+
+While in these future applications the deformable mirror system will be used to aid in observing stars or other objects, the mission goal of DeMi is to provide a low-cost, quick access platform on which to demonstrate MEMS wavefront control deformable mirror imaging technology in space and to accomplish this with commercial off the shelf components whenever possible.  
+
+The Payload for DeMi is an optical system that allows for the testing and technology demonstration of a deformable mirror system.  To keep the design of the Payload simple as possible, a laser will be used as an internal light source for the technology demonstration.  Additionally, an external source option has been included to satisfy the ultimate goal of using this technology on a larger space telescope for imaging of bright stars. Due to the added complexity required of the ADCS system on a CubeSat platform, the external source imaging will not require a precise star acquisition and navigation system. 
+
+This document presents a detailed overview of the role and design of the Payload for the DeMi mission, as well as the preliminary designs of the various satellite subsystems.
+
+%\section*{Design}
+A 3-unit CubeSat platform was selected to carry out this scientific mission due to its low manufacturing and launch costs. This architecture allows the use of commercially available components to streamline the design process and reduce costs.  The satellite will be placed on a 500 km Low Earth Orbit at a 40-degree inclination to facilitate communications with the NASA Wallops ground station. This arrangement provides about 45 minutes of ground access time per day. Uplink and downlink connections will be made through a UHF deployable monopole antenna mounted on the spacecraft's chassis. To acquire electrical power, the spacecraft will be equipped with four body-mounted side solar panels. A 10-watt-hour secondary (rechargeable) battery supplies the satellite with energy during eclipse. This configuration minimizes the total surface area and disturbance torques acting on the spacecraft.
+
+%\section*{Risks}
+At this stage in the design process, there are some important risks to consider. One of these risks is the very tight margin between the average power needed to operate under certain conditions and the power supplied by the solar panels and battery.  Another uncertainty is the ability of the Avionics subsystem to process all Payload and the ADCS data. Finally, while all subsystems have preliminary design and component choices, these still have the potential to undergo changes that could cause conflicts with the current system architecture. 
+
+%\section*{Future Work}
+Of course, the design must undergo more iteration before it is implemented. Future work includes detailed finite element structural to would ensure that the satellite and all its components will survive launch environment in their current configuration. Additionally, a steady-state thermal analysis must be completed in order to characterize the temperature dependence of the battery and solar panel performance and the temperature gradient across the satellite. This would improve the current power supplied calculations and determine whether the proposed heating design will be effective.  The current ADCS design could be refined with more accurate models of external disturbances and an attitude control loop. Also, further work is required to optimize the payload component configuration using optical modeling software. 
+\end{abstract}
+
+\newpage
 \tableofcontents
 \listoffigures
 \listoftables
@@ -1078,7 +1103,7 @@ The future work that needs to be conducted is that there should be work done to 
     \hline
     \textbf{Sensors/ Actuators} & \textbf{Quantity} & \multicolumn{1}{c|}{\textbf{Vendor}} & \multicolumn{2}{c|}{\textbf{Performance}} \bigstrut\\
     \hline
-    \multirow{2}[2]{*}{Sun sensors} & \multirow{2}[2]{*}{5} & \multicolumn{1}{c|}{\multirow{2}[2]{*}{CubeSat shop}} & \multicolumn{2}{l|}{- Field of view: 114$^\circ$} \bigstrut[t]\\
+    \multirow{2}[2]{*}{Sun sensors} & \multirow{2}[2]{*}{5} & \multicolumn{1}{c|}{\multirow{2}[2]{*}{CubeSatShop}} & \multicolumn{2}{l|}{- Field of view: 114$^\circ$} \bigstrut[t]\\
           &       & \multicolumn{1}{c|}{} & \multicolumn{2}{l|}{- Accuracy: $<$ 0.5$^\circ$} \bigstrut[b]\\
     \hline
     \multirow{2}[2]{*}{Magnetometer} & \multirow{2}[2]{*}{1} & \multicolumn{1}{c|}{Analog Devices } & \multicolumn{2}{l|}{- Dynamic range: $\pm$ 3.5 gauss} \bigstrut[t]\\
