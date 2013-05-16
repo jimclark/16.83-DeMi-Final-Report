@@ -231,7 +231,7 @@ The Payload for DeMi is an optical system that allows for the testing
 and technology demonstration of a deformable mirror system.  It must include the following  elements: the deformable mirrors the
 mission aims to test, a light source to create a wavefront, and a detector to measure the wavefront.  These components are attached
 to an optical breadboard and are in an enclosure to block out external
-light.  The challenge in this project is to create an optical system capable of testing the accuracy of current deformable mirror technology and evaluate its future applications while meeting the mass, volume and other constraints imposed by the 3U CubeSat platform.
+light.  The challenge in this project is to create an optical system capable of testing the accuracy and reliability of current deformable mirror technology and evaluate its future applications while meeting the mass, volume, and other constraints imposed by the 3U CubeSat platform.
 			
 \subsubsection{Requirements - AC}\label{sec:payload_requirements}
 
@@ -252,7 +252,7 @@ Parent Requirement: PLD-2
 
 There are two types of requirements on the Payload.  The first set (PLD-1) applies to the features of the deformable mirror system.  The second set (PLD-2) pertains to the measurement and reconstruction of the wavefront.  The complete requirements document can be found in Appendix~\ref{app:requirements}. 
 
-The requirements on measuring and reconstructing the wavefront (PLD-2) apply to the detector.  Nominally, the detector must operate (capture images) for at least 5 minutes per orbit, and be able to function at a minimum of 10 Hz (PLD-2). The requirement is further separated into a ``Diagnostic Mode'' used for calibration and full frame images, and a ``Burst Mode'', used for data capture.  In ``Diagnostic Mode'', the Payload is required to take images for at least a minute per orbit at 10 Hz (PLD-2.1).  In ``Burst Mode'', the Payload is required to take images for at least 30 seconds per orbit a minimum of 100 Hz (PLD-2.2).  For both modes, the reconstruction accuracy must be a maximum of 100 nm rms (PLD-2.3).
+The requirements on measuring and reconstructing the wavefront (PLD-2) apply to the detector.  Nominally, the detector must operate (capture images) for at least 5 minutes per orbit, and be able to function at a minimum of 10 Hz (PLD-2). The requirement is further separated into a ``Diagnostic Mode'' used for calibration and full frame images, and a ``Burst Mode'', used for data capture.  In ``Diagnostic Mode'', the Payload is required to take images for at least a minute per orbit at 10 Hz (PLD-2.1).  In ``Burst Mode'', the Payload is required to take images for at least 30 seconds per orbit at a minimum of 100 Hz (PLD-2.2).  For both modes, the reconstruction accuracy must be a maximum of 100 nm rms (PLD-2.3).
 			
 			\subsubsection{Decisions Made and Trade Studies - AC, KB}
 
@@ -292,20 +292,20 @@ For the external source, the wavefront beam enters a plano-convex lens and passe
 
 The chosen design allows the detector to image both an internal and external source. While the mission goal can be accomplished with just an internal source, the ultimate goal of using this technology on a larger space telescope for imaging of bright stars motivates the use of an external source. Therefore, the option for an external source is included in the design.
 
-Due to the added complexity required of the ADCS system on a CubeSat platform, the external source imaging will not require a precise star acquisition and navigation system. In contrast, with pointing knowledge from ADCS, the shutter on the aperture will be commanded open when a bright star is in the field of view (FOV). The maximum slew rate for imaging the external source is discussed in Paragraph~\ref{sec:pointing_requirement}.  Based on preliminary models looking at five bright stars (Alpha Centauri, Arcturis, Canopus, Sirius, and Vega), the satellite would expect to see the same bright star every orbit for an average of three to five minutes\footnote{Based on an STK simulation performed by Annie Marinan.}.  The pointing requirement on the maximum ADCS slew rate to keep the star on the same pixel on the detector is discussed in Section~\ref{sec:pointing_requirement}.
+Due to the added complexity required of the ADCS system on a CubeSat platform, the external source imaging will not require a precise star acquisition and navigation system. In contrast, with pointing knowledge from ADCS, the shutter on the aperture will be commanded open when a bright star is in the field of view (FOV).  Based on preliminary models looking at five bright stars (Alpha Centauri, Arcturis, Canopus, Sirius, and Vega), the satellite would expect to see the same bright star every orbit for an average of three to five minutes\footnote{Based on an STK simulation performed by Annie Marinan.}.  The pointing requirement on the maximum ADCS slew rate to keep the star on the same pixel on the detector is discussed in the Paragraph Pointing Requirement.
 
 It is necessary that the aperture for imaging an external source be small, given the volume constraints of the CubeSat platform after accommodating all of the key elements of the system (deformable mirror, mirror driver electronics, detector, and necessary imaging optics). Due to the physical size of these key elements, it is not practical to design the external source imaging as a typical reflecting telescope. While it may be possible to accommodate an aperture lens with relatively large diameter ($>60$ mm), the corresponding longer focal length would not fit in the volume, and the space for resizing the beam is limited. While the smaller aperture will limit the angular resolution and sensitivity and increase the size of the point spread function (PSF), tight angular resolution is not a requirement for this technology demonstration. Therefore, this design has an aperture lens with diameter 12.7 mm, with a minimum focal length on the order of its diameter. Using the Rayleigh criterion, the angular resolution (width of the center of the PSF) at 500 nm is 9.907".
 
-The current design allows for open and closed loop control.  Images and centroid solutions can be sent to the ground, allowing for evaluation of the mirror performance over time.  In addition, closed loop control (active correction of the wavefront on orbit) can also be implemented on board using the centroids and calculated slopes to command the mirrors.  Calculating mirror response from slopes requires little additional processing \cite{centroids}. 
+The current design allows for open and closed loop control.  Images and centroid solutions can be sent to the ground, allowing for evaluation of the mirror performance over time.  In addition, closed loop control (active correction of the wavefront on orbit) can also be implemented on-board using the centroids and calculated slopes to command the mirrors.  Calculating mirror response from slopes requires little additional processing \cite{centroids}. 
 
 All optical elements of the system are preliminarily chosen.
 (See Appendix~\ref{app:payload_components} for the full list of
 elements with part numbers and mass totals.)  Glass elements are
-chosen to be UV fused silica over other glasses whenever possible for
+chosen to be UV fused silica over other types of glass whenever possible for
 their better performance in space \cite{radiation_optics} due to a
 high coefficient of thermal expansion and better UV transmission.  All
 elements also have anti-reflective coatings that are efficient in the
-visible spectrum (400 - 700 nm).  All components in Figure~\ref{fig:SHWFS} are shown with their mounts.  However, the mass and volume of the mounts are only estimates of the custom mounts that will be built for all optics.  Custom mounts will be built to adapt the optics for space applications.  All elements must be mounted in stress-free mounts (e.g., no glass touching metal) and mounted to an optical breadboard with multi-footed lens tubes that are made of aluminum, or of a metal that has a similar coefficients of thermal expansion as the lens it holds.  Future modeling and optimization of the optical design will yield more exact component choices.
+visible spectrum (400 - 700 nm).  All components in Figure~\ref{fig:SHWFS} are shown with their mounts.  However, the mass and volume of the mounts are only estimates of the custom mounts that will be built for all optics.  Custom mounts will be built to adapt the optics for space applications.  All elements must be mounted in stress-free mounts (e.g., no glass touching metal) and mounted to an optical breadboard with multi-footed lens tubes that are made of aluminum, or of a metal that has a similar coefficient of thermal expansion as the lens it holds.  Future modeling and optimization of the optical design will yield more exact component choices.
 
 \subparagraph{Other Designs Considered: Michelson Interferometer with Nanopositioner - AC}\label{sec:payload_interferometer}
 The interferometer design shown in Figure~\ref{fig:interferometer} is slightly modified from a typical interferometer due to volume constraints on the Payload and the requirement for high contrast imaging. It has an internal source (laser diode), whose path is denoted by a dotted red line.
@@ -342,18 +342,18 @@ After detumbling, and two weeks of commissioning, as described in
 Section~\ref{sec:systems_conops}, the Payload will perform a status check of all instruments. This includes the deformable mirror system, the detector, and the laser. Each element will be turned on and checked for error or status codes. Any available status information directly from the deformable mirrors, detector, and laser will be sent to the ground.
 
 \item{\textbf{Calibration}}
-The next phase is to calibrate the system using the ``Diagnostic Mode" requirements outlined in Section~\ref{sec:payload_requirements}.  This involves turning on the laser and recording several images in this configuration with the detector, without deforming the mirrors (acts as a flat mirror). From these images, on-board processing algorithms can find the centroids \cite{centroids} and average them to obtain new `standard centroids', which will be used for wavefront comparison calculations throughout the remainder of the mission. These images, averages, and new centroid solutions will be sent to the ground and stored on-board.
+The next phase is to calibrate the system using the ``Diagnostic Mode" requirements outlined in Section~\ref{sec:payload_requirements}.  This involves turning on the laser and recording several images in this configuration with the detector, without deforming the mirrors (acts as a flat mirror). From these images, on-board processing algorithms can find the centroids \cite{centroids} and average them to obtain new `standard centroids', which will be used for wavefront comparison calculations throughout the remainder of the mission. These images, averages, and new centroid solutions will be stored on-board and sent to the ground.
 
 \item{\textbf{Data Capture: Internal Source}}
-The next, and most important, stage is data capture using the internal source. The laser is turned on, then the mirror is deformed by a predetermined test sequence of commands, and the wavefront is imaged on the detector. The test sequence will include `poking' one actuator at a time, and `poking' combinations of actuators in commonly known shapes, such as Zernike polynomials and Fourier modes.  Then, the images are read from the detector, centroids are found, and one full image and the collection of centroid solutions are sent down to the ground and stored on-board.  Local wavefront slopes will be found from the centroid solutions using simple on-board algorithms, and the mirrors will be commanded for active wavefront correction on-board.
+The next, and most important, stage is data capture using the internal source. The laser is turned on, then the mirror is deformed by a predetermined test sequence of commands, and the wavefront is imaged on the detector. The test sequence will include `poking' one actuator at a time, and `poking' combinations of actuators in commonly known shapes, such as Zernike polynomials and Fourier modes.  Then, the images will be read from the detector, centroids will be found, and one full image and the collection of centroid solutions will be stored on-board and sent down to the ground.  Local wavefront slopes will be found from the centroid solutions using simple on-board algorithms, and the mirrors will be commanded for active wavefront correction on-board.
 
 \item{\textbf{Data Capture: External Source}}
 The second part of data capture will be with an external source. This external source will be a bright star, such as Vega or Sirius, as mentioned previously.  With
 knowledge from ADCS, the shutter will be commanded open, and the laser
 will be commanded off, allowing an external source to be imaged. The
-images will be read from the detector, the centroids found, and one
-full frame image along with the collection of centroid solutions will be
-sent to the ground and stored on-board.  Identical to data capture with an internal source, local wavefront slopes will be found from the centroid solutions using simple on-board algorithms, and the mirrors will be commanded for active wavefront correction on-board. 
+images will be read from the detector, the centroids will be found, and one
+full frame image along with the collection of centroid solutions will be stored on-board 
+sent to the ground.  Identical to data capture with an internal source, local wavefront slopes will be found from the centroid solutions using simple on-board algorithms, and the mirrors will be commanded for active wavefront correction on-board. 
 
 \end{enumerate}
 
@@ -418,7 +418,7 @@ A Shack-Hartmann lenslet array consists of a matrix of small lenses (called lens
 To get the best measurement of the wavefront, the maximum number of spots, and therefore lenslets, is desired. As a result, for a constant beam size, a lenslet array should be chosen with the lowest pitch (distance from the center of each lens) in order to get the maximum number of spots for the beam. 
 
 Therefore, the microlens array MLA150 was chosen from ThorLabs \cite{MLA150} (see Figure~\ref{fig:MLA150}), with a pitch of 150 $\mu$m.
-The lenslet is 10 mm square, so it contains about 66 by 66 lenslets. It is mounted in the lens tube on the detector. For an approximate beam size of 2.25 mm (see Paragraph~\ref{par:payload_dms}), approximately 15 by 15 lenslets will be used of the lenslet array.  See Section~\ref{sec:payload_pixels} for a discussion of the pixels used on the detector per lenslet.
+The lenslet is 10 mm square, so it contains about 66 by 66 lenslets. It is mounted in the lens tube on the detector. For an approximate beam size of 2.25 mm (see Paragraph ``Deformable Mirrors'' above), approximately 15 by 15 lenslets will be used of the lenslet array.  See Paragraph ``Pixels per Lenslet Spot'' below for a discussion of the pixels used on the detector per lenslet.
 
 \begin{figure}[ht]
 \centering
@@ -468,10 +468,10 @@ Data Rate & 655.4 Mbit/sec & 310 Mbit/sec \\
 			
 \subparagraph{Pixels per Lenslet Spot}\label{sec:payload_pixels}
 In order to image the spots created by the Shack-Hartmann microlenslet array, spots must fall on their own unique pixels.  At least four pixels are required per lenslet spot (a two by two square of pixels) to account for the event in which a spot lands between two pixels, or at the center of four pixels.
-The incoming beam is 2.25 mm (Paragraph~\ref{par:payload_detector}).  This corresponds to about 15 by 15 spots. The detector has a pixel size of 5.2 $\mu$m, so a 2.25 mm beam corresponds to about 425 px square.  Therefore, over twenty pixels are available for each lenslet spot, so there is no concern for multiple spots falling on the same pixel. 
+The incoming beam is 2.25 mm (see Paragraph ``Deformable Mirrors'' above).  This corresponds to about 15 by 15 spots. The detector has a pixel size of 5.2 $\mu$m, so a 2.25 mm beam corresponds to about 425 px square.  Therefore, over twenty pixels are available for each lenslet spot, so there is no concern for multiple spots falling on the same pixel. 
 				
 				\subparagraph{Actuators per Lens}
-The chosen BMC deformable mirrors have a total of 32 actuators (a 6 by 6 array, with no corners) with an actuator pitch of 450 $\mu$m \cite{BMC}.  The Shack-Hartmann lenslets have a pitch of 150 $\mu$m, so there will be a minimum of four spots devoted to each actuator.  Therefore, there is no concern for individual actuators to be untested or characterized properly.
+The chosen BMC deformable mirrors have a total of 32 actuators (a 6 by 6 array, with no corners) with an actuator pitch of 450 $\mu$m \cite{BMC}.  The Shack-Hartmann lenslets have a pitch of 150 $\mu$m, so there will be a minimum of four spots devoted to each actuator.  Therefore, there is no concern for individual actuators to be untested or characterized improperly.
 
 			\subsubsection{Summary of Outputs - AC}
 
@@ -482,7 +482,7 @@ With all components, the Payload is 1.00 g, and 1.25 kg with a 25\% margin.
 \begin{table}
 \caption{Summary of the mass totals, power needs, and thermal needs of the major Payload components.}
 \begin{tabular}{|c||c|c|c|c|} \hline
-	\textbf{Component} & \textbf{Mass (g)} & \textbf{Power (W)} & \textbf{Thermal, operating ($^\circ$C)} & \textbf{Thermal, storage ($^\circ$C)} \\ \hline \hline
+	\textbf{Component} & \textbf{Mass (g)} & \textbf{Power (W)} & \textbf{Thermal, oper. ($^\circ$C)} & \textbf{Thermal, stor. ($^\circ$C)} \\ \hline \hline
 Laser diode & 24.45 & 0.0045 & -10 to 50 & unknown \\
 Detector & 46.64 & $<$ 2 W & 0 to 50 & -20 to 80 \\
 DMs + Driver & 189.9 & $<$ 2.5 W & -10 to 50 & unknown \\
@@ -501,7 +501,7 @@ The other major risk that Payload faces is that it will produce data too quickly
 
 Future work includes optical modeling of the system using the software ZEMAX \cite{zemax}. Modeling the system with ZEMAX will determine the
   final beam profile on the detector.  This will allow for more precise calculations of data rates, for example.  Optimization of the space will
-  be determined to find the best choice of components.  Thermal
+  be determined to find the best choice of optical components.  Thermal
   effects on the beam and optical components will be also analyzed, along with the effects of slight misalignments (i.e. with lenslet array).
 
 Also, to determine the feasibility of the interferometer with the nanopositioner design, discussions with various nanopositioner manufacturers are needed to resolve if the nanopositioner elements can be appropriately modified for a CubeSat platform.  Preliminarily, a nanopositioner would require additional power and processing.  Further effects on other subsystems needs to be determined. 
@@ -689,19 +689,19 @@ The performance of the solar panels and batteries is temperature-dependent.  In 
 			\subsubsection{Requirements}
 			
 \begin{itemize}
-\item \textbf{COMM-3.1} The subsystem shall transmit at $19.2\ kb/s$ for uplink and $1.5\ Mb/s$ for downlink. \\
+\item \textbf{COMM-3.1} The subsystem shall transmit at 19.2 kb/s for uplink and 1.5 Mb/s for downlink. \\
 Parent Requirement: COMM-3
-\item \textbf{COMM-3.2} The subsystem shall have a bandwidth of $445-455\ MHz$ for uplink and $460-470\ MHz$ for downlink. \\
+\item \textbf{COMM-3.2} The subsystem shall have a bandwidth of 445-455 MHz for uplink and 460-470 MHz for downlink. \\
 Parent Requirement: COMM-3
 \end{itemize}
 
-The driving requirements for the Communications subsystem are that it should transmit at the data rates and frequencies (Comm-3.2) that are necessary to transmit all data to the ground station. The required frequencies are $445-455\ MHz$ for uplink and $460-470\ MHz$ for downlink. The required data rates are $19.2\ kb/s$ for uplink and $1.5\ Mb/s$ for downlink.
+The driving requirements for the Communications subsystem are that it should transmit at the data rates and frequencies (Comm-3.2) that are necessary to transmit all data to the ground station. The required frequencies are 445-455 MHz for uplink and 460-470 MHz for downlink. The required data rates are 19.2 kb/s for uplink and 1.5 Mb/s for downlink.
 
 			\subsubsection{Decisions Made}\label{sec:comm_decisions}
 
-The L-3 Cadet Nanosat UHF Radio was chosen for use on DeMi. It transmits at the frequencies and data rates outlined in the requirements. The transceiver has an extra $4\ GB$ of storage that avionics uses in addition to any of its storage. 
+The L-3 Cadet Nanosat UHF Radio was chosen for use on DeMi. It transmits at the frequencies and data rates outlined in the requirements. The transceiver has an extra 4 GB of storage that avionics uses in addition to any of its storage. 
 
-Because the transceiver is transmitting and receiving at UHF frequencies, a very common antenna choice is to use a measuring tape antenna that is tuned to the frequency that is desired. Because the antenna works like a quarter-wave monopole, the desired length of the antenna is calculated by dividing the wavelength of the signal by 4. Because the transmitting and receiving frequencies are different, the average of these frequencies is used to compute the wavelength. With a frequency of $465\ MHz$, the wavelength equals $.645$ meters. Then, the length of the antenna can be determined using Equation~\ref{eq:comm-antenna-length}.
+Because the transceiver is transmitting and receiving at UHF frequencies, a very common antenna choice is to use a measuring tape antenna that is tuned to the frequency that is desired. Because the antenna works like a quarter-wave monopole, the desired length of the antenna is calculated by dividing the wavelength of the signal by 4. Because the transmitting and receiving frequencies are different, the average of these frequencies is used to compute the wavelength. With a frequency of 465 MHz, the wavelength equals .645 meters. Then, the length of the antenna can be determined using Equation~\ref{eq:comm-antenna-length}.
 
 \begin{equation}\label{eq:comm-antenna-length}
 \lambda = c/f
@@ -713,7 +713,7 @@ gain of this antenna will be approximately 3 dB and the beam width approximately
 using two of these antennas so that communication can occur even if it is rotated 180 degrees
 from where it is supposed to be.
 
-The ground station that DeMi communicates with will be the NASA Wallops UHF Ground Station. This ground station is being used because the transceiver chosen for DeMi was also used in the Dynamic Ionosphere CubeSat Experiment, and the ground station that was used in that mission was the NASA Wallops UHF Ground Station. The diameter of the dish is $18.29$ meters, the gain is $35\ dB$ and the beam with is $2.9^\circ$.
+The ground station that DeMi communicates with will be the NASA Wallops UHF Ground Station. This ground station is being used because the transceiver chosen for DeMi was also used in the Dynamic Ionosphere CubeSat Experiment, and the ground station that was used in that mission was the NASA Wallops UHF Ground Station. The diameter of the dish is 18.29 meters, the gain is 35 dB and the beam with is $2.9^\circ$.
 
 
 \subsubsection{Trade Studies} \label{sec:communications-trade-studies}
@@ -725,23 +725,23 @@ The main factor in choosing the transceiver on DeMi is the maximum data downlink
 \begin{center}
     \begin{tabular}{| c | c |} \hline
     	\textbf{Tranceiver} & \textbf{Maximum Downlink Rate} \\ \hline \hline
-Espace Payload Telemetry System & $1\ Mb/s$ \\
-AstroDev Li-1 UHF Transceiver & $38.4\ kb/s$ \\
-ISIS TXS Small Satellite  S-Band Transmitter & $100\ kb/s$ \\
-Tyvak UHF Transceiver & $200\ kb/s$ \\
-L-3 Cadet Nanosat UHF Radio & $1.5\ Mb/s$ \\
-Microhard MHX2420 Modem & $230.4\ kb/s$ \\ \hline 
+Espace Payload Telemetry System & 1 Mb/s \\
+AstroDev Li-1 UHF Transceiver & 38.4 kb/s \\
+ISIS TXS Small Satellite  S-Band Transmitter & 100 kb/s \\
+Tyvak UHF Transceiver & 200 kb/s \\
+L-3 Cadet Nanosat UHF Radio & 1.5 Mb/s \\
+Microhard MHX2420 Modem & 230.4 kb/s \\ \hline 
     \end{tabular}\label{table:comm_transceivers}
 \end{center}
 \end{table}
 
 			\subsubsection{Analysis}
 
-The maximum amount of data downlink per pass-by can be calculated by multiplying the downlink data rate and the access duration per pass-by. Given the downlink data rate of $1.5\ Mb/s$, and the access duration of $586$ seconds per pass-by, the maximum amount of data that can be downlinked in one pass-by is $109.9\ MB$. Because the satellite is not always directly above the ground station, the satellite is not always downlinking at the maximum data rate. To account for this, and for space for telemetry data and error correcting code, a margin of a factor of 2 is added, so the maximum amount of data from payload that can be downlinked per pass-by is about $54.95\ MB$. Although this is not as much data as payload is creating, on-board processing is used so that the amount of data that needs to be downlinked is below the maximum amount that is allotted for payload.
+The maximum amount of data downlink per pass-by can be calculated by multiplying the downlink data rate and the access duration per pass-by. Given the downlink data rate of 1.5 Mb/s, and the access duration of $586$ seconds per pass-by, the maximum amount of data that can be downlinked in one pass-by is 109.9 MB. Because the satellite is not always directly above the ground station, the satellite is not always downlinking at the maximum data rate. To account for this, and for space for telemetry data and error correcting code, a margin of a factor of 2 is added, so the maximum amount of data from payload that can be downlinked per pass-by is about 54.95 MB. Although this is not as much data as payload is creating, on-board processing is used so that the amount of data that needs to be downlinked is below the maximum amount that is allotted for payload.
 
 A link budget was created in order to determine the link margin for a worst case and a best case for uplink and downlink. The uplink budget and the downlink budget are detailed in Appendix~\ref{app:link_budgets}.
 
-The first calculation for the link budget is to determine the worst case propagation path length. The best case length is $500\ km$ because that is the altitude at which the satellite is orbiting. Figure~\ref{fig:comm_propagation_path} shows how a wave propagates through that atmosphere.
+The first calculation for the link budget is to determine the worst case propagation path length. The best case length is 500 km because that is the altitude at which the satellite is orbiting. Figure~\ref{fig:comm_propagation_path} shows how a wave propagates through that atmosphere.
 
 \begin{figure}[ht]
 \centering
@@ -769,7 +769,7 @@ In this equation, $n_n$ is the refractive index of layer $n$, and $\alpha_n$ is 
 \alpha_n = \pi - \arccos \biggl(\frac{-a_n^2 - 2r_n\delta_n - \delta_n^2}{2a_n r_n + 2a_n \delta_n}\biggr) 
 \end{equation}
 
-Values that still need to be defined are $\beta_1$ (because it cannot be calculated using the Equation~\ref{eq:comm-entry-angle}), $\delta_1$, $\delta_2$, $n_1$, and $n_2$. $\beta_1$ is just equal to the complimentary angle to the minimum angle at which the Wallops Ground Station can track, which is $5^\circ$. $\delta_1$ will be equal to the altitude at which the atmosphere ends which one can say is about $100\ km$. $\delta_2$ is just the orbiting altitude minus $\delta_1$. $n_1$, which is simple the refractive index of air, is $1.000293$. The last remaining value to be defined is $n_2$, which is the refractive index of a vacuum, which is just 1. Using these equations, one can find that $a_1$ equals $707\ km$, and $a_2$ equals $1375\ km$. This means that the worst case propagation path length is equal to $2082\ km$. The refraction of the wave in air did not change the path length by very much. Without accounting for the refraction, the path length can be calculated using the equation for $a_n$. In this calculation, $r_n$ equals $r_1$, $\beta_n$ equals $\beta_1$, and $\delta_n$ equals $500\ km$ which is the altitude at which DeMi orbits. These values give a path length equal to $2077\ km$, which is only $5\ km$ shorter than the path length when taking refraction into consideration.
+Values that still need to be defined are $\beta_1$ (because it cannot be calculated using the Equation~\ref{eq:comm-entry-angle}), $\delta_1$, $\delta_2$, $n_1$, and $n_2$. $\beta_1$ is just equal to the complimentary angle to the minimum angle at which the Wallops Ground Station can track, which is $5^\circ$. $\delta_1$ will be equal to the altitude at which the atmosphere ends which one can say is about 100 km. $\delta_2$ is just the orbiting altitude minus $\delta_1$. $n_1$, which is simple the refractive index of air, is 1.000293. The last remaining value to be defined is $n_2$, which is the refractive index of a vacuum, which is just 1. Using these equations, one can find that $a_1$ equals 707 km, and $a_2$ equals 1375 km. This means that the worst case propagation path length is equal to 2082 km. The refraction of the wave in air did not change the path length by very much. Without accounting for the refraction, the path length can be calculated using the equation for $a_n$. In this calculation, $r_n$ equals $r_1$, $\beta_n$ equals $\beta_1$, and $\delta_n$ equals 500 km which is the altitude at which DeMi orbits. These values give a path length equal to 2077 km, which is only 5 km shorter than the path length when taking refraction into consideration.
 
 The next value calculated in the link budgets is the Equivalent, Isotropic Radiated Power (EIRP). In order to calculate the EIRP, Equation~\ref{eq:comm-eirp} should be used \cite[p.~476]{SMAD}.
 
