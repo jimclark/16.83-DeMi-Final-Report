@@ -354,21 +354,34 @@ sent to the ground and stored on-board.  Identical to data capture with an inter
 \end{enumerate}
 
 \paragraph{Deformable Mirror System - KB} \label{par:payload_dms}
-
-There are only two vendors which sell commercial off-the-self options for MEMS deformable mirrors that will fit inside a CubeSat: Boston Micromachines, and Iris Adaptive Optics. The Boston Micromachines Mini DM comes in three different sizes of stroke and aperture. Stroke
-referes to the maximum amount the mirror can 'push' a segment outward, and the aperture is simply the aperture of the DM. Since there is little room for resizing optics in our system, the aperture of the DM
+%I should probably write a general introduction to DMs, huh? 
+There are only two vendors which sell commercial off-the-self options for MEMS deformable mirrors that will fit inside a CubeSat: Boston Micromachines, and Iris Adaptive Optics. These options are summarized in Table~\ref{table:payload_dms}. The Boston Micromachines Mini DM comes in three different sizes of stroke and aperture. Stroke referes to the maximum amount the mirror can 'push' a segment outward, and the aperture is simply the aperture of the DM. Since there is little room for resizing optics in our system, the aperture of the DM
 acts as a stop. As such, larger apertures are strictly better for the accuracy of the wavefront we can reconstruct. While the Iris AO PT111 does have a larger aperture \emph{and} a larger stroke, which are both
 better for accuracy, its driver board is larger and much more difficult to modify than the BMC Mini's. As such, we selected the largest BMC mini DM, with a 2.25 mm aperture and a stroke of 5.5 $\mu \text{m}$.
 
-\paragraph{Detector - KB} \label{par:payload_detector}
+\begin{table}[!ht]
+  \caption{Deformable Mirrors Considered for Payload Design}
+    \begin{tabular}{|l||l|llll|}
+      \hline
+     &Requirement&BMC Mini 1.5 $\mu$m& Mini 3.5 $\mu$m & Mini 5.5 $\mu$m &Iris AO PT111 \\ \hline
+    Stroke& Min 1.5 $\mu$m & 1.5 $\mu$m & 3.5 $\mu$m & 5.5 $\mu$m & 5 or 8 $\mu$m \\ \hline
+    Rate& Min 100 Hz& 8 kHz & 8 kHz & 8 kHz & $>$ 6.5 kHz\\ \hline
+    Control Precision& 1 nm & 0.09 nm& 0.2 nm & 0.3 nm & 0.3 or 0.5 nm \\ \hline
+    Response Time& 0.001 sec & 20 $\mu$s & 100 $\mu$s & 500 $\mu$s& $< 200 \mu$s \\ \hline
+    Aperture& - & 1.5 mm & 2.0 mm &2.25 mm&3.5 mm\\
+      \hline
+    \end{tabular}\label{table:payload_dms}
+\end{table}
 
+\paragraph{Detector - KB} \label{par:payload_detector}
+%.. and a general introduction to detectors. 
 For a detector, we chose the UI52-41LE-M CMOS detector from
 IDS. Critically, it has a 5.2$\mu m$ pixel size, which is smaller than
 the pixel sizes we looked at for the alternatives. Since accuracy is a
 function of pixel size, maximizing pixels per subaperture is very
 important. Alternatives we considered included the DCC1545M and the
 e2v CCD47-20 frame transfer CCD (Table~\ref{table:payload_detectors}). 
-%clearly planning to write more here -KB
+
 \begin{table}[!ht]
   \caption{Detectors Considered for Payload Design}
     \begin{tabular}{|l||l|llll|}
