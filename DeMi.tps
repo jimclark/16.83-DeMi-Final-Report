@@ -11,14 +11,15 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1169
-NormalPos.bottom=401
+NormalPos.right=494
+NormalPos.bottom=358
 Class=LaTeXView
 Document=DeMi.tex
 
 [Frame0_View0,0]
-TopLine=1594
-Cursor=104681
+
+TopLine=2687
+Cursor=102118
 
 [SessionInfo]
 FrameCount=1
