@@ -450,19 +450,19 @@ The lenslet is 10 mm square, so it contains about 66 by 66 lenslets. It is mount
 \end{figure}
 
 \paragraph{Pointing Requirement - KB}\label{sec:pointing_requirement}
-
-To determine the pointing requirement, it is necessary to calculate the plate scale of the detector.
+During external data acquisition, it is desirable to have the same points of the image of the star be on the same pixels of the detector for the duration of the exposure time, so that the image of the star is not smeared across the detector.
+To determine the pointing requirement which achieves this, it is necessary to calculate the plate scale of the detector.
 %and the amount of time needed to get a reasonable SNR for a star of a reasonable magnitude. 
 The plate scale of the detector is the relationship between angular distance on the sky and pixel size on the detector, and is typically measured in arcseconds per pixel. The plate scale used to calculate the pointing requirement was estimated to be 28 arcseconds/pixel by Eduardo Bendek\footnote{Eduardo.A.Bendek@nasa.gov} at NASA AMES. 
 %%% insert calculations to get to this point. 
 
-The pointing requirement for ADCS during external source imaging can then be determined by using:\\ 
+ The pointing requirement for ADCS during external source imaging can then be determined by using:\\ 
 \begin{center}
 $\text{maximum slew rate} = \frac{\text{plate scale}}{\text{maximum exposure time}}$
 \end{center}
 %is there a better way to do simple formulas that don't really need to be in equation form? 
 
-The maximum exposure time used occurs during ``Diagnostic Mode'' at 10 fps, which corresponds to a maximum exposure time of 0.1 seconds. Plugging everything into this equation, we find a maximum slew rate requirement of $\frac{22 \text{ arcseconds/pixel}}{0.1 \text{ s}} \approx 4.7$ arcminutes/s during external source acquisition.
+The maximum exposure time used occurs during ``Diagnostic Mode'' at 10 fps, which corresponds to a maximum exposure time of 0.1 seconds. Plugging everything into this equation, the maximum slew rate requirement during external source data acquisition is $\frac{22 \text{ arcseconds/pixel}}{0.1 \text{ s}} \approx 4.7$ arcminutes/s.
 
 \paragraph{Data Rates to Avionics - KB}\label{sec:data_rate}
 The rate at which payload will output data to avionics is a function of the number of pixels of the image selected for output (either the full frame or a subframe,) the number of bits per pixel, and the rate at which images are taken in frames per second (fps.) The formula is simply: $r_{out} = \text{pixels} \times \frac{\text{bits}}{\text{pixel}} \times \text{fps}$
