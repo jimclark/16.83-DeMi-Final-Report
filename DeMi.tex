@@ -383,16 +383,15 @@ sent to the ground.  Identical to data capture with an internal source, local wa
 \end{enumerate}
 
 \paragraph{Deformable Mirror System - KB} \label{par:payload_dms}
-%I should probably write a general introduction to DMs, huh? 
-There are only two vendors which sell commercial off-the-self options for MEMS deformable mirrors that will fit inside a CubeSat: Boston Micromachines, and Iris Adaptive Optics. These options are summarized in Table~\ref{table:payload_dms}. The Boston Micromachines Mini DM comes in three different sizes of stroke and aperture. Stroke referes to the maximum amount the mirror can 'push' a segment outward, and the aperture is simply the aperture of the DM. Since there is little room for resizing optics in our system, the aperture of the DM
-acts as a stop. As such, larger apertures are strictly better for the accuracy of the wavefront we can reconstruct. While the Iris AO PT111 does have a larger aperture \emph{and} a larger stroke, which are both
-better for accuracy, its driver board is larger and much more difficult to modify than the BMC Mini's. As such, we selected the largest BMC mini DM, with a 2.25 mm aperture and a stroke of 5.5 $\mu \text{m}$.
+Deformable mirrors (DMs) are mirrors whose surfaces can be dynamically deformed. This deformation is often achieved by actuators placed beneath the mirror's surface which can be commanded to push or pull the surface they are attached to inward or outward. The maximum amount an actuator can push the mirror's surface inward or outward is called the \emph{stroke} of the mirror. The maximum amplitude of the wavefront which can be reconstructed is limited by the maximum stroke of the DM, so DMs with larger strokes allow for the reconstruction of larger amplitude wavefronts. While many DMs are very large, this study uses MEMS DMs controlled by tiny electrostatic actuators which can be individually controlled by applying voltages to the correct actuator electrodes.  
+
+There are few vendors which sell COTS MEMS deformable mirrors which will fit inside a CubeSat. Two were considered here: Boston Micromachines and Iris Adaptive Optics. The Boston Micromachines (BMC) Mini DM comes in three different sizes of stroke and aperture. Since there is little room for resizing optics in the system, the aperture of the DM limits the beam size which will travel through the Shack Hartmann lenslet array. For a sufficiently large Shack Hartmann lenslet array, a larger beam size will allow the wavefront to be sampled by more lenslets, resulting in a better resolution for wavefront reconstruction.  As such, larger apertures are preferable. As shown in Table~\ref{table:payload_dms}, each option meets or exceeds Payload's requirements. While the Iris AO PT111 does have a larger aperture \emph{and} a larger stroke, its driver board is larger and much more difficult to modify than the BMC Mini's. As such, the largest BMC mini DM, with a 2.25 mm aperture and a stroke of 5.5 $\mu \text{m}$, was selected.
 
 \begin{table}[!ht]
   \caption{Deformable Mirrors Considered for Payload Design}
     \begin{tabular}{|l||l|llll|}
       \hline
-     &Requirement&BMC Mini 1.5 $\mu$m& Mini 3.5 $\mu$m & Mini 5.5 $\mu$m &Iris AO PT111 \\ \hline
+     &Requirement&Mini 1.5 $\mu$m& Mini 3.5 $\mu$m & Mini 5.5 $\mu$m &Iris AO PT111 \\ \hline
     Stroke& Min 1.5 $\mu$m & 1.5 $\mu$m & 3.5 $\mu$m & 5.5 $\mu$m & 5 or 8 $\mu$m \\ \hline
     Rate& Min 100 Hz& 8 kHz & 8 kHz & 8 kHz & $>$ 6.5 kHz\\ \hline
     Control Precision& 1 nm & 0.09 nm& 0.2 nm & 0.3 nm & 0.3 or 0.5 nm \\ \hline
@@ -466,7 +465,6 @@ $\text{maximum slew rate} = \frac{\text{plate scale}}{\text{maximum exposure tim
 The maximum exposure time used occurs during ``Diagnostic Mode'' at 10 fps, which corresponds to a maximum exposure time of 0.1 seconds. Plugging everything into this equation, we find a maximum slew rate requirement of $\frac{22 \text{ arcseconds/pixel}}{0.1 \text{ s}} \approx 4.7$ arcminutes/s during external source acquisition.
 
 \paragraph{Data Rates to Avionics - KB}
-
 The rate at which payload will output data to avionics is a function of the number of pixels of the image selected for output (either the full frame or a subframe,) the number of bits per pixel, and the rate at which images are taken in frames per second (fps.) The formula is simply: $r_{out} = \text{pixels} \times \frac{\text{bits}}{\text{pixel}} \times \text{fps}$
 %is there a better way to do simple formulas that don't really need to be in equation form? 
 These values and the calculated data output rate for our selected detector is shown in Table~\ref{table:payload-data-rates}. Note that the 640 x 480 subframe is the mode we will use for ``Burst Mode,'' and the 1280 x 1024 full-frame will be used for ``Diagnostic Mode.'' Each meets their respective requirements. 
@@ -498,7 +496,7 @@ The incoming beam is 2.25 mm (see Paragraph ``Deformable Mirrors'' above).  This
 				\subparagraph{Actuators per Lens}
 The chosen BMC deformable mirrors have a total of 32 actuators (a 6 by 6 array, with no corners) with an actuator pitch of 450 $\mu$m \cite{BMC}.  The Shack-Hartmann lenslets have a pitch of 150 $\mu$m, so there will be a minimum of four spots devoted to each actuator.  Therefore, there is no concern for individual actuators to be untested or characterized improperly.
 
-			\subsubsection{Summary of Outputs - AC}
+\subsubsection{Summary of Outputs - AC}
 
 The Payload's operational requirements are major drivers for the design of the rest of the satellite. A summary of mass totals, power needs, and thermal requirements of all major Payload components can be found in Table~\ref{fig:payload_summary_table}.  
 During data capture mode, the Payload must be kept within $0^\circ$C to $50^\circ$C, will draw a maximum power of 4.5 W, will output a maximum data rate of 550 Mbit/s, and, during external data acquisition only, has a maximum slew rate of 4.7'/s. 
