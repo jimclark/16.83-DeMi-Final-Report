@@ -909,6 +909,8 @@ Parent Requirements: MLR-4, SYS-2
 The main Avionics subsystem requirements are to provide the necessary interfaces, calculations and data storing capability to support functioning of all other subsystems during the mission operation.  In addition, Avionics shall be able to recover from potential single event effects and permit software updates and reprogramming in orbit.
 However, the most important requirements to consider are the memory and processor capabilities because they are the most difficult to satisfy with the current level of technology.
 
+One of the sub-requirements of the mass storage device is to be determined (TBD).  Because the data processing algorithms that the Avionics will perform are not yet fully determined, the memory read and write speed required to support the data processing is also unknown.  However, memory speed is an essential parameter that has to be considered when there is a good enough estimation of data after image processing, so the requirement has been written as a placeholder until the algorithms have been determined more thoroughly.
+
 			\subsubsection{Trade Studies - VE}
 There are two main Avionics configurations considered that are both able to satisfy subsystem’s requirements. They are presented in Table~\ref{table:avionics_hardware_options}. The major difference between configurations is the capability of the first system to do real time image processing, which results in higher complexity and power consumption of that system (see The Steepest Ascent Mission Interface Computer in Table~\ref{table:avionics_hardware_options}). The second configuration only allows downloading raw images to the ground stations without processing them.
 
@@ -986,7 +988,6 @@ Another important component is the operating system that is required to control 
 
 The Avionics subsystem provides the following interfaces with other subsystems (see Table~\ref{table:avionics_interfaces}). It is important to mention that all analog interfaces are implemented in a Power Distribution Module (PDM). It allows collecting all the data from analog sensors and sending over a single I2C interface to the Avionics board. The PDM implements torque coil drivers as well.
 
-
 \begin{table}[ht]
 \caption{Avionics hardware interfaces with other subsystems}
 \label{table:avionics_interfaces}
@@ -1008,11 +1009,9 @@ $^1$Assuming update 10 times per second
 \end{center}
 \end{table}
 
-
 			\subsubsection{Summary of Outputs - ZC}
 
 The Avionics subsystem gives values to the Thermal subsystem for operational temperature range, to the Power subsystem for power consumed during the different modes, and to the Structures subsystem for the mass and volume. These outputs are detailed in Table~\ref{table:avionics_summary_outputs}. The survival temperatures of the components are unknown.
-
 
 \begin{table}[ht]
 \caption{Avionics budgets}
