@@ -14,11 +14,12 @@ NormalPos.top=26
 NormalPos.right=1631
 NormalPos.bottom=708
 Class=LaTeXView
-Document=DeMi.tex
+Document=DeMi.text
 
 [Frame0_View0,0]
 TopLine=491
 Cursor=41640
+
 
 [SessionInfo]
 FrameCount=1
