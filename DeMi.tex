@@ -416,10 +416,10 @@ The UI52-41LE-M CMOS detector from IDS was selected from the CMOS detectors cons
     &47-20&DCC1545M&UI1221LE-M&UI5241LE-M\\ \hline \hline
     Manufacturer&-&e2v&Thorlabs&IDS&IDS\\ \hline
     Type&-&Frame transfer CCD&CMOS&CMOS&CMOS\\ \hline
-    Full frame rate&  10 Hz            & 5 MHz                       & 25 fps                 & 87.2 fps            & 50 fps              \\ \hline
+    Fullframe rate&  10 Hz            & 5 MHz                       & 25 fps                 & 87.2 fps            & 50 fps              \\ \hline
     Subframe rate& 100 Hz            & -                           & 79 fps                 & 100 fps             & 102 fps             \\ \hline
     Accuracy       & 100 nm rms        & 11.2 nm rms                 & 45 nm rms              & 45 nm rms           & 45 nm rms           \\ \hline
-    Data Rate& -                 & 52.4 Tbit/sec               & 259 Mbit/sec           & 207 Mbit/sec        & 310 Mbit/sec        \\\hline
+    Data Rate& -                 & 52.4 Tbit/s               & 259 Mbit/s           & 207 Mbit/s        & 310 Mbit/s        \\\hline
     \end{tabular}\label{table:payload_detectors}
 \end{table}
 
@@ -451,13 +451,15 @@ The lenslet is 10 mm square, so it contains about 66 by 66 lenslets. It is mount
 
 \paragraph{Pointing Requirement - KB}\label{sec:pointing_requirement}
 
-To determine the pointing requirement, we first need to calculate the plate scale of the detector.
+To determine the pointing requirement, it is necessary to calculate the plate scale of the detector.
 %and the amount of time needed to get a reasonable SNR for a star of a reasonable magnitude. 
-The plate scale of the detector is the relationship between angular distance on the sky and pixel size on the detector, and is typically measured in arcseconds per pixel. The plate scale we used to calculate the pointing requirement was estimated to be 28 arcseconds/pixel by Eduardo Bendek\footnote{Eduardo.A.Bendek@nasa.gov} at NASA AMES. 
+The plate scale of the detector is the relationship between angular distance on the sky and pixel size on the detector, and is typically measured in arcseconds per pixel. The plate scale used to calculate the pointing requirement was estimated to be 28 arcseconds/pixel by Eduardo Bendek\footnote{Eduardo.A.Bendek@nasa.gov} at NASA AMES. 
 %%% insert calculations to get to this point. 
 
-The pointing requirement for ADCS during external source imaging can then be determined by using 
+The pointing requirement for ADCS during external source imaging can then be determined by using:\\ 
+\begin{center}
 $\text{maximum slew rate} = \frac{\text{plate scale}}{\text{maximum exposure time}}$
+\end{center}
 %is there a better way to do simple formulas that don't really need to be in equation form? 
 
 The maximum exposure time used occurs during ``Diagnostic Mode'' at 10 fps, which corresponds to a maximum exposure time of 0.1 seconds. Plugging everything into this equation, we find a maximum slew rate requirement of $\frac{22 \text{ arcseconds/pixel}}{0.1 \text{ s}} \approx 4.7$ arcminutes/s during external source acquisition.
